@@ -12,11 +12,19 @@
 }
 
 
+html,
 body{
 
+    width:100%;
+    height:100%;
     background:#050b16;
     color:white;
-    height:100vh;
+
+}
+
+
+body{
+
     overflow:hidden;
 
 }
@@ -25,6 +33,7 @@ body{
 
 .app{
 
+    width:100%;
     height:100vh;
     display:flex;
     flex-direction:column;
@@ -38,13 +47,12 @@ body{
 .header{
 
     height:70px;
+    flex-shrink:0;
 
     background:#07182e;
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
     padding:0 25px;
@@ -54,10 +62,10 @@ body{
 }
 
 
+
 .logo{
 
     font-size:26px;
-
     font-weight:bold;
 
 }
@@ -66,7 +74,6 @@ body{
 .logo span{
 
     color:#38bdf8;
-
     font-size:14px;
 
 }
@@ -93,16 +100,21 @@ body{
 
 
 
-/* ZONA PRINCIPAL */
+
+/* CUERPO PRINCIPAL */
 
 
 .main{
 
     flex:1;
 
+    min-height:0;
+
+    width:100%;
+
     display:grid;
 
-    grid-template-columns:260px 1fr 260px;
+    grid-template-columns:260px minmax(400px,1fr) 260px;
 
 }
 
@@ -118,9 +130,10 @@ body{
 
     padding:20px;
 
-    overflow:auto;
+    overflow-y:auto;
 
 }
+
 
 
 .sidebar{
@@ -153,7 +166,6 @@ h3{
     margin:15px 0;
 
 }
-
 
 
 
@@ -191,11 +203,13 @@ h3{
 }
 
 
+
 .tool:hover{
 
     background:#164e75;
 
 }
+
 
 
 
@@ -216,6 +230,7 @@ h3{
     margin-top:20px;
 
 }
+
 
 
 
@@ -245,7 +260,6 @@ input{
 
 
 
-
 .create{
 
     width:100%;
@@ -268,6 +282,8 @@ input{
 
 
 
+/* RESULTADO CRISTAL */
+
 
 #resultadoCristal{
 
@@ -285,7 +301,7 @@ input{
 
 
 
-/* ACUARIO */
+/* ZONA ACUARIO */
 
 
 .viewer{
@@ -302,8 +318,13 @@ input{
 
     radial-gradient(circle,#134e75,#020617);
 
+    min-width:0;
+
 }
 
+
+
+/* ACUARIO */
 
 
 .aquarium{
@@ -311,6 +332,8 @@ input{
     width:75%;
 
     height:65%;
+
+    min-height:300px;
 
     position:relative;
 
@@ -400,7 +423,6 @@ transform:translateX(20%);
 
     height:18%;
 
-
     background:
 
     linear-gradient(
@@ -426,7 +448,6 @@ transform:translateX(20%);
 }
 
 
-
 .roca{
 
     font-size:55px;
@@ -449,7 +470,7 @@ transform:translateX(20%);
 
 
 
-/* CAMARA */
+/* CONTROL CAMARA */
 
 
 .camera{
@@ -491,11 +512,15 @@ footer{
 
     height:35px;
 
+    flex-shrink:0;
+
     text-align:center;
 
     padding:8px;
 
     background:#020617;
+
+    color:#94a3b8;
 
 }
 
@@ -525,6 +550,8 @@ footer{
 .aquarium{
 
     width:90%;
+
+    height:60%;
 
 }
 
