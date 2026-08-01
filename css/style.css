@@ -1,16 +1,252 @@
-/* =================================
-   PANEL DIMENSIONES PROFESIONAL
-================================= */
+/* =====================================
+   ACUARIO DESIGNER V4
+   ESTILO PRINCIPAL PRO
+===================================== */
 
 
-.dimensions-box{
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
 
-    background:
-    linear-gradient(
-    145deg,
-    #0b1f36,
-    #07111f
-    );
+
+html,body{
+
+    width:100%;
+    height:100%;
+    background:#050b16;
+    color:white;
+
+}
+
+
+body{
+
+    overflow:hidden;
+
+}
+
+
+
+.app{
+
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+
+/* =========================
+   CABECERA
+========================= */
+
+
+.header{
+
+    height:65px;
+    flex-shrink:0;
+
+    background:#07182e;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 20px;
+
+    border-bottom:1px solid #1e4b70;
+
+}
+
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+
+.logo span{
+
+    color:#38bdf8;
+    font-size:14px;
+
+}
+
+
+
+.actions button{
+
+    background:#0284c7;
+
+    border:0;
+
+    color:white;
+
+    padding:8px 14px;
+
+    margin-left:6px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+/* =========================
+   ZONA PRINCIPAL
+========================= */
+
+
+.main{
+
+    flex:1;
+
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:250px minmax(400px,1fr) 250px;
+
+}
+
+
+
+
+/* =========================
+   PANELES
+========================= */
+
+
+.sidebar,
+.panel{
+
+    background:#081426;
+
+    padding:12px;
+
+    overflow-y:auto;
+
+}
+
+
+
+.sidebar{
+
+    border-right:1px solid #163b5c;
+
+}
+
+
+
+.panel{
+
+    border-left:1px solid #163b5c;
+
+}
+
+
+
+h2{
+
+    color:#38bdf8;
+
+    font-size:18px;
+
+    margin-bottom:12px;
+
+}
+
+
+h3{
+
+    font-size:15px;
+
+}
+
+
+
+
+/* =========================
+   HERRAMIENTAS
+========================= */
+
+
+.tool-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+}
+
+
+
+.tool{
+
+    height:65px;
+
+    background:#102a43;
+
+    border:1px solid #245b86;
+
+    border-radius:10px;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+
+
+.tool:hover{
+
+    background:#164e75;
+
+}
+
+
+
+
+
+/* =========================
+   CAJA DIMENSIONES PRO
+========================= */
+
+
+.box{
+
+    background:#07111f;
+
+    border:1px solid #163b5c;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    margin-top:12px;
+
+}
+
+
+
+.dimensions-box h3{
+
+    margin-bottom:10px;
 
 }
 
@@ -20,9 +256,9 @@
 
     display:grid;
 
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(3,1fr);
 
-    gap:12px;
+    gap:6px;
 
 }
 
@@ -32,17 +268,11 @@
 
     background:#102a43;
 
-    border:1px solid #245b86;
+    border-radius:8px;
 
-    border-radius:12px;
+    padding:8px;
 
-    padding:12px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
+    text-align:center;
 
 }
 
@@ -50,7 +280,13 @@
 
 .input-card span{
 
+    display:block;
+
+    font-size:11px;
+
     color:#7dd3fc;
+
+    margin-bottom:5px;
 
 }
 
@@ -58,9 +294,9 @@
 
 .input-card input{
 
-    width:70px;
+    width:50px;
 
-    text-align:center;
+    height:26px;
 
     background:#020617;
 
@@ -68,20 +304,36 @@
 
     border:1px solid #38bdf8;
 
+    border-radius:5px;
+
+    text-align:center;
+
+}
+
+
+
+.input-card strong{
+
+    font-size:11px;
+
 }
 
 
 
 
+
+/* CRISTAL */
+
+
 .glass-box{
 
-    margin-top:20px;
+    margin-top:10px;
 
-    padding:15px;
-
-    border-radius:15px;
+    padding:10px;
 
     background:#020617;
+
+    border-radius:10px;
 
     border:1px solid #38bdf8;
 
@@ -93,9 +345,11 @@
 
     display:flex;
 
+    justify-content:center;
+
     align-items:center;
 
-    gap:10px;
+    gap:8px;
 
 }
 
@@ -103,9 +357,9 @@
 
 .glass-input input{
 
-    width:90px;
+    width:55px;
 
-    font-size:18px;
+    height:28px;
 
     text-align:center;
 
@@ -115,31 +369,35 @@
 
 #resultadoCristal{
 
-    margin-top:15px;
+    margin-top:8px;
 
-    padding:12px;
+    padding:7px;
 
-    border-radius:10px;
+    border-radius:8px;
 
     background:#07182e;
 
-    border:1px solid #1e5680;
+    text-align:center;
 
-    font-weight:bold;
+    font-size:12px;
 
 }
 
 
 
+
+/* INFORMACION RAPIDA */
+
+
 .tank-info{
 
-    margin-top:20px;
+    margin-top:10px;
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
-    gap:10px;
+    gap:6px;
 
 }
 
@@ -149,11 +407,13 @@
 
     background:#102a43;
 
-    padding:12px;
+    border-radius:8px;
 
-    border-radius:12px;
+    padding:8px;
 
     text-align:center;
+
+    font-size:12px;
 
 }
 
@@ -163,6 +423,283 @@
 
     color:#38bdf8;
 
-    font-size:20px;
+    font-size:16px;
+
+}
+
+
+
+
+.create{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:9px;
+
+    background:#059669;
+
+    color:white;
+
+    border:0;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+/* =========================
+   ACUARIO CENTRAL
+========================= */
+
+
+.viewer{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+
+    radial-gradient(circle,#134e75,#020617);
+
+}
+
+
+
+.aquarium{
+
+    width:75%;
+
+    height:65%;
+
+    min-height:280px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:8px solid rgba(180,230,255,.8);
+
+    border-radius:15px;
+
+    background:
+
+    linear-gradient(
+    #38bdf8,
+    #075985
+    );
+
+    box-shadow:
+
+    0 0 40px #0ea5e9;
+
+}
+
+
+
+/* AGUA */
+
+
+.water{
+
+    position:absolute;
+
+    width:120%;
+
+    height:100%;
+
+    left:-10%;
+
+    background:
+
+    linear-gradient(
+    120deg,
+    rgba(255,255,255,.25),
+    transparent
+    );
+
+    animation:agua 6s infinite linear;
+
+}
+
+
+
+@keyframes agua{
+
+from{
+
+transform:translateX(-20%);
+
+}
+
+to{
+
+transform:translateX(20%);
+
+}
+
+}
+
+
+
+/* ARENA */
+
+
+.sand{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:18%;
+
+    background:
+
+    linear-gradient(
+    #d6b56d,
+    #806b3a
+    );
+
+}
+
+
+
+/* OBJETOS */
+
+
+.objeto{
+
+    position:absolute;
+
+    cursor:grab;
+
+}
+
+
+
+.roca{
+
+    font-size:55px;
+
+}
+
+
+
+.planta{
+
+    font-size:60px;
+
+}
+
+
+
+.pez{
+
+    font-size:40px;
+
+}
+
+
+
+
+/* CONTROLES */
+
+
+.camera{
+
+    position:absolute;
+
+    bottom:20px;
+
+}
+
+
+
+.camera button{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:0;
+
+    background:#0284c7;
+
+    color:white;
+
+    margin:4px;
+
+}
+
+
+
+
+/* FOOTER */
+
+
+footer{
+
+    height:30px;
+
+    flex-shrink:0;
+
+    text-align:center;
+
+    padding:6px;
+
+    background:#020617;
+
+    color:#94a3b8;
+
+}
+
+
+
+
+
+/* MOVIL */
+
+
+@media(max-width:900px){
+
+
+.main{
+
+grid-template-columns:1fr;
+
+}
+
+
+.sidebar,
+.panel{
+
+display:none;
+
+}
+
+
+.aquarium{
+
+width:90%;
+
+}
+
 
 }
