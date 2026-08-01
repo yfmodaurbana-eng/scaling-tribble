@@ -1,1 +1,452 @@
+/* ==============================
+   ACUARIO DESIGNER V3.0
+   STYLE PRINCIPAL
+============================== */
 
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+
+    background:#111827;
+    color:white;
+    height:100vh;
+    overflow:hidden;
+
+}
+
+
+
+/* ==============================
+   BARRA SUPERIOR
+============================== */
+
+
+.topbar{
+
+    height:70px;
+    background:#0b1220;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    border-bottom:1px solid #263248;
+
+}
+
+
+.topbar h1{
+
+    font-size:24px;
+
+}
+
+
+.top-buttons button{
+
+    background:#2563eb;
+    color:white;
+    border:0;
+    padding:10px 18px;
+    margin-left:8px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+
+.top-buttons button:hover{
+
+    background:#3b82f6;
+
+}
+
+
+
+/* ==============================
+   ZONA PRINCIPAL
+============================== */
+
+
+.workspace{
+
+    display:grid;
+    grid-template-columns:260px 1fr 260px;
+    height:calc(100vh - 110px);
+
+}
+
+
+
+/* ==============================
+   PANELES
+============================== */
+
+
+.tools,
+.info{
+
+    background:#172033;
+    padding:20px;
+    overflow:auto;
+    border-right:1px solid #263248;
+
+}
+
+
+.info{
+
+    border-left:1px solid #263248;
+    border-right:none;
+
+}
+
+
+
+h2{
+
+    margin-bottom:20px;
+    color:#60a5fa;
+
+}
+
+
+h3{
+
+    margin:15px 0;
+
+}
+
+
+
+/* ==============================
+   BOTONES
+============================== */
+
+
+.tool,
+.create{
+
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:0;
+    border-radius:8px;
+    background:#1e40af;
+    color:white;
+    cursor:pointer;
+
+}
+
+
+.tool:hover{
+
+    background:#2563eb;
+
+}
+
+
+
+.create{
+
+    margin-top:20px;
+    background:#059669;
+
+}
+
+
+.create:hover{
+
+    background:#10b981;
+
+}
+
+
+
+/* ==============================
+   CAMPOS
+============================== */
+
+
+label{
+
+    display:block;
+    margin-bottom:15px;
+
+}
+
+
+input{
+
+    width:100%;
+    margin-top:5px;
+    padding:8px;
+    border-radius:6px;
+    border:none;
+
+}
+
+
+
+/* ==============================
+   SIMULADOR
+============================== */
+
+
+.simulation{
+
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+
+    radial-gradient(circle at center,
+    #1e3a5f,
+    #07101f);
+
+    overflow:hidden;
+
+}
+
+
+
+
+/* ==============================
+   ACUARIO
+============================== */
+
+
+#aquarium{
+
+    position:relative;
+
+    width:70%;
+    height:60%;
+
+    border:8px solid #b7d9ff;
+
+    border-radius:10px;
+
+    background:
+
+    linear-gradient(
+        to bottom,
+        rgba(80,180,255,.5),
+        rgba(0,80,150,.7)
+    );
+
+
+    box-shadow:
+
+    0 0 30px rgba(0,180,255,.5),
+    inset 0 0 40px rgba(255,255,255,.2);
+
+
+    overflow:hidden;
+
+}
+
+
+
+/* AGUA */
+
+
+.water{
+
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:90%;
+
+    background:
+
+    linear-gradient(
+        rgba(0,160,255,.35),
+        rgba(0,60,120,.5)
+    );
+
+}
+
+
+
+/* SUSTRATO */
+
+
+.substrate{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:15%;
+
+    background:
+
+    linear-gradient(
+        #c7a86b,
+        #806030
+    );
+
+
+}
+
+
+
+/* ==============================
+   CONTROLES CAMARA
+============================== */
+
+
+.camera-controls{
+
+    position:absolute;
+
+    bottom:25px;
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+
+.camera-controls button{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    border:0;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:20px;
+
+}
+
+
+
+/* ==============================
+   TARJETAS INFO
+============================== */
+
+
+.card{
+
+    background:#0f172a;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border-radius:10px;
+
+    border:1px solid #263248;
+
+}
+
+
+
+.card p{
+
+    margin:10px 0;
+
+}
+
+
+
+/* ==============================
+   PIE
+============================== */
+
+
+footer{
+
+    height:40px;
+
+    text-align:center;
+
+    padding:10px;
+
+    background:#0b1220;
+
+    color:#94a3b8;
+
+}
+
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+
+@media(max-width:900px){
+
+
+.workspace{
+
+    grid-template-columns:1fr;
+
+    overflow:auto;
+
+}
+
+
+.tools,
+.info{
+
+    height:auto;
+
+}
+
+
+.simulation{
+
+    height:500px;
+
+}
+
+
+.topbar{
+
+    flex-direction:column;
+
+    height:auto;
+
+    padding:15px;
+
+}
+
+
+
+.top-buttons{
+
+    margin-top:10px;
+
+}
+
+
+#aquarium{
+
+    width:90%;
+
+}
+
+
+}
