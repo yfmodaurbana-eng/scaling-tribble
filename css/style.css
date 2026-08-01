@@ -1,9 +1,19 @@
+/* =====================================
+   ACUARIO DESIGNER V5
+   INTERFAZ PROFESIONAL
+===================================== */
+
+
 *{
+
     box-sizing:border-box;
     margin:0;
     padding:0;
+
     font-family:"Segoe UI",Arial,sans-serif;
+
 }
+
 
 
 html,
@@ -22,6 +32,7 @@ body{
 
 
 
+
 .app{
 
     width:100vw;
@@ -36,16 +47,23 @@ body{
 
 
 
-/* =========================
- CABECERA
-========================= */
+
+
+/* =====================================
+   CABECERA
+===================================== */
 
 
 .header{
 
-    height:58px;
+    height:60px;
 
     flex-shrink:0;
+
+    background:#07182e;
+
+    border-bottom:1px solid #164e75;
+
 
     display:flex;
 
@@ -53,11 +71,8 @@ body{
 
     justify-content:space-between;
 
-    padding:0 15px;
 
-    background:#07182e;
-
-    border-bottom:1px solid #164e75;
+    padding:0 20px;
 
 }
 
@@ -65,7 +80,7 @@ body{
 
 .logo{
 
-    font-size:22px;
+    font-size:24px;
 
     font-weight:700;
 
@@ -77,16 +92,18 @@ body{
 
     color:#38bdf8;
 
-    font-size:13px;
+    font-size:14px;
 
-    margin-left:5px;
+    margin-left:8px;
 
 }
 
 
 
 
+
 .actions button{
+
 
     background:#0284c7;
 
@@ -94,11 +111,14 @@ body{
 
     border:0;
 
-    border-radius:7px;
+    border-radius:8px;
 
-    padding:7px 12px;
 
-    margin-left:5px;
+    padding:8px 14px;
+
+
+    margin-left:6px;
+
 
     cursor:pointer;
 
@@ -107,25 +127,44 @@ body{
 
 
 
+.actions button:hover{
 
-/* =========================
- ZONA PRINCIPAL
-========================= */
+    background:#0ea5e9;
+
+}
+
+
+
+
+
+/* =====================================
+   ZONA PRINCIPAL
+===================================== */
 
 
 .main{
+
 
     flex:1;
 
     min-height:0;
 
-    height:calc(100vh - 86px);
 
     display:grid;
 
-    grid-template-columns:220px 1fr 220px;
+
+    grid-template-columns:
+
+    240px
+
+    minmax(400px,1fr)
+
+    240px;
+
+
 
     overflow:hidden;
+
 
 }
 
@@ -133,23 +172,32 @@ body{
 
 
 
-/* =========================
- PANELES
-========================= */
+
+
+/* =====================================
+   PANELES LATERALES
+===================================== */
 
 
 .sidebar,
 .panel{
 
+
     height:100%;
 
-    overflow:hidden;
-
-    padding:8px;
 
     background:#081426;
 
+
+    padding:12px;
+
+
+    overflow:hidden;
+
+
 }
+
+
 
 
 
@@ -170,23 +218,32 @@ body{
 
 
 
+
 h2{
+
 
     color:#38bdf8;
 
-    font-size:16px;
 
-    margin-bottom:8px;
+    font-size:18px;
+
+
+    margin-bottom:12px;
+
 
 }
+
 
 
 
 h3{
 
-    font-size:14px;
 
-    margin-bottom:6px;
+    color:#7dd3fc;
+
+
+    font-size:15px;
+
 
 }
 
@@ -195,18 +252,35 @@ h3{
 
 
 
-/* =========================
- HERRAMIENTAS
-========================= */
+
+/* =====================================
+   HERRAMIENTAS
+===================================== */
+
+
+.tools-panel{
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
 
 
 .tool-grid{
 
+
     display:grid;
+
 
     grid-template-columns:1fr 1fr;
 
-    gap:5px;
+
+    gap:8px;
+
 
 }
 
@@ -215,19 +289,27 @@ h3{
 
 .tool{
 
-    height:48px;
+
+    height:60px;
+
 
     background:#102a43;
 
+
     border:1px solid #245b86;
 
-    border-radius:8px;
+
+    border-radius:10px;
+
 
     color:white;
 
+
     cursor:pointer;
 
-    font-size:13px;
+
+    font-size:15px;
+
 
 }
 
@@ -235,113 +317,24 @@ h3{
 
 .tool:hover{
 
+
     background:#164e75;
-
-}
-
-
-
+    /* =====================================
+   MEDIDAS Y CONFIGURACION
+===================================== */
 
 
+.dimensions-panel{
 
-/* =========================
- CAJAS
-========================= */
-
-
-.box,
-.card{
 
     background:#07111f;
 
+    border-radius:12px;
+
+    padding:12px;
+
     border:1px solid #163b5c;
 
-    border-radius:9px;
-
-    padding:8px;
-
-    margin-top:8px;
-
-}
-
-/* =========================
-   DIMENSIONES
-========================= */
-
-
-.dimensions-box h3{
-
-    color:#7dd3fc;
-
-}
-
-
-
-.dimension-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:4px;
-
-}
-
-
-
-.input-card{
-
-    background:#102a43;
-
-    border-radius:6px;
-
-    padding:5px;
-
-    text-align:center;
-
-}
-
-
-
-.input-card span{
-
-    display:block;
-
-    color:#7dd3fc;
-
-    font-size:10px;
-
-    margin-bottom:3px;
-
-}
-
-
-
-.input-card input{
-
-    width:42px;
-
-    height:22px;
-
-    background:#020617;
-
-    color:white;
-
-    border:1px solid #38bdf8;
-
-    border-radius:4px;
-
-    text-align:center;
-
-    font-size:12px;
-
-}
-
-
-
-.input-card small{
-
-    font-size:10px;
 
 }
 
@@ -349,128 +342,154 @@ h3{
 
 
 
-/* =========================
-   CRISTAL
-========================= */
+.measure-row{
 
-
-.glass-box{
-
-    margin-top:7px;
-
-    padding:7px;
-
-    background:#020617;
-
-    border-radius:7px;
-
-    border:1px solid #38bdf8;
-
-}
-
-
-
-.glass-box h3{
-
-    margin-bottom:5px;
-
-}
-
-
-
-.glass-input{
 
     display:flex;
 
-    justify-content:center;
+
+    justify-content:space-between;
+
 
     align-items:center;
 
-    gap:5px;
+
+    margin-bottom:8px;
+
+
+    background:#102a43;
+
+
+    padding:7px 10px;
+
+
+    border-radius:8px;
+
 
 }
 
 
 
-.glass-input input{
+.measure-row label{
 
-    width:45px;
 
-    height:24px;
+    color:#bae6fd;
 
-    background:#07182e;
+
+    font-size:13px;
+
+
+}
+
+
+
+
+.measure-row input{
+
+
+    width:55px;
+
+
+    height:28px;
+
+
+    background:#020617;
+
 
     color:white;
 
-    text-align:center;
 
     border:1px solid #38bdf8;
 
-    border-radius:5px;
+
+    border-radius:6px;
+
+
+    text-align:center;
+
 
 }
+
+
+
+
+
+.measure-row span{
+
+
+    color:#7dd3fc;
+
+
+    font-size:12px;
+
+
+    margin-left:4px;
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   CRISTAL
+===================================== */
+
+
+.glass-section{
+
+
+    margin-top:12px;
+
+
+    padding-top:10px;
+
+
+    border-top:1px solid #163b5c;
+
+
+}
+
+
+
+
+.glass-section h3{
+
+
+    margin-bottom:8px;
+
+
+}
+
 
 
 
 #resultadoCristal{
 
-    margin-top:5px;
 
-    padding:5px;
+    margin-top:8px;
 
-    background:#07182e;
 
-    border-radius:6px;
+    padding:8px;
+
 
     text-align:center;
 
-    font-size:11px;
 
-}
-
+    background:#052e16;
 
 
-
-/* =========================
-   INFORMACION ACUARIO
-========================= */
+    border-radius:8px;
 
 
-.tank-info{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:5px;
-
-    margin-top:7px;
-
-}
+    color:#86efac;
 
 
+    font-size:12px;
 
-.tank-info div{
-
-    background:#102a43;
-
-    border-radius:6px;
-
-    padding:5px;
-
-    text-align:center;
-
-    font-size:10px;
-
-}
-
-
-
-.tank-info b{
-
-    color:#38bdf8;
-
-    font-size:14px;
 
 }
 
@@ -478,38 +497,54 @@ h3{
 
 
 
-/* =========================
+
+
+/* =====================================
    BOTON CREAR
-========================= */
+===================================== */
 
 
 .create{
 
+
     width:100%;
 
-    margin-top:7px;
 
-    padding:8px;
+    margin-top:15px;
+
+
+    height:40px;
+
 
     border:0;
 
-    border-radius:7px;
+
+    border-radius:10px;
+
 
     background:#059669;
 
+
     color:white;
+
+
+    font-size:15px;
+
 
     cursor:pointer;
 
-    font-size:13px;
 
 }
+
+
 
 
 
 .create:hover{
 
+
     background:#10b981;
+
 
 }
 
@@ -517,59 +552,112 @@ h3{
 
 
 
-/* =========================
+
+
+/* =====================================
    PANEL DERECHO
-========================= */
+===================================== */
+
+
+.card{
+
+
+    background:#07111f;
+
+
+    border:1px solid #163b5c;
+
+
+    border-radius:12px;
+
+
+    padding:12px;
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+
+
+
+.card h3{
+
+
+    margin-bottom:10px;
+
+
+}
+
+
 
 
 .card p{
 
-    margin-top:5px;
 
     font-size:13px;
 
+
+    margin-bottom:7px;
+
+
 }
+
+
 
 
 
 .card b{
 
+
     color:#38bdf8;
 
+
 }
-
-
-
-
-
-
-/* =========================
-   ACUARIO CENTRAL
-========================= */
+/* =====================================
+   ACUARIO CENTRAL 3D
+===================================== */
 
 
 .viewer{
 
+
     position:relative;
+
 
     display:flex;
 
+
     justify-content:center;
 
+
     align-items:center;
+
 
     overflow:hidden;
 
 
+
     background:
 
+
+
     radial-gradient(
+
     circle,
+
     #134e75,
+
     #020617
+
     );
 
+
+
 }
+
 
 
 
@@ -577,29 +665,45 @@ h3{
 
 .aquarium{
 
-    width:82%;
 
-    height:70%;
+    width:85%;
+
+
+    height:75%;
+
+
 
     position:relative;
+
+
 
     overflow:hidden;
 
 
-    border:7px solid rgba(180,230,255,.8);
 
-    border-radius:15px;
+    border:8px solid rgba(200,240,255,.75);
+
+
+
+    border-radius:18px;
+
 
 
     background:#075985;
 
 
+
     box-shadow:
 
-    0 0 40px #0ea5e9;
+
+
+    0 0 50px #0ea5e9;
+
 
 
     perspective:900px;
+
+
 
 }
 
@@ -607,27 +711,45 @@ h3{
 
 
 
-/* FONDO PROFUNDO */
+/* FONDO DEL ACUARIO */
 
 
 .back-wall{
 
+
     position:absolute;
+
 
     inset:0;
 
 
+
     background:
 
+
+
     radial-gradient(
-    circle at 50% 20%,
-    rgba(255,255,255,.25),
+
+    circle at 50% 10%,
+
+    rgba(255,255,255,.35),
+
     transparent 35%
+
     ),
 
+
+
     linear-gradient(
+
+    180deg,
+
     #0ea5e9,
+
+    #075985 50%,
+
     #022c44
+
     );
 
 
@@ -644,71 +766,105 @@ h3{
 
 .water{
 
+
     position:absolute;
 
+
     inset:0;
+
 
     overflow:hidden;
 
 
+
     background:
 
+
+
     linear-gradient(
+
     120deg,
-    rgba(255,255,255,.20),
-    transparent
+
+    rgba(255,255,255,.18),
+
+    transparent 45%
+
     );
 
 
+
 }
-/* =========================
-   EFECTOS AGUA 3D
-========================= */
+
+
+
+
+/* LUZ MOVIMIENTO */
 
 
 .light-rays{
 
+
     position:absolute;
 
-    top:-30%;
 
-    left:15%;
+    top:-20%;
 
-    width:70%;
+
+    left:20%;
+
+
+    width:60%;
+
 
     height:130%;
 
 
+
     background:
 
+
+
     linear-gradient(
+
     120deg,
+
     transparent,
+
     rgba(255,255,255,.25),
+
     transparent
+
     );
+
 
 
     animation:luz 8s infinite linear;
 
+
+
 }
+
+
 
 
 
 @keyframes luz{
 
+
     from{
 
-        transform:translateX(-40%) rotate(10deg);
+        transform:translateX(-50%) rotate(8deg);
 
     }
+
 
 
     to{
 
-        transform:translateX(40%) rotate(10deg);
+        transform:translateX(50%) rotate(8deg);
 
     }
+
 
 }
 
@@ -716,51 +872,71 @@ h3{
 
 
 
-/* =========================
-   BURBUJAS
-========================= */
+
+
+/* BURBUJAS */
 
 
 .bubble{
 
+
     position:absolute;
+
 
     bottom:-20px;
 
+
     width:8px;
 
+
     height:8px;
+
 
     border-radius:50%;
 
 
+
     background:white;
+
+
 
     opacity:.5;
 
 
+
     animation:subir 8s infinite;
 
+
+
 }
+
 
 
 
 .b1{
 
+
     left:25%;
+
 
 }
 
 
+
 .b2{
+
 
     left:55%;
 
+
     width:12px;
+
 
     height:12px;
 
+
     animation-delay:3s;
+
 
 }
 
@@ -768,28 +944,40 @@ h3{
 
 .b3{
 
+
     left:75%;
+
 
     animation-delay:5s;
 
+
 }
+
+
 
 
 
 @keyframes subir{
 
+
     from{
+
 
         transform:translateY(0);
 
+
     }
+
 
 
     to{
 
+
         transform:translateY(-600px);
 
+
     }
+
 
 }
 
@@ -797,28 +985,40 @@ h3{
 
 
 
-/* =========================
-   ARENA
-========================= */
+
+
+/* ARENA */
 
 
 .sand{
 
+
     position:absolute;
+
 
     bottom:0;
 
+
     width:100%;
+
 
     height:18%;
 
 
+
     background:
 
+
+
     linear-gradient(
+
     #d6b56d,
+
     #806b3a
+
     );
+
+
 
 }
 
@@ -827,71 +1027,43 @@ h3{
 
 
 
-/* =========================
-   CRISTAL FRONTAL
-========================= */
+
+/* CRISTAL FRONTAL */
 
 
 .glass-front{
 
+
     position:absolute;
+
 
     inset:0;
 
 
+
     background:
 
+
+
     linear-gradient(
+
     90deg,
-    rgba(255,255,255,.12),
+
+    rgba(255,255,255,.15),
+
     transparent 25%,
+
     transparent 75%,
+
     rgba(255,255,255,.08)
+
     );
+
 
 
     pointer-events:none;
 
-}
 
-
-
-
-
-/* =========================
-   OBJETOS
-========================= */
-
-
-.objeto{
-
-    position:absolute;
-
-    cursor:grab;
-
-}
-
-
-
-.roca{
-
-    font-size:50px;
-
-}
-
-
-
-.planta{
-
-    font-size:55px;
-
-}
-
-
-
-.pez{
-
-    font-size:38px;
 
 }
 
@@ -899,16 +1071,18 @@ h3{
 
 
 
-/* =========================
-   CAMARA
-========================= */
+
+/* CONTROLES CAMARA */
 
 
 .camera{
 
+
     position:absolute;
 
-    bottom:12px;
+
+    bottom:15px;
+
 
 }
 
@@ -916,27 +1090,37 @@ h3{
 
 .camera button{
 
-    width:36px;
 
-    height:36px;
+    width:38px;
+
+
+    height:38px;
+
 
 
     border-radius:50%;
 
 
+
     border:0;
+
+
+
+    margin:4px;
+
 
 
     background:#0284c7;
 
 
+
     color:white;
 
 
-    margin:3px;
-
 
     cursor:pointer;
+
+
 
 }
 
@@ -944,55 +1128,36 @@ h3{
 
 
 
-/* =========================
-   FOOTER
-========================= */
+
+
+/* FOOTER */
 
 
 footer{
 
+
     height:28px;
 
+
     flex-shrink:0;
+
 
 
     background:#020617;
 
 
+
     text-align:center;
+
 
 
     padding:5px;
 
 
+
     color:#94a3b8;
 
-}
 
-
-
-
-
-/* =========================
-   QUITAR SCROLL
-========================= */
-
-
-.sidebar::-webkit-scrollbar,
-.panel::-webkit-scrollbar{
-
-    width:0;
-
-    height:0;
-
-}
-
-
-
-.sidebar,
-.panel{
-
-    scrollbar-width:none;
 
 }
 
@@ -1000,9 +1165,9 @@ footer{
 
 
 
-/* =========================
-   MOVIL
-========================= */
+
+
+/* RESPONSIVE */
 
 
 @media(max-width:900px){
@@ -1010,7 +1175,9 @@ footer{
 
 .main{
 
+
     grid-template-columns:1fr;
+
 
 }
 
@@ -1019,21 +1186,28 @@ footer{
 .sidebar,
 .panel{
 
+
     display:none;
 
+
 }
+
 
 
 
 .aquarium{
 
+
     width:90%;
 
-    height:60%;
+
+    height:65%;
+
 
 }
 
 
+
 }
 
-
+}
