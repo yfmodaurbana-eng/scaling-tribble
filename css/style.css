@@ -698,6 +698,9 @@ display:none;
 .aquarium{
 
 width:90%;
+   body{
+    border:10px solid red !important;
+}
 
 }
 
