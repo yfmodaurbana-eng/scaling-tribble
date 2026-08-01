@@ -1469,6 +1469,74 @@ footer{
 
 
 }
+   /* ==========================
+   SEGURIDAD ESTRUCTURAL
+========================== */
+
+
+.safety-box{
+
+    margin-top:12px;
+
+}
+
+
+
+.safety-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#102a43;
+
+    padding:7px;
+
+    margin-bottom:6px;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+}
+
+
+
+.safety-item span{
+
+    color:#bae6fd;
+
+}
+
+
+
+.safety-item b{
+
+    color:#38bdf8;
+
+}
+
+
+
+#segEstado{
+
+    margin-top:8px;
+
+    padding:8px;
+
+    text-align:center;
+
+    border-radius:8px;
+
+    background:#052e16;
+
+    color:#86efac;
+
+    font-size:12px;
+
+}
 
 
 
