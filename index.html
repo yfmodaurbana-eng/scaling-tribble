@@ -4,9 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer V4</title>
+<title>Acuario Designer V5</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -19,19 +20,28 @@
 <div class="app">
 
 
+
+<!-- CABECERA -->
+
 <header class="header">
 
 
 <div class="logo">
+
 🐠 Acuario Designer
-<span>V4.0</span>
+
+<span>V5.0</span>
+
 </div>
+
 
 
 <div class="actions">
 
 <button>Nuevo</button>
+
 <button>Guardar</button>
+
 <button>Exportar</button>
 
 </div>
@@ -41,9 +51,17 @@
 
 
 
+
+
+<!-- ZONA PRINCIPAL -->
+
 <div class="main">
 
 
+
+
+
+<!-- PANEL IZQUIERDO -->
 
 <aside class="sidebar">
 
@@ -51,125 +69,200 @@
 <h2>🛠 Herramientas</h2>
 
 
+
 <div class="tool-grid">
 
 
+
 <button class="tool">
+
 🪨
+
 <br>
+
 Roca
+
 </button>
 
 
+
 <button class="tool">
+
 🌱
+
 <br>
+
 Planta
+
 </button>
 
 
+
 <button class="tool">
+
 🐟
+
 <br>
+
 Pez
+
 </button>
 
 
+
 <button class="tool">
+
+🌿
+
+<br>
+
+Tronco
+
+</button>
+
+
+
+<button class="tool">
+
 💡
+
 <br>
+
 Luz
+
 </button>
+
 
 
 <button class="tool">
+
 💧
+
 <br>
+
 Agua
+
 </button>
+
+
+
+</div>
+
+
+
+
+
+<!-- CONFIGURACION ACUARIO -->
 
 
 <div class="box dimensions-box">
 
-<h3>📐 Configuración del acuario</h3>
+
+<h3>📐 Dimensiones</h3>
+
+
 
 <div class="dimension-grid">
 
 
+
 <div class="input-card">
 
-<span>↔️ Largo</span>
+<span>Largo</span>
 
 <div>
+
 <input id="largo" value="70">
-<strong>cm</strong>
+
+<small>cm</small>
+
 </div>
 
 </div>
+
 
 
 
 <div class="input-card">
 
-<span>↕️ Ancho</span>
+<span>Ancho</span>
 
 <div>
+
 <input id="ancho" value="30">
-<strong>cm</strong>
+
+<small>cm</small>
+
 </div>
 
 </div>
+
+
 
 
 
 <div class="input-card">
 
-<span>⬆️ Alto</span>
+<span>Alto</span>
 
 <div>
+
 <input id="alto" value="40">
-<strong>cm</strong>
-</div>
+
+<small>cm</small>
 
 </div>
 
+</div>
+
+
 
 </div>
+
 
 
 
 <div class="glass-box">
 
 
-<h3>🪟 Cristal recomendado</h3>
+<h3>🪟 Cristal</h3>
+
 
 
 <div class="glass-input">
 
+
 <input id="cristal" value="6">
+
 
 <span>mm</span>
 
+
 </div>
+
 
 
 <div id="resultadoCristal">
 
-✅ Grosor recomendado
+✔ Grosor recomendado
 
 </div>
 
 
+
 </div>
+
+
 
 
 
 <div class="tank-info">
 
 
+
 <div>
 
-💧 Volumen
+💧
 
 <br>
 
@@ -179,13 +272,15 @@ Agua
 
 </b>
 
+
 </div>
+
 
 
 
 <div>
 
-🪟 Cristal
+🪟
 
 <br>
 
@@ -195,7 +290,9 @@ Agua
 
 </b>
 
+
 </div>
+
 
 
 
@@ -205,89 +302,19 @@ Agua
 
 <button class="create">
 
-🏗️ Crear acuario
+🏗 Crear acuario
 
 </button>
 
 
-</div>
-
-<label>
-
-Largo
-
-<input id="largo" value="70">
-
-cm
-
-</label>
-
-
-
-<label>
-
-Ancho
-
-<input id="ancho" value="30">
-
-cm
-
-</label>
-
-
-
-<label>
-
-Alto
-
-<input id="alto" value="40">
-
-cm
-
-</label>
-
-
-
-
-<h3>🪟 Cristal</h3>
-
-
-<label>
-
-Grosor
-
-<input id="cristal" value="6">
-
-mm
-
-</label>
-
-
-
-<div id="resultadoCristal">
-
-Calculando...
 
 </div>
 
 
 
 
-<button class="create">
 
-Crear acuario
-
-</button>
-
-
-</div>
-
-
-
-</aside>
-
-
-
+<!-- ZONA CENTRAL DEL ACUARIO -->
 
 
 <section class="viewer">
@@ -297,29 +324,57 @@ Crear acuario
 <div class="aquarium">
 
 
+
 <div class="water"></div>
 
 
 <div class="sand"></div>
 
 
+
 <div class="decor"></div>
+
 
 
 </div>
 
 
+
+
+
+<!-- CONTROLES DE CAMARA -->
 
 
 <div class="camera">
 
-<button>+</button>
 
-<button>-</button>
+<button>
 
-<button>⟳</button>
++
+
+</button>
+
+
+
+<button>
+
+-
+
+</button>
+
+
+
+<button>
+
+⟳
+
+</button>
+
+
 
 </div>
+
+
 
 
 </section>
@@ -328,43 +383,73 @@ Crear acuario
 
 
 
+
+
+
+
+<!-- PANEL DERECHO -->
+
+
 <aside class="panel">
+
 
 
 <h2>📊 Información</h2>
 
 
 
+
+
 <div class="card">
 
 
+
 <h3>🐠 Acuario</h3>
+
+
 
 
 <p>
 
 Volumen:
 
-<b id="liters">
+<b id="liters-info">
 
 84 L
 
 </b>
 
+
 </p>
+
+
 
 
 <p>
 
 Cristal:
 
-<span id="infoCristal">
+<span id="cristal-info">
 
 6 mm
 
 </span>
 
+
 </p>
+
+
+
+<p>
+
+Medidas:
+
+<br>
+
+70 × 30 × 40 cm
+
+</p>
+
 
 
 </div>
@@ -372,17 +457,62 @@ Cristal:
 
 
 
+
+
+
+
+
 <div class="card">
+
 
 
 <h3>🌊 Agua</h3>
 
 
-<p>pH: 7.0</p>
 
-<p>Temperatura: 25ºC</p>
+<p>
 
-<p>Nitratos: 20 mg/L</p>
+pH:
+
+<b>
+
+7.0
+
+</b>
+
+
+</p>
+
+
+
+<p>
+
+Temperatura:
+
+<b>
+
+25 ºC
+
+</b>
+
+
+</p>
+
+
+
+<p>
+
+NO3:
+
+<b>
+
+20 mg/L
+
+</b>
+
+
+</p>
+
 
 
 </div>
@@ -390,10 +520,17 @@ Cristal:
 
 
 
+
+
+
+
+
 <div class="card">
 
 
+
 <h3>🐟 Habitantes</h3>
+
 
 
 <p>
@@ -403,7 +540,12 @@ Sin peces añadidos
 </p>
 
 
+
 </div>
+
+
+
+
 
 
 
@@ -411,22 +553,38 @@ Sin peces añadidos
 
 
 
+
+
 </div>
 
 
+</aside>
+  
 
-</div>
 
 
+
+<!-- PIE DE PAGINA -->
 
 
 <footer>
 
+
 Acuario Designer Studio © 2026
+
 
 </footer>
 
 
+
+
+
+</div>
+
+
+
+
+<!-- SCRIPTS -->
 
 
 <script src="js/engine.js"></script>
@@ -434,6 +592,8 @@ Acuario Designer Studio © 2026
 <script src="js/objects.js"></script>
 
 <script src="js/save.js"></script>
+
+
 
 
 </body>
