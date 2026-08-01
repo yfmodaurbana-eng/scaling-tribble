@@ -1,87 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer V3.0</title>
+<title>Acuario Designer V4</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
+
 <body>
 
-<header class="topbar">
 
-    <h1>🐠 Acuario Designer V3.0</h1>
+<div class="app">
 
-    <div class="top-buttons">
-        <button>Nuevo</button>
-        <button>Guardar</button>
-        <button>Exportar</button>
-    </div>
+
+<!-- CABECERA -->
+
+<header class="header">
+
+<div class="logo">
+🐠 Acuario Designer
+<span>V4.0</span>
+</div>
+
+
+<div class="actions">
+
+<button>Nuevo</button>
+<button>Guardar</button>
+<button>Exportar</button>
+
+</div>
 
 </header>
 
 
-<main class="workspace">
 
 
-<!-- PANEL DE HERRAMIENTAS -->
+<!-- CUERPO -->
 
-<aside class="tools">
+<div class="main">
 
-<h2>Herramientas</h2>
+
+
+<!-- MENU IZQUIERDO -->
+
+<aside class="sidebar">
+
+
+<h2>🛠 Herramientas</h2>
+
+
+<div class="tool-grid">
 
 
 <button class="tool">
-🪨 Añadir roca
+🪨
+<br>
+Roca
 </button>
 
 
 <button class="tool">
-🌱 Añadir planta
+🌱
+<br>
+Planta
 </button>
 
 
 <button class="tool">
-🐟 Añadir pez
+🐟
+<br>
+Pez
 </button>
 
 
 <button class="tool">
-💡 Iluminación
+💡
+<br>
+Luz
 </button>
 
 
 <button class="tool">
-💧 Parámetros agua
+💧
+<br>
+Agua
 </button>
 
 
-<hr>
+</div>
 
 
-<h3>Medidas</h3>
+
+<div class="box">
+
+<h3>📐 Dimensiones</h3>
 
 
 <label>
-Largo (cm)
-<input type="number" value="70">
+Largo
+<input value="70">
+cm
 </label>
 
 
 <label>
-Ancho (cm)
-<input type="number" value="30">
+Ancho
+<input value="30">
+cm
 </label>
 
 
 <label>
-Alto (cm)
-<input type="number" value="40">
+Alto
+<input value="40">
+cm
 </label>
 
 
@@ -90,37 +129,48 @@ Crear acuario
 </button>
 
 
+</div>
+
+
 </aside>
 
 
 
 
-<!-- ZONA SIMULADOR -->
 
-<section class="simulation">
-
-
-<div id="aquarium">
+<!-- ZONA PRINCIPAL -->
 
 
-<div class="water">
+<section class="viewer">
+
+
+<div class="aquarium">
+
+
+<div class="water"></div>
+
+
+<div class="sand"></div>
+
+
+
+<div class="decor">
 
 </div>
 
 
-<div class="substrate">
-
 </div>
 
 
-</div>
 
 
-<div class="camera-controls">
+<div class="camera">
+
 
 <button>+</button>
 <button>-</button>
-<button>🔄</button>
+<button>⟳</button>
+
 
 </div>
 
@@ -130,12 +180,15 @@ Crear acuario
 
 
 
-<!-- PANEL INFORMACIÓN -->
+
+<!-- PANEL DERECHO -->
 
 
-<aside class="info">
+<aside class="panel">
 
-<h2>Información</h2>
+
+<h2>📊 Información</h2>
+
 
 
 <div class="card">
@@ -143,10 +196,10 @@ Crear acuario
 <h3>Acuario</h3>
 
 <p>
-Capacidad:
-<span id="liters">
+Volumen:
+<b id="liters">
 84 L
-</span>
+</b>
 </p>
 
 
@@ -160,41 +213,47 @@ Cristal:
 
 
 
+
 <div class="card">
 
-<h3>Agua</h3>
+<h3>🌊 Agua</h3>
 
-<p>
-pH:
-7.0
-</p>
+<p>pH 7.0</p>
+<p>Temperatura 25ºC</p>
+<p>Nitratos 20 mg/L</p>
 
-
-<p>
-Temperatura:
-25 ºC
-</p>
-
-
-<p>
-NO3:
-20 mg/L
-</p>
 
 </div>
+
+
+
+<div class="card">
+
+<h3>🐠 Habitantes</h3>
+
+<p>
+Sin peces añadidos
+</p>
+
+
+</div>
+
 
 
 </aside>
 
 
 
-</main>
+</div>
+
+
+</div>
 
 
 
 <footer>
 
-Acuario Designer © 2026
+Acuario Designer Studio © 2026
 
 </footer>
 
@@ -202,6 +261,9 @@ Acuario Designer © 2026
 
 <script src="js/engine.js"></script>
 <script src="js/objects.js"></script>
+<script src="js/save.js"></script>
+
+
 </body>
 
 </html>
