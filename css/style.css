@@ -1,9 +1,3 @@
-/* =====================================
-   ACUARIO DESIGNER V4
-   ESTILO PRO COMPACTO FINAL
-===================================== */
-
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -12,22 +6,15 @@
 }
 
 
-
 html,
 body{
 
     width:100%;
     height:100%;
 
-    background:#050b16;
+    background:#020617;
 
     color:white;
-
-}
-
-
-
-body{
 
     overflow:hidden;
 
@@ -37,7 +24,7 @@ body{
 
 .app{
 
-    width:100%;
+    width:100vw;
 
     height:100vh;
 
@@ -49,11 +36,9 @@ body{
 
 
 
-
-
-/* =====================
-   CABECERA
-===================== */
+/* =========================
+ CABECERA
+========================= */
 
 
 .header{
@@ -70,10 +55,9 @@ body{
 
     padding:0 15px;
 
-
     background:#07182e;
 
-    border-bottom:1px solid #1e4b70;
+    border-bottom:1px solid #164e75;
 
 }
 
@@ -83,7 +67,7 @@ body{
 
     font-size:22px;
 
-    font-weight:bold;
+    font-weight:700;
 
 }
 
@@ -94,6 +78,8 @@ body{
     color:#38bdf8;
 
     font-size:13px;
+
+    margin-left:5px;
 
 }
 
@@ -108,9 +94,9 @@ body{
 
     border:0;
 
-    padding:7px 12px;
-
     border-radius:7px;
+
+    padding:7px 12px;
 
     margin-left:5px;
 
@@ -122,9 +108,9 @@ body{
 
 
 
-/* =====================
-   ESTRUCTURA PRINCIPAL
-===================== */
+/* =========================
+ ZONA PRINCIPAL
+========================= */
 
 
 .main{
@@ -133,27 +119,11 @@ body{
 
     min-height:0;
 
+    height:calc(100vh - 86px);
+
     display:grid;
 
-    grid-template-columns:215px 1fr 215px;
-
-}
-
-
-
-
-
-/* =====================
-   PANELES LATERALES
-===================== */
-
-
-.sidebar,
-.panel{
-
-    background:#081426;
-
-    padding:8px;
+    grid-template-columns:220px 1fr 220px;
 
     overflow:hidden;
 
@@ -161,9 +131,31 @@ body{
 
 
 
+
+
+/* =========================
+ PANELES
+========================= */
+
+
+.sidebar,
+.panel{
+
+    height:100%;
+
+    overflow:hidden;
+
+    padding:8px;
+
+    background:#081426;
+
+}
+
+
+
 .sidebar{
 
-    border-right:1px solid #163b5c;
+    border-right:1px solid #164e75;
 
 }
 
@@ -171,9 +163,10 @@ body{
 
 .panel{
 
-    border-left:1px solid #163b5c;
+    border-left:1px solid #164e75;
 
 }
+
 
 
 
@@ -200,9 +193,11 @@ h3{
 
 
 
-/* =====================
-   HERRAMIENTAS
-===================== */
+
+
+/* =========================
+ HERRAMIENTAS
+========================= */
 
 
 .tool-grid{
@@ -214,6 +209,7 @@ h3{
     gap:5px;
 
 }
+
 
 
 
@@ -247,9 +243,10 @@ h3{
 
 
 
-/* =====================
-   CAJAS GENERALES
-===================== */
+
+/* =========================
+ CAJAS
+========================= */
 
 
 .box,
@@ -267,13 +264,9 @@ h3{
 
 }
 
-
-
-
-
-/* =====================
+/* =========================
    DIMENSIONES
-===================== */
+========================= */
 
 
 .dimensions-box h3{
@@ -318,7 +311,7 @@ h3{
 
     font-size:10px;
 
-    margin-bottom:2px;
+    margin-bottom:3px;
 
 }
 
@@ -346,25 +339,30 @@ h3{
 
 
 
-.input-card strong{
+.input-card small{
 
     font-size:10px;
 
 }
-/* =====================
+
+
+
+
+
+/* =========================
    CRISTAL
-===================== */
+========================= */
 
 
 .glass-box{
 
-    margin-top:6px;
+    margin-top:7px;
 
     padding:7px;
 
     background:#020617;
 
-    border-radius:8px;
+    border-radius:7px;
 
     border:1px solid #38bdf8;
 
@@ -400,11 +398,11 @@ h3{
 
     height:24px;
 
-    text-align:center;
-
     background:#07182e;
 
     color:white;
+
+    text-align:center;
 
     border:1px solid #38bdf8;
 
@@ -420,9 +418,9 @@ h3{
 
     padding:5px;
 
-    border-radius:6px;
-
     background:#07182e;
+
+    border-radius:6px;
 
     text-align:center;
 
@@ -433,10 +431,9 @@ h3{
 
 
 
-
-/* =====================
-   INFORMACION RAPIDA
-===================== */
+/* =========================
+   INFORMACION ACUARIO
+========================= */
 
 
 .tank-info{
@@ -447,7 +444,7 @@ h3{
 
     gap:5px;
 
-    margin-top:6px;
+    margin-top:7px;
 
 }
 
@@ -480,9 +477,10 @@ h3{
 
 
 
-/* =====================
+
+/* =========================
    BOTON CREAR
-===================== */
+========================= */
 
 
 .create{
@@ -493,13 +491,13 @@ h3{
 
     padding:8px;
 
-    background:#059669;
-
-    color:white;
-
     border:0;
 
     border-radius:7px;
+
+    background:#059669;
+
+    color:white;
 
     cursor:pointer;
 
@@ -519,9 +517,35 @@ h3{
 
 
 
-/* =====================
+/* =========================
+   PANEL DERECHO
+========================= */
+
+
+.card p{
+
+    margin-top:5px;
+
+    font-size:13px;
+
+}
+
+
+
+.card b{
+
+    color:#38bdf8;
+
+}
+
+
+
+
+
+
+/* =========================
    ACUARIO CENTRAL
-===================== */
+========================= */
 
 
 .viewer{
@@ -534,13 +558,19 @@ h3{
 
     align-items:center;
 
-    background:
-
-    radial-gradient(circle,#134e75,#020617);
-
     overflow:hidden;
 
+
+    background:
+
+    radial-gradient(
+    circle,
+    #134e75,
+    #020617
+    );
+
 }
+
 
 
 
@@ -549,80 +579,136 @@ h3{
 
     width:82%;
 
-    height:72%;
+    height:70%;
 
     position:relative;
 
     overflow:hidden;
 
+
     border:7px solid rgba(180,230,255,.8);
 
     border-radius:15px;
 
-    background:
 
-    linear-gradient(
-    #38bdf8,
-    #075985
-    );
+    background:#075985;
 
 
     box-shadow:
 
-    0 0 35px #0ea5e9;
+    0 0 40px #0ea5e9;
+
+
+    perspective:900px;
 
 }
 
 
 
 
-/* =====================
-   EFECTO AGUA
-===================== */
+
+/* FONDO PROFUNDO */
+
+
+.back-wall{
+
+    position:absolute;
+
+    inset:0;
+
+
+    background:
+
+    radial-gradient(
+    circle at 50% 20%,
+    rgba(255,255,255,.25),
+    transparent 35%
+    ),
+
+    linear-gradient(
+    #0ea5e9,
+    #022c44
+    );
+
+
+
+}
+
+
+
+
+
+
+/* AGUA */
 
 
 .water{
 
     position:absolute;
 
-    width:130%;
+    inset:0;
 
-    height:100%;
-
-    left:-15%;
+    overflow:hidden;
 
 
     background:
 
     linear-gradient(
     120deg,
+    rgba(255,255,255,.20),
+    transparent
+    );
+
+
+}
+/* =========================
+   EFECTOS AGUA 3D
+========================= */
+
+
+.light-rays{
+
+    position:absolute;
+
+    top:-30%;
+
+    left:15%;
+
+    width:70%;
+
+    height:130%;
+
+
+    background:
+
+    linear-gradient(
+    120deg,
+    transparent,
     rgba(255,255,255,.25),
     transparent
     );
 
 
-    animation:agua 7s infinite linear;
+    animation:luz 8s infinite linear;
 
 }
 
 
 
-@keyframes agua{
+@keyframes luz{
+
+    from{
+
+        transform:translateX(-40%) rotate(10deg);
+
+    }
 
 
-from{
+    to{
 
-    transform:translateX(-20%);
+        transform:translateX(40%) rotate(10deg);
 
-}
-
-
-to{
-
-    transform:translateX(20%);
-
-}
-
+    }
 
 }
 
@@ -630,9 +716,90 @@ to{
 
 
 
-/* =====================
+/* =========================
+   BURBUJAS
+========================= */
+
+
+.bubble{
+
+    position:absolute;
+
+    bottom:-20px;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+
+    background:white;
+
+    opacity:.5;
+
+
+    animation:subir 8s infinite;
+
+}
+
+
+
+.b1{
+
+    left:25%;
+
+}
+
+
+.b2{
+
+    left:55%;
+
+    width:12px;
+
+    height:12px;
+
+    animation-delay:3s;
+
+}
+
+
+
+.b3{
+
+    left:75%;
+
+    animation-delay:5s;
+
+}
+
+
+
+@keyframes subir{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+
+    to{
+
+        transform:translateY(-600px);
+
+    }
+
+}
+
+
+
+
+
+/* =========================
    ARENA
-===================== */
+========================= */
 
 
 .sand{
@@ -659,9 +826,41 @@ to{
 
 
 
-/* =====================
+
+/* =========================
+   CRISTAL FRONTAL
+========================= */
+
+
+.glass-front{
+
+    position:absolute;
+
+    inset:0;
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    rgba(255,255,255,.12),
+    transparent 25%,
+    transparent 75%,
+    rgba(255,255,255,.08)
+    );
+
+
+    pointer-events:none;
+
+}
+
+
+
+
+
+/* =========================
    OBJETOS
-===================== */
+========================= */
 
 
 .objeto{
@@ -700,9 +899,9 @@ to{
 
 
 
-/* =====================
+/* =========================
    CAMARA
-===================== */
+========================= */
 
 
 .camera{
@@ -721,15 +920,21 @@ to{
 
     height:36px;
 
+
     border-radius:50%;
+
 
     border:0;
 
+
     background:#0284c7;
+
 
     color:white;
 
+
     margin:3px;
+
 
     cursor:pointer;
 
@@ -738,9 +943,10 @@ to{
 
 
 
-/* =====================
-   PIE
-===================== */
+
+/* =========================
+   FOOTER
+========================= */
 
 
 footer{
@@ -749,11 +955,15 @@ footer{
 
     flex-shrink:0;
 
+
+    background:#020617;
+
+
     text-align:center;
+
 
     padding:5px;
 
-    background:#020617;
 
     color:#94a3b8;
 
@@ -763,9 +973,9 @@ footer{
 
 
 
-/* =====================
-   QUITAR BARRAS
-===================== */
+/* =========================
+   QUITAR SCROLL
+========================= */
 
 
 .sidebar::-webkit-scrollbar,
@@ -789,9 +999,10 @@ footer{
 
 
 
-/* =====================
+
+/* =========================
    MOVIL
-===================== */
+========================= */
 
 
 @media(max-width:900px){
@@ -802,6 +1013,7 @@ footer{
     grid-template-columns:1fr;
 
 }
+
 
 
 .sidebar,
@@ -818,122 +1030,6 @@ footer{
     width:90%;
 
     height:60%;
-   /* ===========================
-   ACUARIO 3D REALISTA
-=========================== */
-
-
-.aquarium{
-
-perspective:900px;
-
-overflow:hidden;
-
-background:#063451;
-
-}
-
-
-
-/* Fondo con profundidad */
-
-.back-wall{
-
-position:absolute;
-
-inset:0;
-
-background:
-
-radial-gradient(
-circle at 50% 20%,
-rgba(255,255,255,.25),
-transparent 35%
-),
-
-linear-gradient(
-180deg,
-#0ea5e9,
-#075985 60%,
-#022c44
-);
-
-
-transform:translateZ(-80px);
-
-}
-
-
-
-
-
-/* Agua */
-
-.water{
-
-position:absolute;
-
-inset:0;
-
-overflow:hidden;
-
-background:
-
-linear-gradient(
-120deg,
-rgba(255,255,255,.18),
-transparent 40%
-);
-
-}
-
-
-
-
-/* Rayos de luz */
-
-.light-rays{
-
-position:absolute;
-
-top:-20%;
-
-left:20%;
-
-width:60%;
-
-height:120%;
-
-
-background:
-
-linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,.25),
-transparent
-);
-
-
-animation:luz 8s infinite linear;
-
-}
-
-
-
-@keyframes luz{
-
-
-0%{
-
-transform:translateX(-40%) rotate(10deg);
-
-}
-
-
-100%{
-
-transform:translateX(40%) rotate(10deg);
 
 }
 
@@ -941,141 +1037,3 @@ transform:translateX(40%) rotate(10deg);
 }
 
 
-
-
-/* Burbujas */
-
-
-.bubble{
-
-position:absolute;
-
-bottom:-20px;
-
-width:8px;
-
-height:8px;
-
-background:white;
-
-opacity:.5;
-
-border-radius:50%;
-
-animation:subir 8s infinite;
-
-}
-
-
-
-.b1{
-
-left:25%;
-
-animation-delay:1s;
-
-}
-
-
-.b2{
-
-left:55%;
-
-width:12px;
-
-height:12px;
-
-animation-delay:3s;
-
-}
-
-
-.b3{
-
-left:75%;
-
-animation-delay:5s;
-
-}
-
-
-
-@keyframes subir{
-
-
-from{
-
-transform:translateY(0);
-
-}
-
-
-to{
-
-transform:translateY(-600px);
-
-}
-
-
-}
-
-
-
-
-/* Arena */
-
-.sand{
-
-position:absolute;
-
-bottom:0;
-
-height:20%;
-
-width:100%;
-
-
-background:
-
-linear-gradient(
-#d4b36a,
-#806030
-);
-
-
-}
-
-
-
-
-
-/* Cristal frontal */
-
-
-.glass-front{
-
-position:absolute;
-
-inset:0;
-
-
-background:
-
-linear-gradient(
-90deg,
-rgba(255,255,255,.12),
-transparent 20%,
-transparent 80%,
-rgba(255,255,255,.08)
-);
-
-
-pointer-events:none;
-
-
-}
-
-}
-
-
-}
