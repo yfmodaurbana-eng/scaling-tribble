@@ -1,6 +1,6 @@
 /* =====================================
    ACUARIO DESIGNER V4
-   ESTILO PRINCIPAL PRO
+   ESTILO PRO COMPACTO
 ===================================== */
 
 
@@ -12,7 +12,8 @@
 }
 
 
-html,body{
+html,
+body{
 
     width:100%;
     height:100%;
@@ -41,23 +42,23 @@ body{
 
 
 
-/* =========================
+/* =====================
    CABECERA
-========================= */
+===================== */
 
 
 .header{
 
-    height:65px;
+    height:60px;
     flex-shrink:0;
-
-    background:#07182e;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    padding:0 20px;
+    padding:0 15px;
+
+    background:#07182e;
 
     border-bottom:1px solid #1e4b70;
 
@@ -66,7 +67,7 @@ body{
 
 .logo{
 
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
 
 }
@@ -75,7 +76,7 @@ body{
 .logo span{
 
     color:#38bdf8;
-    font-size:14px;
+    font-size:13px;
 
 }
 
@@ -89,11 +90,11 @@ body{
 
     color:white;
 
-    padding:8px 14px;
+    padding:7px 12px;
 
-    margin-left:6px;
+    margin-left:5px;
 
-    border-radius:8px;
+    border-radius:7px;
 
     cursor:pointer;
 
@@ -102,9 +103,9 @@ body{
 
 
 
-/* =========================
+/* =====================
    ZONA PRINCIPAL
-========================= */
+===================== */
 
 
 .main{
@@ -115,16 +116,15 @@ body{
 
     display:grid;
 
-    grid-template-columns:250px minmax(400px,1fr) 250px;
+    grid-template-columns:230px 1fr 230px;
 
 }
 
 
 
-
-/* =========================
+/* =====================
    PANELES
-========================= */
+===================== */
 
 
 .sidebar,
@@ -132,7 +132,7 @@ body{
 
     background:#081426;
 
-    padding:12px;
+    padding:10px;
 
     overflow-y:auto;
 
@@ -147,7 +147,6 @@ body{
 }
 
 
-
 .panel{
 
     border-left:1px solid #163b5c;
@@ -160,25 +159,25 @@ h2{
 
     color:#38bdf8;
 
-    font-size:18px;
+    font-size:17px;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 
 }
 
 
 h3{
 
-    font-size:15px;
+    font-size:14px;
 
 }
 
 
 
 
-/* =========================
+/* =====================
    HERRAMIENTAS
-========================= */
+===================== */
 
 
 .tool-grid{
@@ -187,7 +186,7 @@ h3{
 
     grid-template-columns:1fr 1fr;
 
-    gap:8px;
+    gap:6px;
 
 }
 
@@ -195,19 +194,19 @@ h3{
 
 .tool{
 
-    height:65px;
+    height:55px;
 
     background:#102a43;
 
     border:1px solid #245b86;
 
-    border-radius:10px;
+    border-radius:8px;
 
     color:white;
 
     cursor:pointer;
 
-    font-size:16px;
+    font-size:14px;
 
 }
 
@@ -221,11 +220,9 @@ h3{
 
 
 
-
-
-/* =========================
-   CAJA DIMENSIONES PRO
-========================= */
+/* =====================
+   DIMENSIONES COMPACTAS
+===================== */
 
 
 .box{
@@ -234,11 +231,11 @@ h3{
 
     border:1px solid #163b5c;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    padding:12px;
+    padding:10px;
 
-    margin-top:12px;
+    margin-top:10px;
 
 }
 
@@ -246,7 +243,9 @@ h3{
 
 .dimensions-box h3{
 
-    margin-bottom:10px;
+    margin-bottom:8px;
+
+    color:#7dd3fc;
 
 }
 
@@ -258,7 +257,7 @@ h3{
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:6px;
+    gap:5px;
 
 }
 
@@ -268,9 +267,9 @@ h3{
 
     background:#102a43;
 
-    border-radius:8px;
+    border-radius:7px;
 
-    padding:8px;
+    padding:6px;
 
     text-align:center;
 
@@ -282,11 +281,11 @@ h3{
 
     display:block;
 
-    font-size:11px;
+    font-size:10px;
 
     color:#7dd3fc;
 
-    margin-bottom:5px;
+    margin-bottom:3px;
 
 }
 
@@ -294,9 +293,9 @@ h3{
 
 .input-card input{
 
-    width:50px;
+    width:45px;
 
-    height:26px;
+    height:24px;
 
     background:#020617;
 
@@ -308,17 +307,17 @@ h3{
 
     text-align:center;
 
+    font-size:12px;
+
 }
 
 
 
 .input-card strong{
 
-    font-size:11px;
+    font-size:10px;
 
 }
-
-
 
 
 
@@ -327,15 +326,23 @@ h3{
 
 .glass-box{
 
-    margin-top:10px;
+    margin-top:8px;
 
-    padding:10px;
+    padding:8px;
 
     background:#020617;
 
-    border-radius:10px;
+    border-radius:8px;
 
     border:1px solid #38bdf8;
+
+}
+
+
+
+.glass-box h3{
+
+    margin-bottom:5px;
 
 }
 
@@ -349,7 +356,7 @@ h3{
 
     align-items:center;
 
-    gap:8px;
+    gap:5px;
 
 }
 
@@ -357,9 +364,9 @@ h3{
 
 .glass-input input{
 
-    width:55px;
+    width:50px;
 
-    height:28px;
+    height:25px;
 
     text-align:center;
 
@@ -369,35 +376,34 @@ h3{
 
 #resultadoCristal{
 
-    margin-top:8px;
+    margin-top:6px;
 
-    padding:7px;
+    padding:6px;
 
-    border-radius:8px;
+    border-radius:6px;
 
     background:#07182e;
 
     text-align:center;
 
-    font-size:12px;
+    font-size:11px;
 
 }
 
 
 
-
-/* INFORMACION RAPIDA */
+/* INFORMACION */
 
 
 .tank-info{
 
-    margin-top:10px;
+    margin-top:8px;
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
-    gap:6px;
+    gap:5px;
 
 }
 
@@ -407,13 +413,13 @@ h3{
 
     background:#102a43;
 
-    border-radius:8px;
+    border-radius:7px;
 
-    padding:8px;
+    padding:6px;
 
     text-align:center;
 
-    font-size:12px;
+    font-size:11px;
 
 }
 
@@ -423,7 +429,7 @@ h3{
 
     color:#38bdf8;
 
-    font-size:16px;
+    font-size:15px;
 
 }
 
@@ -434,9 +440,9 @@ h3{
 
     width:100%;
 
-    margin-top:10px;
+    margin-top:8px;
 
-    padding:9px;
+    padding:8px;
 
     background:#059669;
 
@@ -444,11 +450,9 @@ h3{
 
     border:0;
 
-    border-radius:8px;
+    border-radius:7px;
 
     cursor:pointer;
-
-    font-size:14px;
 
 }
 
@@ -456,9 +460,9 @@ h3{
 
 
 
-/* =========================
+/* =====================
    ACUARIO CENTRAL
-========================= */
+===================== */
 
 
 .viewer{
@@ -481,17 +485,15 @@ h3{
 
 .aquarium{
 
-    width:75%;
+    width:80%;
 
-    height:65%;
-
-    min-height:280px;
+    height:70%;
 
     position:relative;
 
     overflow:hidden;
 
-    border:8px solid rgba(180,230,255,.8);
+    border:7px solid rgba(180,230,255,.8);
 
     border-radius:15px;
 
@@ -504,9 +506,10 @@ h3{
 
     box-shadow:
 
-    0 0 40px #0ea5e9;
+    0 0 35px #0ea5e9;
 
 }
+
 
 
 
@@ -579,8 +582,6 @@ transform:translateX(20%);
 
 
 
-/* OBJETOS */
-
 
 .objeto{
 
@@ -591,26 +592,23 @@ transform:translateX(20%);
 }
 
 
-
 .roca{
+
+    font-size:50px;
+
+}
+
+
+.planta{
 
     font-size:55px;
 
 }
 
 
-
-.planta{
-
-    font-size:60px;
-
-}
-
-
-
 .pez{
 
-    font-size:40px;
+    font-size:38px;
 
 }
 
@@ -624,7 +622,7 @@ transform:translateX(20%);
 
     position:absolute;
 
-    bottom:20px;
+    bottom:15px;
 
 }
 
@@ -632,9 +630,9 @@ transform:translateX(20%);
 
 .camera button{
 
-    width:40px;
+    width:38px;
 
-    height:40px;
+    height:38px;
 
     border-radius:50%;
 
@@ -644,9 +642,10 @@ transform:translateX(20%);
 
     color:white;
 
-    margin:4px;
+    margin:3px;
 
 }
+
 
 
 
@@ -656,21 +655,19 @@ transform:translateX(20%);
 
 footer{
 
-    height:30px;
+    height:28px;
 
     flex-shrink:0;
 
     text-align:center;
 
-    padding:6px;
+    padding:5px;
 
     background:#020617;
 
     color:#94a3b8;
 
 }
-
-
 
 
 
@@ -682,7 +679,7 @@ footer{
 
 .main{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
 }
 
@@ -690,17 +687,16 @@ grid-template-columns:1fr;
 .sidebar,
 .panel{
 
-display:none;
+    display:none;
 
 }
 
 
 .aquarium{
 
-width:90%;
-   body{
-    border:10px solid red !important;
-}
+    width:90%;
+
+    height:60%;
 
 }
 
