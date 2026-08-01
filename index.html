@@ -19,9 +19,8 @@
 <div class="app">
 
 
-<!-- CABECERA -->
-
 <header class="header">
+
 
 <div class="logo">
 🐠 Acuario Designer
@@ -37,18 +36,14 @@
 
 </div>
 
+
 </header>
 
 
 
-
-<!-- CUERPO -->
-
 <div class="main">
 
 
-
-<!-- MENU IZQUIERDO -->
 
 <aside class="sidebar">
 
@@ -100,58 +95,81 @@ Agua
 
 <div class="box">
 
+
 <h3>📐 Dimensiones</h3>
 
 
 <label>
+
 Largo
+
 <input id="largo" value="70">
+
 cm
+
 </label>
 
 
+
 <label>
+
 Ancho
+
 <input id="ancho" value="30">
+
 cm
+
 </label>
+
 
 
 <label>
+
 Alto
+
 <input id="alto" value="40">
+
 cm
+
 </label>
 
 
-
-<hr>
 
 
 <h3>🪟 Cristal</h3>
 
 
 <label>
-Grosor cristal
+
+Grosor
+
 <input id="cristal" value="6">
+
 mm
+
 </label>
+
 
 
 <div id="resultadoCristal">
 
-Introduce las medidas
+Calculando...
 
 </div>
+
 
 
 
 <button class="create">
+
 Crear acuario
+
 </button>
 
 
 </div>
+
+
 
 </aside>
 
@@ -159,10 +177,8 @@ Crear acuario
 
 
 
-<!-- ZONA PRINCIPAL -->
-
-
 <section class="viewer">
+
 
 
 <div class="aquarium">
@@ -174,10 +190,7 @@ Crear acuario
 <div class="sand"></div>
 
 
-
-<div class="decor">
-
-</div>
+<div class="decor"></div>
 
 
 </div>
@@ -187,11 +200,11 @@ Crear acuario
 
 <div class="camera">
 
-
 <button>+</button>
-<button>-</button>
-<button>⟳</button>
 
+<button>-</button>
+
+<button>⟳</button>
 
 </div>
 
@@ -200,9 +213,6 @@ Crear acuario
 
 
 
-
-
-<!-- PANEL DERECHO -->
 
 
 <aside class="panel">
@@ -214,19 +224,33 @@ Crear acuario
 
 <div class="card">
 
-<h3>Acuario</h3>
+
+<h3>🐠 Acuario</h3>
+
 
 <p>
+
 Volumen:
+
 <b id="liters">
+
 84 L
+
 </b>
+
 </p>
 
 
 <p>
+
 Cristal:
+
+<span id="infoCristal">
+
 6 mm
+
+</span>
+
 </p>
 
 
@@ -236,24 +260,33 @@ Cristal:
 
 
 <div class="card">
+
 
 <h3>🌊 Agua</h3>
 
-<p>pH 7.0</p>
-<p>Temperatura 25ºC</p>
-<p>Nitratos 20 mg/L</p>
+
+<p>pH: 7.0</p>
+
+<p>Temperatura: 25ºC</p>
+
+<p>Nitratos: 20 mg/L</p>
 
 
 </div>
 
 
 
+
 <div class="card">
 
-<h3>🐠 Habitantes</h3>
+
+<h3>🐟 Habitantes</h3>
+
 
 <p>
+
 Sin peces añadidos
+
 </p>
 
 
@@ -268,7 +301,9 @@ Sin peces añadidos
 </div>
 
 
+
 </div>
+
 
 
 
@@ -280,11 +315,15 @@ Acuario Designer Studio © 2026
 
 
 
+
 <script src="js/engine.js"></script>
+
 <script src="js/objects.js"></script>
+
 <script src="js/save.js"></script>
 
 
 </body>
+
 
 </html>
