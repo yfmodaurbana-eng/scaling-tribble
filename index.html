@@ -56,6 +56,7 @@
 
 
 
+
 <!-- =====================
      ZONA PRINCIPAL
 ===================== -->
@@ -76,6 +77,8 @@
 
 
 
+
+
 <section class="tools-panel">
 
 
@@ -84,6 +87,7 @@
 
 
 <div class="tool-grid">
+
 
 
 <button class="tool">
@@ -124,18 +128,6 @@ Pez
 
 <button class="tool">
 
-🌿
-
-<br>
-
-Tronco
-
-</button>
-
-
-
-<button class="tool">
-
 💡
 
 <br>
@@ -157,6 +149,19 @@ Agua
 </button>
 
 
+
+<button class="tool">
+
+🌿
+
+<br>
+
+Planta alta
+
+</button>
+
+
+
 </div>
 
 
@@ -166,7 +171,8 @@ Agua
 
 
 
-<section class="dimensions-panel">
+
+<section class="dimensions-box">
 
 
 
@@ -177,11 +183,13 @@ Agua
 
 <div class="measure-row">
 
+
 <label>
 
 Largo
 
 </label>
+
 
 
 <div>
@@ -193,6 +201,7 @@ Largo
 </div>
 
 
+
 </div>
 
 
@@ -201,11 +210,13 @@ Largo
 
 <div class="measure-row">
 
+
 <label>
 
 Ancho
 
 </label>
+
 
 
 <div>
@@ -217,6 +228,7 @@ Ancho
 </div>
 
 
+
 </div>
 
 
@@ -225,11 +237,13 @@ Ancho
 
 <div class="measure-row">
 
+
 <label>
 
 Alto
 
 </label>
+
 
 
 <div>
@@ -239,17 +253,22 @@ Alto
 <span>cm</span>
 
 </div>
-
-
-</div>
-
+     
 
 
 
-<div class="glass-section">
+<!-- =====================
+     CRISTAL Y CALCULO
+===================== -->
 
 
-<h3>🪟 Cristal</h3>
+<div class="glass-box">
+
+
+
+<h3>🪟 Cristal recomendado</h3>
+
+
 
 
 <div class="measure-row">
@@ -262,6 +281,7 @@ Grosor
 </label>
 
 
+
 <div>
 
 <input id="cristal" value="6">
@@ -271,13 +291,21 @@ Grosor
 </div>
 
 
+
 </div>
+
+
 
 
 
 <div id="resultadoCristal">
 
-✔ Grosor recomendado
+✔ Grosor recomendado para este acuario
+
+</div>
+
+
+
 
 </div>
 
@@ -285,7 +313,64 @@ Grosor
 
 
 
-<!-- BOTON CREAR ACUARIO -->
+
+
+
+<!-- INFORMACION RAPIDA -->
+
+
+<div class="tank-info">
+
+
+
+<div>
+
+
+💧 Volumen
+
+<br>
+
+
+<b id="volume">
+
+84 L
+
+</b>
+
+
+
+</div>
+
+
+
+
+<div>
+
+
+🪟 Cristal
+
+<br>
+
+
+<b id="glassInfo">
+
+6 mm
+
+</b>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
 
 
 <button class="create">
@@ -296,7 +381,10 @@ Grosor
 
 
 
+
+
 </aside>
+
 
 
 
@@ -320,30 +408,37 @@ Grosor
 
 
 
-<!-- FONDO PROFUNDIDAD -->
+<!-- FONDO CON PROFUNDIDAD -->
 
 
-<div class="back-wall"></div>
+<div class="background-3d"></div>
 
 
 
-<!-- AGUA -->
+
+
+
+<!-- AGUA ANIMADA -->
 
 
 <div class="water">
 
 
-<div class="light-rays"></div>
+<div class="light"></div>
 
 
-<div class="bubble b1"></div>
 
-<div class="bubble b2"></div>
+<div class="bubble bubble1"></div>
 
-<div class="bubble b3"></div>
+<div class="bubble bubble2"></div>
+
+<div class="bubble bubble3"></div>
+
 
 
 </div>
+
+
 
 
 
@@ -361,10 +456,14 @@ Grosor
 <!-- DECORACION -->
 
 
-<div class="decor">
+<div class="rocks"></div>
 
 
-</div>
+<div class="plants"></div>
+
+
+<div class="fish"></div>
+
 
 
 
@@ -373,12 +472,13 @@ Grosor
 <!-- CRISTAL FRONTAL -->
 
 
-<div class="glass-front"></div>
+<div class="glass"></div>
 
 
 
 
 </div>
+
 
 
 
@@ -391,26 +491,11 @@ Grosor
 <div class="camera">
 
 
-<button>
+<button>+</button>
 
-+
+<button>-</button>
 
-</button>
-
-
-<button>
-
--
-
-</button>
-
-
-<button>
-
-⟳
-
-</button>
-
+<button>⟳</button>
 
 
 </div>
@@ -418,8 +503,10 @@ Grosor
 
 
 
+
 </section>
      
+
 
 
 
@@ -435,10 +522,9 @@ Grosor
 
 
 
-<section class="info-panel">
-
-
 <h2>📊 Información</h2>
+
+
 
 
 
@@ -447,7 +533,9 @@ Grosor
 <div class="card">
 
 
+
 <h3>🐠 Acuario</h3>
+
 
 
 
@@ -455,7 +543,7 @@ Grosor
 
 Volumen:
 
-<b id="liters">
+<b id="infoVolume">
 
 84 L
 
@@ -466,11 +554,13 @@ Volumen:
 
 
 
+
+
 <p>
 
 Cristal:
 
-<b id="infoCristal">
+<b id="infoGlass">
 
 6 mm
 
@@ -478,6 +568,8 @@ Cristal:
 
 
 </p>
+
+
 
 
 
@@ -501,10 +593,14 @@ Medidas:
 
 
 
+
+
 <div class="card">
 
 
+
 <h3>🌊 Agua</h3>
+
 
 
 
@@ -518,7 +614,10 @@ pH:
 
 </b>
 
+
 </p>
+
+
 
 
 
@@ -532,7 +631,10 @@ Temperatura:
 
 </b>
 
+
 </p>
+
+
 
 
 
@@ -546,7 +648,11 @@ Nitratos:
 
 </b>
 
+
 </p>
+
+
+
 
 
 </div>
@@ -557,7 +663,10 @@ Nitratos:
 
 
 
+
+
 <div class="card">
+
 
 
 <h3>🐟 Habitantes</h3>
@@ -579,11 +688,10 @@ Sin peces añadidos
 
 
 
-</section>
-
-
 
 </aside>
+
+
 
 
 
@@ -595,8 +703,11 @@ Sin peces añadidos
 
 
 
+
+
+
 <!-- =====================
-     PIE
+     FOOTER
 ===================== -->
 
 
@@ -612,14 +723,18 @@ Acuario Designer Studio © 2026
 
 
 
+
 </div>
 
 
 
 
 
+
+
+
 <!-- =====================
-     SCRIPTS
+     JAVASCRIPT
 ===================== -->
 
 
@@ -631,10 +746,13 @@ Acuario Designer Studio © 2026
 
 
 
+
+
 </body>
 
 
 </html>
+
 
 
 </div>
