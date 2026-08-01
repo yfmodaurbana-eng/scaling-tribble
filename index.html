@@ -1,521 +1,207 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acuario Designer V1</title>
-  <style>
-    * /* ===== DISEÑO COMPACTO ACUARIO ===== */
 
-body{
-    margin:0;
-    padding:10px;
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#02131f,#056080);
-    color:white;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Acuario Designer V3.0</title>
 
-h1{
-    text-align:center;
-    color:#6be8ff;
-    font-size:22px;
-    margin:8px 0 15px;
-}
+<link rel="stylesheet" href="css/style.css">
 
-
-/* TARJETAS MÁS PEQUEÑAS */
-
-.card{
-    background:rgba(255,255,255,.12);
-    padding:10px;
-    border-radius:12px;
-    margin-bottom:10px;
-    box-shadow:0 4px 12px #0005;
-}
-
-
-.card h3{
-    margin:5px 0 8px;
-    font-size:17px;
-}
-
-
-/* CAMPOS COMPACTOS */
-
-input,
-select,
-button{
-
-    width:100%;
-    height:38px;
-
-    padding:6px 10px;
-
-    margin:4px 0;
-
-    border-radius:8px;
-
-    border:0;
-
-    font-size:14px;
-
-}
-
-
-/* BOTÓN */
-
-button{
-
-    background:#009cff;
-
-    color:white;
-
-    font-weight:bold;
-
-    height:40px;
-
-}
-
-
-/* RESULTADOS */
-
-.resultado{
-
-    background:#02090f;
-
-    padding:10px;
-
-    border-radius:12px;
-
-    font-size:14px;
-
-    line-height:1.4;
-
-}
-
-
-
-/* VISOR 3D */
-
-#acuario3D{
-
-    height:420px;
-
-    border-radius:15px;
-
-    overflow:hidden;
-
-}
-
-
-/* EN PC DOS COLUMNAS */
-
-@media(min-width:900px){
-
-body{
-
-    max-width:1200px;
-
-    margin:auto;
-
-}
-
-
-.card{
-
-    padding:12px;
-
-}
-
-
-input,
-select,
-button{
-
-    max-width:350px;
-
-}
-
-
-
-}
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
 </head>
+
 <body>
-  <h1>🐠 Acuario Designer V1</h1>
-  <div class="card">
-    <h3>📐 Medidas del acuario</h3>
-    <input id="largo" type="number" placeholder="Largo del acuario (cm)">
-    <input id="ancho" type="number" placeholder="Ancho del acuario (cm)">
-    <input id="alto" type="number" placeholder="Alto del acuario (cm)">
-    <select id="cristal">
-      <option value="3">Cristal 3 mm</option>
-      <option value="4">Cristal 4 mm</option>
-      <option value="5">Cristal 5 mm</option>
-      <option value="6">Cristal 6 mm</option>
-      <option value="8">Cristal 8 mm</option>
-      <option value="10">Cristal 10 mm</option>
-    </select>
-    <button onclick="calcular()">🔍 CALCULAR DISEÑO</button>
-  </div>
-  <div class="card">
-    <h3>🧊 Simulador 3D</h3>
-    <canvas id="canvas3D"></canvas>
-  </div>
-  <div class="resultado" id="resultado">
-    Introduce las medidas...
-  </div>
-  <script>
-    function calcular() {
-      let L = Number(document.getElementById("largo").value);
-      let A = Number(document.getElementById("ancho").value);
-      let H = Number(document.getElementById("alto").value);
-      let G = Number(document.getElementById("cristal").value);
 
-      if (!L || !A || !H) {
-        alert("Introduce todas las medidas");
-        return;
-      }
+<header class="topbar">
 
-      let litros = (L * A * H) / 1000;
-      let utiles = litros * 0.85;
+    <h1>🐠 Acuario Designer V3.0</h1>
 
-      let recomendado = 3;
-      if (H >= 45 || L >= 100) {
-        recomendado = 8;
-      } else if (H >= 40 || L >= 80) {
-        recomendado = 6;
-      } else if (H >= 35 || L >= 70) {
-        recomendado = 5;
-      }
+    <div class="top-buttons">
+        <button>Nuevo</button>
+        <button>Guardar</button>
+        <button>Exportar</button>
+    </div>
 
-      let estado = "";
-      if (G >= recomendado) {
-        estado = `
-          <div class="ok">
-            🟢 MONTAJE CORRECTO<br>
-            Cristal adecuado
-          </div>
-        `;
-      } else if (G == recomendado - 1) {
-        estado = `
-          <div class="warn">
-            🟡 PRECAUCIÓN<br>
-            Cristal justo
-          </div>
-        `;
-      } else {
-        estado = `
-          <div class="bad">
-            🔴 NO RECOMENDADO<br>
-            Cristal insuficiente
-          </div>
-        `;
-      }
+</header>
 
-      document.getElementById("resultado").innerHTML = `
-        <h3>💧 Diseño del acuario</h3>
-        <b>Medidas:</b> ${L} × ${A} × ${H} cm<br><br>
-        <b>Litros:</b> ${litros.toFixed(1)} L<br>
-        <b>Agua recomendable:</b> ${utiles.toFixed(1)} L
-        <hr>
-        <h3>🪟 Cristales a cortar</h3>
-        Frontal: ${L} × ${H} cm (1)<br>
-        Trasera: ${L} × ${H} cm (1)<br>
-        Laterales: ${A} × ${H} cm (2)<br>
-        Base: ${L} × ${A} cm (1)
-        <hr>
-        <h3>🛡️ Seguridad</h3>
-        ${estado}
-        <br><b>Cristal elegido:</b> ${G} mm<br><b>Recomendado:</b> ${recomendado} mm
-      `;
-    }
-  </script>
-  <script>
-    let escena3D;
-    let camara3D;
-    let render3D;
-    let tanque3D;
 
-    function iniciar3D() {
-      let zona = document.getElementById("acuario3D");
-      // ESCENA
-      escena3D = new THREE.Scene();
-      escena3D.background = new THREE.Color(0x001018);
+<main class="workspace">
 
-      // CAMARA
-      camara3D = new THREE.PerspectiveCamera(
-        45,
-        zona.clientWidth / zona.clientHeight,
-        0.1,
-        100
-      );
-      camara3D.position.set(0, 0, 6);
 
-      // RENDER
-      render3D = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
+<!-- PANEL DE HERRAMIENTAS -->
 
-      render3D.setPixelRatio(window.devicePixelRatio);
-      render3D.setSize(zona.clientWidth, zona.clientHeight);
-      zona.innerHTML = "";
-      zona.appendChild(render3D.domElement);
+<aside class="tools">
 
-      // LUZ
-      let luz = new THREE.DirectionalLight(0xffffff, 3);
-      luz.position.set(3, 5, 4);
-      escena3D.add(luz);
+<h2>Herramientas</h2>
 
-      let ambiente = new THREE.AmbientLight(0x5599aa, 1.5);
-      escena3D.add(ambiente);
 
-      // CREAR ACUARIO
-      crearAcuario3D();
+<button class="tool">
+🪨 Añadir roca
+</button>
 
-      // ANIMAR
-      animar3D();
-    }
 
-    function crearAcuario3D() {
-      tanque3D = new THREE.Group();
-      // CRISTAL
-      let vidrio = new THREE.MeshPhysicalMaterial({
-        color: 0x99ddff,
-        transparent: true,
-        opacity: 0.25,
-        roughness: 0.05,
-        side: THREE.DoubleSide
-      });
+<button class="tool">
+🌱 Añadir planta
+</button>
 
-      // CAJA EXTERIOR
-      let cristal = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 1.8, 3),
-        vidrio
-      );
-      tanque3D.add(cristal);
 
-      // AGUA
-      let agua = new THREE.Mesh(
-        new THREE.BoxGeometry(2.85, 1.5, 2.85),
-        new THREE.MeshPhysicalMaterial({
-          color: 0x008cff,
-          transparent: true,
-          opacity: 0.45
-        })
-      );
-      agua.position.y = -0.1;
-      tanque3D.add(agua);
+<button class="tool">
+🐟 Añadir pez
+</button>
 
-      // BASE
-      let base = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 0.08, 3),
-        new THREE.MeshStandardMaterial({
-          color: 0x6b451c
-        })
-      );
-      base.position.y = -0.92;
-      tanque3D.add(base);
 
-      escena3D.add(tanque3D);
-    }
+<button class="tool">
+💡 Iluminación
+</button>
 
-    function animar3D() {
-      requestAnimationFrame(animar3D);
-      render3D.render(escena3D, camara3D);
-    }
 
-    iniciar3D();
-  </script>
-  <script>
-    let canvas = document.getElementById("canvas3D");
-    let ctx = canvas.getContext("2d");
-    let giro = 0;
+<button class="tool">
+💧 Parámetros agua
+</button>
 
-    function ajustarCanvas() {
-      canvas.width = canvas.clientWidth * 2;
-      canvas.height = canvas.clientHeight * 2;
-      ctx.scale(2, 2);
-      dibujarAcuario();
-    }
 
-    function dibujarAcuario() {
-      let w = canvas.clientWidth;
-      let h = canvas.clientHeight;
-      ctx.clearRect(0, 0, w, h);
-      let x = w / 2;
-      let y = h / 2;
-      // sombra
-      ctx.fillStyle = "rgba(0,0,0,.4)";
-      ctx.beginPath();
-      ctx.ellipse(x, y + 100, 130, 25, 0, 0, Math.PI * 2);
-      ctx.fill();
-      // acuario
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(giro / 300);
-      // agua
-      ctx.fillStyle = "rgba(0,140,255,.45)";
-      ctx.fillRect(-120, -70, 240, 130);
-      // grava
-      ctx.fillStyle = "#9b6b32";
-      ctx.fillRect(-120, 60, 240, 25);
-      // cristal
-      ctx.strokeStyle = "rgba(220,250,255,.8)";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(-120, -70, 240, 155);
-      ctx.restore();
-    }
+<hr>
 
-    canvas.addEventListener("touchmove", e => {
-      giro += e.touches[0].clientX - canvas.width / 4;
-      dibujarAcuario();
-    });
 
-    window.addEventListener("resize", ajustarCanvas);
-    ajustarCanvas();
-  </script>
+<h3>Medidas</h3>
+
+
+<label>
+Largo (cm)
+<input type="number" value="70">
+</label>
+
+
+<label>
+Ancho (cm)
+<input type="number" value="30">
+</label>
+
+
+<label>
+Alto (cm)
+<input type="number" value="40">
+</label>
+
+
+<button class="create">
+Crear acuario
+</button>
+
+
+</aside>
+
+
+
+
+<!-- ZONA SIMULADOR -->
+
+<section class="simulation">
+
+
+<div id="aquarium">
+
+
+<div class="water">
+
+</div>
+
+
+<div class="substrate">
+
+</div>
+
+
+</div>
+
+
+<div class="camera-controls">
+
+<button>+</button>
+<button>-</button>
+<button>🔄</button>
+
+</div>
+
+
+</section>
+
+
+
+
+<!-- PANEL INFORMACIÓN -->
+
+
+<aside class="info">
+
+<h2>Información</h2>
+
+
+<div class="card">
+
+<h3>Acuario</h3>
+
+<p>
+Capacidad:
+<span id="liters">
+84 L
+</span>
+</p>
+
+
+<p>
+Cristal:
+6 mm
+</p>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Agua</h3>
+
+<p>
+pH:
+7.0
+</p>
+
+
+<p>
+Temperatura:
+25 ºC
+</p>
+
+
+<p>
+NO3:
+20 mg/L
+</p>
+
+</div>
+
+
+</aside>
+
+
+
+</main>
+
+
+
+<footer>
+
+Acuario Designer © 2026
+
+</footer>
+
+
+
+<script src="js/engine.js"></script>
+<script src="js/objects.js"></script>
 </body>
-    <script>
-    let escena3D;
-    let camara3D;
-    let render3D;
-    let tanque3D;
 
-    function iniciar3D() {
-      let zona = document.getElementById("canvas3D");
-      
-      // ESCENA
-      escena3D = new THREE.Scene();
-      escena3D.background = new THREE.Color(0x001018);
-
-      // CAMARA
-      camara3D = new THREE.PerspectiveCamera(
-        45,
-        zona.clientWidth / zona.clientHeight,
-        0.1,
-        100
-      );
-      camara3D.position.set(0, 0, 6);
-
-      // RENDER
-      render3D = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
-
-      render3D.setPixelRatio(window.devicePixelRatio);
-      render3D.setSize(zona.clientWidth, zona.clientHeight);
-      zona.innerHTML = "";
-      zona.appendChild(render3D.domElement);
-
-      // LUZ
-      let luz = new THREE.DirectionalLight(0xffffff, 3);
-      luz.position.set(3, 5, 4);
-      escena3D.add(luz);
-
-      let ambiente = new THREE.AmbientLight(0x5599aa, 1.5);
-      escena3D.add(ambiente);
-
-      // CREAR ACUARIO
-      crearAcuario3D();
-
-      // ANIMAR
-      animar3D();
-    }
-
-    function crearAcuario3D() {
-      tanque3D = new THREE.Group();
-
-      // CRISTAL
-      let vidrio = new THREE.MeshPhysicalMaterial({
-        color: 0x99ddff,
-        transparent: true,
-        opacity: 0.25,
-        roughness: 0.05,
-        side: THREE.DoubleSide
-      });
-
-      // CAJA EXTERIOR
-      let cristal = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 1.8, 3),
-        vidrio
-      );
-      tanque3D.add(cristal);
-
-      // AGUA
-      let agua = new THREE.Mesh(
-        new THREE.BoxGeometry(2.85, 1.5, 2.85),
-        new THREE.MeshPhysicalMaterial({
-          color: 0x008cff,
-          transparent: true,
-          opacity: 0.45
-        })
-      );
-      agua.position.y = -0.1;
-      tanque3D.add(agua);
-
-      // BASE
-      let base = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 0.08, 3),
-        new THREE.MeshStandardMaterial({
-          color: 0x6b451c
-        })
-      );
-      base.position.y = -0.92;
-      tanque3D.add(base);
-
-      escena3D.add(tanque3D);
-    }
-
-    function animar3D() {
-      requestAnimationFrame(animar3D);
-      render3D.render(escena3D, camara3D);
-    }
-
-    iniciar3D();
-  </script>
-  <script>
-  let giroX = 0;
-  let giroY = 0;
-  let pulsando = false;
-  let ultimoX = 0;
-  let ultimoY = 0;
-
-  render3D.domElement.addEventListener("pointerdown", (e) => {
-    pulsando = true;
-    ultimoX = e.clientX;
-    ultimoY = e.clientY;
-  });
-
-  render3D.domElement.addEventListener("pointerup", () => {
-    pulsando = false;
-  });
-
-  render3D.domElement.addEventListener("pointermove", (e) => {
-    if (!pulsando) return;
-
-    let movX = e.clientX - ultimoX;
-    let movY = e.clientY - ultimoY;
-
-    giroY += movX * 0.01;
-    giroX += movY * 0.01;
-
-    tanque3D.rotation.y = giroY;
-    tanque3D.rotation.x = giroX;
-
-    ultimoX = e.clientX;
-    ultimoY = e.clientY;
-  });
-
-  window.addEventListener("resize", () => {
-    let zona = document.getElementById("canvas3D");
-    camara3D.aspect = zona.clientWidth / zona.clientHeight;
-    camara3D.updateProjectionMatrix();
-    render3D.setSize(zona.clientWidth, zona.clientHeight);
-  });
-</script>
 </html>
