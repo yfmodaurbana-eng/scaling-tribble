@@ -1,95 +1,218 @@
-// =====================================
-// CALCULO GROSOR CRISTAL
-// =====================================
+/* =====================================
+   ACUARIO DESIGNER V4
+   MOTOR PRINCIPAL
+===================================== */
+
+
+// DATOS DEL ACUARIO
+
+let aquariumData = {
+
+    largo:70,
+    ancho:30,
+    alto:40,
+    litros:84,
+    cristal:6
+
+};
+
+
+
+
+
+// CREAR ACUARIO
+
+function crearAcuario(){
+
+
+    let largo =
+    Number(
+    document.getElementById("largo").value
+    );
+
+
+    let ancho =
+    Number(
+    document.getElementById("ancho").value
+    );
+
+
+    let alto =
+    Number(
+    document.getElementById("alto").value
+    );
+
+
+    let cristal =
+    Number(
+    document.getElementById("cristal").value
+    );
+
+
+
+    let litros =
+    (largo * ancho * alto) / 1000;
+
+
+
+    aquariumData.largo=largo;
+    aquariumData.ancho=ancho;
+    aquariumData.alto=alto;
+    aquariumData.litros=litros;
+    aquariumData.cristal=cristal;
+
+
+
+    document
+    .getElementById("liters")
+    .innerHTML=
+    litros.toFixed(1)+" L";
+
+
+
+    document
+    .getElementById("infoCristal")
+    .innerHTML=
+    cristal+" mm";
+
+
+
+    comprobarCristal();
+
+
+
+}
+
+
+
+
+
+
+
+// COMPROBAR GROSOR CRISTAL
 
 
 function comprobarCristal(){
 
 
+
 let largo =
-Number(document.getElementById("largo").value);
+Number(
+document.getElementById("largo").value
+);
 
 
 let alto =
-Number(document.getElementById("alto").value);
+Number(
+document.getElementById("alto").value
+);
 
 
-let grosor =
-Number(document.getElementById("cristal").value);
+let cristal =
+Number(
+document.getElementById("cristal").value
+);
 
 
 
-let resultado =
+let recomendado=6;
+
+
+
+if(largo>100 || alto>50){
+
+    recomendado=10;
+
+}
+
+else if(largo>80 || alto>45){
+
+    recomendado=8;
+
+}
+
+
+
+
+
+let caja =
 document.getElementById("resultadoCristal");
 
 
 
-let recomendado = 6;
+
+if(cristal < recomendado){
 
 
+caja.innerHTML=
 
-if(largo > 100 || alto > 50){
-
-    recomendado = 10;
-
-}
-
-else if(largo > 80 || alto > 45){
-
-    recomendado = 8;
-
-}
-
-
-
-if(grosor < recomendado){
-
-resultado.innerHTML =
 "❌ Cristal insuficiente<br>"+
-"Recomendado: "+recomendado+" mm";
+"Recomendado: "+
+recomendado+
+" mm";
 
 
-resultado.style.color="#ef4444";
+caja.style.color="#ef4444";
+
+
+}
+
+
+
+else if(cristal==recomendado){
+
+
+caja.innerHTML=
+
+"✅ Grosor correcto<br>"+
+"Recomendado para este acuario";
+
+
+caja.style.color="#22c55e";
 
 
 }
 
-
-
-else if(grosor == recomendado){
-
-
-resultado.innerHTML =
-"✅ Grosor recomendado<br>"+
-"Correcto para este acuario";
-
-
-resultado.style.color="#22c55e";
-
-
-}
 
 
 else{
 
 
-resultado.innerHTML =
-"⭐ Cristal sobredimensionado<br>"+
-"Muy resistente";
+caja.innerHTML=
+
+"⭐ Cristal reforzado<br>"+
+"Grosor superior al recomendado";
 
 
-resultado.style.color="#38bdf8";
-
-
-}
-
+caja.style.color="#38bdf8";
 
 
 }
 
 
 
-// actualizar al cambiar valores
+}
+
+
+
+
+
+
+
+// BOTON CREAR
+
+
+document
+.querySelector(".create")
+.onclick=
+crearAcuario;
+
+
+
+
+
+// ACTUALIZAR AL CAMBIAR DATOS
+
 
 document
 .getElementById("cristal")
@@ -98,6 +221,13 @@ document
 comprobarCristal
 );
 
+
+document
+.getElementById("largo")
+.addEventListener(
+"input",
+comprobarCristal
+);
 
 
 document
@@ -109,13 +239,8 @@ comprobarCristal
 
 
 
-document
-.getElementById("largo")
-.addEventListener(
-"input",
-comprobarCristal
-);
+window.onload=function(){
 
+    comprobarCristal();
 
-
-comprobarCristal();
+};
