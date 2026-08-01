@@ -1,6 +1,6 @@
 /* =====================================
    ACUARIO DESIGNER V4
-   INTERFAZ PROFESIONAL
+   ESTILO PRINCIPAL
 ===================================== */
 
 
@@ -8,7 +8,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:"Segoe UI", Arial, sans-serif;
+    font-family:"Segoe UI",Arial,sans-serif;
 }
 
 
@@ -39,13 +39,7 @@ body{
 
     height:70px;
 
-    background:
-
-    linear-gradient(
-    90deg,
-    #07182e,
-    #0b2848
-    );
+    background:#07182e;
 
     display:flex;
 
@@ -60,7 +54,6 @@ body{
 }
 
 
-
 .logo{
 
     font-size:26px;
@@ -68,7 +61,6 @@ body{
     font-weight:bold;
 
 }
-
 
 
 .logo span{
@@ -101,15 +93,8 @@ body{
 
 
 
-.actions button:hover{
+/* ZONA PRINCIPAL */
 
-    background:#38bdf8;
-
-}
-
-
-
-/* CUERPO */
 
 .main{
 
@@ -123,20 +108,13 @@ body{
 
 
 
-/* PANEL IZQUIERDO */
+/* PANELES */
+
 
 .sidebar,
 .panel{
 
-
-    background:
-
-    linear-gradient(
-    180deg,
-    #081426,
-    #0b1d35
-    );
-
+    background:#081426;
 
     padding:20px;
 
@@ -145,13 +123,11 @@ body{
 }
 
 
-
 .sidebar{
 
     border-right:1px solid #163b5c;
 
 }
-
 
 
 .panel{
@@ -172,7 +148,16 @@ h2{
 
 
 
-/* BOTONES HERRAMIENTAS */
+h3{
+
+    margin:15px 0;
+
+}
+
+
+
+
+/* HERRAMIENTAS */
 
 
 .tool-grid{
@@ -189,21 +174,19 @@ h2{
 
 .tool{
 
-
     height:80px;
 
     background:#102a43;
-
-    color:white;
 
     border:1px solid #1e5680;
 
     border-radius:12px;
 
+    color:white;
+
     cursor:pointer;
 
     font-size:18px;
-
 
 }
 
@@ -212,26 +195,35 @@ h2{
 
     background:#164e75;
 
-    transform:scale(1.05);
-
 }
 
 
 
 /* CAJAS */
 
+
 .box,
 .card{
 
     background:#07111f;
 
+    border:1px solid #163b5c;
+
+    border-radius:12px;
+
     padding:15px;
 
     margin-top:20px;
 
-    border-radius:12px;
+}
 
-    border:1px solid #163b5c;
+
+
+label{
+
+    display:block;
+
+    margin:12px 0;
 
 }
 
@@ -239,11 +231,11 @@ h2{
 
 input{
 
-    width:70px;
+    width:80px;
 
     padding:7px;
 
-    margin:8px;
+    margin-left:8px;
 
     border-radius:6px;
 
@@ -253,29 +245,41 @@ input{
 
 
 
-/* ZONA ACUARIO */
+
+.create{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:15px;
+
+    background:#059669;
+
+    color:white;
+
+    border:0;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
 
 
-.viewer{
 
 
-    display:flex;
+#resultadoCristal{
 
-    justify-content:center;
+    padding:10px;
 
-    align-items:center;
+    margin-top:10px;
 
-    position:relative;
+    background:#020617;
 
+    border-radius:8px;
 
-    background:
-
-    radial-gradient(
-    circle,
-    #134e75,
-    #020617
-    );
-
+    text-align:center;
 
 }
 
@@ -284,90 +288,79 @@ input{
 /* ACUARIO */
 
 
-.aquarium{
-
-
-    width:75%;
-
-    height:65%;
-
+.viewer{
 
     position:relative;
 
+    display:flex;
 
-    border:
+    justify-content:center;
 
-    8px solid rgba(180,230,255,.8);
-
-
-
-    border-radius:15px;
-
-
-
-    overflow:hidden;
-
-
+    align-items:center;
 
     background:
 
-    linear-gradient(
-
-    180deg,
-
-    #38bdf8,
-
-    #075985
-
-    );
-
-
-
-    box-shadow:
-
-
-    0 0 40px #0ea5e9,
-
-    inset 0 0 80px rgba(255,255,255,.4);
-
+    radial-gradient(circle,#134e75,#020617);
 
 }
 
 
 
-/* AGUA ANIMADA */
+.aquarium{
+
+    width:75%;
+
+    height:65%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:8px solid rgba(180,230,255,.8);
+
+    border-radius:15px;
+
+
+    background:
+
+    linear-gradient(
+    #38bdf8,
+    #075985
+    );
+
+
+    box-shadow:
+
+    0 0 40px #0ea5e9;
+
+}
+
+
+
+/* AGUA */
 
 
 .water{
 
+    position:absolute;
 
-position:absolute;
+    width:120%;
 
-width:120%;
+    height:100%;
 
-height:100%;
-
-left:-10%;
-
-
-background:
-
-linear-gradient(
-
-120deg,
-
-rgba(255,255,255,.25),
-
-transparent,
-
-rgba(255,255,255,.15)
-
-);
+    left:-10%;
 
 
+    background:
 
-animation:agua 6s infinite linear;
+    linear-gradient(
+    120deg,
+    rgba(255,255,255,.25),
+    transparent
+    );
 
+
+    animation:agua 6s infinite linear;
 
 }
 
@@ -399,41 +392,71 @@ transform:translateX(20%);
 
 .sand{
 
+    position:absolute;
 
-position:absolute;
+    bottom:0;
 
-bottom:0;
+    width:100%;
 
-height:18%;
-
-width:100%;
+    height:18%;
 
 
-background:
+    background:
 
-linear-gradient(
-
-#d6b56d,
-
-#806b3a
-
-);
-
+    linear-gradient(
+    #d6b56d,
+    #806b3a
+    );
 
 }
 
 
 
-/* CONTROLES */
+/* OBJETOS */
+
+
+.objeto{
+
+    position:absolute;
+
+    cursor:grab;
+
+    font-size:45px;
+
+}
+
+
+
+.roca{
+
+    font-size:55px;
+
+}
+
+
+.planta{
+
+    font-size:60px;
+
+}
+
+
+.pez{
+
+    font-size:40px;
+
+}
+
+
+
+/* CAMARA */
 
 
 .camera{
 
+    position:absolute;
 
-position:absolute;
-
-bottom:30px;
-
+    bottom:25px;
 
 }
 
@@ -441,36 +464,21 @@ bottom:30px;
 
 .camera button{
 
+    width:45px;
 
-width:45px;
+    height:45px;
 
-height:45px;
+    border-radius:50%;
 
-border-radius:50%;
+    border:0;
 
-border:0;
+    background:#0284c7;
 
-background:#0284c7;
+    color:white;
 
-color:white;
+    font-size:20px;
 
-font-size:22px;
-
-margin:5px;
-
-
-}
-
-
-
-/* TARJETAS */
-
-
-.card p{
-
-margin:12px 0;
-
-color:#cbd5e1;
+    margin:5px;
 
 }
 
@@ -478,17 +486,16 @@ color:#cbd5e1;
 
 /* PIE */
 
+
 footer{
 
-height:35px;
+    height:35px;
 
-text-align:center;
+    text-align:center;
 
-padding:8px;
+    padding:8px;
 
-background:#020617;
-
-color:#64748b;
+    background:#020617;
 
 }
 
@@ -502,9 +509,7 @@ color:#64748b;
 
 .main{
 
-grid-template-columns:1fr;
-
-overflow:auto;
+    grid-template-columns:1fr;
 
 }
 
@@ -512,24 +517,14 @@ overflow:auto;
 .sidebar,
 .panel{
 
-display:none;
+    display:none;
 
 }
-
-
-.viewer{
-
-height:100vh;
-
-}
-
 
 
 .aquarium{
 
-width:90%;
-
-height:60%;
+    width:90%;
 
 }
 
