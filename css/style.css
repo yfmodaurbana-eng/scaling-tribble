@@ -1,1 +1,80 @@
+/* =====================================
+   OBJETOS DEL ACUARIO
+===================================== */
 
+
+.objeto{
+
+    position:absolute;
+
+    cursor:grab;
+
+    user-select:none;
+
+    font-size:45px;
+
+    z-index:5;
+
+}
+
+
+.objeto:active{
+
+    cursor:grabbing;
+
+}
+
+
+
+/* ROCA */
+
+.roca{
+
+    font-size:55px;
+
+}
+
+
+
+/* PLANTA */
+
+.planta{
+
+    font-size:60px;
+
+}
+
+
+
+/* PEZ */
+
+.pez{
+
+    font-size:40px;
+
+    animation:nadar 4s infinite alternate;
+
+}
+
+
+
+/* Movimiento peces */
+
+@keyframes nadar{
+
+
+from{
+
+    transform:translateX(0);
+
+}
+
+
+to{
+
+    transform:translateX(40px);
+
+}
+
+
+}
