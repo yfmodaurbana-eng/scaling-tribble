@@ -557,3 +557,171 @@ footer{
 
 
 }
+/* =================================
+   PANEL DIMENSIONES PROFESIONAL
+================================= */
+
+
+.dimensions-box{
+
+    background:
+    linear-gradient(
+    145deg,
+    #0b1f36,
+    #07111f
+    );
+
+}
+
+
+
+.dimension-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:12px;
+
+}
+
+
+
+.input-card{
+
+    background:#102a43;
+
+    border:1px solid #245b86;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.input-card span{
+
+    color:#7dd3fc;
+
+}
+
+
+
+.input-card input{
+
+    width:70px;
+
+    text-align:center;
+
+    background:#020617;
+
+    color:white;
+
+    border:1px solid #38bdf8;
+
+}
+
+
+
+
+.glass-box{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:#020617;
+
+    border:1px solid #38bdf8;
+
+}
+
+
+
+.glass-input{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+
+.glass-input input{
+
+    width:90px;
+
+    font-size:18px;
+
+    text-align:center;
+
+}
+
+
+
+#resultadoCristal{
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:#07182e;
+
+    border:1px solid #1e5680;
+
+    font-weight:bold;
+
+}
+
+
+
+.tank-info{
+
+    margin-top:20px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+}
+
+
+
+.tank-info div{
+
+    background:#102a43;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+}
+
+
+
+.tank-info b{
+
+    color:#38bdf8;
+
+    font-size:20px;
+
+}
