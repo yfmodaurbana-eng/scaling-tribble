@@ -21,7 +21,10 @@
 
 
 
-<!-- CABECERA -->
+<!-- =====================
+     CABECERA
+===================== -->
+
 
 <header class="header">
 
@@ -53,7 +56,10 @@
 
 
 
-<!-- ZONA PRINCIPAL -->
+<!-- =====================
+     ZONA PRINCIPAL
+===================== -->
+
 
 <div class="main">
 
@@ -61,9 +67,16 @@
 
 
 
-<!-- PANEL IZQUIERDO -->
+<!-- =====================
+     PANEL IZQUIERDO
+===================== -->
+
 
 <aside class="sidebar">
+
+
+
+<section class="tools-panel">
 
 
 <h2>🛠 Herramientas</h2>
@@ -71,7 +84,6 @@
 
 
 <div class="tool-grid">
-
 
 
 <button class="tool">
@@ -145,76 +157,88 @@ Agua
 </button>
 
 
-
 </div>
 
 
+</section>
 
 
 
-<!-- CONFIGURACION ACUARIO -->
 
 
-<div class="box dimensions-box">
-
-
-<h3>📐 Dimensiones</h3>
+<section class="dimensions-panel">
 
 
 
-<div class="dimension-grid">
+<h2>📐 Medidas</h2>
 
 
 
-<div class="input-card">
 
-<span>Largo</span>
+<div class="measure-row">
+
+<label>
+
+Largo
+
+</label>
+
 
 <div>
 
 <input id="largo" value="70">
 
-<small>cm</small>
+<span>cm</span>
 
 </div>
 
+
 </div>
 
 
 
 
-<div class="input-card">
 
-<span>Ancho</span>
+<div class="measure-row">
+
+<label>
+
+Ancho
+
+</label>
+
 
 <div>
 
 <input id="ancho" value="30">
 
-<small>cm</small>
+<span>cm</span>
 
 </div>
 
+
 </div>
 
 
 
 
 
-<div class="input-card">
+<div class="measure-row">
 
-<span>Alto</span>
+<label>
+
+Alto
+
+</label>
+
 
 <div>
 
 <input id="alto" value="40">
 
-<small>cm</small>
+<span>cm</span>
 
 </div>
-
-</div>
-
 
 
 </div>
@@ -222,20 +246,29 @@ Agua
 
 
 
-<div class="glass-box">
+<div class="glass-section">
 
 
 <h3>🪟 Cristal</h3>
 
 
+<div class="measure-row">
 
-<div class="glass-input">
 
+<label>
+
+Grosor
+
+</label>
+
+
+<div>
 
 <input id="cristal" value="6">
 
-
 <span>mm</span>
+
+</div>
 
 
 </div>
@@ -250,54 +283,9 @@ Agua
 
 
 
-</div>
 
 
-
-
-
-<div class="tank-info">
-
-
-
-<div>
-
-💧
-
-<br>
-
-<b id="liters">
-
-84 L
-
-</b>
-
-
-</div>
-
-
-
-
-<div>
-
-🪟
-
-<br>
-
-<b id="infoCristal">
-
-6 mm
-
-</b>
-
-
-</div>
-
-
-
-
-</div>
-
+<!-- BOTON CREAR ACUARIO -->
 
 
 <button class="create">
@@ -308,57 +296,96 @@ Agua
 
 
 
-</div>
+</aside>
 
 
 
 
 
-<!-- ZONA CENTRAL DEL ACUARIO -->
+
+
+
+<!-- =====================
+     ZONA CENTRAL 3D
+===================== -->
 
 
 <section class="viewer">
 
 
 
+
+
 <div class="aquarium">
+
+
+
+<!-- FONDO PROFUNDIDAD -->
 
 
 <div class="back-wall"></div>
 
 
+
+<!-- AGUA -->
+
+
 <div class="water">
+
 
 <div class="light-rays"></div>
 
+
 <div class="bubble b1"></div>
+
 <div class="bubble b2"></div>
+
 <div class="bubble b3"></div>
 
-</div>
-
-
-
-<div class="sand">
-
-<div class="sand-rock"></div>
 
 </div>
 
 
-<div class="decor"></div>
+
+
+
+<!-- ARENA -->
+
+
+<div class="sand"></div>
+
+
+
+
+
+<!-- DECORACION -->
+
+
+<div class="decor">
+
+
+</div>
+
+
+
+
+
+<!-- CRISTAL FRONTAL -->
 
 
 <div class="glass-front"></div>
 
 
+
+
 </div>
 
 
 
 
 
-<!-- CONTROLES DE CAMARA -->
+
+<!-- CONTROLES CAMARA -->
 
 
 <div class="camera">
@@ -371,13 +398,11 @@ Agua
 </button>
 
 
-
 <button>
 
 -
 
 </button>
-
 
 
 <button>
@@ -396,18 +421,24 @@ Agua
 </section>
 
 
+</div>
 
 
 
 
 
-
-
-<!-- PANEL DERECHO -->
+<!-- =====================
+     PANEL DERECHO
+===================== -->
 
 
 <aside class="panel">
 
+
+
+
+
+<section class="info-panel">
 
 
 <h2>📊 Información</h2>
@@ -419,9 +450,7 @@ Agua
 <div class="card">
 
 
-
 <h3>🐠 Acuario</h3>
-
 
 
 
@@ -429,7 +458,7 @@ Agua
 
 Volumen:
 
-<b id="liters-info">
+<b id="liters">
 
 84 L
 
@@ -440,16 +469,15 @@ Volumen:
 
 
 
-
 <p>
 
 Cristal:
 
-<span id="cristal-info">
+<b id="infoCristal">
 
 6 mm
 
-</span>
+</b>
 
 
 </p>
@@ -476,10 +504,7 @@ Medidas:
 
 
 
-
-
 <div class="card">
-
 
 
 <h3>🌊 Agua</h3>
@@ -496,7 +521,6 @@ pH:
 
 </b>
 
-
 </p>
 
 
@@ -511,14 +535,13 @@ Temperatura:
 
 </b>
 
-
 </p>
 
 
 
 <p>
 
-NO3:
+Nitratos:
 
 <b>
 
@@ -526,9 +549,7 @@ NO3:
 
 </b>
 
-
 </p>
-
 
 
 </div>
@@ -539,10 +560,7 @@ NO3:
 
 
 
-
-
 <div class="card">
-
 
 
 <h3>🐟 Habitantes</h3>
@@ -564,6 +582,9 @@ Sin peces añadidos
 
 
 
+</section>
+
+
 
 </aside>
 
@@ -574,13 +595,12 @@ Sin peces añadidos
 </div>
 
 
-</aside>
-  
 
 
 
-
-<!-- PIE DE PAGINA -->
+<!-- =====================
+     PIE
+===================== -->
 
 
 <footer>
@@ -600,7 +620,10 @@ Acuario Designer Studio © 2026
 
 
 
-<!-- SCRIPTS -->
+
+<!-- =====================
+     SCRIPTS
+===================== -->
 
 
 <script src="js/engine.js"></script>
@@ -608,7 +631,6 @@ Acuario Designer Studio © 2026
 <script src="js/objects.js"></script>
 
 <script src="js/save.js"></script>
-
 
 
 
