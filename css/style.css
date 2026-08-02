@@ -908,6 +908,175 @@ font-size:40px;
 
 
 }
+/* =====================================
+   ACUARIO DESIGNER STUDIO
+   PROFUNDIDAD URNA 3D V2
+===================================== */
 
+
+.aquarium{
+
+transform-style:preserve-3d;
+
+perspective:1200px;
+
+}
+
+
+
+/* FONDO */
+
+.glass-back{
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(
+180deg,
+rgba(0,180,240,.35),
+rgba(0,30,70,.95)
+);
+
+transform:
+
+translateZ(-40px);
+
+z-index:1;
+
+}
+
+
+
+/* LATERAL */
+
+.glass-side{
+
+position:absolute;
+
+top:0;
+
+right:-35px;
+
+width:35px;
+
+height:100%;
+
+
+background:
+
+linear-gradient(
+90deg,
+rgba(150,230,255,.35),
+rgba(0,40,80,.7)
+);
+
+
+transform:
+
+skewY(-12deg)
+translateZ(-20px);
+
+
+z-index:4;
+
+}
+
+
+
+/* CRISTAL DELANTERO */
+
+.glass-front{
+
+position:absolute;
+
+inset:0;
+
+
+border:
+
+7px solid rgba(230,250,255,.45);
+
+
+background:
+
+linear-gradient(
+120deg,
+rgba(255,255,255,.18),
+transparent 35%
+);
+
+
+border-radius:18px;
+
+
+z-index:20;
+
+
+pointer-events:none;
+
+}
+
+
+
+/* AGUA */
+
+.water{
+
+position:absolute;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:82%;
+
+
+background:
+
+linear-gradient(
+180deg,
+rgba(100,240,255,.5),
+rgba(0,60,150,.9)
+);
+
+
+z-index:3;
+
+}
+
+
+
+/* GRAVA */
+
+.sand{
+
+position:absolute;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:18%;
+
+
+background:
+
+linear-gradient(
+180deg,
+#e5d080,
+#66451d
+);
+
+
+z-index:5;
+
+}
 
 
