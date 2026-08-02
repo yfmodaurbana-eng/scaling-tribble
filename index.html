@@ -19,13 +19,11 @@
 <div class="app">
 
 
-
 <header class="header">
-
 
 <div class="logo">
 
-🐠 Acuario Designer
+🐠 ACUARIO DESIGNER
 
 <span>
 STUDIO V5
@@ -34,26 +32,22 @@ STUDIO V5
 </div>
 
 
-
 <div class="actions">
 
-<button class="action-btn">
+<button>
 Nuevo
 </button>
 
-<button class="action-btn">
+<button>
 Guardar
 </button>
 
-<button class="action-btn">
+<button>
 Exportar
 </button>
 
-</div>
-
 
 </div>
-
 
 </header>
 
@@ -61,10 +55,7 @@ Exportar
 
 
 
-<div class="main">
-
-
-
+<main class="main">
 
 
 <!-- PANEL IZQUIERDO -->
@@ -72,292 +63,105 @@ Exportar
 <aside class="sidebar">
 
 
-
 <h2>
 🛠 Herramientas
 </h2>
 
 
+<div class="tools">
 
-<div class="tool-grid">
 
-
-<button class="tool">
+<button>
 🪨
 <br>
 Roca
 </button>
 
 
-<button class="tool">
+<button>
 🌱
 <br>
 Planta
 </button>
 
 
-<button class="tool">
+<button>
 🐟
 <br>
 Pez
 </button>
 
 
-<button class="tool">
+<button>
 💡
 <br>
 Luz
 </button>
 
 
-<button class="tool">
-💧
-<br>
-Agua
-</button>
-
-
 </div>
 
 
 
 
 
-
-
-<div class="box dimensions-box">
-
+<div class="panel-box">
 
 
 <h3>
-📐 Configuración
+📐 Diseño
 </h3>
 
-
-
-
-<div class="input-card">
-
-<span>
-↔️ Largo
-</span>
-
-
-<div>
-
-<input id="largo" type="number" value="70">
-
-<strong>
-cm
-</strong>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="input-card">
-
-
-<span>
-↕️ Ancho
-</span>
-
-
-<div>
-
-<input id="ancho" type="number" value="30">
-
-<strong>
-cm
-</strong>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="input-card">
-
-
-<span>
-⬆️ Alto
-</span>
-
-
-<div>
-
-<input id="alto" type="number" value="40">
-
-<strong>
-cm
-</strong>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="glass-box">
-
-
-<h3>
-🪟 Cristal
-</h3>
-
-
-
-<div class="result-row">
-
-
-<span>
-Recomendado
-</span>
-
-
-<strong id="cristal">
-
-6 mm
-
-</strong>
-
-
-</div>
-
-
-<div id="resultadoCristal">
-
-Calculando...
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="glass-box">
-
-
-<h3>
-📐 Montaje
-</h3>
-
-
-
-<div class="select-box">
 
 <label>
-📐 Tipo de montaje
+Largo
+
+<input value="70">
+
+cm
+
 </label>
 
-<select id="montaje" class="custom-select">
 
-<option value="interior">
+
+<label>
+Ancho
+
+<input value="30">
+
+cm
+
+</label>
+
+
+
+<label>
+Alto
+
+<input value="40">
+
+cm
+
+</label>
+
+
+
+<select>
+
+<option>
 Base interior
 </option>
 
-<option value="exterior">
+
+<option>
 Base exterior
 </option>
 
 </select>
 
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="tank-info">
-
-
-<div>
-
-💧 Litros
-
-<br>
-
-<b id="liters">
-
-0 L
-
-</b>
 
 
 </div>
-
-
-
-
-
-<div>
-
-⚖️ Peso
-
-<br>
-
-<b id="pesoTotal">
-
-0 kg
-
-</b>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<button class="create" id="crearAcuario">
-
-
-🏗 Crear acuario
-
-
-</button>
-
-
-
-
-
-</div>
-
-
 
 
 
@@ -370,15 +174,12 @@ Base exterior
 
 
 
-
-<!-- VISOR CENTRAL -->
+<!-- ACUARIO 3D -->
 
 <section class="viewer">
 
 
-
 <div class="aquarium">
-
 
 
 <div class="water">
@@ -386,56 +187,42 @@ Base exterior
 </div>
 
 
-
 <div class="sand">
 
 </div>
 
 
-
-<div class="decor">
-
-</div>
-
-
+<div class="rock">
 
 </div>
 
 
+</div>
 
 
 
 <div class="camera">
 
 
-<button id="zoomMas">
-
+<button>
 +
-
 </button>
 
 
-<button id="zoomMenos">
-
+<button>
 -
-
 </button>
 
 
-<button id="resetCam">
-
+<button>
 ⟳
-
 </button>
 
 
 </div>
 
 
-
-
 </section>
-
 
 
 
@@ -449,14 +236,9 @@ Base exterior
 <aside class="panel">
 
 
-
 <h2>
-
 📊 Información
-
 </h2>
-
-
 
 
 
@@ -468,54 +250,17 @@ Base exterior
 </h3>
 
 
-
 <p>
-
-Volumen:
-
-<b id="infoLitros">
-
-0 L
-
-</b>
-
+84 litros
 </p>
 
 
-
 <p>
-
-Medidas:
-
-<b id="infoMedidas">
-
--
-
-</b>
-
+70×30×40 cm
 </p>
-
-
-
-<p>
-
-Cristal:
-
-<b id="infoCristal">
-
-6 mm
-
-</b>
-
-</p>
-
 
 
 </div>
-
-
-
-
 
 
 
@@ -525,38 +270,16 @@ Cristal:
 
 
 <h3>
-
 🛡 Seguridad
-
 </h3>
 
 
-<p id="estadoSeguridad">
-
-Esperando datos
-
-</p>
-
-
 <p>
-
-Tirantes:
-
-<b id="tirantes">
-
-No necesarios
-
-</b>
-
-
+🟢 Diseño correcto
 </p>
-
 
 
 </div>
-
-
-
 
 
 
@@ -567,71 +290,16 @@ No necesarios
 
 
 <h3>
-
-📋 Ficha fabricación
-
-</h3>
-
-
-<div id="fichaTecnica">
-
-
-Pulsa crear acuario
-
-
-</div>
-
-
-
-<button id="copiarFicha">
-
-
-📋 Copiar ficha
-
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-
-🌊 Agua
-
+📋 Ficha técnica
 </h3>
 
 
 <p>
-pH:
-<b>
-7.0
-</b>
+Esperando datos...
 </p>
-
-
-<p>
-Temperatura:
-<b>
-25ºC
-</b>
-</p>
-
 
 
 </div>
-
-
-
 
 
 
@@ -639,43 +307,17 @@ Temperatura:
 
 
 
-
-
-</div>
-
-
-
-
-
-
-<footer>
-
-Acuario Designer Studio © 2026
-
-</footer>
-
-
-
+</main>
 
 
 
 </div>
-
-
-
-
-
-
 
 
 <script src="js/engine.js"></script>
-<script src="js/objects.js"></script>
-<script src="js/save.js"></script>
-<script src="js/3d-engine.js"></script>
-<script src="js/ficha.js"></script>
-
 
 
 </body>
+
 
 </html>
