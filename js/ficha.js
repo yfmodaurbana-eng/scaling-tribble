@@ -1,11 +1,11 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO
-   FICHA TECNICA PROFESIONAL V3
+   ACUARIO DESIGNER STUDIO V6
+   FICHA TECNICA PROFESIONAL V4
    GENERADOR + COPIAR
 ================================================== */
 
 
-console.log("FICHA TECNICA V3 CARGADA");
+console.log("FICHA TECNICA V4 CARGADA");
 
 
 
@@ -54,17 +54,19 @@ copiarFicha
 function generarFicha(){
 
 
+
 let a = window.acuario;
 
 
 
 if(!a){
 
-alert("Primero modifica las medidas del acuario");
+alert("Primero diseña el acuario");
 
 return;
 
 }
+
 
 
 
@@ -84,12 +86,17 @@ FICHA TÉCNICA PROFESIONAL
 ================================
 
 
+
 📅 Fecha:
+
 ${fecha}
 
 
 
+
+
 📐 DATOS GENERALES
+
 ================================
 
 
@@ -105,7 +112,7 @@ ${a.dimensiones.largo} × ${a.dimensiones.ancho} × ${a.dimensiones.alto} cm
 
 
 
-Volumen aproximado:
+Volumen bruto:
 
 ${a.volumen.toFixed(1)} litros
 
@@ -114,12 +121,19 @@ ${a.volumen.toFixed(1)} litros
 
 
 🪟 CRISTAL ESTRUCTURAL
+
 ================================
 
 
 Tipo:
 
 ${a.cristal.tipo}
+
+
+
+Sistema:
+
+Acuario de vidrio pegado mediante silicona estructural
 
 
 
@@ -138,6 +152,7 @@ ${a.cristal.estado}
 
 
 📐 CORTE DE CRISTALES
+
 ================================
 
 
@@ -148,10 +163,11 @@ ${a.cortes}
 
 
 🔩 SISTEMA DE REFUERZO
+
 ================================
 
 
-Necesidad:
+Estado:
 
 ${a.tirantes.estado}
 
@@ -163,7 +179,7 @@ ${a.tirantes.cantidad}
 
 
 
-Medidas:
+Medida:
 
 ${a.tirantes.medida}
 
@@ -175,9 +191,16 @@ ${a.tirantes.tipo}
 
 
 
+Ubicación:
+
+Refuerzo superior transversal
+
+
+
 
 
 🛡 SEGURIDAD ESTRUCTURAL
+
 ================================
 
 
@@ -196,10 +219,11 @@ ${a.seguridad.mensaje}
 
 
 ⚖ PESO ESTIMADO
+
 ================================
 
 
-Peso cristal:
+Peso del cristal:
 
 ${a.peso.cristal.toFixed(1)} kg
 
@@ -214,12 +238,13 @@ ${a.peso.total.toFixed(1)} kg
 
 
 🧴 MONTAJE RECOMENDADO
+
 ================================
 
 
 Silicona:
 
-Silicona específica para acuarios
+Silicona específica para fabricación de acuarios
 
 
 
@@ -238,22 +263,23 @@ Mínimo 7 días antes del llenado
 
 
 📌 RECOMENDACIONES
+
 ================================
 
 
-✔ Usar superficie perfectamente nivelada
+✔ Usar mueble perfectamente nivelado
 
 
-✔ Revisar soporte del mueble
+✔ Colocar base de apoyo adecuada
 
 
 ✔ Utilizar cantos pulidos
 
 
-✔ No reducir el grosor calculado
+✔ No reducir el grosor recomendado
 
 
-✔ Realizar prueba de estanqueidad antes de instalar
+✔ Realizar prueba de estanqueidad antes de introducir animales
 
 
 
@@ -269,7 +295,7 @@ FIN DE FICHA TÉCNICA
 
 
 
-const salida =
+let salida =
 document.getElementById("fichaTecnica");
 
 
@@ -294,6 +320,8 @@ window.fichaActual=ficha;
 
 
 
+
+
 function copiarFicha(){
 
 
@@ -311,20 +339,24 @@ return;
 
 
 
+
 navigator.clipboard.writeText(
 window.fichaActual
 )
+
 .then(()=>{
 
 
-alert("Ficha copiada correctamente");
+alert("Ficha técnica copiada correctamente");
 
 
 })
+
+
 .catch(()=>{
 
 
-alert("No se pudo copiar");
+alert("No se pudo copiar la ficha");
 
 
 });
