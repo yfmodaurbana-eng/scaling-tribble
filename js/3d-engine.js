@@ -75,7 +75,7 @@ Math.min(Math.max(H/50,0.6),1.4);
 
 
 
-acuari o3D.style.width =
+acuario3D.style.width =
 (escalaL*70)+"%";
 
 
