@@ -194,3 +194,72 @@ calcular();
 
 
 });
+/* =====================================
+   SELECTOR MONTAJE ESTILO APP
+===================================== */
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+const selector =
+document.getElementById("selectorMontaje");
+
+
+if(!selector)return;
+
+
+
+const boton =
+selector.querySelector(".select-button");
+
+
+const opciones =
+selector.querySelectorAll(".select-options div");
+
+
+const campo =
+document.getElementById("montaje");
+
+
+const texto =
+document.getElementById("montajeTexto");
+
+
+
+boton.addEventListener("click",()=>{
+
+selector.classList.toggle("active");
+
+});
+
+
+
+
+opciones.forEach(opcion=>{
+
+
+opcion.addEventListener("click",()=>{
+
+
+campo.value =
+opcion.dataset.value;
+
+
+texto.textContent =
+opcion.textContent;
+
+
+selector.classList.remove("active");
+
+
+
+});
+
+
+
+});
+
+
+
+});
