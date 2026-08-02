@@ -1,113 +1,132 @@
+/* =====================================
+ ACUARIO DESIGNER STUDIO V5
+ ESTILO BLUE SIMULATOR
+===================================== */
+
+
 *{
 box-sizing:border-box;
 }
 
+
 body{
+
 margin:0;
-padding:15px;
-font-family:Arial,sans-serif;
+
+height:100vh;
+
+overflow:hidden;
+
+font-family:Arial, sans-serif;
+
 background:
-linear-gradient(
-180deg,
-#021b35,
-#00111f
+
+radial-gradient(
+circle at top,
+#075985,
+#020617 70%
 );
+
 color:white;
+
 }
+
+
+
 
 
 .app{
-max-width:1400px;
-margin:auto;
+
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
 }
+
+
+
+
+
+/* ==========================
+ HEADER
+========================== */
 
 
 .header{
 
-height:70px;
+height:75px;
 
 display:flex;
+
 align-items:center;
+
 justify-content:space-between;
 
-padding:15px 25px;
+padding:0 25px;
+
 
 background:
-rgba(0,119,182,.35);
 
-border:1px solid #00bfff;
+linear-gradient(
+90deg,
+#0369a1,
+#0284c7,
+#0369a1
+);
 
-border-radius:15px;
+
+border-bottom:
+
+2px solid #38bdf8;
+
+
+box-shadow:
+
+0 0 25px #0284c7;
 
 }
+
 
 
 .logo{
 
-font-size:26px;
+font-size:28px;
+
 font-weight:bold;
 
-color:#dff6ff;
+color:#e0f2fe;
 
 text-shadow:
-0 0 10px #00bfff;
+
+0 0 15px #38bdf8;
 
 }
 
 
 
-.main{
+.logo span{
 
-display:grid;
+display:block;
 
-grid-template-columns:
-300px 1fr 330px;
+font-size:12px;
 
-gap:15px;
+letter-spacing:5px;
 
-margin-top:15px;
-
-}
-
-
-
-.sidebar,
-.panel{
-
-background:
-rgba(0,119,182,.15);
-
-border:
-
-1px solid #00bfff;
-
-border-radius:20px;
-
-padding:20px;
-
-box-shadow:
-
-0 0 20px
-rgba(0,191,255,.25);
+color:#bae6fd;
 
 }
 
 
 
-.card,
-.box{
 
-background:
-rgba(0,0,0,.35);
 
-border-radius:15px;
+.actions{
 
-padding:15px;
+display:flex;
 
-margin-bottom:15px;
-
-border:
-1px solid #075985;
+gap:10px;
 
 }
 
@@ -115,23 +134,591 @@ border:
 
 button{
 
+
 background:
 
 linear-gradient(
 180deg,
-#0096c7,
-#023e8a
+#0284c7,
+#075985
 );
+
+
+border:
+
+1px solid #7dd3fc;
+
 
 color:white;
 
-border:none;
+
+padding:12px 18px;
+
 
 border-radius:12px;
 
-padding:12px;
 
 cursor:pointer;
+
+
+font-weight:bold;
+
+
+box-shadow:
+
+0 0 12px rgba(56,189,248,.6);
+
+
+}
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+ ZONA PRINCIPAL
+========================== */
+
+
+.main{
+
+
+flex:1;
+
+
+display:grid;
+
+
+grid-template-columns:
+
+300px
+1fr
+340px;
+
+
+gap:15px;
+
+
+padding:15px;
+
+
+}
+
+
+
+
+
+/* ==========================
+ PANELES LATERALES
+========================== */
+
+
+.sidebar,
+.panel{
+
+
+background:
+
+rgba(2,132,199,.15);
+
+
+border:
+
+1px solid #0ea5e9;
+
+
+border-radius:20px;
+
+
+padding:18px;
+
+
+overflow:auto;
+
+
+box-shadow:
+
+
+0 0 25px rgba(14,165,233,.25),
+
+
+inset 0 0 30px rgba(14,165,233,.1);
+
+
+}
+
+
+
+
+
+h2{
+
+margin-top:0;
+
+color:#bae6fd;
+
+text-shadow:
+
+0 0 10px #38bdf8;
+
+}
+
+
+
+h3{
+
+color:#7dd3fc;
+
+}
+
+
+
+
+
+/* ==========================
+ HERRAMIENTAS
+========================== */
+
+
+.tool-grid{
+
+
+display:grid;
+
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+
+gap:10px;
+
+
+}
+
+
+
+.tool{
+
+
+height:75px;
+
+padding:5px;
+
+font-size:13px;
+
+
+}
+
+
+
+
+
+/* ==========================
+ CONFIGURACION
+========================== */
+
+
+.box,
+.card{
+
+
+background:
+
+rgba(15,23,42,.75);
+
+
+border:
+
+1px solid #075985;
+
+
+border-radius:15px;
+
+
+padding:15px;
+
+
+margin-top:15px;
+
+
+}
+
+
+
+
+
+.input-card{
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+align-items:center;
+
+
+background:
+
+rgba(14,116,144,.25);
+
+
+padding:12px;
+
+
+margin:10px 0;
+
+
+border-radius:10px;
+
+
+}
+
+
+
+
+
+input,
+select{
+
+
+width:90px;
+
+
+background:#020617;
+
+
+color:white;
+
+
+border:
+
+1px solid #38bdf8;
+
+
+border-radius:8px;
+
+
+padding:8px;
+
+
+}
+
+
+
+
+
+.result-row{
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+}
+
+
+
+
+
+.tank-info{
+
+
+display:grid;
+
+
+grid-template-columns:
+
+1fr 1fr;
+
+
+gap:10px;
+
+
+margin-top:15px;
+
+
+}
+
+
+
+.tank-info div{
+
+
+background:#082f49;
+
+
+padding:10px;
+
+
+border-radius:12px;
+
+
+text-align:center;
+
+
+}
+
+
+
+
+
+/* ==========================
+ VISOR 3D
+========================== */
+
+
+.viewer{
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+position:relative;
+
+
+background:
+
+
+radial-gradient(
+
+circle,
+
+#0c4a6e,
+
+#020617
+
+);
+
+
+border-radius:25px;
+
+
+border:
+
+1px solid #38bdf8;
+
+
+box-shadow:
+
+
+inset 0 0 80px #0284c7;
+
+
+}
+
+
+
+
+
+.aquarium{
+
+
+width:520px;
+
+
+height:330px;
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+border-radius:20px;
+
+
+border:
+
+4px solid rgba(186,230,253,.8);
+
+
+background:
+
+rgba(125,211,252,.15);
+
+
+box-shadow:
+
+
+0 0 50px #0ea5e9;
+
+
+}
+
+
+
+
+.water{
+
+
+position:absolute;
+
+
+bottom:0;
+
+
+width:100%;
+
+
+height:75%;
+
+
+background:
+
+
+linear-gradient(
+
+180deg,
+
+rgba(125,211,252,.5),
+
+rgba(2,132,199,.8)
+
+);
+
+
+}
+
+
+
+
+.sand{
+
+
+position:absolute;
+
+
+bottom:0;
+
+
+height:45px;
+
+
+width:100%;
+
+
+background:
+
+linear-gradient(
+
+#facc15,
+
+#854d0e
+
+);
+
+
+}
+
+
+
+
+
+.decor{
+
+
+position:absolute;
+
+bottom:40px;
+
+left:40%;
+
+width:80px;
+
+height:80px;
+
+background:#475569;
+
+border-radius:50%;
+
+
+}
+
+
+
+
+
+/* ==========================
+ PANEL DERECHO
+========================== */
+
+
+.panel .card{
+
+
+line-height:1.6;
+
+
+}
+
+
+
+
+
+#fichaTecnica{
+
+
+background:#020617;
+
+
+padding:12px;
+
+
+border-radius:10px;
+
+
+font-size:13px;
+
+
+max-height:350px;
+
+
+overflow:auto;
+
+
+}
+
+
+
+
+/* ==========================
+ RESPONSIVE
+========================== */
+
+
+@media(max-width:1000px){
+
+
+.main{
+
+grid-template-columns:
+
+1fr;
+
+overflow:auto;
 
 }
 
@@ -139,101 +726,17 @@ cursor:pointer;
 
 .viewer{
 
-background:
-
-radial-gradient(
-circle,
-#0077b6,
-#00111f
-);
-
-border-radius:20px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
+height:400px;
 
 }
 
 
 
-.aquarium{
+body{
 
-width:500px;
-
-height:320px;
-
-border:
-
-4px solid #caf0f8;
-
-box-shadow:
-
-0 0 30px #00bfff;
-
-position:relative;
-
-overflow:hidden;
+overflow:auto;
 
 }
 
-
-
-.water{
-
-position:absolute;
-
-bottom:0;
-
-height:75%;
-
-width:100%;
-
-background:
-
-linear-gradient(
-180deg,
-rgba(125,211,252,.5),
-#0077b6
-);
-
-}
-
-
-.sand{
-
-position:absolute;
-
-bottom:0;
-
-height:40px;
-
-width:100%;
-
-background:#c28b24;
-
-}
-
-
-
-.ok{
-
-color:#22c55e;
-
-}
-
-
-.warn{
-
-color:#facc15;
-
-}
-
-
-.bad{
-
-color:#ef4444;
 
 }
