@@ -1,262 +1,363 @@
-/* =====================================
- CONTROLES PRO - ACUARIO DESIGNER
-===================================== */
+/* ================================
+   ACUARIO DESIGNER V3.0
+   UI estilo simulador virtual
+================================ */
 
+*{
+    box-sizing:border-box;
+}
 
-/* TODOS LOS SELECT */
-
-select{
-
-appearance:none;
-
--webkit-appearance:none;
-
-background:
-
-linear-gradient(
-180deg,
-#075985,
-#022c44
-);
-
-color:#e0f2fe;
-
-border:
-
-1px solid #38bdf8;
-
-border-radius:12px;
-
-padding:12px 40px 12px 15px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-width:100%;
-
-box-shadow:
-
-0 0 15px rgba(56,189,248,.5);
-
+body{
+    margin:0;
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#183047,#05080d 65%);
+    font-family:'Segoe UI',Arial,sans-serif;
+    color:#e8f7ff;
 }
 
 
-/* FLECHA VISUAL */
+/* CONTENEDOR PRINCIPAL */
 
-select:hover{
-
-border-color:white;
-
-box-shadow:
-
-0 0 20px #38bdf8;
-
+.app{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
 }
 
 
+/* PANELES */
+
+.panel{
+    background:
+    linear-gradient(145deg,#142433,#071019);
+    border:1px solid #236080;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:20px;
+
+    box-shadow:
+    0 0 25px rgba(0,180,255,.15),
+    inset 0 0 20px rgba(0,0,0,.5);
+}
 
 
+.panel h2,
+.panel h3{
 
-/* BOTONES GENERALES */
+    color:#6ee7ff;
+    text-shadow:
+    0 0 10px #00bfff;
+}
+
+
+/* BOTONES */
 
 button{
 
-font-family:Arial,sans-serif;
+    background:
+    linear-gradient(145deg,#0879b8,#00456b);
 
-transition:.25s;
+    border:none;
+    color:white;
 
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    letter-spacing:.5px;
+
+    box-shadow:
+    0 5px 0 #002c44,
+    0 0 15px rgba(0,190,255,.4);
+
+    transition:.25s;
 }
 
 
+button:hover{
 
+    transform:translateY(-3px);
 
-/* BOTONES HERRAMIENTAS */
+    background:
+    linear-gradient(145deg,#10bfff,#006da5);
 
-.tool{
-
-background:
-
-linear-gradient(
-180deg,
-#0369a1,
-#082f49
-);
-
-
-border:
-
-1px solid #38bdf8;
-
-
-color:white;
-
-
-text-shadow:
-
-0 0 8px #38bdf8;
-
-
+    box-shadow:
+    0 7px 0 #002c44,
+    0 0 25px #00cfff;
 }
 
 
-.tool:hover{
+button:active{
 
+    transform:translateY(2px);
 
-background:
-
-linear-gradient(
-180deg,
-#0ea5e9,
-#0369a1
-);
-
-
+    box-shadow:
+    0 2px 0 #002c44;
 }
-
-
-
-
-
-/* BOTON CREAR */
-
-.create{
-
-
-width:100%;
-
-
-margin-top:20px;
-
-
-font-size:16px;
-
-
-background:
-
-linear-gradient(
-180deg,
-#22c55e,
-#166534
-);
-
-
-border:
-
-1px solid #86efac;
-
-
-box-shadow:
-
-0 0 20px rgba(34,197,94,.6);
-
-
-}
-
-
-.create:hover{
-
-
-background:
-
-linear-gradient(
-180deg,
-#4ade80,
-#15803d
-);
-
-
-}
-
-
-
-
 
 
 /* INPUTS */
 
+input,
+select,
+textarea{
+
+    width:100%;
+
+    background:#08131d;
+
+    color:white;
+
+    border:1px solid #22516c;
+
+    border-radius:10px;
+
+    padding:12px;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+
 input:focus,
-select:focus{
+select:focus,
+textarea:focus{
+
+    border-color:#00cfff;
+
+    box-shadow:
+    0 0 15px rgba(0,200,255,.5);
+}
 
 
-outline:none;
+
+/* TARJETAS */
+
+.card{
+
+    background:
+    linear-gradient(160deg,#102333,#050b12);
+
+    border:1px solid #1b5875;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    margin:10px 0;
+
+    box-shadow:
+    inset 0 0 15px black,
+    0 0 15px rgba(0,150,255,.15);
+
+}
 
 
-border-color:#fff;
+/* FICHA TECNICA */
+
+.spec{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:15px;
+
+}
 
 
-box-shadow:
+.spec-item{
 
-0 0 20px #38bdf8;
+    background:#091722;
 
+    padding:15px;
+
+    border-radius:12px;
+
+    border-left:4px solid #00cfff;
+
+}
+
+
+.spec-item span{
+
+    display:block;
+
+    color:#7edfff;
+
+    font-size:13px;
+
+}
+
+
+.spec-item strong{
+
+    font-size:22px;
 
 }
 
 
 
+/* ALERTAS */
+
+.alert{
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin:10px 0;
+
+    font-weight:bold;
+
+    animation:pulse 2s infinite;
+
+}
 
 
+.alert-ok{
 
-/* CAMARA */
+    background:#06351d;
 
-.camera{
+    border:1px solid #00ff88;
 
+    color:#8affc0;
 
-position:absolute;
-
-
-bottom:20px;
-
-
-display:flex;
+}
 
 
-gap:10px;
+.alert-warning{
 
+    background:#3b2b05;
+
+    border:1px solid #ffcc00;
+
+    color:#ffe680;
+
+}
+
+
+.alert-danger{
+
+    background:#3b0909;
+
+    border:1px solid #ff4444;
+
+    color:#ff9999;
 
 }
 
 
 
-.camera button{
+@keyframes pulse{
 
+    0%{
+        box-shadow:0 0 5px transparent;
+    }
 
-width:45px;
+    50%{
+        box-shadow:0 0 20px currentColor;
+    }
 
-height:45px;
-
-
-border-radius:50%;
-
-
-font-size:20px;
-
-
-padding:0;
-
+    100%{
+        box-shadow:0 0 5px transparent;
+    }
 
 }
 
 
 
+/* MEDIDORES */
 
-/* TARJETAS DE ESTADO */
+.bar{
 
+    height:18px;
 
-#estadoSeguridad{
+    background:#02070b;
 
+    border-radius:20px;
 
-padding:10px;
-
-
-border-radius:10px;
-
-
-background:
-
-rgba(14,165,233,.15);
-
+    overflow:hidden;
 
 }
 
 
+.bar-fill{
+
+    height:100%;
+
+    background:
+    linear-gradient(90deg,#00cfff,#00ff99);
+
+    box-shadow:
+    0 0 15px #00ffff;
+
+}
+
+
+
+/* TABLAS */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+td,th{
+
+    padding:12px;
+
+    border-bottom:1px solid #173647;
+
+}
+
+
+tr:hover{
+
+    background:#102738;
+
+}
+
+
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+    .app{
+
+        width:100%;
+
+        padding:10px;
+
+    }
+
+
+    button{
+
+        width:100%;
+
+        margin-top:8px;
+
+    }
+
+
+    .panel{
+
+        padding:15px;
+
+    }
+
+}
