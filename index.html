@@ -7,7 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer Studio V7</title>
+<title>
+Acuario Designer Studio PRO
+</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -20,33 +22,29 @@
 <div class="app">
 
 
-
-<header class="header">
+<header class="topbar">
 
 
 <div class="logo">
 
 🐠 Acuario Designer
 
-<span>STUDIO V7</span>
+<span>PRO V9</span>
 
 </div>
 
 
+<div class="top-actions">
 
-<div class="actions">
-
-<button id="nuevo">
+<button>
 Nuevo
 </button>
 
-
-<button id="guardar">
+<button>
 Guardar
 </button>
 
-
-<button id="exportar">
+<button>
 Exportar
 </button>
 
@@ -60,193 +58,156 @@ Exportar
 
 
 
-<main class="main">
+<main class="workspace">
 
 
 
 <!-- PANEL IZQUIERDO -->
 
-<aside class="sidebar">
+<aside class="left-panel">
 
 
-<h2>🛠 Herramientas</h2>
-
-
-<div class="tool-grid">
+<h2>
+🛠 Herramientas
+</h2>
 
 
 <button class="tool">
-🪨
-<br>
-Roca
+🪨 Roca
 </button>
 
 
 <button class="tool">
-🌱
-<br>
-Planta
+🌱 Planta
 </button>
 
 
 <button class="tool">
-🐟
-<br>
-Pez
+🐟 Pez
 </button>
 
 
 <button class="tool">
-💡
+💡 Luz
+</button>
+
+
+
+<h2>
+📐 Dimensiones
+</h2>
+
+
+
+<label>
+Largo
+<input id="largo" value="70">
+</label>
+
+
+<label>
+Ancho
+<input id="ancho" value="30">
+</label>
+
+
+<label>
+Alto
+<input id="alto" value="40">
+</label>
+
+
+
+<button id="crearAcuario" class="create">
+
+Crear acuario
+
+</button>
+
+
+</aside>
+
+
+
+
+
+<!-- VISOR CENTRAL -->
+
+<section class="viewer">
+
+
+<div class="scene">
+
+
+<div class="placeholder">
+
+🐠
+
 <br>
-Luz
-</button>
 
+VISOR 3D
 
-<button class="tool">
-💧
 <br>
-Agua
-</button>
+
+PROXIMAMENTE
+
+</div>
 
 
 </div>
 
 
+</section>
 
 
 
-<section class="config-panel">
 
 
-<h2>📐 Configuración</h2>
 
 
+<!-- PANEL DERECHO -->
 
-<div class="config-card">
 
+<aside class="right-panel">
 
-<div class="measure-row">
 
-<label>Largo</label>
+<h2>
+📊 Inspector
+</h2>
 
-<div>
 
-<input id="largo" type="number" value="70">
 
-<span>cm</span>
+<div class="card">
 
-</div>
 
-</div>
+<h3>
+Acuario
+</h3>
 
 
+<p>
+Volumen:
 
+<strong id="litros">
 
-<div class="measure-row">
+0 L
 
-<label>Ancho</label>
+</strong>
 
-<div>
+</p>
 
-<input id="ancho" type="number" value="30">
 
-<span>cm</span>
-
-</div>
-
-</div>
-
-
-
-
-<div class="measure-row">
-
-<label>Alto</label>
-
-<div>
-
-<input id="alto" type="number" value="40">
-
-<span>cm</span>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================
-     TIPO DE MONTAJE
-===================== -->
-
-
-<div class="measure-row">
-
-<label>Montaje</label>
-
-<div class="custom-select" id="selectorMontaje">
-
-<button class="select-button" type="button">
-<span id="montajeTexto">Interior</span>
-<span>▼</span>
-</button>
-
-<div class="select-options">
-
-<div data-value="interior">
-Interior
-</div>
-
-<div data-value="exterior">
-Exterior
-</div>
-
-</div>
-
-</div>
-
-<input type="hidden" id="montaje" value="interior">
-
-</div>
-</div>
-
-
-<!-- Este mantiene la compatibilidad con ficha.js -->
-<input type="hidden" id="montaje" value="interior">
-
-
-</div>
-
-</div>
-
-
-
-
-
-
-<div class="config-card">
-
-
-<h3>🪟 Cristal recomendado</h3>
-
-
-<div class="result-row">
-
-<span>Grosor</span>
+<p>
+Cristal:
 
 <strong id="cristal">
-6 mm
+
+-
+
 </strong>
 
-</div>
+</p>
 
-
-<div id="resultadoCristal">
-
-Cristal calculado
-
-</div>
 
 
 </div>
@@ -256,51 +217,36 @@ Cristal calculado
 
 
 
-
-<div class="config-card">
-
-
-<h3>🛡 Seguridad estructural</h3>
+<div class="card">
 
 
+<h3>
+Ficha técnica
+</h3>
 
-<div class="result-row">
 
-<span>Peso agua</span>
+<div id="fichaTecnica">
 
-<strong id="pesoAgua">
-0 kg
-</strong>
+Sin diseño generado
+
+</div>
+
 
 </div>
 
 
 
-<div class="result-row">
-
-<span>Tirantes</span>
-
-<strong id="tirantes">
-No necesarios
-</strong>
-
-</div>
 
 
-
-<div class="result-row">
-
-<span>Carga</span>
-
-<strong id="nivelCarga">
-Baja
-</strong>
-
-</div>
+<div class="card">
 
 
+<h3>
+Seguridad
+</h3>
 
-<div id="estadoSeguridad">
+
+<div id="seguridad">
 
 Esperando datos
 
@@ -312,272 +258,7 @@ Esperando datos
 
 
 
-
-
-
-<div class="quick-info">
-
-
-<div>
-
-💧
-
-<br>
-
-Litros
-
-<strong id="litros">
-0 L
-</strong>
-
-</div>
-
-
-
-<div>
-
-⚖️
-
-<br>
-
-Peso
-
-<strong id="pesoTotal">
-0 kg
-</strong>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<button class="create" id="crearAcuario">
-
-🏗 Crear acuario
-
-</button>
-
-
-
-</section>
-
-
 </aside>
-
-
-
-
-
-
-
-
-
-
-<!-- ZONA 3D -->
-
-
-<section class="viewer">
-
-
-<div class="scene">
-
-
-<div class="aquarium3d">
-
-
-<div class="face front"></div>
-
-<div class="face back"></div>
-
-<div class="face left"></div>
-
-<div class="face right"></div>
-
-<div class="face top"></div>
-
-<div class="face bottom"></div>
-
-
-
-<div class="water3d"></div>
-
-
-<div class="sand3d"></div>
-
-
-<div class="decor"></div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="camera">
-
-
-<button id="zoomMas">
-+
-</button>
-
-
-<button id="zoomMenos">
--
-</button>
-
-
-<button id="resetCam">
-⟳
-</button>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- PANEL DERECHO -->
-
-
-<aside class="panel">
-
-
-<h2>
-📊 Información
-</h2>
-
-
-
-
-<div class="card">
-
-
-<h3>🐠 Acuario</h3>
-
-
-<p>
-Volumen:
-
-<strong id="infoLitros">
-0 L
-</strong>
-
-</p>
-
-
-<p>
-
-Medidas:
-
-<br>
-
-<strong id="infoMedidas">
-0 × 0 × 0 cm
-</strong>
-
-</p>
-
-
-<p>
-
-Cristal:
-
-<strong id="infoCristal">
-6 mm
-</strong>
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-📋 Ficha técnica
-</h3>
-
-
-
-<div id="fichaTecnica">
-
-Pulsa "Crear acuario"
-
-</div>
-
-
-
-<button id="copiarFicha">
-
-📋 Copiar ficha
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-🌊 Agua
-</h3>
-
-
-<p>
-pH:
-<strong>
-7.0
-</strong>
-</p>
-
-
-<p>
-Temperatura:
-<strong>
-25 ºC
-</strong>
-</p>
-
-
-</div>
-
-
-
-
-</aside>
-
-
 
 
 
@@ -585,14 +266,11 @@ Temperatura:
 
 
 
-
-
 <footer>
 
-Acuario Designer Studio © 2026
+Acuario Designer Studio PRO © 2026
 
 </footer>
-
 
 
 
@@ -600,18 +278,15 @@ Acuario Designer Studio © 2026
 
 
 
+<script src="js/app.js"></script>
 
-
-
-
-<!-- SCRIPTS -->
+<script src="js/ui.js"></script>
 
 <script src="js/engine.js"></script>
-<script src="js/objects.js"></script>
-<script src="js/save.js"></script>
-<script src="js/3d-engine.js"></script>
+
 <script src="js/ficha.js"></script>
 
+<script src="js/render3d.js"></script>
 
 
 </body>
