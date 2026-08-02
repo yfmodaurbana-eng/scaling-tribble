@@ -687,3 +687,155 @@ gap:20px;
 
 
 }
+/* =====================================
+   ACUARIO 3D PRO EFFECTS
+===================================== */
+
+
+.aquarium{
+
+    transform:
+    perspective(900px)
+    rotateX(4deg);
+
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(255,255,255,.18),
+        transparent 25%,
+        transparent 75%,
+        rgba(255,255,255,.12)
+    );
+
+
+}
+
+
+/* REFLEJO DEL CRISTAL */
+
+.aquarium::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+        120deg,
+        rgba(255,255,255,.35),
+        transparent 35%
+    );
+
+
+    pointer-events:none;
+
+    z-index:5;
+
+}
+
+
+
+
+.water{
+
+    animation:
+
+    waterMove 8s infinite linear;
+
+
+}
+
+
+
+@keyframes waterMove{
+
+
+0%{
+
+    filter:
+    hue-rotate(0deg);
+
+}
+
+
+50%{
+
+    filter:
+    hue-rotate(15deg);
+
+}
+
+
+100%{
+
+    filter:
+    hue-rotate(0deg);
+
+}
+
+
+}
+
+
+
+
+
+/* ROCA MAS REALISTA */
+
+
+.rock{
+
+
+    width:130px;
+
+    height:95px;
+
+
+    background:
+
+
+    radial-gradient(
+        ellipse at top,
+        #aaa,
+        #555 40%,
+        #111 80%
+    );
+
+
+    box-shadow:
+
+
+    inset -15px -20px 30px black,
+
+    0 15px 25px black;
+
+
+}
+
+
+
+
+
+/* LUZ INTERIOR */
+
+
+.aquarium:hover{
+
+
+    box-shadow:
+
+    0 0 90px #00eaff,
+
+    inset 0 0 50px #000;
+
+
+}
