@@ -1,18 +1,45 @@
 /* ==================================================
    ACUARIO DESIGNER STUDIO
-   FICHA TECNICA PROFESIONAL V2
+   FICHA TECNICA PROFESIONAL V3
    GENERADOR + COPIAR
 ================================================== */
 
 
-console.log("FICHA TECNICA V2 CARGADA");
+console.log("FICHA TECNICA V3 CARGADA");
 
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-crearZonaFicha();
+const botonGenerar =
+document.getElementById("generarFicha");
+
+
+const botonCopiar =
+document.getElementById("copiarFicha");
+
+
+
+if(botonGenerar){
+
+botonGenerar.addEventListener(
+"click",
+generarFicha
+);
+
+}
+
+
+
+if(botonCopiar){
+
+botonCopiar.addEventListener(
+"click",
+copiarFicha
+);
+
+}
 
 
 
@@ -22,90 +49,18 @@ crearZonaFicha();
 
 
 
-function crearZonaFicha(){
-
-
-let panel=document.querySelector(".panel");
-
-
-
-if(!panel)return;
-
-
-
-let bloque=document.createElement("div");
-
-
-bloque.className="card ficha";
-
-
-
-bloque.innerHTML=`
-
-<h3>
-📄 Ficha técnica profesional
-</h3>
-
-
-<button id="generarFicha">
-Generar ficha
-</button>
-
-
-<button id="copiarFicha">
-📋 Copiar
-</button>
-
-
-<pre id="fichaTecnica">
-Pulsa generar ficha...
-</pre>
-
-
-`;
-
-
-
-panel.appendChild(bloque);
-
-
-
-
-
-document
-.getElementById("generarFicha")
-.addEventListener(
-"click",
-generarFicha
-);
-
-
-
-document
-.getElementById("copiarFicha")
-.addEventListener(
-"click",
-copiarFicha
-);
-
-
-
-}
-
-
-
 
 
 function generarFicha(){
 
 
-let a=window.acuario;
+let a = window.acuario;
 
 
 
 if(!a){
 
-alert("Primero diseña el acuario");
+alert("Primero modifica las medidas del acuario");
 
 return;
 
@@ -114,9 +69,14 @@ return;
 
 
 
+let fecha =
+new Date().toLocaleDateString("es-ES");
 
-let texto=`
 
+
+
+
+let ficha = `
 
 🐠 ACUARIO DESIGNER STUDIO
 
@@ -124,111 +84,178 @@ FICHA TÉCNICA PROFESIONAL
 ================================
 
 
-📐 DATOS DEL DISEÑO
+📅 Fecha:
+${fecha}
+
+
+
+📐 DATOS GENERALES
+================================
+
 
 Categoría:
+
 ${a.categoria}
 
 
-Medidas:
+
+Dimensiones exteriores:
+
 ${a.dimensiones.largo} × ${a.dimensiones.ancho} × ${a.dimensiones.alto} cm
 
 
-Volumen:
+
+Volumen aproximado:
+
 ${a.volumen.toFixed(1)} litros
 
 
 
 
-🪟 CRISTAL
+
+🪟 CRISTAL ESTRUCTURAL
+================================
+
 
 Tipo:
+
 ${a.cristal.tipo}
 
 
-Estado:
+
+Grosor recomendado:
+
+${a.cristal.grosor} mm
+
+
+
+Estado del diseño:
+
 ${a.cristal.estado}
 
 
 
 
-📐 CORTES DE FABRICACIÓN
+
+📐 CORTE DE CRISTALES
+================================
+
 
 ${a.cortes}
 
 
 
 
-🔩 REFUERZOS ESTRUCTURALES
+
+🔩 SISTEMA DE REFUERZO
+================================
 
 
 Necesidad:
+
 ${a.tirantes.estado}
 
 
-Medida:
+
+Cantidad:
+
+${a.tirantes.cantidad}
+
+
+
+Medidas:
+
 ${a.tirantes.medida}
 
 
+
 Tipo:
+
 ${a.tirantes.tipo}
 
 
 
 
-🛡 SEGURIDAD
+
+🛡 SEGURIDAD ESTRUCTURAL
+================================
 
 
 Nivel:
+
 ${a.seguridad.nivel}
 
 
+
 Evaluación:
+
 ${a.seguridad.mensaje}
 
 
 
 
-⚖ PESOS ESTIMADOS
+
+⚖ PESO ESTIMADO
+================================
 
 
-Cristal:
+Peso cristal:
+
 ${a.peso.cristal.toFixed(1)} kg
 
 
-Peso total:
+
+Peso total aproximado:
+
 ${a.peso.total.toFixed(1)} kg
 
 
 
 
-🧴 MONTAJE
+
+🧴 MONTAJE RECOMENDADO
+================================
 
 
 Silicona:
-Silicona estructural para acuarios
+
+Silicona específica para acuarios
+
 
 
 Preparación:
-Cristal limpio y desengrasado
 
-
-Curado recomendado:
-7 días mínimo
+Cristales limpios, secos y desengrasados
 
 
 
+Curado:
 
-⚠ RECOMENDACIONES
+Mínimo 7 días antes del llenado
 
 
-✔ Base perfectamente nivelada
 
-✔ Cristal con cantos pulidos
 
-✔ No modificar espesores calculados
 
-✔ Revisar soporte según peso final
+📌 RECOMENDACIONES
+================================
+
+
+✔ Usar superficie perfectamente nivelada
+
+
+✔ Revisar soporte del mueble
+
+
+✔ Utilizar cantos pulidos
+
+
+✔ No reducir el grosor calculado
+
+
+✔ Realizar prueba de estanqueidad antes de instalar
+
+
 
 
 
@@ -241,13 +268,21 @@ FIN DE FICHA TÉCNICA
 
 
 
-document
-.getElementById("fichaTecnica")
-.textContent=texto;
+
+const salida =
+document.getElementById("fichaTecnica");
 
 
 
-window.fichaActual=texto;
+if(salida){
+
+salida.textContent=ficha;
+
+}
+
+
+
+window.fichaActual=ficha;
 
 
 
@@ -265,9 +300,12 @@ function copiarFicha(){
 
 if(!window.fichaActual){
 
-alert("Genera primero la ficha");
+
+alert("Primero genera la ficha técnica");
+
 
 return;
+
 
 }
 
@@ -275,10 +313,21 @@ return;
 
 navigator.clipboard.writeText(
 window.fichaActual
-);
+)
+.then(()=>{
 
 
-alert("Ficha copiada al portapapeles");
+alert("Ficha copiada correctamente");
+
+
+})
+.catch(()=>{
+
+
+alert("No se pudo copiar");
+
+
+});
 
 
 
