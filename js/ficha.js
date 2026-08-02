@@ -1,22 +1,111 @@
-/* =====================================
-   ACUARIO DESIGNER STUDIO V5
-   FICHA TECNICA PROFESIONAL
-===================================== */
+/* ==================================================
+   ACUARIO DESIGNER STUDIO
+   FICHA TECNICA PROFESIONAL V2
+   GENERADOR + COPIAR
+================================================== */
 
 
-console.log("FICHA TECNICA V5 CARGADA");
+console.log("FICHA TECNICA V2 CARGADA");
+
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+crearZonaFicha();
+
+
+
+});
+
+
+
+
+
+function crearZonaFicha(){
+
+
+let panel=document.querySelector(".panel");
+
+
+
+if(!panel)return;
+
+
+
+let bloque=document.createElement("div");
+
+
+bloque.className="card ficha";
+
+
+
+bloque.innerHTML=`
+
+<h3>
+📄 Ficha técnica profesional
+</h3>
+
+
+<button id="generarFicha">
+Generar ficha
+</button>
+
+
+<button id="copiarFicha">
+📋 Copiar
+</button>
+
+
+<pre id="fichaTecnica">
+Pulsa generar ficha...
+</pre>
+
+
+`;
+
+
+
+panel.appendChild(bloque);
+
+
+
+
+
+document
+.getElementById("generarFicha")
+.addEventListener(
+"click",
+generarFicha
+);
+
+
+
+document
+.getElementById("copiarFicha")
+.addEventListener(
+"click",
+copiarFicha
+);
+
+
+
+}
+
+
 
 
 
 function generarFicha(){
 
 
-let a = window.acuario;
+let a=window.acuario;
+
 
 
 if(!a){
 
-alert("No hay datos del acuario");
+alert("Primero diseña el acuario");
 
 return;
 
@@ -24,182 +113,172 @@ return;
 
 
 
-let ficha = `
 
-====================================
 
-🐠 ACUARIO DESIGNER STUDIO V5
+let texto=`
+
+
+🐠 ACUARIO DESIGNER STUDIO
 
 FICHA TÉCNICA PROFESIONAL
-
-====================================
-
-
-📐 DIMENSIONES
-
-Largo:
-${a.dimensiones.largo} cm
-
-Ancho:
-${a.dimensiones.ancho} cm
-
-Alto:
-${a.dimensiones.alto} cm
+================================
 
 
+📐 DATOS DEL DISEÑO
 
-💧 VOLUMEN
+Categoría:
+${a.categoria}
 
+
+Medidas:
+${a.dimensiones.largo} × ${a.dimensiones.ancho} × ${a.dimensiones.alto} cm
+
+
+Volumen:
 ${a.volumen.toFixed(1)} litros
 
 
 
-====================================
 
 🪟 CRISTAL
 
-
-Espesor recomendado:
-
-${a.cristal.grosor} mm
-
-
 Tipo:
-
 ${a.cristal.tipo}
 
 
-
-====================================
-
-✂️ CORTES DE VIDRIO
-
-
-Frontal:
-
-${a.cortes.frontal}
-
-
-Trasera:
-
-${a.cortes.trasera}
-
-
-Laterales:
-
-${a.cortes.laterales}
-
-
-Base:
-
-${a.cortes.base}
+Estado:
+${a.cristal.estado}
 
 
 
-====================================
+
+📐 CORTES DE FABRICACIÓN
+
+${a.cortes}
+
+
+
+
+🔩 REFUERZOS ESTRUCTURALES
+
+
+Necesidad:
+${a.tirantes.estado}
+
+
+Medida:
+${a.tirantes.medida}
+
+
+Tipo:
+${a.tirantes.tipo}
+
+
+
 
 🛡 SEGURIDAD
 
 
-Estado:
-
+Nivel:
 ${a.seguridad.nivel}
 
 
-Refuerzos:
-
-${a.tirantes.estado}
-
+Evaluación:
+${a.seguridad.mensaje}
 
 
-====================================
-
-⚖️ PESO ESTIMADO
 
 
-Agua:
-
-${a.peso.agua.toFixed(1)} kg
+⚖ PESOS ESTIMADOS
 
 
 Cristal:
-
 ${a.peso.cristal.toFixed(1)} kg
 
 
-Decoración:
-
-${a.peso.decoracion.toFixed(1)} kg
-
-
-TOTAL:
-
+Peso total:
 ${a.peso.total.toFixed(1)} kg
 
 
 
-====================================
-
-🏠 SOPORTE
-
-
-${a.soporte.tipo}
-
-
-
-====================================
 
 🧴 MONTAJE
 
 
 Silicona:
+Silicona estructural para acuarios
 
-Silicona neutra específica para acuarios
+
+Preparación:
+Cristal limpio y desengrasado
 
 
 Curado recomendado:
-
 7 días mínimo
 
 
 
-====================================
 
-🔧 RECOMENDACIONES
+⚠ RECOMENDACIONES
 
+
+✔ Base perfectamente nivelada
 
 ✔ Cristal con cantos pulidos
 
-✔ Superficie totalmente nivelada
+✔ No modificar espesores calculados
 
-✔ Limpiar vidrio con alcohol isopropílico antes de pegar
-
-✔ Respetar tiempo de curado
+✔ Revisar soporte según peso final
 
 
-====================================
 
-FIN DE FICHA
+================================
+
+FIN DE FICHA TÉCNICA
 
 `;
 
 
 
-let salida=document.getElementById("fichaTecnica");
+
+document
+.getElementById("fichaTecnica")
+.textContent=texto;
 
 
-if(salida){
 
+window.fichaActual=texto;
 
-salida.innerHTML=
-
-"<pre>"+ficha+"</pre>";
 
 
 }
 
 
-window.fichaActual=ficha;
+
+
+
+
+
+function copiarFicha(){
+
+
+
+if(!window.fichaActual){
+
+alert("Genera primero la ficha");
+
+return;
+
+}
+
+
+
+navigator.clipboard.writeText(
+window.fichaActual
+);
+
+
+alert("Ficha copiada al portapapeles");
 
 
 
