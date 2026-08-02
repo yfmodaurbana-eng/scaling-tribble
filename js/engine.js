@@ -1,8 +1,8 @@
-/* ==========================================
+/* =====================================
    ACUARIO DESIGNER STUDIO V6.2
-   ENGINE PRINCIPAL
-   CALCULO REALISTA ACUARIO
-========================================== */
+   MOTOR REALISTA DE CALCULO
+   VOLUMEN + PESO + CRISTAL + TIRANTES
+===================================== */
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -13,203 +13,147 @@ const ancho = document.getElementById("ancho");
 const alto = document.getElementById("alto");
 
 
-
 if(!largo || !ancho || !alto){
-
-console.error("No existen campos de medidas");
-
-return;
-
+    console.error("Faltan medidas");
+    return;
 }
 
 
 
 
-
-function calcularAcuario(){
-
-
-let L = Number(largo.value) || 0;
-let A = Number(ancho.value) || 0;
-let H = Number(alto.value) || 0;
+function calcular(){
 
 
+let L = Number(largo.value);
+let A = Number(ancho.value);
+let H = Number(alto.value);
 
-// ==========================
+
+
 // VOLUMEN
-// ==========================
-
 
 let litros = (L*A*H)/1000;
 
 
 
-// ==========================
-// PESOS
-// ==========================
-
-
-// Agua
+// PESO AGUA
 
 let pesoAgua = litros;
 
 
 
-// Cristal aproximado
 
-let superficieCristal =
-(
-(L*A)*2 +
-(L*H)*2 +
-(A*H)*2
-)/10000;
-
-
-
-let grosorCalculado = 0.006;
-
-
-let pesoCristal =
-superficieCristal *
-grosorCalculado *
-2500;
-
-
-
-// Decoración + sustrato
-
-let pesoDecoracion = litros * 0.15;
-
-
-
-let pesoTotal =
-pesoAgua +
-pesoCristal +
-pesoDecoracion;
-
-
-
-
-
-// ==========================
-// CRISTAL INTELIGENTE
-// ==========================
+// ===============================
+// CRISTAL RECOMENDADO
+// BASE REALISTA
+// ===============================
 
 
 let cristal = 3;
 
-let tirantes = "No necesarios";
 
-let carga = "Baja";
+// Acuarios pequeños
 
-let estado =
-"🟢 Estructura correcta";
+if(litros <= 20){
 
-
-
-
-
-// ALTURA
-
-if(H <= 30){
-
-cristal = 3;
+    cristal = 3;
 
 }
 
 
 
-else if(H <= 35){
+// 20-60 litros
 
-cristal = 4;
+if(litros > 20){
 
-}
-
-
-
-else if(H <= 45){
-
-cristal = 5;
+    cristal = 4;
 
 }
 
 
 
-else if(H <= 55){
+// 60-120 litros
 
-cristal = 6;
+if(litros > 60){
 
-carga="Media";
-
-}
-
-
-
-else if(H <= 65){
-
-cristal = 8;
-
-carga="Media";
-
-tirantes="Recomendados";
+    cristal = 6;
 
 }
 
 
 
-else if(H <= 75){
+// 120-250 litros
 
-cristal = 10;
+if(litros > 120){
 
-carga="Alta";
-
-tirantes="Necesarios";
+    cristal = 8;
 
 }
 
 
 
-else{
+// grandes
+
+if(litros > 250){
+
+    cristal = 10;
+
+}
 
 
-cristal = 12;
 
-carga="Muy alta";
+// altura manda más que litros
 
-tirantes="Diseño especial";
 
-estado="🔴 Revisar estructura";
+if(H > 45 && cristal < 8){
 
+    cristal = 8;
+
+}
+
+
+if(H > 55){
+
+    cristal = 10;
+
+}
+
+
+
+if(H > 70){
+
+    cristal = 12;
 
 }
 
 
 
 
-// LARGO DEL ACUARIO
+// ===============================
+// TIRANTES
+// ===============================
+
+
+let tirantes="No necesarios";
 
 
 if(L > 80){
 
-tirantes="Recomendados";
+    tirantes="Recomendables";
 
 }
-
 
 
 if(L > 100){
 
-tirantes="Necesarios";
+    tirantes="Necesarios";
 
 }
-
 
 
 if(L > 150){
 
-tirantes="Diseño especial";
-
-estado="🟠 Diseño especial";
+    tirantes="Diseño especial";
 
 }
 
@@ -217,9 +161,80 @@ estado="🟠 Diseño especial";
 
 
 
-// ==========================
-// ACTUALIZAR PANTALLA
-// ==========================
+// ===============================
+// NIVEL DE CARGA
+// ===============================
+
+
+let carga="Baja";
+
+
+if(litros>100){
+
+    carga="Media";
+
+}
+
+
+if(litros>250){
+
+    carga="Alta";
+
+}
+
+
+if(litros>500){
+
+    carga="Muy alta";
+
+}
+
+
+
+
+
+// ===============================
+// SEGURIDAD
+// ===============================
+
+
+let estado="🟢 Estructura correcta";
+
+
+if(H>70 || L>180){
+
+    estado="🔴 Revisar diseño";
+
+}
+
+
+
+
+
+// ===============================
+// PESO TOTAL
+// ===============================
+
+
+let pesoCristal =
+(((L*A*2)+(L*H*2)+(A*H*2))/10000)
+*2.5
+*cristal;
+
+
+let pesoDecoracion =
+litros*0.15;
+
+
+let pesoTotal =
+pesoAgua+pesoCristal+pesoDecoracion;
+
+
+
+
+// ===============================
+// ACTUALIZAR HTML
+// ===============================
 
 
 
@@ -227,10 +242,8 @@ actualizar("litros",
 litros.toFixed(1)+" L");
 
 
-
 actualizar("infoLitros",
 litros.toFixed(1)+" L");
-
 
 
 
@@ -239,11 +252,8 @@ pesoAgua.toFixed(1)+" kg");
 
 
 
-
 actualizar("pesoTotal",
 pesoTotal.toFixed(1)+" kg");
-
-
 
 
 
@@ -252,10 +262,8 @@ cristal+" mm");
 
 
 
-
 actualizar("infoCristal",
 cristal+" mm");
-
 
 
 
@@ -264,16 +272,13 @@ tirantes);
 
 
 
-
 actualizar("nivelCarga",
 carga);
 
 
 
-
 actualizar("estadoSeguridad",
 estado);
-
 
 
 
@@ -283,19 +288,14 @@ actualizar("infoMedidas",
 
 
 
-
 let resultado =
 document.getElementById("resultadoCristal");
 
 
-
 if(resultado){
 
-
 resultado.innerHTML =
-"🟢 Cristal recomendado: <b>"+
-cristal+
-" mm</b>";
+"🟢 Cristal recomendado: <b>"+cristal+" mm</b>";
 
 }
 
@@ -307,48 +307,33 @@ cristal+
 
 
 
-function actualizar(id,valor){
+function actualizar(id,texto){
 
-
-let elemento =
-document.getElementById(id);
-
+let elemento=document.getElementById(id);
 
 if(elemento){
 
-elemento.textContent = valor;
+elemento.textContent=texto;
+
+}
 
 }
 
 
-}
 
 
+[largo,ancho,alto].forEach(input=>{
 
-
-
-// ACTUALIZAR AL CAMBIAR MEDIDAS
-
-
-[largo,ancho,alto].forEach(campo=>{
-
-
-campo.addEventListener(
+input.addEventListener(
 "input",
-calcularAcuario
+calcular
 );
-
 
 });
 
 
 
-
-
-// INICIO
-
-calcularAcuario();
-
+calcular();
 
 
 });
