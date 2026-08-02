@@ -1,9 +1,9 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO V10.1
-   FICHA FABRICACION PROFESIONAL
+   ACUARIO DESIGNER STUDIO V11
+   FICHA FABRICACION + CORTE AUTOMATICO
 ===================================== */
 
-console.log("FICHA V10.1 CARGADA");
+console.log("FICHA V11 CARGADA");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -37,6 +37,21 @@ parseFloat(document.getElementById("alto").value) || 0;
 
 
 
+let montaje="exterior";
+
+
+const selector =
+document.getElementById("montaje");
+
+
+if(selector){
+
+montaje=selector.value;
+
+}
+
+
+
 
 
 if(largo<=0 || ancho<=0 || alto<=0){
@@ -50,10 +65,10 @@ return;
 
 
 
-
 // ======================
 // VOLUMEN
 // ======================
+
 
 let litros =
 (largo*ancho*alto)/1000;
@@ -65,6 +80,7 @@ let litros =
 // ======================
 // CRISTAL
 // ======================
+
 
 let cristal=6;
 
@@ -100,33 +116,71 @@ cristal=10;
 
 
 // ======================
+// CORTE AUTOMATICO
+// ======================
+
+
+let frontalLargo=largo;
+let frontalAlto=alto;
+
+let lateralAncho=ancho;
+let lateralAlto=alto;
+
+let baseLargo=largo;
+let baseAncho=ancho;
+
+
+
+if(montaje==="interior"){
+
+
+lateralAncho =
+ancho-(cristal/10*2);
+
+
+baseAncho =
+ancho-(cristal/10*2);
+
+
+}
+
+
+
+
+
+// ======================
 // TIRANTES
 // ======================
+
 
 let cantidadTirantes=0;
 
 let textoTirantes="No necesarios";
 
 
+
 if(largo>80){
 
 cantidadTirantes=1;
+
 textoTirantes="Recomendados";
 
 }
 
 
-if(largo>100){
+if(largo>120){
 
 cantidadTirantes=2;
+
 textoTirantes="Necesarios";
 
 }
 
 
-if(largo>150){
+if(largo>180){
 
 cantidadTirantes=3;
+
 textoTirantes="Diseño especial";
 
 }
@@ -135,12 +189,12 @@ textoTirantes="Diseño especial";
 
 
 
-// ======================
-// PESO CRISTAL
-// ======================
 
 
-// superficie aproximada en m2
+// ======================
+// PESOS
+// ======================
+
 
 let superficie =
 
@@ -154,18 +208,16 @@ let superficie =
 
 
 let pesoCristal =
-
-superficie *
-cristal *
-2.5;
+superficie*cristal*2.5;
 
 
 
-let pesoDecoracion = litros*0.10;
+let pesoDecoracion =
+litros*0.10;
+
 
 
 let pesoTotal =
-
 litros+
 pesoCristal+
 pesoDecoracion;
@@ -179,6 +231,7 @@ pesoDecoracion;
 // ======================
 // SEGURIDAD
 // ======================
+
 
 let estado=
 "🟢 DISEÑO CORRECTO";
@@ -198,7 +251,6 @@ aviso="Longitud elevada, revisar refuerzos";
 }
 
 
-
 if(largo>300 || alto>80 || litros>1000){
 
 estado="🔴 DISEÑO ESPECIAL";
@@ -212,14 +264,21 @@ aviso="Requiere fabricación especializada";
 
 
 
-
-
 // ======================
 // FICHA
 // ======================
 
 
-let ficha = `
+let nombreMontaje =
+montaje==="interior"
+?
+"Base interior"
+:
+"Base exterior";
+
+
+
+let ficha=`
 
 🐠 ACUARIO DESIGNER STUDIO
 
@@ -244,6 +303,16 @@ ${litros.toFixed(1)} litros
 ================================
 
 
+🧱 TIPO DE MONTAJE
+
+
+${nombreMontaje}
+
+
+
+================================
+
+
 🪟 LISTA DE CORTE DE CRISTALES
 
 
@@ -253,7 +322,7 @@ Cantidad: 1
 
 Medida:
 
-${largo*10} × ${alto*10} mm
+${frontalLargo*10} × ${frontalAlto*10} mm
 
 Grosor:
 
@@ -267,7 +336,7 @@ Cantidad: 1
 
 Medida:
 
-${largo*10} × ${alto*10} mm
+${frontalLargo*10} × ${frontalAlto*10} mm
 
 Grosor:
 
@@ -281,7 +350,7 @@ Cantidad: 2
 
 Medida:
 
-${ancho*10} × ${alto*10} mm
+${lateralAncho*10} × ${lateralAlto*10} mm
 
 Grosor:
 
@@ -295,7 +364,7 @@ Cantidad: 1
 
 Medida:
 
-${largo*10} × ${ancho*10} mm
+${baseLargo*10} × ${baseAncho*10} mm
 
 Grosor:
 
@@ -318,15 +387,14 @@ ${textoTirantes}
 
 if(cantidadTirantes>0){
 
-ficha += `
+ficha+=`
 
 Cantidad:
 
 ${cantidadTirantes}
 
 
-Medida tirante:
-
+Cada tirante:
 
 Ancho:
 
@@ -344,7 +412,7 @@ ${cristal} mm
 
 
 
-ficha += `
+ficha+=`
 
 
 ================================
@@ -381,17 +449,14 @@ ${pesoTotal.toFixed(1)} kg
 
 
 Silicona:
-
 Acuarios
 
 
 Cristal:
-
 Canto pulido seguridad
 
 
 Tolerancia:
-
 ±1 mm
 
 
@@ -407,15 +472,11 @@ ${estado}
 
 ${aviso}
 
-
 `;
 
 
 
 
-
-
-// MOSTRAR FICHA
 
 const caja =
 document.getElementById("fichaTecnica");
@@ -425,10 +486,9 @@ if(caja){
 
 caja.innerHTML=
 `
-<pre style="
-white-space:pre-wrap;
-font-family:Arial;
-">${ficha}</pre>
+<pre style="white-space:pre-wrap;font-family:Arial">
+${ficha}
+</pre>
 `;
 
 }
@@ -445,32 +505,24 @@ window.fichaActual=ficha;
 
 
 
-// COPIAR
-
 const copiar =
 document.getElementById("copiarFicha");
 
 
 if(copiar){
 
-
-copiar.addEventListener("click",()=>{
+copiar.onclick=()=>{
 
 
 if(window.fichaActual){
 
-
 navigator.clipboard.writeText(window.fichaActual);
 
-
-alert("Ficha copiada correctamente");
-
+alert("Ficha copiada");
 
 }
 
-
-});
-
+};
 
 }
 
