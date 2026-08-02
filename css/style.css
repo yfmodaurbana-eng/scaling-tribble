@@ -1437,6 +1437,32 @@ transform:scale(.75);
 
 
 }
+   /* PRUEBA VISUAL 3D */
+
+.aquarium3d{
+
+display:block !important;
+
+background:red !important;
+
+width:420px !important;
+
+height:260px !important;
+
+position:relative !important;
+
+transform-style:preserve-3d !important;
+
+}
+
+
+.face{
+
+display:block !important;
+
+opacity:1 !important;
+
+}
 
 
 
