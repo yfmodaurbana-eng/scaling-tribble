@@ -1,83 +1,53 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO V12
+   ACUARIO DESIGNER STUDIO V12.1
    FICHA PROFESIONAL FABRICACION
 ===================================== */
 
-
-console.log("FICHA V12 PROFESIONAL CARGADA");
+console.log("FICHA V12.1 CARGADA");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const crear =
-document.getElementById("crearAcuario");
-
+const crear=document.getElementById("crearAcuario");
 
 if(!crear)return;
-
 
 
 crear.addEventListener("click",()=>{
 
 
-let largo=parseFloat(
-document.getElementById("largo").value
-)||0;
-
-
-let ancho=parseFloat(
-document.getElementById("ancho").value
-)||0;
-
-
-let alto=parseFloat(
-document.getElementById("alto").value
-)||0;
-
+let largo=parseFloat(document.getElementById("largo").value)||0;
+let ancho=parseFloat(document.getElementById("ancho").value)||0;
+let alto=parseFloat(document.getElementById("alto").value)||0;
 
 
 let montaje="interior";
 
-
-let selector=document.getElementById("montaje");
-
+const selector=document.getElementById("montaje");
 
 if(selector){
-
 montaje=selector.value;
-
 }
 
 
 
-
-
-if(!largo || !ancho || !alto){
+if(largo<=0 || ancho<=0 || alto<=0){
 
 alert("Introduce medidas correctas");
-
 return;
 
 }
 
 
+// VOLUMEN
+
+let litros=(largo*ancho*alto)/1000;
 
 
-
-// ==========================
-// CALCULOS
-// ==========================
-
-
-let litros=
-(largo*ancho*alto)/1000;
-
-
-
+// CRISTAL
 
 let cristal=6;
-
 
 if(litros<=20) cristal=3;
 else if(litros<=60) cristal=4;
@@ -86,162 +56,95 @@ else if(alto>45) cristal=8;
 
 
 
-
-
-
-
-// ==========================
 // CORTE
-// ==========================
-
 
 let lateral=ancho;
-
-
 let base=ancho;
-
 
 
 if(montaje==="interior"){
 
-
-lateral=
-ancho-(cristal/10*2);
-
-
-base=
-ancho-(cristal/10*2);
+lateral=ancho-(cristal/10*2);
+base=ancho-(cristal/10*2);
 
 }
 
 
 
-
-
-// ==========================
 // TIRANTES
-// ==========================
 
-
-let numTirantes=0;
-
-let tirantes="No necesarios";
+let cantidadTirantes=0;
+let tipoTirantes="No necesarios";
 
 
 if(largo>80){
 
-numTirantes=1;
-tirantes="Recomendados";
+cantidadTirantes=1;
+tipoTirantes="Recomendados";
 
 }
-
 
 if(largo>120){
 
-numTirantes=2;
-tirantes="Necesarios";
+cantidadTirantes=2;
+tipoTirantes="Necesarios";
 
 }
-
 
 if(largo>180){
 
-numTirantes=3;
-tirantes="Diseño reforzado";
+cantidadTirantes=3;
+tipoTirantes="Refuerzo estructural";
 
 }
 
 
 
-
-
-// ==========================
 // PESOS
-// ==========================
 
-
-let superficie=(
-
+let superficie=
+(
 (largo*alto*2)+
 (ancho*alto*2)+
 (largo*ancho)
-
 )/10000;
 
 
+let pesoCristal=superficie*cristal*2.5;
 
-let pesoCristal=
-superficie*cristal*2.5;
+let decoracion=litros*0.10;
 
-
-let decoracion=
-litros*0.10;
-
-
-let pesoFinal=
+let pesoTotal=
 litros+pesoCristal+decoracion;
 
 
 
-
-
-
-
-// ==========================
 // SILICONA
-// ==========================
-
 
 let tubos=1;
 
-
-if(litros>100){
-
-tubos=2;
-
-}
-
-
-if(litros>300){
-
-tubos=3;
-
-}
+if(litros>100)tubos=2;
+if(litros>300)tubos=3;
 
 
 
-
-
-
-
-// ==========================
 // SEGURIDAD
-// ==========================
 
-
-let estado=
-"🟢 Diseño correcto";
-
-
-let aviso=
-"Fabricación estándar";
-
+let estado="🟢 DISEÑO CORRECTO";
+let aviso="Medidas dentro de parámetros normales";
 
 
 if(largo>200){
 
-estado="🟡 Revisar diseño";
-
+estado="🟡 REVISAR DISEÑO";
 aviso="Longitud elevada, revisar refuerzos";
 
 }
 
 
-
 if(largo>300 || alto>80){
 
-estado="🔴 Diseño especial";
-
+estado="🔴 DISEÑO ESPECIAL";
 aviso="Requiere cálculo estructural";
 
 }
@@ -250,13 +153,7 @@ aviso="Requiere cálculo estructural";
 
 
 
-
-
-
-// ==========================
 // FICHA
-// ==========================
-
 
 let ficha=`
 
@@ -268,10 +165,8 @@ FICHA PROFESIONAL DE FABRICACIÓN
 ================================
 
 
-📐 DATOS DEL ACUARIO
+📐 MEDIDAS
 
-
-Medidas:
 
 ${largo} × ${ancho} × ${alto} cm
 
@@ -281,7 +176,12 @@ Volumen:
 ${litros.toFixed(1)} litros
 
 
-Tipo montaje:
+
+================================
+
+
+🧱 MONTAJE
+
 
 ${montaje==="interior"
 ?"Base interior"
@@ -292,7 +192,7 @@ ${montaje==="interior"
 ================================
 
 
-🪟 LISTA DE CORTE DE CRISTALES
+🪟 CORTE DE CRISTALES
 
 
 FRONTAL
@@ -301,7 +201,7 @@ FRONTAL
 
 ${largo*10} × ${alto*10} mm
 
-Cristal:
+Grosor:
 ${cristal} mm
 
 
@@ -312,7 +212,7 @@ TRASERA
 
 ${largo*10} × ${alto*10} mm
 
-Cristal:
+Grosor:
 ${cristal} mm
 
 
@@ -323,7 +223,7 @@ LATERALES
 
 ${lateral*10} × ${alto*10} mm
 
-Cristal:
+Grosor:
 ${cristal} mm
 
 
@@ -334,7 +234,7 @@ BASE
 
 ${largo*10} × ${base*10} mm
 
-Cristal:
+Grosor:
 ${cristal} mm
 
 
@@ -343,28 +243,29 @@ ${cristal} mm
 ================================
 
 
-🛡 REFUERZOS
+🛡 TIRANTES
 
 
-${tirantes}
+${tipoTirantes}
 
 
 Cantidad:
 
-${numTirantes}
+${cantidadTirantes}
+
 
 `;
 
 
 
-if(numTirantes>0){
+if(cantidadTirantes>0){
 
 ficha+=`
 
-Medida tirante:
+Medida cada tirante:
 
 
-Largo:
+Ancho:
 
 ${ancho} cm
 
@@ -380,14 +281,13 @@ ${cristal} mm
 
 
 
-
 ficha+=`
 
 
 ================================
 
 
-🧴 MATERIAL MONTAJE
+🧴 MATERIAL
 
 
 Silicona acuario:
@@ -395,16 +295,11 @@ Silicona acuario:
 ${tubos} tubos de 300 ml
 
 
-Tipo:
-
-Silicona neutra para acuarios
-
-
 
 ================================
 
 
-⚖️ PESOS
+⚖️ PESO
 
 
 Agua:
@@ -422,26 +317,9 @@ Decoración:
 ${decoracion.toFixed(1)} kg
 
 
-Peso final estimado:
+Peso total:
 
-${pesoFinal.toFixed(1)} kg
-
-
-
-
-================================
-
-
-🔧 RECOMENDACIONES
-
-
-✔ Cristal con canto pulido
-
-✔ Superficie perfectamente nivelada
-
-✔ Silicona específica para acuarios
-
-✔ Dejar curado antes de llenar
+${pesoTotal.toFixed(1)} kg
 
 
 
@@ -461,24 +339,12 @@ ${aviso}
 
 
 
-
-
-const caja=
-document.getElementById("fichaTecnica");
-
+const caja=document.getElementById("fichaTecnica");
 
 if(caja){
 
 caja.innerHTML=
-`
-<pre style="
-white-space:pre-wrap;
-font-family:Arial;
-font-size:13px;
-">
-${ficha}
-</pre>
-`;
+`<pre style="white-space:pre-wrap;font-family:Arial">${ficha}</pre>`;
 
 }
 
@@ -491,16 +357,12 @@ window.fichaActual=ficha;
 
 
 
-
-
-const copiar=
-document.getElementById("copiarFicha");
+const copiar=document.getElementById("copiarFicha");
 
 
 if(copiar){
 
 copiar.onclick=()=>{
-
 
 if(window.fichaActual){
 
