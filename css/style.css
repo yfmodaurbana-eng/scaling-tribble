@@ -3,6 +3,7 @@
    STYLE PRINCIPAL
 =================================== */
 
+
 *{
     box-sizing:border-box;
 }
@@ -15,8 +16,10 @@ body{
 
     min-height:100vh;
 
+    overflow-x:hidden;
+
     background:
-    radial-gradient(circle at top,#183047,#05080d 65%);
+    radial-gradient(circle at top,#1b4058 0%,#08131d 45%,#020609 100%);
 
     font-family:'Segoe UI',Arial,sans-serif;
 
@@ -33,7 +36,7 @@ body{
 
     width:95%;
 
-    max-width:1400px;
+    max-width:1500px;
 
     margin:auto;
 
@@ -60,14 +63,17 @@ body{
     margin-bottom:20px;
 
     background:
-    linear-gradient(145deg,#112738,#061018);
+    linear-gradient(145deg,#152f42,#050c12);
 
-    border:1px solid #1d607d;
+    border:1px solid #18749b;
 
     border-radius:20px;
 
     box-shadow:
-    0 0 25px rgba(0,200,255,.15);
+
+    0 0 30px rgba(0,190,255,.25),
+
+    inset 0 0 20px rgba(0,0,0,.7);
 
 }
 
@@ -75,13 +81,14 @@ body{
 
 .logo{
 
-    font-size:28px;
+    font-size:30px;
 
     font-weight:900;
 
-    color:#00d9ff;
+    color:#00ddff;
 
     text-shadow:
+
     0 0 15px #00cfff;
 
 }
@@ -94,7 +101,7 @@ body{
 
     font-size:14px;
 
-    color:#9defff;
+    color:#b4efff;
 
 }
 
@@ -106,11 +113,9 @@ body{
 
     display:flex;
 
-    gap:10px;
+    gap:12px;
 
 }
-
-
 
 
 
@@ -122,8 +127,7 @@ body{
 
     display:grid;
 
-    grid-template-columns:
-    250px 1fr 300px;
+    grid-template-columns:250px 1fr 300px;
 
     gap:20px;
 
@@ -139,10 +143,11 @@ button{
 
 
     background:
-    linear-gradient(145deg,#0879b8,#00456b);
+
+    linear-gradient(145deg,#078dcc,#003d62);
 
 
-    border:none;
+    border:1px solid #12cfff;
 
 
     color:white;
@@ -160,16 +165,14 @@ button{
     font-weight:bold;
 
 
+    transition:.25s;
+
 
     box-shadow:
 
-    0 5px 0 #002c44,
+    0 5px 0 #00263d,
 
-    0 0 15px rgba(0,190,255,.4);
-
-
-
-    transition:.25s;
+    0 0 15px rgba(0,200,255,.4);
 
 
 }
@@ -177,24 +180,23 @@ button{
 
 
 
-
 button:hover{
 
-
-    transform:translateY(-3px);
-
-
-    background:
-    linear-gradient(145deg,#10bfff,#006da5);
-
-
+    transform:translateY(-4px);
 
     box-shadow:
 
-    0 7px 0 #002c44,
+    0 8px 0 #00263d,
 
-    0 0 25px #00cfff;
+    0 0 30px #00d9ff;
 
+}
+
+
+
+button:active{
+
+    transform:translateY(2px);
 
 }
 
@@ -206,16 +208,14 @@ button:hover{
 
 /* PANEL IZQUIERDO */
 
-
 .sidebar{
-
 
     background:
 
-    linear-gradient(160deg,#102333,#050c13);
+    linear-gradient(160deg,#102b3e,#050a10);
 
 
-    border:1px solid #235875;
+    border:1px solid #1d6685;
 
 
     border-radius:20px;
@@ -224,24 +224,22 @@ button:hover{
     padding:20px;
 
 
-}
+    box-shadow:
 
+    inset 0 0 30px black;
+
+}
 
 
 
 
 .tools{
 
-
     display:grid;
 
-
-    grid-template-columns:
-    repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
 
     gap:12px;
-
 
 }
 
@@ -250,15 +248,9 @@ button:hover{
 
 .tools button{
 
-
-    height:80px;
-
-    font-size:18px;
-
+    height:85px;
 
 }
-
-
 
 
 
@@ -266,25 +258,17 @@ button:hover{
 
 .panel-box{
 
-
     margin-top:20px;
-
 
     padding:15px;
 
-
-    background:#081722;
-
+    background:#07141e;
 
     border-radius:15px;
 
-
-    border:1px solid #1c526d;
-
+    border:1px solid #19506d;
 
 }
-
-
 
 
 
@@ -292,19 +276,13 @@ button:hover{
 
 label{
 
-
     display:block;
-
 
     margin-bottom:15px;
 
-
-    color:#8bdfff;
-
+    color:#8de7ff;
 
 }
-
-
 
 
 
@@ -318,13 +296,13 @@ select{
     width:100%;
 
 
-    background:#08131d;
+    background:#02090e;
 
 
     color:white;
 
 
-    border:1px solid #22516c;
+    border:1px solid #23627e;
 
 
     border-radius:10px;
@@ -335,7 +313,6 @@ select{
 
     margin-top:5px;
 
-
 }
 
 
@@ -343,28 +320,7 @@ select{
 
 
 
-input:focus,
-select:focus{
-
-
-    border-color:#00cfff;
-
-
-    box-shadow:
-    0 0 15px rgba(0,200,255,.5);
-
-
-}
-
-
-
-
-
-
-
-
-/* VISOR ACUARIO */
-
+/* VISOR 3D */
 
 .viewer{
 
@@ -377,7 +333,8 @@ select:focus{
 
     background:
 
-    radial-gradient(circle,#16415a,#02080d 70%);
+
+    radial-gradient(circle,#15506c,#020609 75%);
 
 
 
@@ -385,7 +342,7 @@ select:focus{
 
 
 
-    border:1px solid #2380a5;
+    border:2px solid #1685ad;
 
 
 
@@ -405,19 +362,15 @@ select:focus{
 
 
 
-
     box-shadow:
 
 
-    inset 0 0 50px black,
+    inset 0 0 70px black,
 
 
-    0 0 30px rgba(0,200,255,.2);
-
+    0 0 40px rgba(0,200,255,.3);
 
 }
-
-
 
 
 
@@ -436,31 +389,31 @@ select:focus{
 
 
 
-    border:
-
-    8px solid rgba(180,230,255,.4);
+    border:8px solid rgba(190,240,255,.45);
 
 
 
-    border-radius:15px;
+    border-radius:18px;
+
 
 
     overflow:hidden;
 
 
 
+    background:rgba(0,180,255,.08);
+
+
+
     box-shadow:
 
 
-    0 0 50px #00bfff,
+    0 0 60px #00bfff,
 
 
-    inset 0 0 40px #000;
-
+    inset 0 0 40px black;
 
 }
-
-
 
 
 
@@ -472,9 +425,6 @@ select:focus{
     position:absolute;
 
 
-    top:0;
-
-
     width:100%;
 
 
@@ -484,16 +434,42 @@ select:focus{
 
     background:
 
+
     linear-gradient(
+
     180deg,
-    rgba(0,220,255,.45),
-    rgba(0,60,120,.7)
+
+    rgba(0,230,255,.5),
+
+    rgba(0,80,150,.8)
+
     );
 
+
+
+    animation:agua 5s infinite alternate;
 
 }
 
 
+
+
+
+@keyframes agua{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(5px);
+
+}
+
+}
 
 
 
@@ -517,12 +493,9 @@ select:focus{
 
     background:
 
-    linear-gradient(#d8c27a,#8a6b32);
-
+    linear-gradient(#e0ca80,#76552b);
 
 }
-
-
 
 
 
@@ -540,22 +513,27 @@ select:focus{
     left:35%;
 
 
-    width:90px;
+    width:100px;
 
 
-    height:70px;
+    height:75px;
 
 
 
     background:
 
-    radial-gradient(circle,#777,#222);
+
+    radial-gradient(circle,#999,#222);
 
 
 
     border-radius:50%;
 
 
+
+    box-shadow:
+
+    0 10px 20px black;
 
 }
 
@@ -573,13 +551,15 @@ select:focus{
 
     background:
 
-    linear-gradient(145deg,#142433,#071019);
+
+    linear-gradient(145deg,#142b3d,#050b10);
 
 
-    border:1px solid #236080;
+
+    border:1px solid #22789b;
 
 
-    border-radius:18px;
+    border-radius:20px;
 
 
     padding:20px;
@@ -587,11 +567,11 @@ select:focus{
 
     box-shadow:
 
-    0 0 25px rgba(0,180,255,.15);
+
+    inset 0 0 30px black;
 
 
 }
-
 
 
 
@@ -602,11 +582,12 @@ select:focus{
 
     background:
 
-    linear-gradient(160deg,#102333,#050b12);
+
+    linear-gradient(160deg,#102839,#050b11);
 
 
 
-    border:1px solid #1b5875;
+    border:1px solid #21607d;
 
 
 
@@ -618,11 +599,15 @@ select:focus{
 
 
 
-    margin:10px 0;
+    margin:12px 0;
 
+
+
+    box-shadow:
+
+    0 0 15px rgba(0,180,255,.15);
 
 }
-
 
 
 
@@ -631,19 +616,13 @@ select:focus{
 
 h2,h3{
 
-
-    color:#6ee7ff;
-
+    color:#74eaff;
 
     text-shadow:
 
-    0 0 10px #00bfff;
-
+    0 0 12px #00cfff;
 
 }
-
-
-
 
 
 
@@ -672,8 +651,6 @@ h2,h3{
 
 
 
-
-
 .camera button{
 
 
@@ -688,7 +665,6 @@ h2,h3{
 
     border-radius:50%;
 
-
 }
 
 
@@ -696,10 +672,6 @@ h2,h3{
 
 
 
-
-
-
-/* MOVIL */
 
 
 @media(max-width:1000px){
@@ -707,25 +679,32 @@ h2,h3{
 
 .main{
 
-
-    grid-template-columns:1fr;
-
+grid-template-columns:1fr;
 
 }
-
 
 
 .header{
 
+flex-direction:column;
 
-    flex-direction:column;
-
-
-    gap:15px;
-
+gap:15px;
 
 }
 
+
+.actions{
+
+width:100%;
+
+}
+
+
+.actions button{
+
+flex:1;
+
+}
 
 
 }
