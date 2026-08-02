@@ -3,6 +3,8 @@
    FICHA TECNICA V1
 ===================================== */
 
+console.log("FICHA.JS FUNCIONANDO");
+
 
 document.addEventListener("DOMContentLoaded",()=>{
 
