@@ -1,6 +1,6 @@
 /* =====================================
-   ACUARIO DESIGNER PRO
-   STYLE V2 - SOFTWARE DESIGN
+   ACUARIO DESIGNER STUDIO
+   STYLE V3 - AQUARIUM SIMULATOR
 ===================================== */
 
 
@@ -13,32 +13,36 @@ body{
 
     margin:0;
     height:100vh;
+
     overflow:hidden;
 
     font-family:
-    "Segoe UI",
     Arial,
     sans-serif;
 
+
     background:
-    linear-gradient(
-    135deg,
-    #020617,
-    #0f172a
+
+    radial-gradient(
+    circle at top,
+    #0ea5e9,
+    #020617 70%
     );
 
-    color:#e2e8f0;
+
+    color:white;
 
 }
 
 
 
-/* APP */
 
 .app{
 
     height:100vh;
+
     display:flex;
+
     flex-direction:column;
 
 }
@@ -50,7 +54,9 @@ body{
 
 header{
 
+
     height:75px;
+
 
     display:flex;
 
@@ -58,20 +64,34 @@ header{
 
     justify-content:space-between;
 
-    padding:0 30px;
+
+    padding:0 25px;
 
 
     background:
 
-    rgba(15,23,42,.85);
+    linear-gradient(
 
+    90deg,
 
-    backdrop-filter:blur(10px);
+    #082f49,
+
+    #0c4a6e,
+
+    #082f49
+
+    );
 
 
     border-bottom:
 
-    1px solid rgba(255,255,255,.08);
+    2px solid #38bdf8;
+
+
+    box-shadow:
+
+    0 0 25px #0284c7;
+
 
 }
 
@@ -79,16 +99,22 @@ header{
 
 header h1{
 
+
     margin:0;
 
-    font-size:24px;
 
-    color:#38bdf8;
+    font-size:26px;
 
-    letter-spacing:1px;
+
+    color:#e0f2fe;
+
+
+    text-shadow:
+
+    0 0 15px #38bdf8;
+
 
 }
-
 
 
 
@@ -107,16 +133,17 @@ main{
 
     grid-template-columns:
 
-    300px
+    290px
     1fr
-    350px;
+    340px;
 
 
 
-    gap:18px;
+    gap:15px;
 
 
-    padding:18px;
+    padding:15px;
+
 
 
 }
@@ -131,35 +158,52 @@ main{
 
     background:
 
-    rgba(15,23,42,.75);
+
+    linear-gradient(
+
+    180deg,
+
+    rgba(14,165,233,.18),
+
+    rgba(2,6,23,.85)
+
+    );
 
 
     border:
 
-    1px solid rgba(255,255,255,.08);
+
+    1px solid rgba(56,189,248,.5);
 
 
 
     border-radius:20px;
 
 
-    padding:22px;
+
+    padding:18px;
+
 
 
     box-shadow:
 
 
-    0 20px 40px rgba(0,0,0,.35);
+    inset 0 0 30px rgba(14,165,233,.15),
+
+
+    0 0 25px rgba(14,165,233,.25);
 
 
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(8px);
 
 
 
 }
 
 
+
+/* TITULOS */
 
 
 h2{
@@ -168,19 +212,14 @@ h2{
     margin-top:0;
 
 
-    color:#38bdf8;
+    color:#7dd3fc;
 
 
-    font-size:18px;
+    text-shadow:
 
 
-}
+    0 0 10px #0284c7;
 
-
-h3{
-
-
-    color:#94a3b8;
 
 }
 
@@ -201,21 +240,22 @@ label{
     align-items:center;
 
 
-    margin:18px 0;
+    margin:15px 0;
 
 
-    color:#cbd5e1;
+
+    font-size:15px;
+
 
 
 }
 
 
 
-
 input{
 
 
-    width:90px;
+    width:85px;
 
 
     padding:10px;
@@ -226,7 +266,8 @@ input{
 
     border:
 
-    1px solid #334155;
+
+    1px solid #38bdf8;
 
 
 
@@ -239,11 +280,14 @@ input{
     text-align:center;
 
 
-    font-size:15px;
+    box-shadow:
+
+
+    inset 0 0 10px #0c4a6e;
+
 
 
 }
-
 
 
 
@@ -256,17 +300,19 @@ button{
     width:100%;
 
 
-    padding:12px;
+    padding:13px;
 
 
     margin-top:10px;
 
 
+    border-radius:15px;
 
-    border-radius:14px;
+
+    border:
 
 
-    border:none;
+    1px solid #7dd3fc;
 
 
 
@@ -274,14 +320,21 @@ button{
 
 
     linear-gradient(
-    135deg,
+
+    180deg,
+
     #0284c7,
-    #2563eb
+
+    #075985
+
     );
 
 
 
     color:white;
+
+
+    font-size:15px;
 
 
     font-weight:bold;
@@ -291,7 +344,14 @@ button{
 
 
 
-    transition:.25s;
+    box-shadow:
+
+
+    0 0 15px rgba(56,189,248,.5);
+
+
+
+    transition:.2s;
 
 
 
@@ -302,21 +362,22 @@ button{
 button:hover{
 
 
-    transform:
+    transform:scale(1.05);
 
-    translateY(-3px);
 
 
     box-shadow:
 
-    0 10px 20px rgba(37,99,235,.4);
+
+    0 0 30px #38bdf8;
+
 
 
 }
 
 
 
-/* VISOR */
+/* VISOR CENTRAL */
 
 
 .visor{
@@ -326,9 +387,13 @@ button:hover{
 
 
     radial-gradient(
+
     circle,
-    #1e293b,
-    #020617
+
+    #075985,
+
+    #020617 75%
+
     );
 
 
@@ -349,13 +414,19 @@ button:hover{
 
     border:
 
-    1px solid rgba(255,255,255,.08);
+
+    2px solid rgba(56,189,248,.5);
+
+
+
+    box-shadow:
+
+
+    inset 0 0 60px rgba(14,165,233,.4);
 
 
 
 }
-
-
 
 
 
@@ -365,14 +436,13 @@ button:hover{
 .aquarium{
 
 
-    width:450px;
+    width:500px;
 
 
-    height:280px;
+    height:300px;
 
 
-
-    border-radius:18px;
+    position:relative;
 
 
 
@@ -380,20 +450,27 @@ button:hover{
 
 
 
-    position:relative;
+    border-radius:20px;
 
 
 
     border:
 
-    3px solid rgba(255,255,255,.35);
+
+    4px solid rgba(186,230,253,.5);
+
+
+
+    background:
+
+    rgba(14,165,233,.15);
 
 
 
     box-shadow:
 
 
-    0 0 40px rgba(14,165,233,.25);
+    0 0 50px rgba(14,165,233,.6);
 
 
 
@@ -401,6 +478,7 @@ button:hover{
 
 
 
+/* AGUA */
 
 
 .water{
@@ -426,16 +504,48 @@ button:hover{
 
     180deg,
 
-    rgba(56,189,248,.35),
+    rgba(125,211,252,.35),
 
-    rgba(2,132,199,.55)
+    rgba(2,132,199,.65)
 
     );
 
 
 
+    animation:
+
+    wave 5s infinite alternate;
+
+
+
 }
 
+
+
+
+@keyframes wave{
+
+
+from{
+
+transform:translateY(0);
+
+}
+
+
+to{
+
+transform:translateY(8px);
+
+}
+
+
+}
+
+
+
+
+/* ARENA */
 
 
 .sand{
@@ -447,10 +557,10 @@ button:hover{
     bottom:0;
 
 
-    height:40px;
-
-
     width:100%;
+
+
+    height:45px;
 
 
 
@@ -459,9 +569,9 @@ button:hover{
 
     linear-gradient(
 
-    #d6b978,
+    #fde68a,
 
-    #92723c
+    #a16207
 
     );
 
@@ -471,17 +581,24 @@ button:hover{
 
 
 
-/* TARJETAS */
+/* DATOS */
 
 
 #litros,
 #cristal{
 
 
-    color:#38bdf8;
+    color:#7dd3fc;
 
 
-    font-size:18px;
+    font-size:20px;
+
+
+
+    text-shadow:
+
+
+    0 0 10px #38bdf8;
 
 
 }
@@ -495,21 +612,20 @@ button:hover{
     padding:15px;
 
 
-    margin-top:15px;
-
-
-
     border-radius:15px;
 
 
+    background:
 
-    background:#020617;
+
+    rgba(2,6,23,.7);
 
 
 
     border:
 
-    1px solid #1e293b;
+
+    1px solid #0284c7;
 
 
 
@@ -517,19 +633,21 @@ button:hover{
 
 
 
-/* FICHA */
-
 
 #fichaTecnica{
 
 
-    background:#020617;
+    background:
+
+    rgba(2,6,23,.8);
+
+
+
+    border-radius:15px;
 
 
     padding:15px;
 
-
-    border-radius:15px;
 
 
     max-height:350px;
@@ -538,25 +656,34 @@ button:hover{
     overflow:auto;
 
 
-    color:#cbd5e1;
+    font-size:13px;
+
 
 
 }
 
 
 
+/* SCROLL */
 
-pre{
+::-webkit-scrollbar{
+
+width:8px;
+
+}
 
 
-    white-space:pre-wrap;
+::-webkit-scrollbar-thumb{
 
+background:#0284c7;
+
+border-radius:10px;
 
 }
 
 
 
-/* RESPONSIVE */
+/* MOVIL */
 
 
 @media(max-width:1000px){
@@ -567,7 +694,6 @@ body{
 overflow:auto;
 
 }
-
 
 
 main{
@@ -583,8 +709,7 @@ grid-template-columns:1fr;
 .visor{
 
 
-height:450px;
-
+height:400px;
 
 }
 
