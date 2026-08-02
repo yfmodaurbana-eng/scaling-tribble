@@ -7,9 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer Studio V5</title>
+<title>Acuario Designer Studio V6 Professional</title>
 
-<link rel="stylesheet" href="./css/style.css?v=11">
+<link rel="stylesheet" href="./css/style.css?v=20">
 
 </head>
 
@@ -28,25 +28,24 @@
 🐠 ACUARIO DESIGNER
 
 <span>
-STUDIO V5
+STUDIO V6 PROFESSIONAL
 </span>
 
 </div>
 
 
-
 <div class="actions">
 
-<button>
-Nuevo
+<button id="nuevo">
+🆕 Nuevo
 </button>
 
-<button>
-Guardar
+<button id="guardar">
+💾 Guardar
 </button>
 
-<button>
-Exportar
+<button id="exportar">
+📄 Exportar
 </button>
 
 </div>
@@ -58,20 +57,17 @@ Exportar
 
 
 
-<main class="main">
-
-
+<main class="workspace">
 
 
 
 <!-- PANEL IZQUIERDO -->
 
-
-<aside class="sidebar">
+<aside class="sidebar panel-scroll">
 
 
 <h2>
-🛠 Herramientas
+🛠 Diseño
 </h2>
 
 
@@ -79,28 +75,28 @@ Exportar
 <div class="tools">
 
 
-<button class="tool">
+<button class="tool" data-tool="roca">
 🪨
 <br>
 Roca
 </button>
 
 
-<button class="tool">
+<button class="tool" data-tool="planta">
 🌱
 <br>
 Planta
 </button>
 
 
-<button class="tool">
+<button class="tool" data-tool="pez">
 🐟
 <br>
 Pez
 </button>
 
 
-<button class="tool">
+<button class="tool" data-tool="luz">
 💡
 <br>
 Luz
@@ -113,46 +109,52 @@ Luz
 
 
 
-<div class="panel-box">
+<section class="box">
 
 
 <h3>
-📐 Diseño del acuario
+📐 Medidas del acuario
 </h3>
 
 
-
 <label>
 
-Largo (cm)
+Largo
 
 <input id="largo" value="70">
 
+cm
+
 </label>
 
 
 
 <label>
 
-Ancho (cm)
+Ancho
 
 <input id="ancho" value="30">
 
+cm
+
 </label>
 
 
 
 <label>
 
-Alto (cm)
+Alto
 
 <input id="alto" value="40">
+
+cm
 
 </label>
 
 
 
 <select id="montaje">
+
 
 <option value="interior">
 Base interior
@@ -167,24 +169,26 @@ Base exterior
 </select>
 
 
-</div>
+
+</section>
 
 
 
 
 
 
-<div class="panel-box">
+<section class="box">
 
 
 <h3>
-🪟 Especificaciones estructurales
+🪟 Cristal estructural
 </h3>
 
 
 
 <p>
-📏 Grosor recomendado:
+Grosor recomendado:
+
 <br>
 
 <strong id="cristalDiseño">
@@ -195,12 +199,14 @@ Calculando...
 
 
 
+
 <p>
-🔹 Tipo de vidrio:
+Tipo:
+
 <br>
 
 <strong id="tipoCristal">
-Vidrio float recocido para acuarios
+Calculando...
 </strong>
 
 </p>
@@ -209,7 +215,8 @@ Vidrio float recocido para acuarios
 
 
 <p>
-📐 Cortes de cristal:
+Cortes:
+
 <br>
 
 <strong id="cortesCristalDiseño">
@@ -220,8 +227,11 @@ Calculando...
 
 
 
+
+
 <p>
-🔩 Tirantes necesarios:
+🔩 Tirantes:
+
 <br>
 
 <strong id="tirantesDiseño">
@@ -233,7 +243,8 @@ Calculando...
 
 
 <p>
-📏 Medidas del refuerzo:
+Medida refuerzo:
+
 <br>
 
 <strong id="medidaTirante">
@@ -245,7 +256,8 @@ Calculando...
 
 
 <p>
-⚙ Tipo de refuerzo:
+Tipo:
+
 <br>
 
 <strong id="tipoRefuerzo">
@@ -256,47 +268,34 @@ Calculando...
 
 
 
+</section>
 
-<hr>
 
+
+
+
+
+<section class="box">
 
 
 <h3>
-🛡 Seguridad estructural
+🛡 Seguridad
 </h3>
 
 
-
-<p>
-
-Nivel:
-
-<br>
-
-<strong id="nivelEstructural">
+<p id="nivelEstructural">
 Analizando...
-</strong>
-
 </p>
 
 
-
-
-<p>
-
-Motivo:
-
-<br>
-
-<strong id="motivoSeguridad">
+<p id="motivoSeguridad">
 Analizando...
-</strong>
-
 </p>
 
 
+</section>
 
-</div>
+
 
 
 </aside>
@@ -308,7 +307,8 @@ Analizando...
 
 
 
-<!-- VISOR 3D -->
+
+<!-- VISOR CENTRAL -->
 
 
 <section class="viewer">
@@ -323,11 +323,8 @@ Analizando...
 <div class="sand"></div>
 
 
-<div class="rock"></div>
-
 
 </div>
-
 
 
 
@@ -367,7 +364,7 @@ Analizando...
 <!-- PANEL DERECHO -->
 
 
-<aside class="panel">
+<aside class="panel panel-scroll">
 
 
 <h2>
@@ -377,46 +374,28 @@ Analizando...
 
 
 
-
-<div class="card">
+<section class="card">
 
 
 <h3>
-🐠 Acuario
+🐠 Diseño actual
 </h3>
+
 
 
 <p id="infoLitros">
-84 litros
+0 litros
 </p>
+
 
 
 <p id="infoMedidas">
-70 × 30 × 40 cm
+0 × 0 × 0 cm
 </p>
 
 
-</div>
 
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-🛡 Seguridad
-</h3>
-
-
-<p id="estadoSeguridad">
-🟢 Diseño correcto
-</p>
-
-
-</div>
+</section>
 
 
 
@@ -425,7 +404,7 @@ Analizando...
 
 
 
-<div class="card">
+<section class="card">
 
 
 <h3>
@@ -437,70 +416,64 @@ Analizando...
 🪟 Cristal:
 
 <span id="infoCristal">
-Calculando...
+-
 </span>
 
 </p>
-
-
 
 
 <p>
 📐 Cortes:
 
 <span id="cortesCristal">
-Calculando...
+-
 </span>
 
 </p>
-
 
 
 <p>
-⚖ Peso total:
+⚖ Peso:
 
 <span id="pesoTotal">
-Calculando...
+-
 </span>
 
 </p>
-
 
 
 <p>
 🔩 Refuerzos:
 
 <span id="tirantes">
-Calculando...
+-
 </span>
 
 </p>
-
 
 
 <p>
 🛡 Riesgo:
 
 <span id="riesgo">
-Analizando...
+-
 </span>
 
 </p>
-
 
 
 <p>
 🏠 Soporte:
 
 <span id="soporte">
-Analizando...
+-
 </span>
 
 </p>
 
 
 
-</div>
+</section>
 
 
 
@@ -510,7 +483,7 @@ Analizando...
 
 
 
-<div class="card">
+<section class="card">
 
 
 <h3>
@@ -526,19 +499,19 @@ Generar ficha
 
 
 <button id="copiarFicha">
-📋 Copiar ficha
+📋 Copiar
 </button>
 
 
 
+
 <pre id="fichaTecnica">
-Diseña el acuario para generar la ficha...
+Diseña el acuario para generar la ficha técnica...
 </pre>
 
 
 
-</div>
-
+</section>
 
 
 
@@ -550,8 +523,19 @@ Diseña el acuario para generar la ficha...
 
 
 
-
 </main>
+
+
+
+
+
+
+<footer class="footer">
+
+Acuario Designer Studio V6 Professional
+
+</footer>
+
 
 
 </div>
