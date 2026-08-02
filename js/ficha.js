@@ -1,50 +1,22 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO PRO V9
-   GENERADOR DE FICHA TECNICA
+   ACUARIO DESIGNER STUDIO V5
+   FICHA TECNICA PROFESIONAL
 ===================================== */
 
 
-console.log("FICHA PRO V9 CARGADA");
-
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-const boton =
-document.getElementById("crearAcuario");
-
-
-if(!boton)return;
-
-
-
-boton.addEventListener("click",()=>{
-
-
-generarFicha();
-
-
-});
-
-
-
-});
-
-
+console.log("FICHA TECNICA V5 CARGADA");
 
 
 
 function generarFicha(){
 
 
-
-const a =
-window.acuario;
+let a = window.acuario;
 
 
+if(!a){
 
-if(!a || !a.volumen){
+alert("No hay datos del acuario");
 
 return;
 
@@ -52,59 +24,81 @@ return;
 
 
 
+let ficha = `
+
+====================================
+
+🐠 ACUARIO DESIGNER STUDIO V5
+
+FICHA TÉCNICA PROFESIONAL
+
+====================================
 
 
-let d =
-a.dimensiones;
+📐 DIMENSIONES
 
+Largo:
+${a.dimensiones.largo} cm
 
-let ficha=`
+Ancho:
+${a.dimensiones.ancho} cm
 
-
-🐠 ACUARIO DESIGNER STUDIO PRO
-
-FICHA PROFESIONAL DE FABRICACIÓN
-
-
-================================
-
-
-📐 DATOS DEL ACUARIO
-
-
-Medidas exteriores:
-
-${d.largo} × ${d.ancho} × ${d.alto} cm
+Alto:
+${a.dimensiones.alto} cm
 
 
 
-Volumen:
+💧 VOLUMEN
 
 ${a.volumen.toFixed(1)} litros
 
 
 
-================================
+====================================
+
+🪟 CRISTAL
 
 
-🪟 CRISTAL RECOMENDADO
-
-
-Espesor:
+Espesor recomendado:
 
 ${a.cristal.grosor} mm
 
 
-Estado:
+Tipo:
 
-${a.cristal.estado}
-
-
-
-================================
+${a.cristal.tipo}
 
 
-🛡 SEGURIDAD ESTRUCTURAL
+
+====================================
+
+✂️ CORTES DE VIDRIO
+
+
+Frontal:
+
+${a.cortes.frontal}
+
+
+Trasera:
+
+${a.cortes.trasera}
+
+
+Laterales:
+
+${a.cortes.laterales}
+
+
+Base:
+
+${a.cortes.base}
+
+
+
+====================================
+
+🛡 SEGURIDAD
 
 
 Estado:
@@ -112,31 +106,15 @@ Estado:
 ${a.seguridad.nivel}
 
 
-${a.seguridad.mensaje}
-
-
-
-================================
-
-
-🔩 REFUERZOS
-
-
-Tirantes:
+Refuerzos:
 
 ${a.tirantes.estado}
 
 
-Cantidad:
 
-${a.tirantes.cantidad}
+====================================
 
-
-
-================================
-
-
-⚖️ PESOS ESTIMADOS
+⚖️ PESO ESTIMADO
 
 
 Agua:
@@ -154,64 +132,60 @@ Decoración:
 ${a.peso.decoracion.toFixed(1)} kg
 
 
-
-Peso total:
+TOTAL:
 
 ${a.peso.total.toFixed(1)} kg
 
 
 
-================================
+====================================
+
+🏠 SOPORTE
 
 
-🧴 MATERIAL DE MONTAJE
+${a.soporte.tipo}
+
+
+
+====================================
+
+🧴 MONTAJE
 
 
 Silicona:
 
-Recomendada para acuarios
+Silicona neutra específica para acuarios
 
 
-Curado:
+Curado recomendado:
 
-Mínimo 7 días
+7 días mínimo
 
 
 
-================================
-
+====================================
 
 🔧 RECOMENDACIONES
 
 
-✔ Cristal con canto pulido
+✔ Cristal con cantos pulidos
 
+✔ Superficie totalmente nivelada
 
-✔ Superficie perfectamente nivelada
-
-
-✔ Limpiar vidrio antes de silicona
-
+✔ Limpiar vidrio con alcohol isopropílico antes de pegar
 
 ✔ Respetar tiempo de curado
 
 
-
-================================
-
+====================================
 
 FIN DE FICHA
-
 
 `;
 
 
 
-
-
-const salida =
-document.getElementById("fichaTecnica");
-
+let salida=document.getElementById("fichaTecnica");
 
 
 if(salida){
@@ -219,18 +193,10 @@ if(salida){
 
 salida.innerHTML=
 
-`
+"<pre>"+ficha+"</pre>";
 
-<pre>
-
-${ficha}
-
-</pre>
-
-`;
 
 }
-
 
 
 window.fichaActual=ficha;
