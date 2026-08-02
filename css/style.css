@@ -1,49 +1,35 @@
-/* =====================================
-   ACUARIO DESIGNER STUDIO
-   STYLE V3 - AQUARIUM SIMULATOR
-===================================== */
-
-
 *{
-    box-sizing:border-box;
+box-sizing:border-box;
 }
 
 
 body{
 
-    margin:0;
-    height:100vh;
+margin:0;
+height:100vh;
+overflow:hidden;
 
-    overflow:hidden;
+font-family:Arial, sans-serif;
 
-    font-family:
-    Arial,
-    sans-serif;
+background:
+linear-gradient(
+180deg,
+#021b35,
+#003b5c,
+#00111f
+);
 
-
-    background:
-
-    radial-gradient(
-    circle at top,
-    #0ea5e9,
-    #020617 70%
-    );
-
-
-    color:white;
+color:white;
 
 }
 
 
 
-
 .app{
 
-    height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
+height:100vh;
+display:flex;
+flex-direction:column;
 
 }
 
@@ -51,100 +37,84 @@ body{
 
 /* CABECERA */
 
+.header{
 
-header{
+height:75px;
 
+display:flex;
+align-items:center;
+justify-content:space-between;
 
-    height:75px;
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
+padding:0 30px;
 
 
-    padding:0 25px;
+background:
+
+linear-gradient(
+90deg,
+#003b5c,
+#0077b6,
+#003b5c
+);
 
 
-    background:
+border-bottom:2px solid #38bdf8;
 
-    linear-gradient(
+box-shadow:
 
-    90deg,
-
-    #082f49,
-
-    #0c4a6e,
-
-    #082f49
-
-    );
-
-
-    border-bottom:
-
-    2px solid #38bdf8;
-
-
-    box-shadow:
-
-    0 0 25px #0284c7;
-
+0 0 25px #00bfff;
 
 }
 
 
 
-header h1{
+.logo{
 
+font-size:26px;
+font-weight:bold;
 
-    margin:0;
+color:#dff6ff;
 
+text-shadow:
 
-    font-size:26px;
-
-
-    color:#e0f2fe;
-
-
-    text-shadow:
-
-    0 0 15px #38bdf8;
-
+0 0 15px #00cfff;
 
 }
 
 
 
+.logo span{
 
-/* ZONA PRINCIPAL */
+display:block;
 
+font-size:12px;
 
-main{
+letter-spacing:4px;
 
+color:#7dd3fc;
 
-    flex:1;
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    290px
-    1fr
-    340px;
+}
 
 
 
-    gap:15px;
+/* ZONA */
+
+.main{
+
+flex:1;
+
+display:grid;
+
+grid-template-columns:
+
+280px
+1fr
+340px;
 
 
-    padding:15px;
+gap:15px;
 
-
+padding:15px;
 
 }
 
@@ -155,49 +125,30 @@ main{
 
 .panel{
 
+background:
 
-    background:
-
-
-    linear-gradient(
-
-    180deg,
-
-    rgba(14,165,233,.18),
-
-    rgba(2,6,23,.85)
-
-    );
+linear-gradient(
+180deg,
+rgba(0,119,182,.45),
+rgba(2,6,23,.9)
+);
 
 
-    border:
+border:
+
+1px solid #38bdf8;
 
 
-    1px solid rgba(56,189,248,.5);
+border-radius:20px;
 
 
-
-    border-radius:20px;
-
+padding:20px;
 
 
-    padding:18px;
+box-shadow:
 
-
-
-    box-shadow:
-
-
-    inset 0 0 30px rgba(14,165,233,.15),
-
-
-    0 0 25px rgba(14,165,233,.25);
-
-
-
-    backdrop-filter:blur(8px);
-
-
+0 0 25px rgba(0,191,255,.35),
+inset 0 0 30px rgba(0,191,255,.15);
 
 }
 
@@ -208,84 +159,50 @@ main{
 
 h2{
 
+color:#7dd3fc;
 
-    margin-top:0;
+text-shadow:
 
-
-    color:#7dd3fc;
-
-
-    text-shadow:
-
-
-    0 0 10px #0284c7;
-
+0 0 10px #00bfff;
 
 }
 
 
 
-/* CAMPOS */
+/* INPUTS */
 
 
 label{
 
+display:flex;
 
-    display:flex;
+justify-content:space-between;
 
+align-items:center;
 
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-    margin:15px 0;
-
-
-
-    font-size:15px;
-
-
+margin:15px 0;
 
 }
 
 
 
-input{
+input,
+select{
+
+width:100px;
+
+padding:10px;
+
+background:#00111f;
+
+color:white;
+
+border:
+
+1px solid #38bdf8;
 
 
-    width:85px;
-
-
-    padding:10px;
-
-
-    border-radius:12px;
-
-
-    border:
-
-
-    1px solid #38bdf8;
-
-
-
-    background:#020617;
-
-
-    color:white;
-
-
-    text-align:center;
-
-
-    box-shadow:
-
-
-    inset 0 0 10px #0c4a6e;
-
-
+border-radius:10px;
 
 }
 
@@ -297,62 +214,41 @@ input{
 button{
 
 
-    width:100%;
+padding:12px;
+
+margin-top:15px;
+
+width:100%;
 
 
-    padding:13px;
+border-radius:15px;
 
 
-    margin-top:10px;
+border:
+
+1px solid #7dd3fc;
 
 
-    border-radius:15px;
+background:
+
+linear-gradient(
+180deg,
+#0096c7,
+#023e8a
+);
 
 
-    border:
+color:white;
+
+font-weight:bold;
 
 
-    1px solid #7dd3fc;
+box-shadow:
+
+0 0 15px #00bfff;
 
 
-
-    background:
-
-
-    linear-gradient(
-
-    180deg,
-
-    #0284c7,
-
-    #075985
-
-    );
-
-
-
-    color:white;
-
-
-    font-size:15px;
-
-
-    font-weight:bold;
-
-
-    cursor:pointer;
-
-
-
-    box-shadow:
-
-
-    0 0 15px rgba(56,189,248,.5);
-
-
-
-    transition:.2s;
-
+cursor:pointer;
 
 
 }
@@ -362,15 +258,7 @@ button{
 button:hover{
 
 
-    transform:scale(1.05);
-
-
-
-    box-shadow:
-
-
-    0 0 30px #38bdf8;
-
+transform:scale(1.05);
 
 
 }
@@ -383,47 +271,33 @@ button:hover{
 .visor{
 
 
-    background:
+display:flex;
+
+align-items:center;
+
+justify-content:center;
 
 
-    radial-gradient(
-
-    circle,
-
-    #075985,
-
-    #020617 75%
-
-    );
+background:
 
 
+radial-gradient(
 
-    border-radius:25px;
+circle,
 
+#0077b6,
 
+#00111f 70%
 
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
+);
 
 
-
-    border:
-
-
-    2px solid rgba(56,189,248,.5);
+border-radius:25px;
 
 
+box-shadow:
 
-    box-shadow:
-
-
-    inset 0 0 60px rgba(14,165,233,.4);
-
+inset 0 0 80px #00bfff;
 
 
 }
@@ -436,197 +310,112 @@ button:hover{
 .aquarium{
 
 
-    width:500px;
+width:520px;
+
+height:320px;
 
 
-    height:300px;
+position:relative;
 
 
-    position:relative;
+overflow:hidden;
 
 
-
-    overflow:hidden;
-
+border-radius:20px;
 
 
-    border-radius:20px;
+border:
+
+4px solid #caf0f8;
 
 
+box-shadow:
 
-    border:
-
-
-    4px solid rgba(186,230,253,.5);
-
-
-
-    background:
-
-    rgba(14,165,233,.15);
-
-
-
-    box-shadow:
-
-
-    0 0 50px rgba(14,165,233,.6);
-
-
+0 0 40px #00bfff;
 
 }
 
-
-
-/* AGUA */
 
 
 .water{
 
 
-    position:absolute;
+position:absolute;
+
+bottom:0;
+
+width:100%;
+
+height:75%;
 
 
-    bottom:0;
+background:
 
+linear-gradient(
 
-    width:100%;
+180deg,
 
+rgba(125,211,252,.45),
 
-    height:75%;
+rgba(0,119,182,.8)
 
-
-
-    background:
-
-
-    linear-gradient(
-
-    180deg,
-
-    rgba(125,211,252,.35),
-
-    rgba(2,132,199,.65)
-
-    );
-
-
-
-    animation:
-
-    wave 5s infinite alternate;
-
+);
 
 
 }
 
-
-
-
-@keyframes wave{
-
-
-from{
-
-transform:translateY(0);
-
-}
-
-
-to{
-
-transform:translateY(8px);
-
-}
-
-
-}
-
-
-
-
-/* ARENA */
 
 
 .sand{
 
 
-    position:absolute;
+position:absolute;
+
+bottom:0;
+
+width:100%;
+
+height:45px;
 
 
-    bottom:0;
+background:
 
+linear-gradient(
 
-    width:100%;
+#facc15,
 
+#854d0e
 
-    height:45px;
-
-
-
-    background:
-
-
-    linear-gradient(
-
-    #fde68a,
-
-    #a16207
-
-    );
-
-
-
-}
-
-
-
-/* DATOS */
-
-
-#litros,
-#cristal{
-
-
-    color:#7dd3fc;
-
-
-    font-size:20px;
-
-
-
-    text-shadow:
-
-
-    0 0 10px #38bdf8;
-
+);
 
 }
 
 
 
 
-#seguridad{
+/* TARJETAS */
 
 
-    padding:15px;
+.card{
 
 
-    border-radius:15px;
+background:
+
+rgba(0,17,31,.8);
 
 
-    background:
+padding:15px;
 
 
-    rgba(2,6,23,.7);
+margin-bottom:15px;
 
 
+border-radius:15px;
 
-    border:
 
+border:
 
-    1px solid #0284c7;
-
+1px solid #075985;
 
 
 }
@@ -634,85 +423,27 @@ transform:translateY(8px);
 
 
 
-#fichaTecnica{
+b{
 
-
-    background:
-
-    rgba(2,6,23,.8);
-
-
-
-    border-radius:15px;
-
-
-    padding:15px;
-
-
-
-    max-height:350px;
-
-
-    overflow:auto;
-
-
-    font-size:13px;
-
-
+color:#7dd3fc;
 
 }
 
 
 
-/* SCROLL */
-
-::-webkit-scrollbar{
-
-width:8px;
-
-}
+pre{
 
 
-::-webkit-scrollbar-thumb{
-
-background:#0284c7;
-
-border-radius:10px;
-
-}
+white-space:pre-wrap;
 
 
-
-/* MOVIL */
-
-
-@media(max-width:1000px){
+font-size:13px;
 
 
-body{
+max-height:350px;
+
 
 overflow:auto;
-
-}
-
-
-main{
-
-
-grid-template-columns:1fr;
-
-
-}
-
-
-
-.visor{
-
-
-height:400px;
-
-}
-
 
 
 }
