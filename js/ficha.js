@@ -1,46 +1,38 @@
 /* ==================================================
    ACUARIO DESIGNER STUDIO
-   FICHA TECNICA PROFESIONAL V6
+   FICHA TECNICA PROFESIONAL V7
    GENERADOR + COPIAR
 ================================================== */
 
 
-console.log("FICHA TECNICA V6 CARGADA");
+console.log("FICHA TECNICA V7 CARGADA");
 
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const botonGenerar =
+const generar =
 document.getElementById("generarFicha");
 
 
-const botonCopiar =
+const copiar =
 document.getElementById("copiarFicha");
 
 
 
-if(botonGenerar){
+if(generar){
 
-botonGenerar.addEventListener(
-"click",
-generarFicha
-);
+generar.onclick = generarFicha;
 
 }
 
 
+if(copiar){
 
-if(botonCopiar){
-
-botonCopiar.addEventListener(
-"click",
-copiarFicha
-);
+copiar.onclick = copiarFicha;
 
 }
-
 
 
 });
@@ -51,7 +43,9 @@ copiarFicha
 
 
 
+
 function generarFicha(){
+
 
 
 let a = window.acuario;
@@ -60,13 +54,11 @@ let a = window.acuario;
 
 if(!a){
 
-alert("Primero diseña el acuario");
+alert("Diseña primero el acuario");
 
 return;
 
 }
-
-
 
 
 
@@ -82,27 +74,70 @@ a.volumenUtil || (a.volumen * 0.85);
 
 
 
-let estadoRefuerzo =
-a.tirantes.estado;
+/* =========================
+   REFUERZOS
+========================= */
+
+
+let estadoRefuerzo;
+let cantidad;
+let medida;
+let tipo;
+let ubicacion;
 
 
 
-let ubicacion =
-"Refuerzo superior transversal";
+if(
+a.tirantes.cantidad===0 ||
+a.tirantes.cantidad==="0"
+){
 
 
-
-
-if(a.tirantes.cantidad===0){
-
-estadoRefuerzo=
+estadoRefuerzo =
 "No requiere tirantes superiores";
 
 
-ubicacion=
+cantidad =
+"0";
+
+
+medida =
 "No aplica";
 
+
+tipo =
+"Sin refuerzo";
+
+
+ubicacion =
+"No aplica";
+
+
+}else{
+
+
+estadoRefuerzo =
+a.tirantes.estado;
+
+
+cantidad =
+a.tirantes.cantidad;
+
+
+medida =
+a.tirantes.medida;
+
+
+tipo =
+a.tirantes.tipo;
+
+
+ubicacion =
+"Refuerzo superior transversal";
+
+
 }
+
 
 
 
@@ -213,19 +248,19 @@ ${estadoRefuerzo}
 
 Cantidad:
 
-${a.tirantes.cantidad}
+${cantidad}
 
 
 
 Medida:
 
-${a.tirantes.medida}
+${medida}
 
 
 
 Tipo:
 
-${a.tirantes.tipo}
+${tipo}
 
 
 
@@ -288,7 +323,7 @@ Silicona específica para fabricación de acuarios
 
 Preparación:
 
-Cristales limpios, secos y correctamente desengrasados
+Cristales limpios, secos y desengrasados
 
 
 
@@ -333,8 +368,7 @@ FIN DE FICHA TÉCNICA
 
 
 
-
-let salida =
+const salida =
 document.getElementById("fichaTecnica");
 
 
@@ -360,8 +394,8 @@ window.fichaActual=ficha;
 
 
 
-function copiarFicha(){
 
+function copiarFicha(){
 
 
 if(!window.fichaActual){
@@ -389,15 +423,13 @@ alert("Ficha técnica copiada correctamente");
 
 })
 
-
 .catch(()=>{
 
 
-alert("No se pudo copiar la ficha");
+alert("Error al copiar la ficha");
 
 
 });
-
 
 
 }
