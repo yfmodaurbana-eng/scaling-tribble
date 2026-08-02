@@ -27,7 +27,7 @@
 
 🐠 Acuario Designer
 
-<span>STUDIO V7</span>
+<span>STUDIO V7 3D</span>
 
 </div>
 
@@ -56,7 +56,9 @@ Exportar
 
 
 
+
 <main class="main">
+
 
 
 <aside class="sidebar">
@@ -65,6 +67,7 @@ Exportar
 <h2>
 🛠 Herramientas
 </h2>
+
 
 
 <div class="tool-grid">
@@ -115,6 +118,7 @@ Agua
 <h2>
 📐 Configuración
 </h2>
+
 
 
 <div class="config-card">
@@ -174,7 +178,6 @@ Alto
 
 
 </div>
-
 <!-- =========================
      CRISTAL INTELIGENTE
 ========================= -->
@@ -186,7 +189,6 @@ Alto
 <h3>
 🪟 Cristal recomendado
 </h3>
-
 
 
 <div class="result-row">
@@ -221,8 +223,10 @@ Grosor
 
 
 
+
+
 <!-- =========================
-     SEGURIDAD ESTRUCTURAL
+     SEGURIDAD
 ========================= -->
 
 
@@ -241,13 +245,11 @@ Grosor
 Peso agua
 </span>
 
-
 <strong id="pesoAgua">
 
 84 kg
 
 </strong>
-
 
 </div>
 
@@ -260,16 +262,13 @@ Peso agua
 Tirantes
 </span>
 
-
 <strong id="tirantes">
 
 No necesarios
 
 </strong>
 
-
 </div>
-
 
 
 
@@ -280,13 +279,11 @@ No necesarios
 Nivel carga
 </span>
 
-
 <strong id="nivelCarga">
 
 Baja
 
 </strong>
-
 
 </div>
 
@@ -295,13 +292,15 @@ Baja
 
 <div id="estadoSeguridad">
 
-🟢 Diseño correcto
+🟢 Estructura correcta
 
 </div>
 
 
 
 </div>
+
+
 
 
 
@@ -309,12 +308,11 @@ Baja
 
 
 <!-- =========================
-     INFORMACION RAPIDA
+     DATOS RAPIDOS
 ========================= -->
 
 
 <div class="quick-info">
-
 
 
 <div>
@@ -334,6 +332,7 @@ Litros
 
 
 </div>
+
 
 
 
@@ -371,7 +370,6 @@ Peso
 
 
 
-
 </section>
 
 
@@ -383,50 +381,53 @@ Peso
 
 
 
+
+
 <!-- =========================
-     ZONA CENTRAL 3D
+     ACUARIO 3D REAL
 ========================= -->
 
 
 <section class="viewer">
 
 
-
-<div class="aquarium">
-
-
-<div class="background-3d">
-
-</div>
+<div class="scene" id="scene">
 
 
 
-<div class="water">
-
-</div>
+<div class="aquarium3d" id="aquarium3d">
 
 
 
-<div class="sand">
+<div class="face front"></div>
 
-</div>
+<div class="face back"></div>
+
+<div class="face left"></div>
+
+<div class="face right"></div>
+
+<div class="face top"></div>
+
+<div class="face bottom"></div>
 
 
 
-<div class="decor">
-
-</div>
+<div class="water3d"></div>
 
 
+<div class="sand3d"></div>
 
-<div class="glass">
 
-</div>
+<div class="decor"></div>
 
 
 
 </div>
 
+
+
+</div>
 
 
 
@@ -434,17 +435,17 @@ Peso
 <div class="camera">
 
 
-<button>
+<button id="zoomIn">
 +
 </button>
 
 
-<button>
+<button id="zoomOut">
 -
 </button>
 
 
-<button>
+<button id="resetView">
 ⟳
 </button>
 
@@ -454,7 +455,6 @@ Peso
 
 
 </section>
-
 <!-- =========================
      PANEL DERECHO
 ========================= -->
@@ -466,7 +466,6 @@ Peso
 <h2>
 📊 Información
 </h2>
-
 
 
 
@@ -541,7 +540,6 @@ Cristal:
 </h3>
 
 
-
 <p>
 
 pH:
@@ -552,8 +550,6 @@ pH:
 
 
 </p>
-
-
 
 
 <p>
@@ -568,8 +564,6 @@ Temperatura:
 </p>
 
 
-
-
 <p>
 
 Nitratos:
@@ -582,9 +576,7 @@ Nitratos:
 </p>
 
 
-
 </div>
-
 
 
 
@@ -600,13 +592,11 @@ Nitratos:
 </h3>
 
 
-
 <p>
 
 Sin peces añadidos
 
 </p>
-
 
 
 </div>
@@ -627,19 +617,25 @@ Sin peces añadidos
 </h3>
 
 
+
 <div id="fichaTecnica">
 
-
-Pulsa "Crear acuario"
-
-para generar ficha.
-
+Genera un acuario para crear ficha
 
 </div>
 
 
 
+<button id="copiarFicha">
+
+📋 Copiar ficha
+
+</button>
+
+
+
 </div>
+
 
 
 
@@ -649,8 +645,9 @@ para generar ficha.
 
 
 
-
 </main>
+
+
 
 
 
@@ -665,27 +662,24 @@ Acuario Designer Studio © 2026
 
 
 
-
 </div>
 
 
 
 
 
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<!-- SCRIPTS -->
 
 
 <script src="js/engine.js"></script>
+
 <script src="js/objects.js"></script>
+
 <script src="js/save.js"></script>
-<script src="js/3d-engine.js"></script>
+
 <script src="js/ficha.js"></script>
 
-
+<script src="js/3d-engine.js"></script>
 
 
 
