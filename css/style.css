@@ -1096,3 +1096,23 @@ background:#777;
 z-index:30;
 
 }
+/* PRUEBA PROPORCION 3D */
+
+.aquarium{
+
+transition:all .5s ease;
+
+min-width:200px;
+
+min-height:150px;
+
+}
+
+
+.glass-side{
+
+transform:
+skewY(-15deg)
+translateZ(40px);
+
+}
