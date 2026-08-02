@@ -1,21 +1,19 @@
-/* ======================================
-   ACUARIO DESIGNER STUDIO V6
-   SISTEMA VISUAL PRINCIPAL
-====================================== */
+/* =====================================
+   ACUARIO DESIGNER STUDIO V6.1
+   CSS PRINCIPAL
+===================================== */
 
 
+/* RESET */
 
 *{
 
 box-sizing:border-box;
 margin:0;
 padding:0;
-
 font-family:"Segoe UI",Arial,sans-serif;
 
 }
-
-
 
 
 
@@ -24,15 +22,11 @@ body{
 
 width:100%;
 height:100%;
-
 overflow:hidden;
-
 background:#020617;
-
 color:white;
 
 }
-
 
 
 
@@ -41,9 +35,7 @@ color:white;
 
 width:100%;
 height:100vh;
-
 display:flex;
-
 flex-direction:column;
 
 }
@@ -52,32 +44,25 @@ flex-direction:column;
 
 
 
-
-
-/* =========================
+/* =====================================
    CABECERA
-========================= */
+===================================== */
 
 
 .header{
 
-height:65px;
-
+height:60px;
 flex-shrink:0;
 
+background:#07182e;
+
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
 
 padding:0 20px;
 
-
-background:#07182e;
-
 border-bottom:1px solid #164e75;
-
 
 }
 
@@ -88,26 +73,19 @@ border-bottom:1px solid #164e75;
 .logo{
 
 font-size:24px;
-
 font-weight:bold;
 
-color:white;
-
 }
-
 
 
 
 .logo span{
 
-font-size:13px;
-
 color:#38bdf8;
-
+font-size:14px;
 margin-left:8px;
 
 }
-
 
 
 
@@ -121,7 +99,7 @@ border:none;
 
 color:white;
 
-padding:8px 15px;
+padding:8px 14px;
 
 margin-left:8px;
 
@@ -143,19 +121,14 @@ background:#0ea5e9;
 
 
 
-
-
-
-/* =========================
+/* =====================================
    ESTRUCTURA PRINCIPAL
-========================= */
+===================================== */
 
 
 .main{
 
 flex:1;
-
-min-height:0;
 
 display:grid;
 
@@ -163,10 +136,14 @@ grid-template-columns:
 
 280px
 
-minmax(500px,1fr)
+1fr
 
 280px;
 
+
+min-height:0;
+
+overflow:hidden;
 
 }
 
@@ -176,9 +153,9 @@ minmax(500px,1fr)
 
 
 
-/* =========================
+/* =====================================
    PANELES LATERALES
-========================= */
+===================================== */
 
 
 .sidebar,
@@ -190,7 +167,6 @@ padding:12px;
 
 overflow-y:auto;
 
-
 }
 
 
@@ -198,15 +174,16 @@ overflow-y:auto;
 
 .sidebar{
 
-border-right:1px solid #164e75;
+border-right:1px solid #163b5c;
 
 }
 
 
 
+
 .panel{
 
-border-left:1px solid #164e75;
+border-left:1px solid #163b5c;
 
 }
 
@@ -227,17 +204,18 @@ margin-bottom:12px;
 
 
 
-
 h3{
 
 font-size:15px;
 
-color:#7dd3fc;
+color:#bae6fd;
 
 margin-bottom:10px;
-   /* =========================
+
+}
+/* =====================================
    HERRAMIENTAS
-========================= */
+===================================== */
 
 
 .tool-grid{
@@ -248,7 +226,7 @@ grid-template-columns:1fr 1fr;
 
 gap:8px;
 
-margin-bottom:12px;
+margin-bottom:15px;
 
 }
 
@@ -268,14 +246,13 @@ border-radius:10px;
 
 color:white;
 
-font-size:15px;
-
 cursor:pointer;
+
+font-size:15px;
 
 transition:.2s;
 
 }
-
 
 
 
@@ -294,9 +271,9 @@ transform:scale(1.03);
 
 
 
-/* =========================
+/* =====================================
    CONFIGURACION
-========================= */
+===================================== */
 
 
 .config-panel{
@@ -312,8 +289,9 @@ gap:10px;
 
 
 
-.card-config{
 
+
+.config-card{
 
 background:#07111f;
 
@@ -323,6 +301,8 @@ border-radius:12px;
 
 padding:10px;
 
+margin-bottom:10px;
+
 }
 
 
@@ -330,13 +310,14 @@ padding:10px;
 
 
 
-.input-row{
+
+.measure-row{
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
+
+justify-content:space-between;
 
 background:#102a43;
 
@@ -344,7 +325,7 @@ padding:8px;
 
 border-radius:8px;
 
-margin-bottom:6px;
+margin-bottom:7px;
 
 }
 
@@ -352,39 +333,7 @@ margin-bottom:6px;
 
 
 
-.input-row label{
-
-color:#bae6fd;
-
-}
-
-
-
-
-.input-row input{
-
-width:65px;
-
-height:28px;
-
-text-align:center;
-
-background:#020617;
-
-border:1px solid #38bdf8;
-
-border-radius:5px;
-
-color:white;
-
-}
-
-
-
-
-.input-row span{
-
-margin-left:5px;
+.measure-row label{
 
 color:#7dd3fc;
 
@@ -394,16 +343,50 @@ color:#7dd3fc;
 
 
 
+.measure-row input{
+
+width:65px;
+
+height:28px;
+
+background:#020617;
+
+color:white;
+
+border:1px solid #38bdf8;
+
+border-radius:5px;
+
+text-align:center;
+
+}
 
 
 
-/* =========================
-   CRISTAL INTELIGENTE
-========================= */
+
+
+.measure-row span{
+
+color:#94a3b8;
+
+margin-left:5px;
+
+}
 
 
 
-.result-line{
+
+
+
+
+
+
+/* =====================================
+   CRISTAL
+===================================== */
+
+
+.result-row{
 
 display:flex;
 
@@ -417,7 +400,7 @@ padding:8px;
 
 border-radius:8px;
 
-margin-bottom:6px;
+margin-bottom:7px;
 
 font-size:13px;
 
@@ -426,7 +409,8 @@ font-size:13px;
 
 
 
-.result-line b{
+
+.result-row strong{
 
 color:#38bdf8;
 
@@ -436,9 +420,7 @@ color:#38bdf8;
 
 
 
-
 #resultadoCristal{
-
 
 background:#052e16;
 
@@ -452,7 +434,6 @@ text-align:center;
 
 font-size:12px;
 
-
 }
 
 
@@ -461,22 +442,9 @@ font-size:12px;
 
 
 
-
-
-/* =========================
+/* =====================================
    SEGURIDAD
-========================= */
-
-
-
-.safety .result-line{
-
-margin-bottom:7px;
-
-}
-
-
-
+===================================== */
 
 
 #estadoSeguridad{
@@ -491,9 +459,9 @@ padding:8px;
 
 border-radius:8px;
 
-text-align:center;
-
 font-size:12px;
+
+text-align:center;
 
 }
 
@@ -503,11 +471,9 @@ font-size:12px;
 
 
 
-
-
-/* =========================
+/* =====================================
    INFORMACION RAPIDA
-========================= */
+===================================== */
 
 
 .quick-info{
@@ -517,8 +483,6 @@ display:grid;
 grid-template-columns:1fr 1fr;
 
 gap:8px;
-
-margin-top:10px;
 
 }
 
@@ -563,17 +527,17 @@ margin-top:5px;
 
 width:100%;
 
-margin-top:12px;
-
 padding:10px;
 
+margin-top:8px;
+
 background:#059669;
+
+color:white;
 
 border:none;
 
 border-radius:8px;
-
-color:white;
 
 font-size:15px;
 
@@ -583,15 +547,14 @@ cursor:pointer;
 
 
 
-
 .create:hover{
 
 background:#10b981;
 
 }
-/* =========================
-   VISOR CENTRAL 3D
-========================= */
+/* =====================================
+   ZONA CENTRAL ACUARIO 3D
+===================================== */
 
 
 .viewer{
@@ -616,30 +579,7 @@ overflow:hidden;
 
 
 
-.aquarium-container{
-
-width:100%;
-
-height:100%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-perspective:1200px;
-
-}
-
-
-
-
-
-
-
-#aquarium3D{
-
+.aquarium{
 
 position:relative;
 
@@ -647,10 +587,19 @@ width:75%;
 
 height:65%;
 
-min-height:320px;
+min-height:300px;
 
+background:
 
-transform-style:preserve-3d;
+linear-gradient(
+
+180deg,
+
+#38bdf8,
+
+#075985
+
+);
 
 
 border:8px solid rgba(186,230,253,.7);
@@ -658,15 +607,53 @@ border:8px solid rgba(186,230,253,.7);
 border-radius:18px;
 
 
-background:#075985;
+overflow:hidden;
 
 
 box-shadow:
 
-0 0 40px rgba(14,165,233,.8);
+0 0 50px rgba(14,165,233,.8);
+
+}
 
 
-overflow:hidden;
+
+
+
+/* FONDO 3D */
+
+
+.background-3d{
+
+position:absolute;
+
+inset:0;
+
+
+background:
+
+linear-gradient(
+
+135deg,
+
+rgba(255,255,255,.18),
+
+transparent
+
+),
+
+radial-gradient(
+
+circle at center,
+
+#0ea5e9,
+
+#082f49
+
+);
+
+
+animation:depthMove 12s infinite alternate;
 
 
 }
@@ -675,11 +662,34 @@ overflow:hidden;
 
 
 
-/* CRISTAL FRONTAL */
+@keyframes depthMove{
 
 
-.glass-front{
+from{
 
+transform:scale(1);
+
+}
+
+
+to{
+
+transform:scale(1.08);
+
+}
+
+
+}
+
+
+
+
+
+
+/* AGUA */
+
+
+.water{
 
 position:absolute;
 
@@ -699,59 +709,27 @@ transparent
 );
 
 
-pointer-events:none;
+animation:waterFlow 7s infinite alternate;
+
 
 }
 
 
 
 
-
-/* AGUA */
-
-
-.water-layer{
-
-
-position:absolute;
-
-inset:0;
-
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(56,189,248,.85),
-
-rgba(7,89,133,.95)
-
-);
-
-
-animation:waterMove 8s infinite alternate;
-
-}
-
-
-
-
-
-@keyframes waterMove{
+@keyframes waterFlow{
 
 
 from{
 
-transform:translateX(-3%);
+transform:translateX(-10%);
 
 }
 
 
 to{
 
-transform:translateX(3%);
+transform:translateX(10%);
 
 }
 
@@ -766,15 +744,11 @@ transform:translateX(3%);
 /* ARENA */
 
 
-.sand-layer{
-
+.sand{
 
 position:absolute;
 
 bottom:0;
-
-left:0;
-
 
 width:100%;
 
@@ -800,67 +774,101 @@ linear-gradient(
 
 
 
+/* DECORACION */
+
+
+.decor{
+
+position:absolute;
+
+inset:0;
+
+}
+
+
+
+
+
+.glass{
+
+position:absolute;
+
+inset:0;
+
+
+border:4px solid rgba(255,255,255,.35);
+
+
+background:
+
+linear-gradient(
+
+120deg,
+
+rgba(255,255,255,.15),
+
+transparent
+
+);
+
+
+pointer-events:none;
+
+}
+
+
+
+
+
 
 
 /* CONTROLES CAMARA */
 
 
-.camera-controls{
-
+.camera{
 
 position:absolute;
 
 bottom:20px;
 
-
 display:flex;
 
 gap:10px;
-
 
 }
 
 
 
 
-.camera-controls button{
 
+.camera button{
 
 width:42px;
 
 height:42px;
 
-
 border-radius:50%;
 
 border:none;
 
-
 background:#0284c7;
-
 
 color:white;
 
-
 font-size:20px;
-
 
 cursor:pointer;
 
-
 }
 
 
 
 
 
-
-.camera-controls button:hover{
-
+.camera button:hover{
 
 background:#0ea5e9;
 
-
 }
 
 
@@ -870,64 +878,55 @@ background:#0ea5e9;
 
 
 
-
-/* =========================
+/* =====================================
    PANEL DERECHO
-========================= */
+===================================== */
 
 
-.info-card{
-
+.card{
 
 background:#07111f;
 
-
 border:1px solid #163b5c;
-
 
 border-radius:12px;
 
-
 padding:12px;
-
 
 margin-bottom:12px;
 
-
 }
 
 
 
-.info-card h3{
 
+
+.card h3{
 
 color:#38bdf8;
 
-margin-bottom:10px;
-
-
 }
 
 
 
-.info-card p{
 
 
-font-size:14px;
+.card p{
 
 margin-bottom:8px;
 
+font-size:14px;
 
 }
 
 
 
-.info-card strong{
 
+
+.card strong{
 
 color:#7dd3fc;
 
-
 }
 
 
@@ -937,33 +936,26 @@ color:#7dd3fc;
 
 
 
-/* =========================
+/* =====================================
    FOOTER
-========================= */
+===================================== */
 
 
 footer{
 
-
-height:28px;
+height:30px;
 
 flex-shrink:0;
 
-
 background:#020617;
-
 
 color:#94a3b8;
 
-
 text-align:center;
-
 
 font-size:12px;
 
-
-padding:6px;
-
+padding:7px;
 
 }
 
@@ -974,54 +966,42 @@ padding:6px;
 
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =====================================
+   ADAPTACION PANTALLAS
+===================================== */
 
 
-@media(max-width:1000px){
-
+@media(max-width:1100px){
 
 
 .main{
 
-
 grid-template-columns:
 
-220px
+230px
 
-1fr;
+1fr
 
-
-}
-
-
-
-.panel{
-
-display:none;
+230px;
 
 }
 
 
 
-#aquarium3D{
+.aquarium{
 
 width:85%;
 
-height:60%;
+}
+
 
 }
 
 
 
-}
 
 
-
-
-@media(max-width:700px){
-
+@media(max-width:800px){
 
 
 .main{
@@ -1032,25 +1012,22 @@ grid-template-columns:1fr;
 
 
 
-.sidebar{
+.sidebar,
+.panel{
 
 display:none;
 
 }
 
 
+.aquarium{
 
-.header{
+width:90%;
 
-height:55px;
-
-}
-
-
-
-.logo{
-
-font-size:18px;
+height:60%;
 
 }
 
+
+
+}
