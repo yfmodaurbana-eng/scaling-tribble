@@ -1,3 +1,9 @@
+/* =====================================
+   ACUARIO DESIGNER STUDIO V7
+   MOTOR ESTRUCTURAL REALISTA
+===================================== */
+
+
 document.addEventListener("DOMContentLoaded",()=>{
 
 
@@ -6,7 +12,11 @@ const ancho=document.getElementById("ancho");
 const alto=document.getElementById("alto");
 
 
-if(!largo || !ancho || !alto) return;
+if(!largo || !ancho || !alto){
+console.error("Faltan medidas");
+return;
+}
+
 
 
 
@@ -19,20 +29,33 @@ let H=Number(alto.value);
 
 
 
+// VOLUMEN
+
 let litros=(L*A*H)/1000;
 
 
 
-// PESOS
+// PESO AGUA
 
 let pesoAgua=litros;
 
+
+
+// PESO APROX CRISTAL
+
+let superficie=
+((L*A)*2)+
+((L*H)*2)+
+((A*H)*2);
+
+
 let pesoCristal=
-(((L*A)*2)+((L*H)*2)+((A*H)*2))
-*0.006*2.5;
+(superficie/10000)*2.5*1.2;
 
 
-let pesoDecoracion=litros*0.15;
+
+let pesoDecoracion=
+litros*0.15;
 
 
 let pesoTotal=
@@ -40,50 +63,114 @@ pesoAgua+pesoCristal+pesoDecoracion;
 
 
 
-// SEGURIDAD
 
-let cristal=6;
-let tirantes="No necesarios";
-let nivel="Baja";
-let estado="🟢 Estructura correcta";
 
+// ==========================
+// CALCULO CRISTAL
+// ==========================
+
+
+let cristal=3;
+
+
+
+if(H>25){
+cristal=4;
+}
+
+
+if(H>35){
+cristal=6;
+}
 
 
 if(H>45){
-
 cristal=8;
-tirantes="Recomendados";
-nivel="Media";
-
 }
-
 
 
 if(H>55){
-
 cristal=10;
-tirantes="Necesarios";
-nivel="Alta";
-
 }
 
 
-
-if(L>120){
-
-tirantes="Recomendados";
-
-}
-
-
-
-if(L>150 || H>70){
-
+if(H>70){
 cristal=12;
-tirantes="Diseño especial";
-nivel="Muy alta";
-estado="🔴 Revisar estructura";
+}
 
+
+
+
+
+// compensación por longitud
+
+
+if(L>100 && cristal<8){
+cristal=8;
+}
+
+
+if(L>150){
+cristal=12;
+}
+
+
+
+
+
+// ==========================
+// TIRANTES
+// ==========================
+
+
+let tirantes="No necesarios";
+
+
+if(L>80){
+tirantes="Recomendados";
+}
+
+
+if(L>100){
+tirantes="Necesarios";
+}
+
+
+if(L>150){
+tirantes="Diseño especial";
+}
+
+
+
+
+// NIVEL CARGA
+
+
+let carga="Baja";
+
+
+if(litros>100){
+carga="Media";
+}
+
+
+if(litros>250){
+carga="Alta";
+}
+
+
+if(litros>500){
+carga="Muy alta";
+}
+
+
+
+
+let estado="🟢 Estructura correcta";
+
+
+if(H>70 || L>180){
+estado="🔴 Revisar diseño";
 }
 
 
@@ -91,62 +178,72 @@ estado="🔴 Revisar estructura";
 
 // ACTUALIZAR
 
-cambiar("litros",litros.toFixed(1)+" L");
 
-cambiar("infoLitros",litros.toFixed(1)+" L");
+poner("litros",litros.toFixed(1)+" L");
 
-
-cambiar("pesoAgua",pesoAgua.toFixed(1)+" kg");
+poner("infoLitros",litros.toFixed(1)+" L");
 
 
-cambiar("pesoTotal",pesoTotal.toFixed(1)+" kg");
+poner("pesoAgua",
+pesoAgua.toFixed(1)+" kg");
 
 
-cambiar("cristal",cristal+" mm");
-
-
-cambiar("infoCristal",cristal+" mm");
-
-
-cambiar("tirantes",tirantes);
-
-
-cambiar("nivelCarga",nivel);
-
-
-cambiar("estadoSeguridad",estado);
+poner("pesoTotal",
+pesoTotal.toFixed(1)+" kg");
 
 
 
-cambiar(
-"infoMedidas",
-`${L} × ${A} × ${H} cm`
-);
+poner("cristal",
+cristal+" mm");
+
+
+poner("infoCristal",
+cristal+" mm");
 
 
 
-cambiar(
-"resultadoCristal",
-"🟢 Cristal recomendado: "+cristal+" mm"
-);
+poner("tirantes",
+tirantes);
+
+
+poner("nivelCarga",
+carga);
+
+
+poner("estadoSeguridad",
+estado);
 
 
 
-}
+poner("infoMedidas",
+`${L} × ${A} × ${H} cm`);
 
 
 
-function cambiar(id,texto){
 
-let e=document.getElementById(id);
+poner("resultadoCristal",
+"🟢 Cristal recomendado: "+cristal+" mm");
 
-if(e){
 
-e.textContent=texto;
 
 }
 
+
+
+
+
+function poner(id,texto){
+
+let elemento=document.getElementById(id);
+
+if(elemento){
+
+elemento.textContent=texto;
+
 }
+
+}
+
 
 
 
@@ -159,6 +256,7 @@ e.addEventListener("input",calcular);
 
 
 calcular();
+
 
 
 });
