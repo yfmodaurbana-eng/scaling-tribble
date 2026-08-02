@@ -20,9 +20,11 @@
 <div class="app">
 
 
+
 <!-- =====================
      CABECERA
 ===================== -->
+
 
 <header class="header">
 
@@ -63,12 +65,15 @@ Exportar
 
 
 
+
 <!-- =====================
-     AREA PRINCIPAL
+     ZONA PRINCIPAL
 ===================== -->
 
 
 <main class="main">
+
+
 
 
 
@@ -87,56 +92,69 @@ Exportar
 
 
 
+
 <div class="tool-grid">
 
 
-<button class="tool" data-tool="rock">
+
+<button class="tool">
 
 🪨
 <br>
+
 Roca
 
 </button>
 
 
 
-<button class="tool" data-tool="plant">
+
+<button class="tool">
 
 🌱
 <br>
+
 Planta
 
 </button>
 
 
 
-<button class="tool" data-tool="fish">
+
+<button class="tool">
 
 🐟
 <br>
+
 Pez
 
 </button>
 
 
 
-<button class="tool" data-tool="light">
+
+<button class="tool">
 
 💡
 <br>
+
 Luz
 
 </button>
 
 
 
-<button class="tool" data-tool="water">
+
+<button class="tool">
 
 💧
 <br>
+
 Agua
 
 </button>
+
+
 
 
 </div>
@@ -155,15 +173,19 @@ Agua
 
 
 
-<div class="card-config">
+
+
+<div class="config-card">
 
 
 
-<div class="input-row">
+<div class="measure-row">
+
 
 <label>
 Largo
 </label>
+
 
 <div>
 
@@ -173,17 +195,21 @@ Largo
 
 </div>
 
+
 </div>
 
 
 
 
 
-<div class="input-row">
+
+<div class="measure-row">
+
 
 <label>
 Ancho
 </label>
+
 
 <div>
 
@@ -193,17 +219,22 @@ Ancho
 
 </div>
 
+
 </div>
 
 
 
 
 
-<div class="input-row">
+
+
+<div class="measure-row">
+
 
 <label>
 Alto
 </label>
+
 
 <div>
 
@@ -213,11 +244,15 @@ Alto
 
 </div>
 
+
+</div>
+
+
+
+
 </div>
 
 
-
-</div>
 
 
 
@@ -230,28 +265,30 @@ Alto
 ===================== -->
 
 
-<div class="card-config glass-smart">
+<div class="config-card">
 
 
 
 <h3>
-🪟 Cristal inteligente
+🪟 Cristal recomendado
 </h3>
 
 
 
-<div class="result-line">
+
+<div class="result-row">
+
 
 <span>
-Grosor recomendado
+Grosor
 </span>
 
 
-<b id="cristal">
+<strong id="cristal">
 
 6 mm
 
-</b>
+</strong>
 
 
 </div>
@@ -262,15 +299,14 @@ Grosor recomendado
 
 <div id="resultadoCristal">
 
-
-🟢 Grosor adecuado
-
+🟢 Grosor recomendado
 
 </div>
 
 
 
 </div>
+
 
 
 
@@ -284,7 +320,7 @@ Grosor recomendado
 ===================== -->
 
 
-<div class="card-config safety">
+<div class="config-card">
 
 
 
@@ -294,19 +330,21 @@ Grosor recomendado
 
 
 
-<div class="result-line">
+
+
+<div class="result-row">
 
 
 <span>
-Peso del agua
+Peso agua
 </span>
 
 
-<b id="pesoAgua">
+<strong id="pesoAgua">
 
 84 kg
 
-</b>
+</strong>
 
 
 </div>
@@ -315,7 +353,7 @@ Peso del agua
 
 
 
-<div class="result-line">
+<div class="result-row">
 
 
 <span>
@@ -323,11 +361,11 @@ Tirantes
 </span>
 
 
-<b id="tirantes">
+<strong id="tirantes">
 
 No necesarios
 
-</b>
+</strong>
 
 
 </div>
@@ -336,23 +374,22 @@ No necesarios
 
 
 
-<div class="result-line">
+<div class="result-row">
 
 
 <span>
-Nivel de carga
+Nivel carga
 </span>
 
 
-<b id="nivelCarga">
+<strong id="nivelCarga">
 
 Baja
 
-</b>
+</strong>
 
 
 </div>
-
 
 
 
@@ -366,6 +403,7 @@ Baja
 
 
 
+
 </div>
 
 
@@ -374,8 +412,10 @@ Baja
 
 
 
+
+
 <!-- =====================
-     DATOS RAPIDOS
+     INFORMACION RAPIDA
 ===================== -->
 
 
@@ -389,9 +429,8 @@ Baja
 
 <br>
 
-<span>
 Litros
-</span>
+
 
 <strong id="litros">
 
@@ -405,16 +444,14 @@ Litros
 
 
 
-
 <div>
 
 ⚖️
 
 <br>
 
-<span>
-Peso total
-</span>
+Peso
+
 
 <strong id="pesoTotal">
 
@@ -436,7 +473,6 @@ Peso total
 
 <button class="create" id="crearAcuario">
 
-
 🏗 Crear acuario
 
 </button>
@@ -444,9 +480,17 @@ Peso total
 
 
 
+
 </section>
+</aside>
+
+
+
+
+
+
 <!-- =====================
-     VISOR 3D CENTRAL
+     ZONA CENTRAL 3D
 ===================== -->
 
 
@@ -454,26 +498,21 @@ Peso total
 
 
 
-<div class="aquarium-container">
 
 
-<div id="aquarium3D">
+<div class="aquarium">
 
 
-<!-- Aquí irá el motor 3D -->
 
-
-<div class="glass-front"></div>
-
-
-<div class="water-layer"></div>
-
-
-<div class="sand-layer"></div>
-
-
+<div class="background-3d">
 
 </div>
+
+
+
+
+
+<div class="water">
 
 
 </div>
@@ -482,25 +521,65 @@ Peso total
 
 
 
-<div class="camera-controls">
+<div class="sand">
 
 
-<button id="zoomIn">
+</div>
+
+
+
+
+
+<div class="decor">
+
+
+</div>
+
+
+
+
+
+<div class="glass">
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="camera">
+
+
+<button>
 +
 </button>
 
 
-<button id="zoomOut">
+<button>
 -
 </button>
 
 
-<button id="resetCamera">
+<button>
 ⟳
 </button>
 
 
+
 </div>
+
+
+
 
 
 
@@ -523,6 +602,8 @@ Peso total
 
 
 
+
+
 <h2>
 📊 Información
 </h2>
@@ -531,12 +612,17 @@ Peso total
 
 
 
-<div class="info-card">
+
+
+<div class="card">
+
 
 
 <h3>
 🐠 Acuario
 </h3>
+
+
 
 
 <p>
@@ -549,7 +635,10 @@ Volumen:
 
 </strong>
 
+
 </p>
+
+
 
 
 
@@ -559,14 +648,17 @@ Medidas:
 
 <br>
 
-<span id="infoMedidas">
+
+<strong id="infoMedidas">
 
 70 × 30 × 40 cm
 
-</span>
+</strong>
 
 
 </p>
+
+
 
 
 
@@ -594,12 +686,14 @@ Cristal:
 
 
 
-<div class="info-card">
+
+<div class="card">
 
 
 <h3>
 🌊 Agua
 </h3>
+
 
 
 <p>
@@ -610,8 +704,9 @@ pH:
 7.0
 </strong>
 
-
 </p>
+
+
 
 
 <p>
@@ -622,8 +717,9 @@ Temperatura:
 25 ºC
 </strong>
 
-
 </p>
+
+
 
 
 <p>
@@ -634,8 +730,8 @@ Nitratos:
 20 mg/L
 </strong>
 
-
 </p>
+
 
 
 </div>
@@ -646,7 +742,9 @@ Nitratos:
 
 
 
-<div class="info-card">
+
+
+<div class="card">
 
 
 <h3>
@@ -654,7 +752,8 @@ Nitratos:
 </h3>
 
 
-<p id="habitantes">
+
+<p>
 
 Sin peces añadidos
 
@@ -669,41 +768,8 @@ Sin peces añadidos
 
 
 
-<div class="info-card">
-
-
-<h3>
-💡 Equipamiento
-</h3>
-
-
-<p>
-
-Filtro:
-
-Sin seleccionar
-
-</p>
-
-
-
-<p>
-
-Iluminación:
-
-Sin seleccionar
-
-</p>
-
-
-
-</div>
-
-
-
-
-
 </aside>
+
 
 
 
@@ -716,18 +782,16 @@ Sin seleccionar
 
 
 
-<!-- =====================
-     PIE
-===================== -->
 
 
 <footer>
 
-
 Acuario Designer Studio © 2026
 
-
 </footer>
+
+
+
 
 
 
@@ -739,23 +803,11 @@ Acuario Designer Studio © 2026
 
 
 
-
-<!-- =====================
-     JAVASCRIPT
-===================== -->
-
-
 <script src="js/engine.js"></script>
-
-<script src="js/crystal.js"></script>
-
-<script src="js/aquarium.js"></script>
 
 <script src="js/objects.js"></script>
 
 <script src="js/save.js"></script>
-
-<script src="js/ui.js"></script>
 
 
 
