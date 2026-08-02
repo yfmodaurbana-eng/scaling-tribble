@@ -1,49 +1,46 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO V11
-   FICHA FABRICACION + CORTE AUTOMATICO
+   ACUARIO DESIGNER STUDIO V12
+   FICHA PROFESIONAL FABRICACION
 ===================================== */
 
-alert("ESTOY EN FICHA V11");
 
-console.log("FICHA V11 CARGADA");
+console.log("FICHA V12 PROFESIONAL CARGADA");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const boton =
+const crear =
 document.getElementById("crearAcuario");
 
 
-if(!boton){
-console.log("Botón crear no encontrado");
-return;
-}
+if(!crear)return;
 
 
 
-boton.addEventListener("click",()=>{
+crear.addEventListener("click",()=>{
+
+
+let largo=parseFloat(
+document.getElementById("largo").value
+)||0;
+
+
+let ancho=parseFloat(
+document.getElementById("ancho").value
+)||0;
+
+
+let alto=parseFloat(
+document.getElementById("alto").value
+)||0;
 
 
 
-let largo =
-parseFloat(document.getElementById("largo").value) || 0;
+let montaje="interior";
 
 
-let ancho =
-parseFloat(document.getElementById("ancho").value) || 0;
-
-
-let alto =
-parseFloat(document.getElementById("alto").value) || 0;
-
-
-
-let montaje="exterior";
-
-
-const selector =
-document.getElementById("montaje");
+let selector=document.getElementById("montaje");
 
 
 if(selector){
@@ -56,9 +53,9 @@ montaje=selector.value;
 
 
 
-if(largo<=0 || ancho<=0 || alto<=0){
+if(!largo || !ancho || !alto){
 
-alert("Introduce medidas válidas");
+alert("Introduce medidas correctas");
 
 return;
 
@@ -67,82 +64,53 @@ return;
 
 
 
-// ======================
-// VOLUMEN
-// ======================
+
+// ==========================
+// CALCULOS
+// ==========================
 
 
-let litros =
+let litros=
 (largo*ancho*alto)/1000;
 
 
 
 
-
-// ======================
-// CRISTAL
-// ======================
-
-
 let cristal=6;
 
 
-if(litros<=20){
-
-cristal=3;
-
-}
-else if(litros<=60){
-
-cristal=4;
-
-}
-else if(alto<=45){
-
-cristal=6;
-
-}
-else if(alto<=55){
-
-cristal=8;
-
-}
-else{
-
-cristal=10;
-
-}
+if(litros<=20) cristal=3;
+else if(litros<=60) cristal=4;
+else if(alto>55) cristal=10;
+else if(alto>45) cristal=8;
 
 
 
 
 
-// ======================
-// CORTE AUTOMATICO
-// ======================
 
 
-let frontalLargo=largo;
-let frontalAlto=alto;
+// ==========================
+// CORTE
+// ==========================
 
-let lateralAncho=ancho;
-let lateralAlto=alto;
 
-let baseLargo=largo;
-let baseAncho=ancho;
+let lateral=ancho;
+
+
+let base=ancho;
 
 
 
 if(montaje==="interior"){
 
 
-lateralAncho =
+lateral=
 ancho-(cristal/10*2);
 
 
-baseAncho =
+base=
 ancho-(cristal/10*2);
-
 
 }
 
@@ -150,40 +118,36 @@ ancho-(cristal/10*2);
 
 
 
-// ======================
+// ==========================
 // TIRANTES
-// ======================
+// ==========================
 
 
-let cantidadTirantes=0;
+let numTirantes=0;
 
-let textoTirantes="No necesarios";
-
+let tirantes="No necesarios";
 
 
 if(largo>80){
 
-cantidadTirantes=1;
-
-textoTirantes="Recomendados";
+numTirantes=1;
+tirantes="Recomendados";
 
 }
 
 
 if(largo>120){
 
-cantidadTirantes=2;
-
-textoTirantes="Necesarios";
+numTirantes=2;
+tirantes="Necesarios";
 
 }
 
 
 if(largo>180){
 
-cantidadTirantes=3;
-
-textoTirantes="Diseño especial";
+numTirantes=3;
+tirantes="Diseño reforzado";
 
 }
 
@@ -191,16 +155,13 @@ textoTirantes="Diseño especial";
 
 
 
-
-
-// ======================
+// ==========================
 // PESOS
-// ======================
+// ==========================
 
 
-let superficie =
+let superficie=(
 
-(
 (largo*alto*2)+
 (ancho*alto*2)+
 (largo*ancho)
@@ -209,20 +170,16 @@ let superficie =
 
 
 
-let pesoCristal =
+let pesoCristal=
 superficie*cristal*2.5;
 
 
-
-let pesoDecoracion =
+let decoracion=
 litros*0.10;
 
 
-
-let pesoTotal =
-litros+
-pesoCristal+
-pesoDecoracion;
+let pesoFinal=
+litros+pesoCristal+decoracion;
 
 
 
@@ -230,34 +187,62 @@ pesoDecoracion;
 
 
 
-// ======================
+// ==========================
+// SILICONA
+// ==========================
+
+
+let tubos=1;
+
+
+if(litros>100){
+
+tubos=2;
+
+}
+
+
+if(litros>300){
+
+tubos=3;
+
+}
+
+
+
+
+
+
+
+// ==========================
 // SEGURIDAD
-// ======================
+// ==========================
 
 
 let estado=
-"🟢 DISEÑO CORRECTO";
+"🟢 Diseño correcto";
 
 
 let aviso=
-"Medidas dentro de rango estándar";
+"Fabricación estándar";
 
 
 
 if(largo>200){
 
-estado="🟡 REVISAR DISEÑO";
+estado="🟡 Revisar diseño";
 
 aviso="Longitud elevada, revisar refuerzos";
 
 }
 
 
-if(largo>300 || alto>80 || litros>1000){
 
-estado="🔴 DISEÑO ESPECIAL";
+if(largo>300 || alto>80){
 
-aviso="Requiere fabricación especializada";
+estado="🔴 Diseño especial";
+
+aviso="Requiere cálculo estructural";
 
 }
 
@@ -266,32 +251,27 @@ aviso="Requiere fabricación especializada";
 
 
 
-// ======================
+
+
+// ==========================
 // FICHA
-// ======================
-
-
-let nombreMontaje =
-montaje==="interior"
-?
-"Base interior"
-:
-"Base exterior";
-
+// ==========================
 
 
 let ficha=`
 
 🐠 ACUARIO DESIGNER STUDIO
 
-FICHA DE FABRICACIÓN
+FICHA PROFESIONAL DE FABRICACIÓN
 
 
 ================================
 
 
-📐 MEDIDAS EXTERIORES
+📐 DATOS DEL ACUARIO
 
+
+Medidas:
 
 ${largo} × ${ancho} × ${alto} cm
 
@@ -301,14 +281,11 @@ Volumen:
 ${litros.toFixed(1)} litros
 
 
+Tipo montaje:
 
-================================
-
-
-🧱 TIPO DE MONTAJE
-
-
-${nombreMontaje}
+${montaje==="interior"
+?"Base interior"
+:"Base exterior"}
 
 
 
@@ -320,57 +297,46 @@ ${nombreMontaje}
 
 FRONTAL
 
-Cantidad: 1
+1 unidad
 
-Medida:
+${largo*10} × ${alto*10} mm
 
-${frontalLargo*10} × ${frontalAlto*10} mm
-
-Grosor:
-
+Cristal:
 ${cristal} mm
 
 
 
 TRASERA
 
-Cantidad: 1
+1 unidad
 
-Medida:
+${largo*10} × ${alto*10} mm
 
-${frontalLargo*10} × ${frontalAlto*10} mm
-
-Grosor:
-
+Cristal:
 ${cristal} mm
 
 
 
 LATERALES
 
-Cantidad: 2
+2 unidades
 
-Medida:
+${lateral*10} × ${alto*10} mm
 
-${lateralAncho*10} × ${lateralAlto*10} mm
-
-Grosor:
-
+Cristal:
 ${cristal} mm
 
 
 
 BASE
 
-Cantidad: 1
+1 unidad
 
-Medida:
+${largo*10} × ${base*10} mm
 
-${baseLargo*10} × ${baseAncho*10} mm
-
-Grosor:
-
+Cristal:
 ${cristal} mm
+
 
 
 
@@ -380,25 +346,25 @@ ${cristal} mm
 🛡 REFUERZOS
 
 
-${textoTirantes}
+${tirantes}
 
+
+Cantidad:
+
+${numTirantes}
 
 `;
 
 
 
-if(cantidadTirantes>0){
+if(numTirantes>0){
 
 ficha+=`
 
-Cantidad:
-
-${cantidadTirantes}
+Medida tirante:
 
 
-Cada tirante:
-
-Ancho:
+Largo:
 
 ${ancho} cm
 
@@ -414,7 +380,25 @@ ${cristal} mm
 
 
 
+
 ficha+=`
+
+
+================================
+
+
+🧴 MATERIAL MONTAJE
+
+
+Silicona acuario:
+
+${tubos} tubos de 300 ml
+
+
+Tipo:
+
+Silicona neutra para acuarios
+
 
 
 ================================
@@ -435,31 +419,29 @@ ${pesoCristal.toFixed(1)} kg
 
 Decoración:
 
-${pesoDecoracion.toFixed(1)} kg
+${decoracion.toFixed(1)} kg
 
 
-Peso final aproximado:
+Peso final estimado:
 
-${pesoTotal.toFixed(1)} kg
+${pesoFinal.toFixed(1)} kg
+
 
 
 
 ================================
 
 
-🔧 RECOMENDACIÓN FABRICACIÓN
+🔧 RECOMENDACIONES
 
 
-Silicona:
-Acuarios
+✔ Cristal con canto pulido
 
+✔ Superficie perfectamente nivelada
 
-Cristal:
-Canto pulido seguridad
+✔ Silicona específica para acuarios
 
-
-Tolerancia:
-±1 mm
+✔ Dejar curado antes de llenar
 
 
 
@@ -474,13 +456,14 @@ ${estado}
 
 ${aviso}
 
+
 `;
 
 
 
 
 
-const caja =
+const caja=
 document.getElementById("fichaTecnica");
 
 
@@ -488,13 +471,16 @@ if(caja){
 
 caja.innerHTML=
 `
-<pre style="white-space:pre-wrap;font-family:Arial">
+<pre style="
+white-space:pre-wrap;
+font-family:Arial;
+font-size:13px;
+">
 ${ficha}
 </pre>
 `;
 
 }
-
 
 
 window.fichaActual=ficha;
@@ -507,7 +493,7 @@ window.fichaActual=ficha;
 
 
 
-const copiar =
+const copiar=
 document.getElementById("copiarFicha");
 
 
