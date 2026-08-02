@@ -1031,3 +1031,79 @@ height:60%;
 
 
 }
+/* =========================
+   OBJETOS ACUARIO 3D
+========================= */
+
+
+.objeto{
+
+position:absolute;
+
+font-size:45px;
+
+cursor:pointer;
+
+user-select:none;
+
+z-index:5;
+
+}
+
+
+
+.roca{
+
+filter:drop-shadow(0 5px 5px #000);
+
+}
+
+
+
+.planta{
+
+font-size:55px;
+
+}
+
+
+
+.pez{
+
+animation:nadar 6s infinite alternate;
+
+}
+
+
+
+@keyframes nadar{
+
+from{
+
+transform:translateX(0);
+
+}
+
+to{
+
+transform:translateX(150px);
+
+}
+
+}
+
+
+
+.iluminado{
+
+filter:brightness(1.25);
+
+}
+
+
+
+.agua-activa .water{
+
+animation-duration:3s;
+
+}
