@@ -1,11 +1,11 @@
 /* =====================================
    ACUARIO DESIGNER STUDIO
-   MOTOR 3D V4 INTELIGENTE
-   VISOR ESTABLE + DATOS TECNICOS
+   MOTOR 3D V5 INTELIGENTE
+   VISOR PROPORCIONAL + DATOS TECNICOS
 ===================================== */
 
 
-console.log("MOTOR 3D V4 INTELIGENTE CARGADO");
+console.log("MOTOR 3D V5 INTELIGENTE CARGADO");
 
 
 
@@ -14,10 +14,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 const acuario3D =
 document.querySelector(".aquarium");
-
-
-const visor =
-document.querySelector(".viewer");
 
 
 const largo =
@@ -33,18 +29,29 @@ document.getElementById("alto");
 
 
 
-if(!acuario3D || !visor || !largo || !ancho || !alto){
-
+if(!acuario3D || !largo || !ancho || !alto){
 
 console.error(
-"Motor 3D V4: elementos no encontrados"
+"Motor 3D: elementos no encontrados"
 );
-
 
 return;
 
+}
+
+
+
+
+
+function limitar(valor,min,max){
+
+return Math.min(
+Math.max(valor,min),
+max
+);
 
 }
+
 
 
 
@@ -52,70 +59,54 @@ return;
 
 
 /* =====================================
-   CONFIGURACION VISUAL
+   FORMA Y ESCALA 3D
 ===================================== */
 
 
-let escalaBase = 1;
+function actualizarForma3D(L,A,H){
 
-
-
-function limitar(valor,min,max){
-
-
-return Math.min(
-Math.max(valor,min),
-max
-);
-
-
-}
-   /* =====================================
-   ESCALADO 3D ESTABLE
-===================================== */
-
-
-function actualizarEscala(L,A,H){
-
-
-/*
- No cambia el tamaño real del contenedor.
- Solo escala visualmente.
-*/
 
 
 let escalaL =
-limitar(L/100,0.65,1.35);
+limitar(L/100,0.65,1.8);
 
 
 
 let escalaH =
-limitar(H/50,0.75,1.25);
+limitar(H/50,0.7,1.4);
 
 
 
-let escalaA =
-limitar(A/35,0.75,1.20);
+let profundidad =
+limitar(A/30,0.8,1.6);
 
 
 
 
-escalaBase =
-(escalaL + escalaH + escalaA) / 3;
+acuario3D.style.width =
+(escalaL*70)+"%";
+
+
+
+acuario3D.style.height =
+(escalaH*65)+"%";
+
 
 
 
 acuario3D.style.transform =
 
 `
-perspective(900px)
-rotateX(5deg)
-scale(${escalaBase})
+perspective(1200px)
+rotateX(8deg)
+rotateY(-8deg)
+scale(${profundidad})
 `;
 
 
 
 }
+
 
 
 
@@ -130,6 +121,7 @@ scale(${escalaBase})
 
 
 function actualizarInterior(){
+
 
 
 let agua =
@@ -156,13 +148,25 @@ arena.style.height="18%";
 }
 
 
+
 }
-   /* =====================================
-   PANEL TECNICO 3D
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   INFORMACION 3D
 ===================================== */
 
 
-function crearInfo3D(){
+function crearInfo(){
+
 
 
 let info =
@@ -185,6 +189,7 @@ acuario3D.appendChild(info);
 }
 
 
+
 return info;
 
 
@@ -196,8 +201,10 @@ return info;
 
 
 
+
+
 /* =====================================
-   REFUERZOS 3D
+   REFUERZOS
 ===================================== */
 
 
@@ -240,21 +247,22 @@ datos.tirantes.cantidad;
 
 
 
+
 if(cantidad===1){
 
 
-let tirante =
+let t =
 document.createElement("div");
 
 
-tirante.className=
-"tirante3d";
+t.className="tirante3d";
 
 
-acuario3D.appendChild(tirante);
+acuario3D.appendChild(t);
 
 
 }
+
 
 
 
@@ -293,24 +301,27 @@ acuario3D.appendChild(t2);
 
 
 
+
 if(cantidad==="Según diseño"){
 
 
-let refuerzo =
+let r =
 document.createElement("div");
 
 
-refuerzo.className=
+r.className=
 "refuerzo3d";
 
 
-acuario3D.appendChild(refuerzo);
+acuario3D.appendChild(r);
 
 
 }
 
 
 }
+
+
 
 
 
@@ -319,11 +330,12 @@ acuario3D.appendChild(refuerzo);
 
 
 /* =====================================
-   ACTUALIZACION PRINCIPAL
+   ACTUALIZAR MOTOR
 ===================================== */
 
 
 function actualizar3D(){
+
 
 
 let L =
@@ -339,7 +351,8 @@ Number(alto.value)||40;
 
 
 
-actualizarEscala(
+
+actualizarForma3D(
 L,
 A,
 H
@@ -351,21 +364,23 @@ actualizarInterior();
 
 
 
-
 let datos =
 window.acuario;
 
 
 
 let info =
-crearInfo3D();
+crearInfo();
+
 
 
 
 if(datos){
 
 
-info.innerHTML=`
+info.innerHTML=
+
+`
 
 <b>🐠 ACUARIO DESIGNER</b><br><br>
 
@@ -386,7 +401,9 @@ ${datos.seguridad.nivel}
 }else{
 
 
-info.innerHTML=`
+info.innerHTML=
+
+`
 
 <b>🐠 ACUARIO DESIGNER</b><br><br>
 
@@ -400,7 +417,9 @@ info.innerHTML=`
 crearRefuerzos();
 
 
+
 acuario3D.dataset.medidas =
+
 `${L} x ${A} x ${H} cm`;
 
 
@@ -413,8 +432,10 @@ acuario3D.dataset.medidas =
 
 
 
+
+
 /* =====================================
-   SINCRONIZACION
+   EVENTOS
 ===================================== */
 
 
@@ -427,7 +448,7 @@ input.addEventListener(
 
 setTimeout(
 actualizar3D,
-150
+200
 );
 
 
@@ -440,9 +461,11 @@ actualizar3D,
 
 
 
+
+
 setTimeout(
 actualizar3D,
-500
+700
 );
 
 
