@@ -1,371 +1,52 @@
-/* ================================
-   ACUARIO DESIGNER V3.0
-   UI estilo simulador virtual
-================================ */
+/* ===================================
+   ACUARIO DESIGNER STUDIO V5
+   STYLE PRINCIPAL
+=================================== */
+
 
 *{
     box-sizing:border-box;
 }
 
+
+
 body{
+
     margin:0;
+
     min-height:100vh;
+
     background:
     radial-gradient(circle at top,#183047,#05080d 65%);
+
     font-family:'Segoe UI',Arial,sans-serif;
+
     color:#e8f7ff;
+
 }
 
 
-/* CONTENEDOR PRINCIPAL */
+
+
+/* CONTENEDOR */
 
 .app{
+
     width:95%;
+
     max-width:1400px;
+
     margin:auto;
+
     padding:20px;
-}
-
-
-/* PANELES */
-
-.panel{
-    background:
-    linear-gradient(145deg,#142433,#071019);
-    border:1px solid #236080;
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:20px;
-
-    box-shadow:
-    0 0 25px rgba(0,180,255,.15),
-    inset 0 0 20px rgba(0,0,0,.5);
-}
-
-
-.panel h2,
-.panel h3{
-
-    color:#6ee7ff;
-    text-shadow:
-    0 0 10px #00bfff;
-}
-
-
-/* BOTONES */
-
-button{
-
-    background:
-    linear-gradient(145deg,#0879b8,#00456b);
-
-    border:none;
-    color:white;
-
-    padding:12px 22px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    letter-spacing:.5px;
-
-    box-shadow:
-    0 5px 0 #002c44,
-    0 0 15px rgba(0,190,255,.4);
-
-    transition:.25s;
-}
-
-
-button:hover{
-
-    transform:translateY(-3px);
-
-    background:
-    linear-gradient(145deg,#10bfff,#006da5);
-
-    box-shadow:
-    0 7px 0 #002c44,
-    0 0 25px #00cfff;
-}
-
-
-button:active{
-
-    transform:translateY(2px);
-
-    box-shadow:
-    0 2px 0 #002c44;
-}
-
-
-/* INPUTS */
-
-input,
-select,
-textarea{
-
-    width:100%;
-
-    background:#08131d;
-
-    color:white;
-
-    border:1px solid #22516c;
-
-    border-radius:10px;
-
-    padding:12px;
-
-    outline:none;
-
-    transition:.3s;
-}
-
-
-input:focus,
-select:focus,
-textarea:focus{
-
-    border-color:#00cfff;
-
-    box-shadow:
-    0 0 15px rgba(0,200,255,.5);
-}
-
-
-
-/* TARJETAS */
-
-.card{
-
-    background:
-    linear-gradient(160deg,#102333,#050b12);
-
-    border:1px solid #1b5875;
-
-    border-radius:15px;
-
-    padding:15px;
-
-    margin:10px 0;
-
-    box-shadow:
-    inset 0 0 15px black,
-    0 0 15px rgba(0,150,255,.15);
 
 }
 
 
-/* FICHA TECNICA */
 
-.spec{
 
-    display:grid;
 
-    grid-template-columns:
-    repeat(auto-fit,minmax(180px,1fr));
-
-    gap:15px;
-
-}
-
-
-.spec-item{
-
-    background:#091722;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    border-left:4px solid #00cfff;
-
-}
-
-
-.spec-item span{
-
-    display:block;
-
-    color:#7edfff;
-
-    font-size:13px;
-
-}
-
-
-.spec-item strong{
-
-    font-size:22px;
-
-}
-
-
-
-/* ALERTAS */
-
-.alert{
-
-    padding:15px;
-
-    border-radius:12px;
-
-    margin:10px 0;
-
-    font-weight:bold;
-
-    animation:pulse 2s infinite;
-
-}
-
-
-.alert-ok{
-
-    background:#06351d;
-
-    border:1px solid #00ff88;
-
-    color:#8affc0;
-
-}
-
-
-.alert-warning{
-
-    background:#3b2b05;
-
-    border:1px solid #ffcc00;
-
-    color:#ffe680;
-
-}
-
-
-.alert-danger{
-
-    background:#3b0909;
-
-    border:1px solid #ff4444;
-
-    color:#ff9999;
-
-}
-
-
-
-@keyframes pulse{
-
-    0%{
-        box-shadow:0 0 5px transparent;
-    }
-
-    50%{
-        box-shadow:0 0 20px currentColor;
-    }
-
-    100%{
-        box-shadow:0 0 5px transparent;
-    }
-
-}
-
-
-
-/* MEDIDORES */
-
-.bar{
-
-    height:18px;
-
-    background:#02070b;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-}
-
-
-.bar-fill{
-
-    height:100%;
-
-    background:
-    linear-gradient(90deg,#00cfff,#00ff99);
-
-    box-shadow:
-    0 0 15px #00ffff;
-
-}
-
-
-
-/* TABLAS */
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-
-td,th{
-
-    padding:12px;
-
-    border-bottom:1px solid #173647;
-
-}
-
-
-tr:hover{
-
-    background:#102738;
-
-}
-
-
-
-/* RESPONSIVE */
-
-@media(max-width:700px){
-
-    .app{
-
-        width:100%;
-
-        padding:10px;
-
-    }
-
-
-    button{
-
-        width:100%;
-
-        margin-top:8px;
-
-    }
-
-
-    .panel{
-
-        padding:15px;
-
-    }
-
-}
-/* ===================================
-   ACUARIO DESIGNER V5
-   ESTRUCTURA PRINCIPAL
-=================================== */
-
+/* CABECERA */
 
 .header{
 
@@ -407,6 +88,7 @@ tr:hover{
 }
 
 
+
 .logo span{
 
     display:block;
@@ -416,6 +98,8 @@ tr:hover{
     color:#9defff;
 
 }
+
+
 
 
 
@@ -431,6 +115,10 @@ tr:hover{
 
 
 
+
+
+/* ESTRUCTURA */
+
 .main{
 
     display:grid;
@@ -445,16 +133,97 @@ tr:hover{
 
 
 
-.sidebar{
+
+/* BOTONES */
+
+button{
+
 
     background:
+    linear-gradient(145deg,#0879b8,#00456b);
+
+
+    border:none;
+
+
+    color:white;
+
+
+    padding:12px 22px;
+
+
+    border-radius:12px;
+
+
+    cursor:pointer;
+
+
+    font-weight:bold;
+
+
+
+    box-shadow:
+
+    0 5px 0 #002c44,
+
+    0 0 15px rgba(0,190,255,.4);
+
+
+
+    transition:.25s;
+
+
+}
+
+
+
+
+
+button:hover{
+
+
+    transform:translateY(-3px);
+
+
+    background:
+    linear-gradient(145deg,#10bfff,#006da5);
+
+
+
+    box-shadow:
+
+    0 7px 0 #002c44,
+
+    0 0 25px #00cfff;
+
+
+}
+
+
+
+
+
+
+
+/* PANEL IZQUIERDO */
+
+
+.sidebar{
+
+
+    background:
+
     linear-gradient(160deg,#102333,#050c13);
+
 
     border:1px solid #235875;
 
+
     border-radius:20px;
 
+
     padding:20px;
+
 
 }
 
@@ -464,24 +233,33 @@ tr:hover{
 
 .tools{
 
+
     display:grid;
+
 
     grid-template-columns:
     repeat(2,1fr);
 
+
     gap:12px;
 
+
 }
+
 
 
 
 .tools button{
 
+
     height:80px;
 
     font-size:18px;
 
+
 }
+
+
 
 
 
@@ -489,15 +267,21 @@ tr:hover{
 
 .panel-box{
 
+
     margin-top:20px;
+
 
     padding:15px;
 
+
     background:#081722;
+
 
     border-radius:15px;
 
+
     border:1px solid #1c526d;
+
 
 }
 
@@ -505,66 +289,152 @@ tr:hover{
 
 
 
-.panel-box label{
+
+
+label{
+
 
     display:block;
 
+
     margin-bottom:15px;
 
+
     color:#8bdfff;
+
 
 }
 
 
 
 
-/* ==========================
-   VISOR 3D ACUARIO
-========================== */
+
+
+
+
+input,
+select{
+
+
+    width:100%;
+
+
+    background:#08131d;
+
+
+    color:white;
+
+
+    border:1px solid #22516c;
+
+
+    border-radius:10px;
+
+
+    padding:12px;
+
+
+    margin-top:5px;
+
+
+}
+
+
+
+
+
+
+input:focus,
+select:focus{
+
+
+    border-color:#00cfff;
+
+
+    box-shadow:
+    0 0 15px rgba(0,200,255,.5);
+
+
+}
+
+
+
+
+
+
+
+
+/* VISOR ACUARIO */
 
 
 .viewer{
 
+
     position:relative;
+
 
     min-height:550px;
 
+
     background:
 
-    radial-gradient(circle,
-    #16415a,
-    #02080d 70%);
+    radial-gradient(circle,#16415a,#02080d 70%);
+
+
 
     border-radius:25px;
 
+
+
     border:1px solid #2380a5;
+
+
 
     overflow:hidden;
 
+
+
     display:flex;
 
+
+
     align-items:center;
+
+
 
     justify-content:center;
 
 
+
+
     box-shadow:
+
 
     inset 0 0 50px black,
 
+
     0 0 30px rgba(0,200,255,.2);
 
+
 }
+
+
+
+
 
 
 
 .aquarium{
 
+
     position:relative;
+
 
     width:80%;
 
+
     height:65%;
+
 
 
     border:
@@ -572,26 +442,22 @@ tr:hover{
     8px solid rgba(180,230,255,.4);
 
 
+
     border-radius:15px;
 
 
     overflow:hidden;
 
 
-    background:
-
-    linear-gradient(
-    90deg,
-    rgba(255,255,255,.2),
-    transparent
-    );
-
 
     box-shadow:
 
+
     0 0 50px #00bfff,
 
+
     inset 0 0 40px #000;
+
 
 }
 
@@ -599,15 +465,22 @@ tr:hover{
 
 
 
+
+
 .water{
+
 
     position:absolute;
 
+
     top:0;
+
 
     width:100%;
 
+
     height:85%;
+
 
 
     background:
@@ -625,25 +498,32 @@ tr:hover{
 
 
 
+
+
 .sand{
+
 
     position:absolute;
 
+
     bottom:0;
 
+
     width:100%;
+
 
     height:15%;
 
 
+
     background:
 
-    linear-gradient(
-    #d8c27a,
-    #8a6b32
-    );
+    linear-gradient(#d8c27a,#8a6b32);
+
 
 }
+
+
 
 
 
@@ -651,15 +531,21 @@ tr:hover{
 
 .rock{
 
+
     position:absolute;
+
 
     bottom:15%;
 
+
     left:35%;
+
 
     width:90px;
 
+
     height:70px;
+
 
 
     background:
@@ -667,14 +553,99 @@ tr:hover{
     radial-gradient(circle,#777,#222);
 
 
+
     border-radius:50%;
+
+
+
+}
+
+
+
+
+
+
+
+/* PANEL DERECHO */
+
+
+.panel{
+
+
+    background:
+
+    linear-gradient(145deg,#142433,#071019);
+
+
+    border:1px solid #236080;
+
+
+    border-radius:18px;
+
+
+    padding:20px;
 
 
     box-shadow:
 
-    0 0 20px black;
+    0 0 25px rgba(0,180,255,.15);
+
 
 }
+
+
+
+
+
+
+.card{
+
+
+    background:
+
+    linear-gradient(160deg,#102333,#050b12);
+
+
+
+    border:1px solid #1b5875;
+
+
+
+    border-radius:15px;
+
+
+
+    padding:15px;
+
+
+
+    margin:10px 0;
+
+
+}
+
+
+
+
+
+
+
+h2,h3{
+
+
+    color:#6ee7ff;
+
+
+    text-shadow:
+
+    0 0 10px #00bfff;
+
+
+}
+
+
+
+
 
 
 
@@ -682,68 +653,80 @@ tr:hover{
 
 .camera{
 
+
     position:absolute;
+
 
     bottom:20px;
 
+
     right:20px;
+
 
     display:flex;
 
+
     gap:10px;
 
+
 }
+
+
 
 
 
 .camera button{
 
+
     width:45px;
+
 
     height:45px;
 
+
     padding:0;
+
 
     border-radius:50%;
 
+
 }
 
 
 
 
 
-/* RESPONSIVE */
+
+
+
+
+/* MOVIL */
+
 
 @media(max-width:1000px){
 
+
 .main{
+
 
     grid-template-columns:1fr;
 
-}
-
-
-.sidebar,
-.panel{
-
-    width:100%;
 
 }
 
-
-.viewer{
-
-    min-height:400px;
-
-}
 
 
 .header{
 
+
     flex-direction:column;
+
 
     gap:15px;
 
+
 }
+
+
 
 }
