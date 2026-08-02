@@ -1,9 +1,10 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V7
+   ACUARIO DESIGNER STUDIO V8
    MOTOR ESTRUCTURAL PROFESIONAL
+   CALCULO CRISTAL + REFUERZOS
 ================================================== */
 
-console.log("ENGINE V7 ESTRUCTURAL CARGADO");
+console.log("ENGINE V8 ESTRUCTURAL CARGADO");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -16,7 +17,7 @@ const alto=document.getElementById("alto");
 
 if(!largo || !ancho || !alto){
 
-console.error("Faltan campos de medidas");
+console.error("Faltan medidas del acuario");
 return;
 
 }
@@ -32,42 +33,40 @@ let H=Number(alto.value)||0;
 
 
 
+// VOLUMEN
+
 let litros=(L*A*H)/1000;
 
 
 
-
-/* ==========================
- CLASIFICACION
-========================== */
+/* ============================
+   CATEGORIA
+============================ */
 
 
 let categoria="Acuario doméstico";
+
 
 if(litros<=30){
 
 categoria="Nano acuario";
 
 }
-
 else if(litros<=120){
 
 categoria="Acuario doméstico";
 
 }
-
 else if(litros<=300){
 
 categoria="Acuario medio";
 
 }
-
 else if(litros<=600){
 
 categoria="Acuario grande";
 
 }
-
 else{
 
 categoria="Acuario gigante";
@@ -77,25 +76,19 @@ categoria="Acuario gigante";
 
 
 
-
-
-
-/* ==========================
- CRISTAL
-========================== */
+/* ============================
+   CRISTAL
+============================ */
 
 
 let cristal=6;
-let motivo="";
+let motivo="Dimensiones dentro de parámetros normales";
 
 
 
 if(L<=100 && H<=45){
 
 cristal=6;
-
-motivo="Dimensiones domésticas estándar";
-
 
 }
 
@@ -105,8 +98,7 @@ if((L>100 && L<=150) || H>45){
 
 cristal=8;
 
-motivo="Mayor longitud o altura de agua";
-
+motivo="Mayor longitud frontal o altura de agua";
 
 }
 
@@ -116,8 +108,7 @@ if(L>150 || H>=60){
 
 cristal=10;
 
-motivo="Dimensiones elevadas, requiere mayor rigidez";
-
+motivo="Dimensiones elevadas, necesita mayor rigidez";
 
 }
 
@@ -127,8 +118,7 @@ if(L>200 || H>=70){
 
 cristal=12;
 
-motivo="Acuario de gran tamaño";
-
+motivo="Acuario grande, requiere fabricación reforzada";
 
 }
 
@@ -136,13 +126,14 @@ motivo="Acuario de gran tamaño";
 
 
 
-/* ==========================
- CORTES
-========================== */
+
+
+/* ============================
+   CORTES CRISTAL
+============================ */
 
 
 let lateral=A-(cristal/10*2);
-
 
 let base=A-(cristal/10*2);
 
@@ -160,9 +151,9 @@ let cortes=
 
 
 
-/* ==========================
- TIRANTES
-========================== */
+/* ============================
+   TIRANTES TRANSVERSALES
+============================ */
 
 
 let tirantes="No necesarios";
@@ -173,13 +164,14 @@ let tipo="Sin refuerzo";
 
 
 
-if(L>100 && L<=120){
 
-tirantes="Opcional recomendado";
+if(L>100 && L<=120 && H>=45){
 
-medida=`${L} × 5 cm`;
+tirantes="1 tirante transversal superior recomendado";
 
-tipo="Tirante superior central";
+medida=`${(A-(cristal/10*2)).toFixed(1)} × 5 cm`;
+
+tipo="Tirante transversal superior central";
 
 
 }
@@ -188,11 +180,11 @@ tipo="Tirante superior central";
 
 if(L>120 && L<=150){
 
-tirantes="1 tirante longitudinal recomendado";
+tirantes="1 tirante transversal superior recomendado";
 
-medida=`${L} × 5 cm`;
+medida=`${(A-(cristal/10*2)).toFixed(1)} × 5 cm`;
 
-tipo="Tirante superior central";
+tipo="Tirante transversal superior central";
 
 
 }
@@ -201,11 +193,11 @@ tipo="Tirante superior central";
 
 if(L>150 && L<=200){
 
-tirantes="1 tirante obligatorio";
+tirantes="2 tirantes transversales superiores recomendados";
 
-medida=`${L} × 6 cm`;
+medida=`${(A-(cristal/10*2)).toFixed(1)} × 6 cm`;
 
-tipo="Refuerzo longitudinal superior";
+tipo="Dos tirantes transversales superiores";
 
 
 }
@@ -214,11 +206,12 @@ tipo="Refuerzo longitudinal superior";
 
 if(L>200){
 
-tirantes="Refuerzo estructural obligatorio";
+tirantes="Refuerzo estructural completo";
 
-medida=`${L} × 8 cm`;
+medida=`${(A-(cristal/10*2)).toFixed(1)} × 8 cm`;
 
-tipo="Refuerzo perimetral";
+tipo="Refuerzo perimetral + tirantes transversales";
+
 
 }
 
@@ -226,10 +219,9 @@ tipo="Refuerzo perimetral";
 
 
 
-
-/* ==========================
- SEGURIDAD
-========================== */
+/* ============================
+   SEGURIDAD
+============================ */
 
 
 let nivel="🟢 Diseño doméstico seguro";
@@ -260,15 +252,20 @@ nivel="🔴 Diseño profesional obligatorio";
 
 
 
-/* ==========================
- PESO
-========================== */
+
+/* ============================
+   PESO
+============================ */
 
 
 let pesoCristal=
 
 (((L*H*2)+(A*H*2)+(L*A))/10000)
-*cristal*2.5;
+*
+cristal
+*
+2.5;
+
 
 
 let pesoTotal=
@@ -282,13 +279,16 @@ pesoCristal+
 
 
 
+/* ============================
+   ACTUALIZAR PANEL
+============================ */
 
-/* ==========================
- ACTUALIZAR INTERFAZ
-========================== */
+
+poner("infoLitros",
+litros.toFixed(1)+" litros"
+);
 
 
-poner("infoLitros",litros.toFixed(1)+" litros");
 
 poner("infoMedidas",
 `${L} × ${A} × ${H} cm`
@@ -375,21 +375,25 @@ nivel
 
 
 poner("soporte",
-"Base perfectamente nivelada y resistente"
+"Base nivelada y soporte adecuado para el peso"
 );
 
 
 
 
 
-/* ==========================
- DATOS PARA FICHA
-========================== */
+
+
+/* ============================
+   DATOS PARA FICHA TECNICA
+============================ */
 
 
 window.acuario={
 
-categoria,
+
+categoria:categoria,
+
 
 dimensiones:{
 largo:L,
@@ -397,36 +401,56 @@ ancho:A,
 alto:H
 },
 
+
 volumen:litros,
 
 
 cristal:{
+
 grosor:cristal,
+
 tipo:`Vidrio float recocido ${cristal} mm`,
+
 estado:nivel
+
 },
 
 
-cortes,
+
+cortes:cortes,
+
 
 
 tirantes:{
+
 estado:tirantes,
-medida,
-tipo
+
+medida:medida,
+
+tipo:tipo
+
 },
+
 
 
 seguridad:{
-nivel,
+
+nivel:nivel,
+
 mensaje:motivo
+
 },
 
 
+
 peso:{
+
 cristal:pesoCristal,
+
 total:pesoTotal
+
 }
+
 
 
 };
@@ -440,22 +464,26 @@ total:pesoTotal
 
 function poner(id,texto){
 
-let e=document.getElementById(id);
+let elemento=document.getElementById(id);
 
-if(e){
+if(elemento){
 
-e.textContent=texto;
-
-}
+elemento.textContent=texto;
 
 }
 
+}
 
 
 
-[largo,ancho,alto].forEach(e=>{
 
-e.addEventListener("input",calcular);
+
+[largo,ancho,alto].forEach(input=>{
+
+input.addEventListener(
+"input",
+calcular
+);
 
 });
 
