@@ -1,20 +1,19 @@
-/* ==================================================
+/* =====================================
    ACUARIO DESIGNER STUDIO V5
-   ENGINE PROFESIONAL V2
-   CALCULO ESTRUCTURAL
-================================================== */
+   ENGINE PROFESIONAL ESTABLE
+===================================== */
 
 
-console.log("ENGINE PROFESIONAL V2 CARGADO");
+console.log("ENGINE V5 ESTABLE CARGADO");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const largo=document.getElementById("largo");
-const ancho=document.getElementById("ancho");
-const alto=document.getElementById("alto");
-const montaje=document.getElementById("montaje");
+const largo = document.getElementById("largo");
+const ancho = document.getElementById("ancho");
+const alto = document.getElementById("alto");
+const montaje = document.getElementById("montaje");
 
 
 if(!largo || !ancho || !alto){
@@ -27,113 +26,96 @@ return;
 
 
 
-
 function calcular(){
 
 
-let L=parseFloat(largo.value)||0;
-let A=parseFloat(ancho.value)||0;
-let H=parseFloat(alto.value)||0;
+let L = Number(largo.value) || 0;
+let A = Number(ancho.value) || 0;
+let H = Number(alto.value) || 0;
 
 
 
-// ==========================
+// ======================
 // VOLUMEN
-// ==========================
+// ======================
+
+let litros = (L*A*H)/1000;
 
 
-let litros=(L*A*H)/1000;
 
-
-
-// ==========================
+// ======================
 // CRISTAL
-// ==========================
+// ======================
+
+let cristal = 6;
 
 
-let cristal=6;
+if(H <= 35){
 
-
-if(H<=35){
-
-    cristal=4;
-
-}
-
-
-else if(H<=45){
-
-    cristal=6;
+cristal = 4;
 
 }
+else if(H <= 45){
 
-
-else if(H<=60){
-
-    cristal=8;
+cristal = 6;
 
 }
+else if(H <= 60){
 
-
-else if(H<=70){
-
-    cristal=10;
+cristal = 8;
 
 }
+else if(H <= 70){
 
+cristal = 10;
 
+}
 else{
 
-    cristal=12;
+cristal = 12;
 
 }
 
 
 
-// aumento por longitud
+// aumento por largo
 
+if(L > 120){
 
-if(L>120){
+cristal += 2;
 
-    cristal+=2;
+}
+
+if(L > 180){
+
+cristal += 2;
 
 }
 
 
-if(L>180){
 
-    cristal+=2;
-
-}
-
-
-
-// ==========================
+// ======================
 // CORTES
-// ==========================
+// ======================
 
 
-let descuento=cristal/10;
+let lateral = A - ((cristal/10)*2);
 
 
-let lateral=A-(descuento*2);
 
+let cortes =
 
-let cortes=
-
-`
-Frontal: ${L} × ${H} cm
-Trasera: ${L} × ${H} cm
-Laterales: ${lateral.toFixed(1)} × ${H} cm
-Base: ${L} × ${lateral.toFixed(1)} cm
-`;
+"Frontal: "+L+" × "+H+" cm\n"+
+"Trasera: "+L+" × "+H+" cm\n"+
+"Laterales: "+lateral.toFixed(1)+" × "+H+" cm\n"+
+"Base: "+L+" × "+lateral.toFixed(1)+" cm";
 
 
 
 
-// ==========================
-// TIRANTES
-// ==========================
+// ======================
+// REFUERZOS
+// ======================
 
 
 let tirantes="No necesarios";
@@ -141,14 +123,14 @@ let tirantes="No necesarios";
 
 if(L>100){
 
-tirantes="1 recomendado";
+tirantes="1 tirante recomendado";
 
 }
 
 
 if(L>150){
 
-tirantes="2 recomendados";
+tirantes="2 tirantes recomendados";
 
 }
 
@@ -163,65 +145,24 @@ tirantes="Diseño reforzado";
 
 
 
-// ==========================
+// ======================
 // SEGURIDAD
-// ==========================
+// ======================
 
 
-let riesgo="🟢 Diseño doméstico correcto";
+let seguridad="🟢 Diseño correcto";
 
 
-let nivel=0;
+if(H>60 || L>150){
 
-
-
-if(H>50){
-
-nivel+=30;
+seguridad="🟡 Revisar refuerzos";
 
 }
 
 
-if(H>60){
+if(H>70 || L>250){
 
-nivel+=30;
-
-}
-
-
-if(L>120){
-
-nivel+=20;
-
-}
-
-
-if(L>180){
-
-nivel+=30;
-
-}
-
-
-if(litros>500){
-
-nivel+=30;
-
-}
-
-
-
-if(nivel>=70){
-
-riesgo="🔴 Riesgo alto. Requiere revisión estructural";
-
-
-}
-
-else if(nivel>=40){
-
-riesgo="🟡 Atención. Recomendado reforzar";
-
+seguridad="🔴 Requiere cálculo avanzado";
 
 }
 
@@ -229,17 +170,13 @@ riesgo="🟡 Atención. Recomendado reforzar";
 
 
 
-// ==========================
-// PESOS
-// ==========================
+// ======================
+// PESO
+// ======================
 
 
-// vidrio aproximado
+let superficie=(
 
-
-let superficie=
-
-(
 (L*H*2)+
 (A*H*2)+
 (L*A)
@@ -249,28 +186,23 @@ let superficie=
 
 
 let pesoCristal=
-
 superficie*cristal*2.5;
 
 
 
 let decoracion=
-
 litros*0.12;
 
 
 
 let pesoTotal=
-
-litros+
-pesoCristal+
-decoracion;
+litros+pesoCristal+decoracion;
 
 
 
-// ==========================
+// ======================
 // SOPORTE
-// ==========================
+// ======================
 
 
 let soporte="Mueble estándar";
@@ -291,31 +223,29 @@ soporte="Soporte profesional";
 
 
 
-// ==========================
-// DATOS GLOBALES PARA FICHA
-// ==========================
+
+// ======================
+// GUARDAR DATOS PARA FICHA
+// ======================
 
 
 window.acuario={
 
 
-volumen:litros,
-
-
 dimensiones:{
-
 largo:L,
 ancho:A,
 alto:H
-
 },
 
 
+volumen:litros,
+
+
 cristal:{
-
 grosor:cristal,
-estado:riesgo
-
+tipo:"Vidrio float para acuarios",
+estado:seguridad
 },
 
 
@@ -323,30 +253,26 @@ cortes:cortes,
 
 
 peso:{
-
 agua:litros,
 cristal:pesoCristal,
 decoracion:decoracion,
 total:pesoTotal
-
 },
 
 
 tirantes:{
-
 estado:tirantes
-
 },
 
 
 seguridad:{
-
-nivel:riesgo
-
+nivel:seguridad
 },
 
 
-soporte:soporte
+soporte:{
+tipo:soporte
+}
 
 
 };
@@ -354,68 +280,66 @@ soporte:soporte
 
 
 
-// ==========================
-// ACTUALIZAR PANEL
-// ==========================
+// ======================
+// ACTUALIZAR PANTALLA
+// ======================
 
 
-actualizar(
-"infoLitros",
-litros.toFixed(1)+" litros"
-);
+actualizar("infoLitros",
+litros.toFixed(1)+" litros");
 
 
-actualizar(
-"infoMedidas",
-`${L} × ${A} × ${H} cm`
-);
+actualizar("infoMedidas",
+`${L} × ${A} × ${H} cm`);
 
 
 
-actualizar(
-"infoCristal",
-cristal+" mm"
-);
+actualizar("infoCristal",
+cristal+" mm");
 
 
 
-actualizar(
-"cortesCristal",
-cortes
-);
+actualizar("cristalDiseño",
+cristal+" mm");
 
 
 
-actualizar(
-"pesoTotal",
-pesoTotal.toFixed(1)+" kg"
-);
+actualizar("pesoTotal",
+pesoTotal.toFixed(1)+" kg");
 
 
 
-actualizar(
-"tirantes",
-tirantes
-);
+actualizar("tirantes",
+tirantes);
 
 
 
-actualizar(
-"riesgo",
-riesgo
-);
+actualizar("refuerzosDiseño",
+tirantes);
 
 
 
-actualizar(
-"soporte",
-soporte
-);
+actualizar("riesgo",
+seguridad);
+
+
+
+actualizar("seguridadDiseño",
+seguridad);
+
+
+
+actualizar("soporte",
+soporte);
+
+
+
+actualizar("cortesCristal",
+cortes);
 
 
 
 }
-
 
 
 
@@ -437,10 +361,11 @@ elemento.textContent=texto;
 
 
 
-[largo,ancho,alto].forEach(input=>{
+
+[largo,ancho,alto].forEach(campo=>{
 
 
-input.addEventListener(
+campo.addEventListener(
 "input",
 calcular
 );
