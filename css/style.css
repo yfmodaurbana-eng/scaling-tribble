@@ -418,55 +418,28 @@ select{
 
 .viewer{
 
-   
-    overflow:hidden;
+    height:700px;
 
-
-}
-
-    min-height:600px;
-
-
-    position:relative;
-
+    min-height:700px;
 
     display:flex;
 
-
     justify-content:center;
-
 
     align-items:center;
 
+    position:sticky;
 
+    top:20px;
+
+    overflow:hidden;
 
     background:
-
-
-    radial-gradient(
-    circle,
-    #0c5875,
-    #02070b 70%
-    );
-
+    radial-gradient(circle,#0c5875,#02070b 70%);
 
     border-radius:25px;
 
-
-    border:
-
-    2px solid #00bfff;
-
-
-
-    box-shadow:
-
-
-    inset 0 0 80px black,
-
-
-    0 0 40px #003b55;
-
+    border:2px solid #00bfff;
 
 }
 
@@ -855,5 +828,36 @@ gap:20px;
 
     inset 0 0 50px #000;
 
+
+}
+/* =========================
+   FICHA TÉCNICA
+========================= */
+
+#fichaTecnica{
+
+    margin-top:15px;
+
+    height:420px;
+
+    overflow-y:auto;
+
+    white-space:pre-wrap;
+
+    background:#06111b;
+
+    color:#dff8ff;
+
+    border:1px solid #1b8ab5;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-family:Consolas, monospace;
+
+    font-size:13px;
+
+    line-height:1.5;
 
 }
