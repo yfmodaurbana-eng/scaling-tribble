@@ -1,74 +1,101 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO V8
-   FICHA FABRICACION
+   ACUARIO DESIGNER STUDIO V8.1
+   FICHA FABRICACION COMPLETA
 ===================================== */
 
-console.log("FICHA FABRICACION V8 CARGADA");
+
+console.log("FICHA V8.1 CARGADA");
 
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-const boton=document.getElementById("crearAcuario");
-
-
-if(!boton) return;
+document.addEventListener("DOMContentLoaded", function(){
 
 
 
-boton.addEventListener("click",()=>{
-
-
-let largo=
-Number(document.getElementById("largo").value);
-
-
-let ancho=
-Number(document.getElementById("ancho").value);
-
-
-let alto=
-Number(document.getElementById("alto").value);
+const botonCrear = document.getElementById("crearAcuario");
 
 
 
+if(!botonCrear){
 
-let litros=(largo*ancho*alto)/1000;
+console.log("No existe crearAcuario");
 
-
-
-
-/* ==========================
- CRISTAL
-========================== */
-
-
-let cristal=6;
-
-
-if(litros<=20){
-
-cristal=3;
+return;
 
 }
-else if(litros<=60){
 
-cristal=4;
+
+
+
+
+botonCrear.addEventListener("click", generarFicha);
+
+
+
+
+
+function generarFicha(){
+
+
+
+let largo =
+Number(document.getElementById("largo").value) || 0;
+
+
+let ancho =
+Number(document.getElementById("ancho").value) || 0;
+
+
+let alto =
+Number(document.getElementById("alto").value) || 0;
+
+
+
+
+
+let litros =
+(largo * ancho * alto) / 1000;
+
+
+
+
+
+
+// ========================
+// CALCULO CRISTAL
+// ========================
+
+
+let cristal = 6;
+
+
+
+if(litros <= 20){
+
+cristal = 3;
 
 }
-else if(alto<=45){
 
-cristal=6;
+else if(litros <= 60){
 
-}
-else if(alto<=55){
-
-cristal=8;
+cristal = 4;
 
 }
+
+else if(alto <= 45){
+
+cristal = 6;
+
+}
+
+else if(alto <= 55){
+
+cristal = 8;
+
+}
+
 else{
 
-cristal=10;
+cristal = 10;
 
 }
 
@@ -76,39 +103,44 @@ cristal=10;
 
 
 
-/* ==========================
- TIRANTES
-========================== */
 
 
-let cantidadTirantes=0;
+// ========================
+// TIRANTES
+// ========================
 
-let estadoTirantes="Sin tirantes";
 
+let numeroTirantes = 0;
 
-
-if(largo>80){
-
-cantidadTirantes=1;
-estadoTirantes="1 tirante recomendado";
-
-}
+let textoTirantes = "Sin tirantes";
 
 
 
-if(largo>100){
+if(largo > 80){
 
-cantidadTirantes=2;
-estadoTirantes="2 tirantes necesarios";
+numeroTirantes = 1;
+
+textoTirantes="1 tirante recomendado";
 
 }
 
 
 
-if(largo>150){
+if(largo > 100){
 
-cantidadTirantes=3;
-estadoTirantes="3 tirantes diseño especial";
+numeroTirantes = 2;
+
+textoTirantes="2 tirantes necesarios";
+
+}
+
+
+
+if(largo > 150){
+
+numeroTirantes = 3;
+
+textoTirantes="3 tirantes diseño especial";
 
 }
 
@@ -116,66 +148,91 @@ estadoTirantes="3 tirantes diseño especial";
 
 
 
-/* ==========================
- SEGURIDAD
-========================== */
 
 
-let estado="🟢 Diseño correcto";
+// ========================
+// SEGURIDAD
+// ========================
+
+
+let estado =
+"🟢 DISEÑO CORRECTO";
+
+
+let aviso =
+"Medidas dentro de rango";
+
 
 
 if(largo>200){
 
-estado="🟡 Longitud elevada";
+estado="🟡 REVISAR DISEÑO";
 
-}
-
-
-if(largo>300 || alto>80){
-
-estado="🔴 Diseño especial";
+aviso="Longitud grande, fabricación especializada";
 
 }
 
 
 
+if(largo>300 || alto>80 || litros>1000){
 
+estado="🔴 DISEÑO ESPECIAL";
 
+aviso="Necesita cálculo profesional";
 
-
-/* ==========================
- PESOS
-========================== */
-
-
-let pesoAgua=litros;
-
-let pesoTotal=
-litros+
-(litros*0.15)+
-(cristal*2);
+}
 
 
 
 
 
 
-/* ==========================
- TEXTO FICHA
-========================== */
 
 
-let texto=`
+// ========================
+// PESO
+// ========================
+
+
+let pesoAgua = litros;
+
+
+let pesoTotal =
+litros +
+(litros*0.15);
+
+
+
+
+
+
+
+
+// ========================
+// FICHA FINAL
+// ========================
+
+
+let ficha = `
 
 🐠 ACUARIO DESIGNER
+
 FICHA DE FABRICACIÓN
 
-====================
+==========================
 
-📐 MEDIDAS
 
-Exterior:
-${largo} × ${ancho} × ${alto} cm
+📐 MEDIDAS ACUARIO
+
+Largo:
+${largo} cm
+
+Ancho:
+${ancho} cm
+
+Alto:
+${alto} cm
+
 
 
 💧 VOLUMEN
@@ -183,66 +240,122 @@ ${largo} × ${ancho} × ${alto} cm
 ${litros.toFixed(1)} litros
 
 
-====================
 
-🪟 LISTADO DE CRISTALES
+==========================
 
-Frontal:
+
+🪟 CRISTALES NECESARIOS
+
+
+FRONTAL
+
+Cantidad: 1
+
+Medida:
+
 ${largo} × ${alto} cm
+
+Grosor:
+
 ${cristal} mm
 
-Trasera:
+
+
+TRASERA
+
+Cantidad: 1
+
+Medida:
+
 ${largo} × ${alto} cm
+
+Grosor:
+
 ${cristal} mm
 
-Lateral izquierdo:
+
+
+LATERALES
+
+Cantidad: 2
+
+Medida:
+
 ${ancho} × ${alto} cm
+
+Grosor:
+
 ${cristal} mm
 
-Lateral derecho:
-${ancho} × ${alto} cm
-${cristal} mm
 
-Base:
+
+BASE
+
+Cantidad: 1
+
+Medida:
+
 ${largo} × ${ancho} cm
+
+Grosor:
+
 ${cristal} mm
 
 
-====================
 
-🛡 REFUERZOS
+==========================
 
-${estadoTirantes}
+
+🛡 TIRANTES
+
+
+${textoTirantes}
+
 
 Cantidad:
-${cantidadTirantes}
+
+${numeroTirantes}
 
 
-Medida tirante:
+
+Cada tirante:
 
 Ancho:
 ${ancho} cm
+
 
 Grosor:
 ${cristal} mm
 
 
-====================
 
-⚖️ PESOS
+==========================
+
+
+⚖️ PESO ESTIMADO
+
 
 Agua:
+
 ${pesoAgua.toFixed(1)} kg
 
+
 Peso total aproximado:
+
 ${pesoTotal.toFixed(1)} kg
 
 
-====================
 
-🚦 ESTADO
+==========================
+
+
+🚦 SEGURIDAD
+
 
 ${estado}
+
+
+${aviso}
 
 
 `;
@@ -251,15 +364,15 @@ ${estado}
 
 
 
+let caja =
+document.getElementById("fichaTecnica");
 
-/* MOSTRAR */
-
-let caja=document.getElementById("fichaTecnica");
 
 
 if(caja){
 
-caja.innerText=texto;
+caja.innerHTML =
+"<pre style='white-space:pre-wrap'>" + ficha + "</pre>";
 
 }
 
@@ -267,31 +380,25 @@ caja.innerText=texto;
 
 
 
-/* GUARDAR PARA COPIAR */
-
-
-window.fichaActual=texto;
+window.fichaActual=ficha;
 
 
 
-});
+}
 
 
 
 
 
-/* ==========================
- COPIAR
-========================== */
+const copiar =
+document.getElementById("copiarFicha");
 
-
-let copiar=document.getElementById("copiarFicha");
 
 
 if(copiar){
 
 
-copiar.addEventListener("click",()=>{
+copiar.onclick=function(){
 
 
 if(window.fichaActual){
@@ -300,14 +407,12 @@ if(window.fichaActual){
 navigator.clipboard.writeText(window.fichaActual);
 
 
-alert("Ficha copiada correctamente");
-
+alert("Ficha copiada");
 
 }
 
 
-
-});
+};
 
 
 }
