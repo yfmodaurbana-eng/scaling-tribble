@@ -1,11 +1,11 @@
 /* =====================================
    ACUARIO DESIGNER STUDIO
-   MOTOR 3D V2 INTELIGENTE
-   ESCALADO + DATOS TECNICOS
+   MOTOR 3D V3 INTELIGENTE
+   ESCALADO + DATOS + REFUERZOS 3D
 ===================================== */
 
 
-console.log("MOTOR 3D V2 INTELIGENTE CARGADO");
+console.log("MOTOR 3D V3 INTELIGENTE CARGADO");
 
 
 
@@ -41,6 +41,183 @@ return;
 
 
 
+/* =====================================
+   ACTUALIZAR INFORMACION
+===================================== */
+
+
+function crearInfo(){
+
+
+let info =
+document.querySelector(".info3d");
+
+
+if(!info){
+
+
+info=document.createElement("div");
+
+info.className="info3d";
+
+acuario3D.appendChild(info);
+
+
+}
+
+
+return info;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   CREAR REFUERZOS 3D
+===================================== */
+
+
+function limpiarRefuerzos(){
+
+
+document
+.querySelectorAll(".tirante3d,.refuerzo3d")
+.forEach(e=>e.remove());
+
+
+}
+
+
+
+
+
+function crearRefuerzos(){
+
+
+limpiarRefuerzos();
+
+
+let datos =
+window.acuario;
+
+
+
+if(!datos)return;
+
+
+
+let cantidad =
+datos.tirantes.cantidad;
+
+
+
+
+
+// 1 TIRANTE
+
+
+if(cantidad===1){
+
+
+let tirante =
+document.createElement("div");
+
+
+tirante.className="tirante3d";
+
+
+acuario3D.appendChild(tirante);
+
+
+}
+
+
+
+
+
+
+
+// 2 TIRANTES
+
+
+if(cantidad===2){
+
+
+
+let t1 =
+document.createElement("div");
+
+
+t1.className=
+"tirante3d izquierdo";
+
+
+acuario3D.appendChild(t1);
+
+
+
+
+let t2 =
+document.createElement("div");
+
+
+t2.className=
+"tirante3d derecho";
+
+
+acuario3D.appendChild(t2);
+
+
+
+}
+
+
+
+
+
+
+// REFUERZO ESPECIAL
+
+
+if(cantidad==="Según diseño"){
+
+
+let refuerzo =
+document.createElement("div");
+
+
+refuerzo.className="refuerzo3d";
+
+
+acuario3D.appendChild(refuerzo);
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   ACTUALIZAR VISOR
+===================================== */
+
+
 function actualizar3D(){
 
 
@@ -60,9 +237,7 @@ Number(alto.value)||40;
 
 
 
-/* =========================
-   ESCALA VISUAL
-========================= */
+/* ESCALA */
 
 
 let escalaL =
@@ -72,7 +247,6 @@ Math.min(Math.max(L/100,0.55),1.8);
 
 let escalaH =
 Math.min(Math.max(H/50,0.6),1.4);
-
 
 
 
@@ -90,10 +264,7 @@ acuario3D.style.height =
 
 
 
-
-/* =========================
-   AGUA
-========================= */
+/* AGUA */
 
 
 let agua =
@@ -111,11 +282,7 @@ agua.style.height="82%";
 
 
 
-
-
-/* =========================
-   ARENA
-========================= */
+/* ARENA */
 
 
 let arena =
@@ -135,36 +302,15 @@ arena.style.height="18%";
 
 
 
-/* =========================
-   DATOS TECNICOS
-========================= */
+/* INFORMACION TECNICA */
 
 
 let datos =
 window.acuario;
 
 
-
 let info =
-document.querySelector(".info3d");
-
-
-
-if(!info){
-
-
-info=document.createElement("div");
-
-
-info.className="info3d";
-
-
-acuario3D.appendChild(info);
-
-
-}
-
-
+crearInfo();
 
 
 
@@ -180,6 +326,8 @@ info.innerHTML=`
 💧 ${datos.volumen.toFixed(1)} L<br>
 
 🪟 Cristal ${datos.cristal.grosor} mm<br>
+
+🔩 ${datos.tirantes.estado}<br>
 
 ${datos.seguridad.nivel}
 
@@ -201,18 +349,11 @@ info.innerHTML=`
 }
 
 
- 
+
+crearRefuerzos();
 
 
 
-
-
-
-
-
-/* =========================
-   DATOS DOM
-========================= */
 
 
 acuario3D.dataset.medidas =
@@ -261,11 +402,7 @@ setTimeout(actualizar3D,50);
 
 
 
-
-
 actualizar3D();
-
-
 
 
 
