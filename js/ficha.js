@@ -2,7 +2,9 @@
    ACUARIO DESIGNER STUDIO V11
    FICHA FABRICACION + CORTE AUTOMATICO
 ===================================== */
+
 alert("ESTOY EN FICHA V11");
+
 console.log("FICHA V11 CARGADA");
 
 
