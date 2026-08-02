@@ -1,18 +1,24 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO V7
-   MOTOR 3D ACUARIO
+   ACUARIO DESIGNER STUDIO
+   MOTOR 3D V1
+   ESCALADO AUTOMATICO
 ===================================== */
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const aquarium = document.querySelector(".aquarium");
+const acuario = document.querySelector(".aquarium");
+
+const largo = document.getElementById("largo");
+const ancho = document.getElementById("ancho");
+const alto = document.getElementById("alto");
 
 
-if(!aquarium){
 
-console.error("No existe el acuario 3D");
+if(!acuario || !largo || !ancho || !alto){
+
+console.error("Motor 3D: elementos no encontrados");
 
 return;
 
@@ -20,249 +26,130 @@ return;
 
 
 
-// ================================
-// ROTACION 3D
-// ================================
+
+function actualizar3D(){
 
 
-let rotX = 0;
-let rotY = 0;
-let zoom = 1;
+let L = Number(largo.value) || 70;
+let A = Number(ancho.value) || 30;
+let H = Number(alto.value) || 40;
 
 
 
-function actualizarVista(){
+
+// ==========================
+// ESCALA VISUAL
+// ==========================
 
 
-aquarium.style.transform =
-`
-perspective(900px)
-rotateX(${rotX}deg)
-rotateY(${rotY}deg)
-scale(${zoom})
-`;
+// largo controla anchura
+let escalaL =
+Math.min(Math.max(L / 100,0.55),1.8);
+
+
+// alto controla altura
+let escalaH =
+Math.min(Math.max(H / 50,0.6),1.4);
+
+
+
+
+
+// tamaño del acuario
+
+
+acuario.style.width =
+(escalaL * 70) + "%";
+
+
+
+acuario.style.height =
+(escalaH * 65) + "%";
+
+
+
+
+
+// ==========================
+// AGUA
+// ==========================
+
+
+const agua =
+document.querySelector(".water");
+
+
+if(agua){
+
+agua.style.height="82%";
 
 }
 
 
 
 
-// ================================
-// CONTROL RATON
-// ================================
 
+// ==========================
+// ARENA
+// ==========================
 
-let pulsado=false;
 
-let inicioX=0;
-let inicioY=0;
+const arena =
+document.querySelector(".sand");
 
 
+if(arena){
 
-aquarium.addEventListener(
-"mousedown",
-(e)=>{
-
-
-pulsado=true;
-
-
-inicioX=e.clientX;
-inicioY=e.clientY;
-
-
-});
-
-
-
-
-document.addEventListener(
-"mouseup",
-()=>{
-
-
-pulsado=false;
-
-
-});
-
-
-
-
-
-document.addEventListener(
-"mousemove",
-(e)=>{
-
-
-if(!pulsado)return;
-
-
-
-let movimientoX =
-e.clientX-inicioX;
-
-
-let movimientoY =
-e.clientY-inicioY;
-
-
-
-rotY += movimientoX*0.4;
-
-rotX -= movimientoY*0.3;
-
-
-
-if(rotX>40) rotX=40;
-
-if(rotX<-40) rotX=-40;
-
-
-
-actualizarVista();
-
-
-
-inicioX=e.clientX;
-inicioY=e.clientY;
-
-
-
-});
-
-
-
-
-
-// ================================
-// ZOOM RUEDA RATON
-// ================================
-
-
-aquarium.addEventListener(
-"wheel",
-(e)=>{
-
-
-e.preventDefault();
-
-
-
-if(e.deltaY<0){
-
-zoom+=0.05;
-
-}else{
-
-zoom-=0.05;
+arena.style.height="18%";
 
 }
 
 
 
-if(zoom>1.5)
-zoom=1.5;
 
+// guardar medidas
 
-if(zoom<0.7)
-zoom=0.7;
-
-
-
-actualizarVista();
+acuario.dataset.medidas =
+`${L} x ${A} x ${H} cm`;
 
 
 
-},
-{passive:false}
+
+
+console.log(
+"3D actualizado:",
+L,A,H
 );
 
 
 
-
-
-
-// ================================
-// BOTONES CAMARA
-// ================================
-
-
-const botones =
-document.querySelectorAll(".camera button");
-
-
-
-if(botones.length>=3){
-
-
-
-// acercar
-
-botones[0].onclick=()=>{
-
-
-zoom+=0.1;
-
-
-if(zoom>1.5)
-zoom=1.5;
-
-
-actualizarVista();
-
-
-};
-
-
-
-
-// alejar
-
-botones[1].onclick=()=>{
-
-
-zoom-=0.1;
-
-
-if(zoom<0.7)
-zoom=0.7;
-
-
-actualizarVista();
-
-
-};
-
-
-
-
-
-// reset
-
-botones[2].onclick=()=>{
-
-
-rotX=0;
-
-rotY=0;
-
-zoom=1;
-
-
-actualizarVista();
-
-
-};
-
-
-
 }
 
 
 
 
-actualizarVista();
+
+// escuchar cambios
+
+
+[largo,ancho,alto].forEach(input=>{
+
+
+input.addEventListener(
+"input",
+actualizar3D
+);
+
+
+});
+
+
+
+
+
+// iniciar
+
+actualizar3D();
 
 
 
