@@ -1,9 +1,11 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V13
+   ACUARIO DESIGNER STUDIO V14
    MOTOR ESTRUCTURAL PROFESIONAL
+   CRISTAL + REFUERZOS + SEGURIDAD
 ================================================== */
 
-console.log("ENGINE V13 PROFESIONAL CARGADO");
+
+console.log("ENGINE V14 PROFESIONAL CARGADO");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -16,7 +18,7 @@ const alto=document.getElementById("alto");
 
 if(!largo || !ancho || !alto){
 
-console.error("Campos no encontrados");
+console.error("Campos de medidas no encontrados");
 return;
 
 }
@@ -25,13 +27,17 @@ return;
 
 function actualizar(id,texto){
 
-let e=document.getElementById(id);
+let elemento=document.getElementById(id);
 
-if(e){
-e.textContent=texto;
+if(elemento){
+
+elemento.textContent=texto;
+
 }
 
 }
+
+
 
 
 
@@ -40,24 +46,26 @@ e.textContent=texto;
 function calcular(){
 
 
+
 let L=Number(largo.value)||0;
 let A=Number(ancho.value)||0;
 let H=Number(alto.value)||0;
+
 
 
 if(!L || !A || !H)return;
 
 
 
-/* =====================
+
+
+/* =========================
    VOLUMEN
-===================== */
+========================= */
 
 
 let litros=(L*A*H)/1000;
 
-
-// volumen útil aproximado
 let volumenUtil=litros*0.85;
 
 
@@ -65,9 +73,10 @@ let volumenUtil=litros*0.85;
 
 
 
-/* =====================
+
+/* =========================
    CATEGORIA
-===================== */
+========================= */
 
 
 let categoria="Acuario doméstico";
@@ -98,10 +107,10 @@ categoria="Acuario gigante";
 
 
 
-/* =====================
+/* =========================
    CRISTAL
-   MINIMO 6mm
-===================== */
+   MINIMO COMERCIAL 6mm
+========================= */
 
 
 let cristal=6;
@@ -128,7 +137,7 @@ if(L>150 || H>=60){
 cristal=10;
 
 motivo=
-"Mayor presión estructural.";
+"Mayor carga estructural.";
 
 }
 
@@ -149,12 +158,14 @@ motivo=
 
 
 
-/* =====================
+/* =========================
    CORTES
-===================== */
+========================= */
 
 
-let lateral=A-(cristal/10*2);
+let lateral=
+A-(cristal/10*2);
+
 
 
 let cortes=
@@ -170,16 +181,23 @@ let cortes=
 
 
 
-/* =====================
-   TIRANTES
-===================== */
+/* =========================
+   REFUERZOS
+   TRANSVERSALES SUPERIORES
+========================= */
 
 
-let tirantes="No necesarios";
+let tirantes=
+"No requiere tirantes superiores";
 
-let medida="No aplica";
 
-let tipo="Sin refuerzo";
+let medida=
+"No aplica";
+
+
+let tipo=
+"Sin refuerzo";
+
 
 let cantidad=0;
 
@@ -207,6 +225,8 @@ cantidad=1;
 
 
 
+
+
 if(L>180 && L<=250){
 
 
@@ -229,6 +249,8 @@ cantidad=2;
 
 
 
+
+
 if(L>250){
 
 
@@ -241,10 +263,11 @@ medida=
 
 
 tipo=
-"Refuerzo perimetral + tirantes";
+"Refuerzo perimetral + tirantes transversales";
 
 
-cantidad="Según diseño";
+cantidad=
+"Según diseño";
 
 
 }
@@ -255,15 +278,19 @@ cantidad="Según diseño";
 
 
 
-/* =====================
- SEGURIDAD MEJORADA
-===================== */
+/* =========================
+   SEGURIDAD
+========================= */
 
 
-let nivel="🟢 Diseño doméstico seguro";
+let nivel=
+"🟢 Diseño doméstico seguro";
+
 
 let seguridad=
-"Dimensiones dentro de parámetros normales.";
+motivo;
+
+
 
 
 
@@ -275,9 +302,11 @@ nivel=
 
 
 seguridad=
-"Longitud elevada. Tirante transversal superior calculado.";
+"Refuerzo transversal superior calculado según dimensiones del acuario.";
+
 
 }
+
 
 
 
@@ -285,14 +314,33 @@ seguridad=
 if(L>180 || H>=60){
 
 
+
+if(cantidad>0){
+
+
+nivel=
+"🟢 Diseño avanzado con refuerzo instalado";
+
+
+seguridad=
+"Acuario de grandes dimensiones con refuerzo transversal superior calculado.";
+
+
+}else{
+
+
 nivel=
 "🟡 Diseño avanzado";
 
 
 seguridad=
-"Mayor carga estructural. Refuerzo superior necesario.";
+"Mayor carga estructural. Requiere refuerzo superior.";
 
 }
+
+
+}
+
 
 
 
@@ -306,7 +354,7 @@ nivel=
 
 
 seguridad=
-"Dimensiones fuera del rango doméstico.";
+"Dimensiones fuera del rango doméstico. Requiere diseño especializado.";
 
 }
 
@@ -316,10 +364,9 @@ seguridad=
 
 
 
-
-/* =====================
- PESO
-===================== */
+/* =========================
+   PESO
+========================= */
 
 
 let pesoCristal=
@@ -344,9 +391,14 @@ pesoCristal;
 
 
 
-/* =====================
- ACTUALIZAR PANEL
-===================== */
+
+
+
+
+
+/* =========================
+   ACTUALIZAR PANEL
+========================= */
 
 
 actualizar(
@@ -406,6 +458,34 @@ medida
 
 
 actualizar(
+"tipoRefuerzo",
+tipo
+);
+
+
+
+actualizar(
+"nivelEstructural",
+nivel
+);
+
+
+
+actualizar(
+"motivoSeguridad",
+seguridad
+);
+
+
+
+actualizar(
+"estadoSeguridad",
+nivel
+);
+
+
+
+actualizar(
 "pesoTotal",
 `${cargaTotal.toFixed(1)} kg`
 );
@@ -430,9 +510,10 @@ actualizar(
 
 
 
-/* =====================
- DATOS PARA FICHA
-===================== */
+
+/* =========================
+   DATOS PARA FICHA
+========================= */
 
 
 window.acuario={
@@ -442,16 +523,22 @@ categoria,
 
 
 dimensiones:{
+
 largo:L,
+
 ancho:A,
+
 alto:H
+
 },
+
 
 
 volumen:litros,
 
 
 volumenUtil,
+
 
 
 cristal:{
@@ -479,9 +566,12 @@ tirantes:{
 
 estado:tirantes,
 
+
 cantidad,
 
+
 medida,
+
 
 tipo
 
@@ -495,6 +585,7 @@ seguridad:{
 
 nivel,
 
+
 mensaje:seguridad
 
 
@@ -506,6 +597,7 @@ peso:{
 
 
 cristal:pesoCristal,
+
 
 total:cargaTotal
 
@@ -524,18 +616,23 @@ total:cargaTotal
 
 
 
+
+
 [largo,ancho,alto].forEach(input=>{
+
 
 input.addEventListener(
 "input",
 calcular
 );
 
+
 });
 
 
 
 calcular();
+
 
 
 });
