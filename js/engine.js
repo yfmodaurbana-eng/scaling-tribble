@@ -3,7 +3,7 @@
    ENGINE PRINCIPAL
    CALCULOS ACUARIO + SEGURIDAD
 ===================================== */
-
+console.log("ENGINE NUEVO CARGADO");
 
 document.addEventListener("DOMContentLoaded",()=>{
 
