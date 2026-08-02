@@ -1,11 +1,11 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V14
+   ACUARIO DESIGNER STUDIO V15
    MOTOR ESTRUCTURAL PROFESIONAL
    CRISTAL + REFUERZOS + SEGURIDAD
 ================================================== */
 
 
-console.log("ENGINE V14 PROFESIONAL CARGADO");
+console.log("ENGINE V15 PROFESIONAL CARGADO");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -36,8 +36,6 @@ elemento.textContent=texto;
 }
 
 }
-
-
 
 
 
@@ -83,22 +81,27 @@ let categoria="Acuario doméstico";
 
 
 if(litros<=30)
+
 categoria="Nano acuario";
 
 
 else if(litros<=120)
+
 categoria="Acuario doméstico";
 
 
 else if(litros<=300)
+
 categoria="Acuario medio";
 
 
 else if(litros<=600)
+
 categoria="Acuario grande";
 
 
 else
+
 categoria="Acuario gigante";
 
 
@@ -109,7 +112,7 @@ categoria="Acuario gigante";
 
 /* =========================
    CRISTAL
-   MINIMO COMERCIAL 6mm
+   MÍNIMO RECOMENDADO 6 mm
 ========================= */
 
 
@@ -117,38 +120,53 @@ let cristal=6;
 
 
 let motivo=
-"Dimensiones dentro de parámetros comerciales normales.";
+"Dimensiones dentro de parámetros domésticos normales.";
+
+
 
 
 
 if((L>100 && L<=150) || H>45){
 
+
 cristal=8;
 
+
 motivo=
-"Longitud o altura elevada.";
+"Longitud o altura elevada. Se aumenta el grosor recomendado.";
+
 
 }
+
+
 
 
 
 if(L>150 || H>=60){
 
+
 cristal=10;
 
+
 motivo=
-"Mayor carga estructural.";
+"Mayor carga estructural. Se requiere mayor rigidez del vidrio.";
+
 
 }
 
 
 
+
+
 if(L>250 || H>=70){
+
 
 cristal=12;
 
+
 motivo=
-"Dimensiones especiales.";
+"Dimensiones especiales. Requiere diseño estructural avanzado.";
+
 
 }
 
@@ -164,6 +182,7 @@ motivo=
 
 
 let lateral=
+
 A-(cristal/10*2);
 
 
@@ -183,7 +202,6 @@ let cortes=
 
 /* =========================
    REFUERZOS
-   TRANSVERSALES SUPERIORES
 ========================= */
 
 
@@ -200,6 +218,7 @@ let tipo=
 
 
 let cantidad=0;
+
 
 
 
@@ -311,8 +330,8 @@ seguridad=
 
 
 
-if(L>180 || H>=60){
 
+if(L>180 || H>=60){
 
 
 if(cantidad>0){
@@ -323,7 +342,7 @@ nivel=
 
 
 seguridad=
-"Acuario de grandes dimensiones con refuerzo transversal superior calculado.";
+"Acuario de grandes dimensiones con refuerzo superior calculado.";
 
 
 }else{
@@ -334,12 +353,14 @@ nivel=
 
 
 seguridad=
-"Mayor carga estructural. Requiere refuerzo superior.";
-
-}
+"Mayor carga estructural. Se recomienda refuerzo superior.";
 
 
 }
+
+
+}
+
 
 
 
@@ -356,7 +377,9 @@ nivel=
 seguridad=
 "Dimensiones fuera del rango doméstico. Requiere diseño especializado.";
 
+
 }
+
 
 
 
@@ -396,114 +419,41 @@ pesoCristal;
 
 
 
+
 /* =========================
    ACTUALIZAR PANEL
 ========================= */
 
 
-actualizar(
-"infoLitros",
-`${litros.toFixed(1)} litros`
-);
+actualizar("infoLitros",`${litros.toFixed(1)} litros`);
 
+actualizar("infoMedidas",`${L} × ${A} × ${H} cm`);
 
+actualizar("cristalDiseño",`${cristal} mm`);
 
-actualizar(
-"infoMedidas",
-`${L} × ${A} × ${H} cm`
-);
+actualizar("tipoCristal",`Vidrio float recocido ${cristal} mm`);
 
+actualizar("infoCristal",`Vidrio float recocido ${cristal} mm`);
 
+actualizar("cortesCristalDiseño",cortes);
 
-actualizar(
-"cristalDiseño",
-`${cristal} mm`
-);
+actualizar("tirantesDiseño",tirantes);
 
+actualizar("medidaTirante",medida);
 
+actualizar("tipoRefuerzo",tipo);
 
-actualizar(
-"tipoCristal",
-`Vidrio float recocido ${cristal} mm`
-);
+actualizar("nivelEstructural",nivel);
 
+actualizar("motivoSeguridad",seguridad);
 
+actualizar("estadoSeguridad",nivel);
 
-actualizar(
-"infoCristal",
-`Vidrio float recocido ${cristal} mm`
-);
+actualizar("pesoTotal",`${cargaTotal.toFixed(1)} kg`);
 
+actualizar("riesgo",nivel);
 
-
-actualizar(
-"cortesCristalDiseño",
-cortes
-);
-
-
-
-actualizar(
-"tirantesDiseño",
-tirantes
-);
-
-
-
-actualizar(
-"medidaTirante",
-medida
-);
-
-
-
-actualizar(
-"tipoRefuerzo",
-tipo
-);
-
-
-
-actualizar(
-"nivelEstructural",
-nivel
-);
-
-
-
-actualizar(
-"motivoSeguridad",
-seguridad
-);
-
-
-
-actualizar(
-"estadoSeguridad",
-nivel
-);
-
-
-
-actualizar(
-"pesoTotal",
-`${cargaTotal.toFixed(1)} kg`
-);
-
-
-
-actualizar(
-"riesgo",
-nivel
-);
-
-
-
-actualizar(
-"soporte",
-"Soporte preparado para carga total"
-);
-
+actualizar("soporte","Soporte preparado para carga total");
 
 
 
@@ -524,11 +474,13 @@ categoria,
 
 dimensiones:{
 
+
 largo:L,
 
 ancho:A,
 
 alto:H
+
 
 },
 
@@ -566,12 +518,9 @@ tirantes:{
 
 estado:tirantes,
 
-
 cantidad,
 
-
 medida,
-
 
 tipo
 
@@ -585,7 +534,6 @@ seguridad:{
 
 nivel,
 
-
 mensaje:seguridad
 
 
@@ -597,7 +545,6 @@ peso:{
 
 
 cristal:pesoCristal,
-
 
 total:cargaTotal
 
