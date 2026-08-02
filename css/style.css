@@ -1,31 +1,28 @@
-/* =====================================
-   ACUARIO DESIGNER STUDIO V7
-   CSS PRINCIPAL
-===================================== */
+/* ======================================
+   ACUARIO DESIGNER STUDIO PRO V9
+   SISTEMA VISUAL
+====================================== */
 
-
-/* RESET */
 
 *{
-
 box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:"Segoe UI",Arial,sans-serif;
-
 }
 
 
-
-html,
 body{
 
-width:100%;
-height:100%;
+margin:0;
+
+height:100vh;
 
 overflow:hidden;
 
-background:#020617;
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
+
+background:#0b1220;
 
 color:white;
 
@@ -33,13 +30,14 @@ color:white;
 
 
 
+/* ===============================
+   APP GENERAL
+=============================== */
 
 
 .app{
 
 height:100vh;
-
-width:100%;
 
 display:flex;
 
@@ -49,22 +47,21 @@ flex-direction:column;
 
 
 
+/* ===============================
+   BARRA SUPERIOR
+=============================== */
 
 
+.topbar{
 
+height:70px;
 
-/* =====================================
-   CABECERA
-===================================== */
-
-
-.header{
-
-height:60px;
-
-flex-shrink:0;
-
-background:#07182e;
+background:
+linear-gradient(
+135deg,
+#111827,
+#1e293b
+);
 
 display:flex;
 
@@ -72,12 +69,12 @@ align-items:center;
 
 justify-content:space-between;
 
-padding:0 20px;
+padding:0 25px;
 
-border-bottom:1px solid #164e75;
+border-bottom:
+1px solid rgba(255,255,255,.1);
 
 }
-
 
 
 
@@ -91,61 +88,73 @@ font-weight:bold;
 
 
 
-
 .logo span{
 
-font-size:14px;
+display:block;
+
+font-size:12px;
 
 color:#38bdf8;
 
-margin-left:8px;
+letter-spacing:3px;
 
 }
 
 
 
 
+.top-actions{
 
-.actions button{
+display:flex;
 
-background:#0284c7;
+gap:12px;
 
-border:none;
+}
+
+
+
+button{
+
+background:#1e293b;
 
 color:white;
 
-padding:8px 14px;
+border:
 
-margin-left:8px;
+1px solid rgba(255,255,255,.15);
 
-border-radius:8px;
+padding:
+
+10px 18px;
+
+border-radius:10px;
 
 cursor:pointer;
 
-}
+font-weight:600;
 
-
-
-.actions button:hover{
-
-background:#0ea5e9;
+transition:.25s;
 
 }
 
 
 
+button:hover{
+
+background:#2563eb;
+
+transform:translateY(-2px);
+
+}
 
 
 
-
-
-
-/* =====================================
+/* ===============================
    ZONA PRINCIPAL
-===================================== */
+=============================== */
 
 
-.main{
+.workspace{
 
 flex:1;
 
@@ -153,16 +162,16 @@ display:grid;
 
 grid-template-columns:
 
-280px
+260px
 
 1fr
 
-280px;
+320px;
 
 
-min-height:0;
+gap:15px;
 
-overflow:hidden;
+padding:15px;
 
 }
 
@@ -170,40 +179,31 @@ overflow:hidden;
 
 
 
-
-
-/* =====================================
+/* ===============================
    PANELES
-===================================== */
+=============================== */
 
 
-.sidebar,
-.panel{
+.left-panel,
+.right-panel{
+
+background:
+
+rgba(17,24,39,.95);
 
 
-background:#081426;
-
-padding:12px;
-
-overflow-y:auto;
+border-radius:18px;
 
 
-}
+padding:18px;
 
 
+overflow:auto;
 
 
-.sidebar{
+box-shadow:
 
-border-right:1px solid #163b5c;
-
-}
-
-
-
-.panel{
-
-border-left:1px solid #163b5c;
+0 10px 30px rgba(0,0,0,.35);
 
 }
 
@@ -212,11 +212,11 @@ border-left:1px solid #163b5c;
 
 h2{
 
+margin-top:0;
+
 font-size:18px;
 
 color:#38bdf8;
-
-margin-bottom:12px;
 
 }
 
@@ -226,9 +226,7 @@ h3{
 
 font-size:15px;
 
-color:#bae6fd;
-
-margin-bottom:10px;
+margin-top:0;
 
 }
 
@@ -236,1328 +234,30 @@ margin-bottom:10px;
 
 
 
-
-
-
-/* =====================================
+/* ===============================
    HERRAMIENTAS
-===================================== */
-
-
-.tool-grid{
-
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:8px;
-
-margin-bottom:15px;
-
-
-}
-
-
-
+=============================== */
 
 
 .tool{
 
-
-height:65px;
-
-background:#102a43;
-
-border:1px solid #245b86;
-
-border-radius:10px;
-
-color:white;
-
-cursor:pointer;
-
-font-size:15px;
-
-transition:.2s;
-
-
-}
-
-
-
-
-.tool:hover{
-
-
-background:#164e75;
-
-transform:scale(1.05);
-
-
-}
-/* =====================================
-   CONFIGURACION
-===================================== */
-
-
-.config-panel{
-
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
-
-}
-
-
-
-
-
-.config-card{
-
-
-background:#07111f;
-
-border:1px solid #163b5c;
-
-border-radius:12px;
-
-padding:10px;
+width:100%;
 
 margin-bottom:10px;
 
+height:45px;
+
+text-align:left;
 
 }
-
-
-
-
-
-.measure-row{
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-
-background:#102a43;
-
-padding:8px;
-
-border-radius:8px;
-
-margin-bottom:7px;
-
-
-}
-
-
-
-
-.measure-row label{
-
-
-color:#7dd3fc;
-
-
-}
-
-
-
-
-
-.measure-row input{
-
-
-width:65px;
-
-height:28px;
-
-background:#020617;
-
-color:white;
-
-border:1px solid #38bdf8;
-
-border-radius:5px;
-
-text-align:center;
-
-
-}
-
-
-
-
-.measure-row span{
-
-
-color:#94a3b8;
-
-margin-left:5px;
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   RESULTADOS SEGURIDAD
-===================================== */
-
-
-.result-row{
-
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-
-background:#102a43;
-
-padding:8px;
-
-border-radius:8px;
-
-margin-bottom:7px;
-
-font-size:13px;
-
-
-}
-
-
-
-
-
-.result-row strong{
-
-
-color:#38bdf8;
-
-
-}
-
-
-
-
-
-#resultadoCristal,
-
-
-#estadoSeguridad{
-
-
-background:#052e16;
-
-color:#86efac;
-
-padding:8px;
-
-border-radius:8px;
-
-text-align:center;
-
-font-size:12px;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   INFO RAPIDA
-===================================== */
-
-
-.quick-info{
-
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:8px;
-
-
-}
-
-
-
-
-
-.quick-info div{
-
-
-background:#102a43;
-
-border-radius:10px;
-
-padding:10px;
-
-text-align:center;
-
-font-size:12px;
-
-
-}
-
-
-
-
-
-.quick-info strong{
-
-
-display:block;
-
-color:#38bdf8;
-
-font-size:16px;
-
-margin-top:5px;
-
-
-}
-
-
-
 
 
 
 .create{
 
-
 width:100%;
 
-padding:10px;
-
-background:#059669;
-
-border:none;
-
-border-radius:8px;
-
-color:white;
-
-font-size:15px;
-
-cursor:pointer;
-
-
-}
-
-
-
-
-
-.create:hover{
-
-background:#10b981;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   PANEL DERECHO
-===================================== */
-
-
-.card{
-
-
-background:#07111f;
-
-border:1px solid #163b5c;
-
-border-radius:12px;
-
-padding:12px;
-
-margin-bottom:12px;
-
-
-}
-
-
-
-
-
-.card h3{
-
-
-color:#38bdf8;
-
-
-}
-
-
-
-
-
-.card p{
-
-
-font-size:14px;
-
-margin-bottom:8px;
-
-
-}
-
-
-
-
-
-.card strong{
-
-
-color:#7dd3fc;
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   FICHA TECNICA
-===================================== */
-
-
-#fichaTecnica{
-
-
-background:#020617;
-
-border:1px solid #245b86;
-
-border-radius:8px;
-
-padding:10px;
-
-font-size:12px;
-
-line-height:1.5;
-
-
-max-height:220px;
-
-overflow:auto;
-
-
-}
-
-
-
-
-#copiarFicha{
-
-
-width:100%;
-
-margin-top:10px;
-
-padding:8px;
-
-
-background:#0284c7;
-
-border:none;
-
-border-radius:8px;
-
-
-color:white;
-
-cursor:pointer;
-
-
-}
-
-
-
-
-#copiarFicha:hover{
-
-
-background:#0ea5e9;
-
-
-}
-
-
-
-
-
-/* =====================================
-   FOOTER
-===================================== */
-
-
-footer{
-
-
-height:30px;
-
-background:#020617;
-
-color:#94a3b8;
-
-text-align:center;
-
-font-size:12px;
-
-padding:7px;
-
-
-}
-/* =====================================
-   ZONA 3D ACUARIO
-===================================== */
-
-
-.viewer{
-
-
-position:relative;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-background:
-
-radial-gradient(
-
-circle,
-
-#134e75,
-
-#020617
-
-);
-
-
-overflow:hidden;
-
-
-perspective:1200px;
-
-
-}
-
-
-
-
-
-
-
-.scene{
-
-
-width:100%;
-
-height:100%;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-transform-style:preserve-3d;
-
-
-}
-
-
-
-
-
-
-
-.aquarium3d{
-
-
-position:relative;
-
-
-width:420px;
-
-height:260px;
-
-
-transform-style:preserve-3d;
-
-
-transition:.3s;
-
-
-transform:
-
-rotateX(-15deg)
-
-rotateY(-30deg);
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   CRISTALES
-===================================== */
-
-
-.face{
-
-
-position:absolute;
-
-
-background:
-
-linear-gradient(
-
-135deg,
-
-rgba(255,255,255,.35),
-
-rgba(14,165,233,.20)
-
-);
-
-
-
-border:
-
-3px solid rgba(186,230,253,.8);
-
-
-
-box-shadow:
-
-
-0 0 30px rgba(14,165,233,.5);
-
-
-backface-visibility:hidden;
-
-
-}
-
-
-
-
-.front{
-
-
-width:420px;
-
-height:260px;
-
-
-transform:
-
-translateZ(80px);
-
-
-}
-
-
-
-.back{
-
-
-width:420px;
-
-height:260px;
-
-
-transform:
-
-translateZ(-80px);
-
-
-}
-
-
-
-
-.left{
-
-
-width:160px;
-
-height:260px;
-
-
-left:-80px;
-
-
-transform:
-
-rotateY(90deg);
-
-
-}
-
-
-
-
-.right{
-
-
-width:160px;
-
-height:260px;
-
-
-right:-80px;
-
-
-transform:
-
-rotateY(90deg);
-
-
-}
-
-
-
-
-.top{
-
-
-width:420px;
-
-height:160px;
-
-
-top:-80px;
-
-
-transform:
-
-rotateX(90deg);
-
-
-}
-
-
-
-
-.bottom{
-
-
-width:420px;
-
-height:160px;
-
-
-bottom:-80px;
-
-
-transform:
-
-rotateX(90deg);
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   AGUA
-===================================== */
-
-
-.water3d{
-
-
-position:absolute;
-
-
-width:400px;
-
-height:220px;
-
-
-left:10px;
-
-top:20px;
-
-
-background:
-
-
-linear-gradient(
-
-180deg,
-
-rgba(56,189,248,.8),
-
-rgba(7,89,133,.95)
-
-);
-
-
-transform:
-
-translateZ(10px);
-
-
-overflow:hidden;
-
-
-}
-
-
-
-
-
-.water3d::after{
-
-
-content:"";
-
-
-position:absolute;
-
-inset:0;
-
-
-background:
-
-linear-gradient(
-
-120deg,
-
-rgba(255,255,255,.25),
-
-transparent
-
-);
-
-
-animation:
-
-aguaMovimiento 5s infinite alternate;
-
-
-}
-
-
-
-
-
-@keyframes aguaMovimiento{
-
-
-from{
-
-transform:translateX(-15%);
-
-}
-
-
-to{
-
-transform:translateX(15%);
-
-}
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   ARENA
-===================================== */
-
-
-.sand3d{
-
-
-position:absolute;
-
-
-width:400px;
-
-
-height:45px;
-
-
-left:10px;
-
-
-bottom:20px;
-
-
-background:
-
-linear-gradient(
-
-#d6b56d,
-
-#806b3a
-
-);
-
-
-
-transform:
-
-translateZ(20px);
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   DECORACION
-===================================== */
-
-
-.objeto{
-
-
-position:absolute;
-
-
-font-size:45px;
-
-
-cursor:pointer;
-
-
-z-index:20;
-
-
-}
-
-
-
-
-
-.roca{
-
-
-filter:
-
-drop-shadow(
-
-0 5px 5px black
-
-);
-
-
-}
-
-
-
-
-
-.planta{
-
-
-font-size:55px;
-
-
-}
-
-
-
-
-.pez{
-
-
-animation:
-
-nadar 6s infinite alternate;
-
-
-}
-
-
-
-
-@keyframes nadar{
-
-
-from{
-
-transform:translateX(0);
-
-}
-
-
-to{
-
-transform:translateX(120px);
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   CAMARA
-===================================== */
-
-
-.camera{
-
-
-position:absolute;
-
-
-bottom:20px;
-
-
-display:flex;
-
-
-gap:10px;
-
-
-}
-
-
-
-
-
-.camera button{
-
-
-width:45px;
-
-height:45px;
-
-
-border-radius:50%;
-
-
-border:none;
-
-
-background:#0284c7;
-
-
-color:white;
-
-
-font-size:20px;
-
-
-cursor:pointer;
-
-
-}
-
-
-
-
-
-.camera button:hover{
-
-
-background:#0ea5e9;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   ADAPTACION
-===================================== */
-
-
-@media(max-width:1100px){
-
-
-.main{
-
-
-grid-template-columns:
-
-230px
-
-1fr
-
-230px;
-
-
-}
-
-
-
-
-.aquarium3d{
-
-
-transform:
-
-scale(.8)
-
-rotateX(-15deg)
-
-rotateY(-30deg);
-
-
-}
-
-
-}
-
-
-
-
-
-@media(max-width:800px){
-
-
-
-.main{
-
-
-grid-template-columns:1fr;
-
-
-}
-
-
-
-.sidebar,
-.panel{
-
-
-display:none;
-
-
-}
-
-
-
-
-.aquarium3d{
-
-
-transform:
-
-scale(.65)
-
-rotateX(-15deg)
-
-rotateY(-30deg);
-
-
-}
-
-
-
-}
-/* Selector montaje profesional */
-
-.select-modern{
-
-width:150px;
-height:38px;
-
-background:#111827;
-
-color:white;
-
-border:1px solid #3b82f6;
-
-border-radius:8px;
-
-padding:0 12px;
-
-font-size:14px;
-
-cursor:pointer;
-
-outline:none;
-
-}
-
-
-.select-modern:hover{
-
-border-color:#60a5fa;
-
-}
-
-
-.select-modern option{
-
-background:#111827;
-
-color:white;
-
-}
-/* ==========================
-   SELECTOR MONTAJE APP
-========================== */
-
-
-.custom-select{
-
-position:relative;
-
-width:100%;
-
-}
-
-
-
-.select-button{
-
-width:100%;
-
-height:42px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-
-background:#111827;
-
-color:white;
-
-border:1px solid rgba(255,255,255,.15);
-
-border-radius:12px;
-
-padding:0 15px;
-
-font-size:15px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-
-
-.select-button:hover{
-
-border-color:#38bdf8;
-
-}
-
-
-
-
-.select-options{
-
-display:none;
-
-position:absolute;
-
-top:48px;
-
-left:0;
-
-width:100%;
-
-background:#111827;
-
-border:1px solid #38bdf8;
-
-border-radius:12px;
-
-overflow:hidden;
-
-z-index:999;
-
-
-}
-
-
-
-.select-options div{
-
-padding:12px;
-
-color:white;
-
-cursor:pointer;
-
-
-}
-
-
-
-.select-options div:hover{
+margin-top:25px;
 
 background:#2563eb;
 
@@ -1565,8 +265,238 @@ background:#2563eb;
 
 
 
-.custom-select.active .select-options{
+/* ===============================
+   CAMPOS
+=============================== */
 
-display:block;
+
+label{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:12px;
+
+font-size:14px;
+
+}
+
+
+
+input{
+
+width:90px;
+
+padding:8px;
+
+border-radius:8px;
+
+border:
+
+1px solid rgba(255,255,255,.2);
+
+background:#020617;
+
+color:white;
+
+text-align:center;
+
+}
+
+
+
+/* ===============================
+   VISOR 3D
+=============================== */
+
+
+.viewer{
+
+
+background:
+
+radial-gradient(
+circle,
+#1e293b,
+#020617
+);
+
+
+border-radius:20px;
+
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+.scene{
+
+width:100%;
+
+height:100%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+.placeholder{
+
+text-align:center;
+
+font-size:28px;
+
+color:#38bdf8;
+
+opacity:.8;
+
+}
+
+
+
+/* ===============================
+   TARJETAS
+=============================== */
+
+
+.card{
+
+background:
+
+rgba(255,255,255,.05);
+
+
+border-radius:14px;
+
+
+padding:15px;
+
+
+margin-bottom:15px;
+
+
+border:
+
+1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+
+.card strong{
+
+color:#38bdf8;
+
+}
+
+
+
+/* ===============================
+   FICHA
+=============================== */
+
+
+#fichaTecnica{
+
+font-size:13px;
+
+line-height:1.5;
+
+background:#020617;
+
+padding:12px;
+
+border-radius:10px;
+
+max-height:350px;
+
+overflow:auto;
+
+}
+
+
+
+/* ===============================
+   PIE
+=============================== */
+
+
+footer{
+
+height:35px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:12px;
+
+color:#94a3b8;
+
+}
+
+
+
+
+
+/* ===============================
+   RESPONSIVE
+=============================== */
+
+
+@media(max-width:1000px){
+
+
+.workspace{
+
+grid-template-columns:
+
+1fr;
+
+
+overflow:auto;
+
+}
+
+
+.viewer{
+
+height:500px;
+
+}
+
+
+.left-panel,
+.right-panel{
+
+height:auto;
+
+}
+
 
 }
