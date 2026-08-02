@@ -1,40 +1,35 @@
-/* =====================================
-   ACUARIO DESIGNER V5
-   CSS PRINCIPAL
-===================================== */
+/* ======================================
+   ACUARIO DESIGNER STUDIO V6
+   SISTEMA VISUAL PRINCIPAL
+====================================== */
+
 
 
 *{
 
-    box-sizing:border-box;
+box-sizing:border-box;
+margin:0;
+padding:0;
 
-    margin:0;
-
-    padding:0;
-
-    font-family:"Segoe UI",Arial,sans-serif;
+font-family:"Segoe UI",Arial,sans-serif;
 
 }
+
+
 
 
 
 html,
 body{
 
+width:100%;
+height:100%;
 
-    width:100%;
+overflow:hidden;
 
-    height:100%;
+background:#020617;
 
-
-    overflow:hidden;
-
-
-    background:#020617;
-
-
-    color:white;
-
+color:white;
 
 }
 
@@ -44,18 +39,12 @@ body{
 
 .app{
 
+width:100%;
+height:100vh;
 
-    width:100vw;
+display:flex;
 
-
-    height:100vh;
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
+flex-direction:column;
 
 }
 
@@ -64,41 +53,30 @@ body{
 
 
 
-/* =====================================
+
+/* =========================
    CABECERA
-===================================== */
+========================= */
 
 
 .header{
 
+height:65px;
 
-    height:60px;
+flex-shrink:0;
 
+display:flex;
 
-    flex-shrink:0;
+align-items:center;
 
+justify-content:space-between;
 
-
-    background:#07182e;
-
-
-
-    border-bottom:1px solid #164e75;
+padding:0 20px;
 
 
+background:#07182e;
 
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-
-    padding:0 18px;
-
+border-bottom:1px solid #164e75;
 
 
 }
@@ -109,32 +87,26 @@ body{
 
 .logo{
 
+font-size:24px;
 
-    font-size:24px;
+font-weight:bold;
 
-
-    font-weight:700;
-
-
+color:white;
 
 }
+
 
 
 
 .logo span{
 
+font-size:13px;
 
-    color:#38bdf8;
+color:#38bdf8;
 
-
-    font-size:14px;
-
-
-    margin-left:8px;
-
+margin-left:8px;
 
 }
-
 
 
 
@@ -143,27 +115,19 @@ body{
 
 .actions button{
 
+background:#0284c7;
 
-    background:#0284c7;
+border:none;
 
+color:white;
 
-    color:white;
+padding:8px 15px;
 
+margin-left:8px;
 
-    border:0;
+border-radius:8px;
 
-
-    border-radius:8px;
-
-
-    padding:8px 14px;
-
-
-    margin-left:6px;
-
-
-    cursor:pointer;
-
+cursor:pointer;
 
 }
 
@@ -171,9 +135,7 @@ body{
 
 .actions button:hover{
 
-
-    background:#0ea5e9;
-
+background:#0ea5e9;
 
 }
 
@@ -184,40 +146,26 @@ body{
 
 
 
-/* =====================================
+/* =========================
    ESTRUCTURA PRINCIPAL
-===================================== */
+========================= */
 
 
 .main{
 
+flex:1;
 
-    flex:1;
+min-height:0;
 
+display:grid;
 
-    min-height:0;
+grid-template-columns:
 
+280px
 
+minmax(500px,1fr)
 
-    display:grid;
-
-
-
-    grid-template-columns:
-
-
-    240px
-
-
-    minmax(450px,1fr)
-
-
-    240px;
-
-
-
-    overflow:hidden;
-
+280px;
 
 
 }
@@ -228,54 +176,37 @@ body{
 
 
 
-/* =====================================
-   PANELES
-===================================== */
+/* =========================
+   PANELES LATERALES
+========================= */
 
 
 .sidebar,
 .panel{
 
+background:#081426;
 
-    height:100%;
+padding:12px;
 
-
-
-    background:#081426;
-
-
-
-    padding:12px;
-
-
-
-    overflow:hidden;
-
+overflow-y:auto;
 
 
 }
-
 
 
 
 
 .sidebar{
 
-
-    border-right:1px solid #164e75;
-
+border-right:1px solid #164e75;
 
 }
 
 
 
-
-
 .panel{
 
-
-    border-left:1px solid #164e75;
-
+border-left:1px solid #164e75;
 
 }
 
@@ -286,63 +217,40 @@ body{
 
 h2{
 
+font-size:18px;
 
-    color:#38bdf8;
+color:#38bdf8;
 
-
-    font-size:18px;
-
-
-    margin-bottom:12px;
-
-
+margin-bottom:12px;
 
 }
+
 
 
 
 h3{
 
+font-size:15px;
 
-    color:#7dd3fc;
+color:#7dd3fc;
 
-
-    font-size:15px;
-
-
-
-}
-/* =====================================
+margin-bottom:10px;
+   /* =========================
    HERRAMIENTAS
-===================================== */
-
-
-.tools-panel{
-
-
-    margin-bottom:15px;
-
-
-}
-
-
-
+========================= */
 
 
 .tool-grid{
 
+display:grid;
 
-    display:grid;
+grid-template-columns:1fr 1fr;
 
+gap:8px;
 
-    grid-template-columns:1fr 1fr;
-
-
-    gap:8px;
-
+margin-bottom:12px;
 
 }
-
 
 
 
@@ -350,34 +258,21 @@ h3{
 
 .tool{
 
+height:65px;
 
-    height:58px;
+background:#102a43;
 
+border:1px solid #245b86;
 
+border-radius:10px;
 
-    background:#102a43;
+color:white;
 
+font-size:15px;
 
+cursor:pointer;
 
-    border:1px solid #245b86;
-
-
-
-    border-radius:10px;
-
-
-
-    color:white;
-
-
-
-    cursor:pointer;
-
-
-
-    font-size:14px;
-
-
+transition:.2s;
 
 }
 
@@ -387,9 +282,111 @@ h3{
 
 .tool:hover{
 
+background:#164e75;
 
-    background:#164e75;
+transform:scale(1.03);
 
+}
+
+
+
+
+
+
+
+/* =========================
+   CONFIGURACION
+========================= */
+
+
+.config-panel{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+
+
+
+.card-config{
+
+
+background:#07111f;
+
+border:1px solid #163b5c;
+
+border-radius:12px;
+
+padding:10px;
+
+}
+
+
+
+
+
+
+.input-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:#102a43;
+
+padding:8px;
+
+border-radius:8px;
+
+margin-bottom:6px;
+
+}
+
+
+
+
+
+.input-row label{
+
+color:#bae6fd;
+
+}
+
+
+
+
+.input-row input{
+
+width:65px;
+
+height:28px;
+
+text-align:center;
+
+background:#020617;
+
+border:1px solid #38bdf8;
+
+border-radius:5px;
+
+color:white;
+
+}
+
+
+
+
+.input-row span{
+
+margin-left:5px;
+
+color:#7dd3fc;
 
 }
 
@@ -400,171 +397,41 @@ h3{
 
 
 
-
-/* =====================================
-   MEDIDAS
-===================================== */
-
-
-.dimensions-box{
-
-
-    background:#07111f;
-
-
-    border:1px solid #163b5c;
-
-
-    border-radius:12px;
+/* =========================
+   CRISTAL INTELIGENTE
+========================= */
 
 
 
-    padding:10px;
+.result-line{
 
+display:flex;
 
+justify-content:space-between;
 
-}
+align-items:center;
 
+background:#102a43;
 
+padding:8px;
 
+border-radius:8px;
 
+margin-bottom:6px;
 
-
-
-.measure-row{
-
-
-    display:flex;
-
-
-
-    justify-content:space-between;
-
-
-
-    align-items:center;
-
-
-
-    background:#102a43;
-
-
-
-    padding:7px;
-
-
-
-    margin-bottom:7px;
-
-
-
-    border-radius:8px;
-
-
+font-size:13px;
 
 }
 
 
 
 
+.result-line b{
 
-.measure-row label{
-
-
-    font-size:13px;
-
-
-    color:#bae6fd;
-
+color:#38bdf8;
 
 }
 
-
-
-
-
-.measure-row input{
-
-
-    width:55px;
-
-
-    height:27px;
-
-
-
-    background:#020617;
-
-
-
-    color:white;
-
-
-
-    border:1px solid #38bdf8;
-
-
-
-    border-radius:6px;
-
-
-
-    text-align:center;
-
-
-
-}
-
-
-
-
-
-.measure-row span{
-
-
-    color:#7dd3fc;
-
-
-
-    font-size:12px;
-
-
-
-    margin-left:4px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-   CRISTAL
-===================================== */
-
-
-.glass-box{
-
-
-    margin-top:12px;
-
-
-
-    padding-top:10px;
-
-
-
-    border-top:1px solid #163b5c;
-
-
-
-}
 
 
 
@@ -573,32 +440,17 @@ h3{
 #resultadoCristal{
 
 
-    margin-top:8px;
+background:#052e16;
 
+color:#86efac;
 
+padding:8px;
 
-    padding:8px;
+border-radius:8px;
 
+text-align:center;
 
-
-    border-radius:8px;
-
-
-
-    background:#052e16;
-
-
-
-    color:#86efac;
-
-
-
-    text-align:center;
-
-
-
-    font-size:12px;
-
+font-size:12px;
 
 
 }
@@ -609,57 +461,64 @@ h3{
 
 
 
-/* =====================================
+
+
+/* =========================
+   SEGURIDAD
+========================= */
+
+
+
+.safety .result-line{
+
+margin-bottom:7px;
+
+}
+
+
+
+
+
+#estadoSeguridad{
+
+margin-top:8px;
+
+background:#052e16;
+
+color:#86efac;
+
+padding:8px;
+
+border-radius:8px;
+
+text-align:center;
+
+font-size:12px;
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
    INFORMACION RAPIDA
-===================================== */
+========================= */
 
 
-.tank-info{
+.quick-info{
 
+display:grid;
 
-    display:grid;
+grid-template-columns:1fr 1fr;
 
+gap:8px;
 
-
-    grid-template-columns:1fr 1fr;
-
-
-
-    gap:8px;
-
-
-
-    margin-top:12px;
-
-
-
-}
-
-
-
-
-.tank-info div{
-
-
-    background:#102a43;
-
-
-
-    border-radius:8px;
-
-
-
-    padding:8px;
-
-
-
-    text-align:center;
-
-
-
-    font-size:12px;
-
-
+margin-top:10px;
 
 }
 
@@ -667,190 +526,109 @@ h3{
 
 
 
-.tank-info b{
+.quick-info div{
 
+background:#102a43;
 
-    color:#38bdf8;
+padding:10px;
 
+border-radius:10px;
 
+text-align:center;
+
+font-size:12px;
 
 }
 
 
 
 
+.quick-info strong{
+
+display:block;
+
+color:#38bdf8;
+
+font-size:16px;
+
+margin-top:5px;
+
+}
 
 
-/* =====================================
-   BOTON CREAR
-===================================== */
+
 
 
 .create{
 
+width:100%;
 
-    width:100%;
+margin-top:12px;
 
+padding:10px;
 
+background:#059669;
 
-    height:40px;
+border:none;
 
+border-radius:8px;
 
+color:white;
 
-    margin-top:12px;
+font-size:15px;
 
-
-
-    border:0;
-
-
-
-    border-radius:10px;
-
-
-
-    background:#059669;
-
-
-
-    color:white;
-
-
-
-    cursor:pointer;
-
-
-
-    font-size:15px;
-
-
+cursor:pointer;
 
 }
-
 
 
 
 
 .create:hover{
 
-
-    background:#10b981;
-
+background:#10b981;
 
 }
-
-
-
-
-
-
-/* =====================================
-   TARJETAS DERECHA
-===================================== */
-
-
-.card{
-
-
-    background:#07111f;
-
-
-
-    border:1px solid #163b5c;
-
-
-
-    border-radius:12px;
-
-
-
-    padding:12px;
-
-
-
-    margin-bottom:12px;
-
-
-
-}
-
-
-
-
-
-.card h3{
-
-
-    margin-bottom:10px;
-
-
-}
-
-
-
-
-.card p{
-
-
-    font-size:13px;
-
-
-
-    margin-bottom:7px;
-
-
-
-}
-
-
-
-
-.card b{
-
-
-    color:#38bdf8;
-
-
-
-}
-/* =====================================
-   ACUARIO CENTRAL 3D
-===================================== */
+/* =========================
+   VISOR CENTRAL 3D
+========================= */
 
 
 .viewer{
 
+position:relative;
 
-    position:relative;
+display:flex;
 
+align-items:center;
 
-    display:flex;
+justify-content:center;
 
+background:
 
-    justify-content:center;
+radial-gradient(circle,#134e75,#020617);
 
+overflow:hidden;
 
-    align-items:center;
-
-
-
-    overflow:hidden;
-
-
-
-    background:
+}
 
 
-    radial-gradient(
 
-    circle,
 
-    #134e75,
 
-    #020617
+.aquarium-container{
 
-    );
+width:100%;
 
+height:100%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+perspective:1200px;
 
 }
 
@@ -860,43 +638,35 @@ h3{
 
 
 
-.aquarium{
+#aquarium3D{
 
 
-    width:85%;
+position:relative;
+
+width:75%;
+
+height:65%;
+
+min-height:320px;
 
 
-
-    height:75%;
-
+transform-style:preserve-3d;
 
 
-    position:relative;
+border:8px solid rgba(186,230,253,.7);
+
+border-radius:18px;
 
 
-
-    overflow:hidden;
-
+background:#075985;
 
 
-    border:8px solid rgba(200,240,255,.8);
+box-shadow:
+
+0 0 40px rgba(14,165,233,.8);
 
 
-
-    border-radius:18px;
-
-
-
-    background:#075985;
-
-
-
-    box-shadow:
-
-
-
-    0 0 50px #0ea5e9;
-
+overflow:hidden;
 
 
 }
@@ -905,55 +675,33 @@ h3{
 
 
 
-
-/* FONDO */
-
-
-.background-3d{
+/* CRISTAL FRONTAL */
 
 
-    position:absolute;
+.glass-front{
 
 
+position:absolute;
 
-    inset:0;
-
-
-
-    background:
+inset:0;
 
 
+background:
 
-    radial-gradient(
+linear-gradient(
 
-    circle at 50% 15%,
+120deg,
 
-    rgba(255,255,255,.35),
+rgba(255,255,255,.25),
 
-    transparent 35%
+transparent
 
-    ),
-
-
-
-    linear-gradient(
-
-    180deg,
-
-    #0ea5e9,
-
-    #075985,
-
-    #022c44
-
-    );
+);
 
 
+pointer-events:none;
 
 }
-
-
-
 
 
 
@@ -962,36 +710,28 @@ h3{
 /* AGUA */
 
 
-.water{
+.water-layer{
 
 
-    position:absolute;
+position:absolute;
+
+inset:0;
 
 
+background:
 
-    inset:0;
+linear-gradient(
 
+180deg,
 
+rgba(56,189,248,.85),
 
-    overflow:hidden;
+rgba(7,89,133,.95)
 
-
-
-    background:
-
-
-
-    linear-gradient(
-
-    120deg,
-
-    rgba(255,255,255,.18),
-
-    transparent
-
-    );
+);
 
 
+animation:waterMove 8s infinite alternate;
 
 }
 
@@ -999,216 +739,24 @@ h3{
 
 
 
-
-
-
-/* LUZ */
-
-
-.light{
-
-
-    position:absolute;
-
-
-
-    top:-30%;
-
-
-
-    left:20%;
-
-
-
-    width:60%;
-
-
-
-    height:130%;
-
-
-
-    background:
-
-
-
-    linear-gradient(
-
-    120deg,
-
-    transparent,
-
-    rgba(255,255,255,.25),
-
-    transparent
-
-    );
-
-
-
-    animation:waterLight 8s infinite linear;
-
-
-
-}
-
-
-
-
-@keyframes waterLight{
+@keyframes waterMove{
 
 
 from{
 
-
-    transform:translateX(-50%);
-
+transform:translateX(-3%);
 
 }
-
 
 
 to{
 
-
-    transform:translateX(50%);
-
+transform:translateX(3%);
 
 }
 
 
 }
-
-
-
-
-
-
-
-
-
-/* BURBUJAS */
-
-
-.bubble{
-
-
-    position:absolute;
-
-
-
-    bottom:-20px;
-
-
-
-    width:8px;
-
-
-
-    height:8px;
-
-
-
-    border-radius:50%;
-
-
-
-    background:white;
-
-
-
-    opacity:.5;
-
-
-
-    animation:bubbleMove 8s infinite;
-
-
-
-}
-
-
-
-
-
-.bubble1{
-
-
-    left:25%;
-
-
-}
-
-
-
-.bubble2{
-
-
-    left:55%;
-
-
-
-    width:12px;
-
-
-
-    height:12px;
-
-
-
-    animation-delay:3s;
-
-
-
-}
-
-
-
-
-.bubble3{
-
-
-    left:75%;
-
-
-
-    animation-delay:5s;
-
-
-
-}
-
-
-
-
-
-
-@keyframes bubbleMove{
-
-
-from{
-
-
-    transform:translateY(0);
-
-
-}
-
-
-
-to{
-
-
-    transform:translateY(-600px);
-
-
-}
-
-
-}
-
-
-
 
 
 
@@ -1218,37 +766,30 @@ to{
 /* ARENA */
 
 
-.sand{
+.sand-layer{
 
 
-    position:absolute;
+position:absolute;
+
+bottom:0;
+
+left:0;
 
 
+width:100%;
 
-    bottom:0;
-
-
-
-    width:100%;
+height:18%;
 
 
+background:
 
-    height:18%;
+linear-gradient(
 
+#d6b56d,
 
+#806b3a
 
-    background:
-
-
-
-    linear-gradient(
-
-    #d6b56d,
-
-    #806b3a
-
-    );
-
+);
 
 
 }
@@ -1260,20 +801,64 @@ to{
 
 
 
-/* ELEMENTOS FUTUROS */
+
+/* CONTROLES CAMARA */
 
 
-.rocks,
-.plants,
-.fish{
+.camera-controls{
 
 
-    position:absolute;
+position:absolute;
+
+bottom:20px;
+
+
+display:flex;
+
+gap:10px;
+
+
+}
 
 
 
-    inset:0;
 
+.camera-controls button{
+
+
+width:42px;
+
+height:42px;
+
+
+border-radius:50%;
+
+border:none;
+
+
+background:#0284c7;
+
+
+color:white;
+
+
+font-size:20px;
+
+
+cursor:pointer;
+
+
+}
+
+
+
+
+
+
+.camera-controls button:hover{
+
+
+background:#0ea5e9;
 
 
 }
@@ -1285,42 +870,62 @@ to{
 
 
 
-/* CRISTAL DELANTERO */
+
+/* =========================
+   PANEL DERECHO
+========================= */
 
 
-.glass{
+.info-card{
 
 
-    position:absolute;
+background:#07111f;
 
 
-
-    inset:0;
-
+border:1px solid #163b5c;
 
 
-    background:
+border-radius:12px;
 
 
+padding:12px;
 
-    linear-gradient(
 
-    90deg,
+margin-bottom:12px;
 
-    rgba(255,255,255,.15),
 
-    transparent 25%,
-
-    transparent 75%,
-
-    rgba(255,255,255,.08)
-
-    );
+}
 
 
 
-    pointer-events:none;
+.info-card h3{
 
+
+color:#38bdf8;
+
+margin-bottom:10px;
+
+
+}
+
+
+
+.info-card p{
+
+
+font-size:14px;
+
+margin-bottom:8px;
+
+
+}
+
+
+
+.info-card strong{
+
+
+color:#7dd3fc;
 
 
 }
@@ -1332,96 +937,32 @@ to{
 
 
 
-/* CONTROLES */
-
-
-.camera{
-
-
-    position:absolute;
-
-
-
-    bottom:15px;
-
-
-
-}
-
-
-
-.camera button{
-
-
-    width:38px;
-
-
-
-    height:38px;
-
-
-
-    border-radius:50%;
-
-
-
-    border:0;
-
-
-
-    background:#0284c7;
-
-
-
-    color:white;
-
-
-
-    margin:4px;
-
-
-
-    cursor:pointer;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 
 footer{
 
 
-    height:28px;
+height:28px;
+
+flex-shrink:0;
 
 
-
-    flex-shrink:0;
-
+background:#020617;
 
 
-    background:#020617;
+color:#94a3b8;
 
 
-
-    color:#94a3b8;
-
+text-align:center;
 
 
-    text-align:center;
+font-size:12px;
 
 
-
-    padding:5px;
-
+padding:6px;
 
 
 }
@@ -1432,112 +973,84 @@ footer{
 
 
 
-/* PANTALLAS PEQUEÑAS */
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 
-@media(max-width:900px){
+@media(max-width:1000px){
+
 
 
 .main{
 
 
-    grid-template-columns:1fr;
+grid-template-columns:
+
+220px
+
+1fr;
 
 
 }
 
 
 
-.sidebar,
 .panel{
 
-
-    display:none;
-
+display:none;
 
 }
 
 
 
-.aquarium{
+#aquarium3D{
 
+width:85%;
 
-    width:90%;
-
-
-    height:65%;
-
-
-}
-   /* ==========================
-   SEGURIDAD ESTRUCTURAL
-========================== */
-
-
-.safety-box{
-
-    margin-top:12px;
-
-}
-
-
-
-.safety-item{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    background:#102a43;
-
-    padding:7px;
-
-    margin-bottom:6px;
-
-    border-radius:8px;
-
-    font-size:12px;
-
-}
-
-
-
-.safety-item span{
-
-    color:#bae6fd;
-
-}
-
-
-
-.safety-item b{
-
-    color:#38bdf8;
-
-}
-
-
-
-#segEstado{
-
-    margin-top:8px;
-
-    padding:8px;
-
-    text-align:center;
-
-    border-radius:8px;
-
-    background:#052e16;
-
-    color:#86efac;
-
-    font-size:12px;
+height:60%;
 
 }
 
 
 
 }
+
+
+
+
+@media(max-width:700px){
+
+
+
+.main{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.sidebar{
+
+display:none;
+
+}
+
+
+
+.header{
+
+height:55px;
+
+}
+
+
+
+.logo{
+
+font-size:18px;
+
+}
+
