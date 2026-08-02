@@ -29,7 +29,7 @@ document.getElementById("alto");
 
 
 
-if(!acuari o3D && !largo){
+if(!acuario3D || !largo || !ancho || !alto){
 
 console.error("Motor 3D: elementos no encontrados");
 
@@ -75,12 +75,15 @@ Math.min(Math.max(H/50,0.6),1.4);
 
 
 
+
+
 acuario3D.style.width =
 (escalaL*70)+"%";
 
 
-acuari o3D.style.height =
+acuario3D.style.height =
 (escalaH*65)+"%";
+
 
 
 
@@ -94,7 +97,7 @@ acuari o3D.style.height =
 
 
 let agua =
-acuari o3D.querySelector(".water");
+acuario3D.querySelector(".water");
 
 
 if(agua){
@@ -108,13 +111,15 @@ agua.style.height="82%";
 
 
 
+
+
 /* =========================
    ARENA
 ========================= */
 
 
 let arena =
-acuari o3D.querySelector(".sand");
+acuario3D.querySelector(".sand");
 
 
 if(arena){
@@ -122,6 +127,7 @@ if(arena){
 arena.style.height="18%";
 
 }
+
 
 
 
@@ -153,7 +159,7 @@ info=document.createElement("div");
 info.className="info3d";
 
 
-acuari o3D.appendChild(info);
+acuario3D.appendChild(info);
 
 
 }
@@ -201,12 +207,15 @@ info.innerHTML=`
 
 
 
+
+
+
 /* =========================
    DATOS DOM
 ========================= */
 
 
-acuari o3D.dataset.medidas =
+acuario3D.dataset.medidas =
 `${L} x ${A} x ${H} cm`;
 
 
@@ -231,6 +240,7 @@ H
 
 
 
+
 [largo,ancho,alto].forEach(input=>{
 
 
@@ -246,6 +256,8 @@ setTimeout(actualizar3D,50);
 
 
 });
+
+
 
 
 
