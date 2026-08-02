@@ -22,6 +22,7 @@
 
 <header class="header">
 
+
 <div class="logo">
 
 🐠 ACUARIO DESIGNER
@@ -31,6 +32,7 @@ STUDIO V5
 </span>
 
 </div>
+
 
 
 <div class="actions">
@@ -47,14 +49,22 @@ Guardar
 Exportar
 </button>
 
-
 </div>
+
 
 </header>
 
 
 
+
+
 <main class="main">
+
+
+
+
+
+<!-- PANEL IZQUIERDO -->
 
 
 <aside class="sidebar">
@@ -113,6 +123,7 @@ Luz
 
 
 <label>
+
 Largo (cm)
 
 <input id="largo" value="70">
@@ -122,6 +133,7 @@ Largo (cm)
 
 
 <label>
+
 Ancho (cm)
 
 <input id="ancho" value="30">
@@ -131,6 +143,7 @@ Ancho (cm)
 
 
 <label>
+
 Alto (cm)
 
 <input id="alto" value="40">
@@ -160,6 +173,7 @@ Base exterior
 
 
 
+
 <div class="panel-box">
 
 
@@ -178,7 +192,6 @@ Calculando...
 </strong>
 
 </p>
-
 
 
 
@@ -207,7 +220,6 @@ Calculando...
 
 
 
-
 <p>
 🔩 Tirantes necesarios:
 <br>
@@ -220,7 +232,6 @@ Calculando...
 
 
 
-
 <p>
 📏 Medidas del refuerzo:
 <br>
@@ -230,7 +241,6 @@ Calculando...
 </strong>
 
 </p>
-
 
 
 
@@ -247,7 +257,6 @@ Calculando...
 
 
 
-
 <hr>
 
 
@@ -258,9 +267,10 @@ Calculando...
 
 
 
-
 <p>
+
 Nivel:
+
 <br>
 
 <strong id="nivelEstructural">
@@ -273,7 +283,9 @@ Analizando...
 
 
 <p>
+
 Motivo:
+
 <br>
 
 <strong id="motivoSeguridad">
@@ -287,7 +299,6 @@ Analizando...
 </div>
 
 
-
 </aside>
 
 
@@ -296,6 +307,8 @@ Analizando...
 
 
 
+
+<!-- VISOR 3D -->
 
 
 <section class="viewer">
@@ -343,40 +356,196 @@ Analizando...
 
 </section>
 
+
+
+
+
+
+
+
+
+<!-- PANEL DERECHO -->
+
+
 <aside class="panel">
+
 
 <h2>
 📊 Información
 </h2>
 
 
-... tus tarjetas actuales ...
+
 
 
 <div class="card">
+
+
+<h3>
+🐠 Acuario
+</h3>
+
+
+<p id="infoLitros">
+84 litros
+</p>
+
+
+<p id="infoMedidas">
+70 × 30 × 40 cm
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+
+<h3>
+🛡 Seguridad
+</h3>
+
+
+<p id="estadoSeguridad">
+🟢 Diseño correcto
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h3>
+📋 Resumen técnico
+</h3>
+
+
+<p>
+🪟 Cristal:
+
+<span id="infoCristal">
+Calculando...
+</span>
+
+</p>
+
+
+
+
+<p>
+📐 Cortes:
+
+<span id="cortesCristal">
+Calculando...
+</span>
+
+</p>
+
+
+
+<p>
+⚖ Peso total:
+
+<span id="pesoTotal">
+Calculando...
+</span>
+
+</p>
+
+
+
+<p>
+🔩 Refuerzos:
+
+<span id="tirantes">
+Calculando...
+</span>
+
+</p>
+
+
+
+<p>
+🛡 Riesgo:
+
+<span id="riesgo">
+Analizando...
+</span>
+
+</p>
+
+
+
+<p>
+🏠 Soporte:
+
+<span id="soporte">
+Analizando...
+</span>
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
 
 <h3>
 📄 Ficha técnica profesional
 </h3>
 
+
+
 <button id="generarFicha">
 Generar ficha
 </button>
+
+
 
 <button id="copiarFicha">
 📋 Copiar ficha
 </button>
 
+
+
 <pre id="fichaTecnica">
 Diseña el acuario para generar la ficha...
 </pre>
 
+
+
 </div>
 
 
-</aside>
+
+
 
 </aside>
+
+
 
 
 
@@ -386,6 +555,7 @@ Diseña el acuario para generar la ficha...
 
 
 </div>
+
 
 
 
