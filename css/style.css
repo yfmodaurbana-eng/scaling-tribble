@@ -477,18 +477,25 @@ select{
 .aquarium{
 
 
-    width:75%;
+    width:70%;
 
 
-    height:65%;
+    aspect-ratio: 7 / 4;
+
+
+    height:auto;
+
+
+    max-width:900px;
+
+
+    max-height:520px;
 
 
     position:relative;
 
 
-
     overflow:hidden;
-
 
 
     border-radius:20px;
@@ -508,8 +515,14 @@ select{
 
 
 
-}
+    transition:
 
+    width .4s ease,
+
+    height .4s ease;
+
+
+}
 
 
 
