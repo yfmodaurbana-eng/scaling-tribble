@@ -36,7 +36,6 @@
 
 <div class="actions">
 
-
 <button id="nuevo">
 Nuevo
 </button>
@@ -65,17 +64,12 @@ Exportar
 
 
 
-
-
 <!-- PANEL IZQUIERDO -->
 
 <aside class="sidebar">
 
 
-<h2>
-🛠 Herramientas
-</h2>
-
+<h2>🛠 Herramientas</h2>
 
 
 <div class="tool-grid">
@@ -116,7 +110,6 @@ Agua
 </button>
 
 
-
 </div>
 
 
@@ -126,10 +119,7 @@ Agua
 <section class="config-panel">
 
 
-<h2>
-📐 Configuración
-</h2>
-
+<h2>📐 Configuración</h2>
 
 
 
@@ -138,10 +128,7 @@ Agua
 
 <div class="measure-row">
 
-<label>
-Largo
-</label>
-
+<label>Largo</label>
 
 <div>
 
@@ -158,10 +145,7 @@ Largo
 
 <div class="measure-row">
 
-<label>
-Ancho
-</label>
-
+<label>Ancho</label>
 
 <div>
 
@@ -178,10 +162,7 @@ Ancho
 
 <div class="measure-row">
 
-<label>
-Alto
-</label>
-
+<label>Alto</label>
 
 <div>
 
@@ -194,41 +175,34 @@ Alto
 </div>
 
 
-
 </div>
 
-<!-- CRISTAL INTELIGENTE -->
+
+
+
+
+
 
 <div class="config-card">
 
 
-<h3>
-🪟 Cristal recomendado
-</h3>
-
+<h3>🪟 Cristal recomendado</h3>
 
 
 <div class="result-row">
 
-
-<span>
-Grosor
-</span>
-
+<span>Grosor</span>
 
 <strong id="cristal">
 6 mm
 </strong>
 
-
 </div>
-
-
 
 
 <div id="resultadoCristal">
 
-🟢 Cristal recomendado
+Cristal calculado
 
 </div>
 
@@ -239,91 +213,64 @@ Grosor
 
 
 
-
-
-<!-- SEGURIDAD ESTRUCTURAL -->
 
 
 <div class="config-card">
 
 
-<h3>
-🛡 Seguridad estructural
-</h3>
-
+<h3>🛡 Seguridad estructural</h3>
 
 
 
 <div class="result-row">
 
-<span>
-Peso agua
-</span>
-
+<span>Peso agua</span>
 
 <strong id="pesoAgua">
-84 kg
+0 kg
 </strong>
-
 
 </div>
 
 
 
-
-
 <div class="result-row">
 
-<span>
-Tirantes
-</span>
-
+<span>Tirantes</span>
 
 <strong id="tirantes">
 No necesarios
 </strong>
 
-
 </div>
-
-
 
 
 
 <div class="result-row">
 
-<span>
-Nivel carga
-</span>
-
+<span>Carga</span>
 
 <strong id="nivelCarga">
 Baja
 </strong>
 
-
 </div>
-
 
 
 
 <div id="estadoSeguridad">
 
-🟢 Estructura correcta
+Esperando datos
+
+</div>
+
 
 </div>
 
 
 
-</div>
 
 
-
-
-
-
-
-<!-- INFORMACION RAPIDA -->
 
 
 <div class="quick-info">
@@ -337,11 +284,9 @@ Baja
 
 Litros
 
-
 <strong id="litros">
-84 L
+0 L
 </strong>
-
 
 </div>
 
@@ -353,21 +298,16 @@ Litros
 
 <br>
 
-Peso total
-
+Peso
 
 <strong id="pesoTotal">
-100 kg
+0 kg
 </strong>
 
-
 </div>
 
 
-
 </div>
-
-
 
 
 
@@ -378,8 +318,6 @@ Peso total
 🏗 Crear acuario
 
 </button>
-
-
 
 
 
@@ -396,39 +334,30 @@ Peso total
 
 
 
-<!-- ======================
-     ZONA 3D
-====================== -->
+
+<!-- ZONA 3D -->
 
 
 <section class="viewer">
 
 
+<div class="scene">
 
-<div class="scene" id="scene">
 
-
-<div class="aquarium3d" id="aquarium3d">
-
+<div class="aquarium3d">
 
 
 <div class="face front"></div>
 
-
 <div class="face back"></div>
-
 
 <div class="face left"></div>
 
-
 <div class="face right"></div>
-
 
 <div class="face top"></div>
 
-
 <div class="face bottom"></div>
-
 
 
 
@@ -438,13 +367,10 @@ Peso total
 <div class="sand3d"></div>
 
 
-
 <div class="decor"></div>
 
 
-
 </div>
-
 
 
 </div>
@@ -471,12 +397,16 @@ Peso total
 </button>
 
 
-
 </div>
 
 
 
 </section>
+
+
+
+
+
 
 
 
@@ -487,7 +417,6 @@ Peso total
 <aside class="panel">
 
 
-
 <h2>
 📊 Información
 </h2>
@@ -495,30 +424,20 @@ Peso total
 
 
 
-
 <div class="card">
 
 
-<h3>
-🐠 Acuario
-</h3>
-
+<h3>🐠 Acuario</h3>
 
 
 <p>
-
 Volumen:
 
 <strong id="infoLitros">
-
-84 L
-
+0 L
 </strong>
 
-
 </p>
-
-
 
 
 <p>
@@ -527,18 +446,11 @@ Medidas:
 
 <br>
 
-
 <strong id="infoMedidas">
-
-70 × 30 × 40 cm
-
+0 × 0 × 0 cm
 </strong>
 
-
 </p>
-
-
-
 
 
 <p>
@@ -546,14 +458,10 @@ Medidas:
 Cristal:
 
 <strong id="infoCristal">
-
 6 mm
-
 </strong>
 
-
 </p>
-
 
 
 </div>
@@ -562,69 +470,6 @@ Cristal:
 
 
 
-
-
-
-<div class="card">
-
-
-<h3>
-🌊 Agua
-</h3>
-
-
-
-<p>
-
-pH:
-
-<strong>
-7.0
-
-</strong>
-
-</p>
-
-
-
-
-<p>
-
-Temperatura:
-
-<strong>
-25 ºC
-
-</strong>
-
-</p>
-
-
-
-
-<p>
-
-Nitratos:
-
-<strong>
-20 mg/L
-
-</strong>
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- FICHA TECNICA -->
 
 
 <div class="card">
@@ -651,11 +496,39 @@ Pulsa "Crear acuario"
 </button>
 
 
-
 </div>
 
 
 
+
+
+
+
+<div class="card">
+
+
+<h3>
+🌊 Agua
+</h3>
+
+
+<p>
+pH:
+<strong>
+7.0
+</strong>
+</p>
+
+
+<p>
+Temperatura:
+<strong>
+25 ºC
+</strong>
+</p>
+
+
+</div>
 
 
 
@@ -666,11 +539,7 @@ Pulsa "Crear acuario"
 
 
 
-
-
 </main>
-
-
 
 
 
@@ -685,8 +554,6 @@ Acuario Designer Studio © 2026
 
 
 
-
-
 </div>
 
 
@@ -695,17 +562,20 @@ Acuario Designer Studio © 2026
 
 
 
-<!-- JAVASCRIPT -->
+<!-- SCRIPTS -->
 
 <script src="js/engine.js"></script>
+
 <script src="js/objects.js"></script>
+
 <script src="js/save.js"></script>
+
 <script src="js/3d-engine.js"></script>
+
 <script src="js/ficha.js"></script>
 
 
 
 </body>
-
 
 </html>
