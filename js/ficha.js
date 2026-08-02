@@ -1,11 +1,11 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V6
-   FICHA TECNICA PROFESIONAL V4
+   ACUARIO DESIGNER STUDIO
+   FICHA TECNICA PROFESIONAL V5
    GENERADOR + COPIAR
 ================================================== */
 
 
-console.log("FICHA TECNICA V4 CARGADA");
+console.log("FICHA TECNICA V5 CARGADA");
 
 
 
@@ -50,7 +50,6 @@ copiarFicha
 
 
 
-
 function generarFicha(){
 
 
@@ -70,9 +69,27 @@ return;
 
 
 
-
 let fecha =
 new Date().toLocaleDateString("es-ES");
+
+
+
+let volumenUtil =
+a.volumenUtil || (a.volumen * 0.85);
+
+
+
+let tiranteTexto =
+a.tirantes.estado;
+
+
+
+if(tiranteTexto==="No necesarios"){
+
+tiranteTexto=
+"No requiere tirantes superiores";
+
+}
 
 
 
@@ -118,6 +135,12 @@ ${a.volumen.toFixed(1)} litros
 
 
 
+Volumen útil estimado:
+
+${volumenUtil.toFixed(1)} litros
+
+
+
 
 
 🪟 CRISTAL ESTRUCTURAL
@@ -133,7 +156,7 @@ ${a.cristal.tipo}
 
 Sistema:
 
-Acuario de vidrio pegado mediante silicona estructural
+Construcción mediante silicona estructural específica para acuarios
 
 
 
@@ -167,9 +190,9 @@ ${a.cortes}
 ================================
 
 
-Estado:
+Necesidad:
 
-${a.tirantes.estado}
+${tiranteTexto}
 
 
 
@@ -179,7 +202,7 @@ ${a.tirantes.cantidad}
 
 
 
-Medida:
+Medidas:
 
 ${a.tirantes.medida}
 
@@ -218,7 +241,7 @@ ${a.seguridad.mensaje}
 
 
 
-⚖ PESO ESTIMADO
+⚖ CARGAS ESTIMADAS
 
 ================================
 
@@ -229,7 +252,7 @@ ${a.peso.cristal.toFixed(1)} kg
 
 
 
-Peso total aproximado:
+Carga estimada sobre soporte:
 
 ${a.peso.total.toFixed(1)} kg
 
@@ -250,13 +273,13 @@ Silicona específica para fabricación de acuarios
 
 Preparación:
 
-Cristales limpios, secos y desengrasados
+Cristales limpios, secos y correctamente desengrasados
 
 
 
 Curado:
 
-Mínimo 7 días antes del llenado
+Mínimo 7 días antes del llenado completo
 
 
 
@@ -267,10 +290,13 @@ Mínimo 7 días antes del llenado
 ================================
 
 
-✔ Usar mueble perfectamente nivelado
+✔ Utilizar superficie perfectamente nivelada
 
 
-✔ Colocar base de apoyo adecuada
+✔ Verificar resistencia del mueble
+
+
+✔ Colocar apoyo inferior adecuado
 
 
 ✔ Utilizar cantos pulidos
@@ -321,7 +347,6 @@ window.fichaActual=ficha;
 
 
 
-
 function copiarFicha(){
 
 
@@ -339,25 +364,20 @@ return;
 
 
 
-
 navigator.clipboard.writeText(
 window.fichaActual
 )
 
 .then(()=>{
 
-
 alert("Ficha técnica copiada correctamente");
-
 
 })
 
 
 .catch(()=>{
 
-
 alert("No se pudo copiar la ficha");
-
 
 });
 
