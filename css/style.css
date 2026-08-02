@@ -361,3 +361,389 @@ tr:hover{
     }
 
 }
+/* ===================================
+   ACUARIO DESIGNER V5
+   ESTRUCTURA PRINCIPAL
+=================================== */
+
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    background:
+    linear-gradient(145deg,#112738,#061018);
+
+    border:1px solid #1d607d;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 25px rgba(0,200,255,.15);
+
+}
+
+
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:900;
+
+    color:#00d9ff;
+
+    text-shadow:
+    0 0 15px #00cfff;
+
+}
+
+
+.logo span{
+
+    display:block;
+
+    font-size:14px;
+
+    color:#9defff;
+
+}
+
+
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+
+
+
+.main{
+
+    display:grid;
+
+    grid-template-columns:
+    250px 1fr 300px;
+
+    gap:20px;
+
+}
+
+
+
+
+.sidebar{
+
+    background:
+    linear-gradient(160deg,#102333,#050c13);
+
+    border:1px solid #235875;
+
+    border-radius:20px;
+
+    padding:20px;
+
+}
+
+
+
+
+
+.tools{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:12px;
+
+}
+
+
+
+.tools button{
+
+    height:80px;
+
+    font-size:18px;
+
+}
+
+
+
+
+
+.panel-box{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:#081722;
+
+    border-radius:15px;
+
+    border:1px solid #1c526d;
+
+}
+
+
+
+
+
+.panel-box label{
+
+    display:block;
+
+    margin-bottom:15px;
+
+    color:#8bdfff;
+
+}
+
+
+
+
+/* ==========================
+   VISOR 3D ACUARIO
+========================== */
+
+
+.viewer{
+
+    position:relative;
+
+    min-height:550px;
+
+    background:
+
+    radial-gradient(circle,
+    #16415a,
+    #02080d 70%);
+
+    border-radius:25px;
+
+    border:1px solid #2380a5;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    box-shadow:
+
+    inset 0 0 50px black,
+
+    0 0 30px rgba(0,200,255,.2);
+
+}
+
+
+
+.aquarium{
+
+    position:relative;
+
+    width:80%;
+
+    height:65%;
+
+
+    border:
+
+    8px solid rgba(180,230,255,.4);
+
+
+    border-radius:15px;
+
+
+    overflow:hidden;
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    rgba(255,255,255,.2),
+    transparent
+    );
+
+
+    box-shadow:
+
+    0 0 50px #00bfff,
+
+    inset 0 0 40px #000;
+
+}
+
+
+
+
+
+.water{
+
+    position:absolute;
+
+    top:0;
+
+    width:100%;
+
+    height:85%;
+
+
+    background:
+
+    linear-gradient(
+    180deg,
+    rgba(0,220,255,.45),
+    rgba(0,60,120,.7)
+    );
+
+
+}
+
+
+
+
+
+.sand{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:15%;
+
+
+    background:
+
+    linear-gradient(
+    #d8c27a,
+    #8a6b32
+    );
+
+}
+
+
+
+
+
+.rock{
+
+    position:absolute;
+
+    bottom:15%;
+
+    left:35%;
+
+    width:90px;
+
+    height:70px;
+
+
+    background:
+
+    radial-gradient(circle,#777,#222);
+
+
+    border-radius:50%;
+
+
+    box-shadow:
+
+    0 0 20px black;
+
+}
+
+
+
+
+
+.camera{
+
+    position:absolute;
+
+    bottom:20px;
+
+    right:20px;
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+
+.camera button{
+
+    width:45px;
+
+    height:45px;
+
+    padding:0;
+
+    border-radius:50%;
+
+}
+
+
+
+
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.main{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.sidebar,
+.panel{
+
+    width:100%;
+
+}
+
+
+.viewer{
+
+    min-height:400px;
+
+}
+
+
+.header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+}
