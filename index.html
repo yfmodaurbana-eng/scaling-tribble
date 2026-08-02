@@ -20,71 +20,70 @@
 <div class="app">
 
 
+<header class="header">
 
-<header>
+<div class="logo">
+🐠 Acuario Designer
+<span>STUDIO PRO</span>
+</div>
 
-<h1>
-🐠 Acuario Designer Studio
-</h1>
+<button>
+⚙️ Opciones
+</button>
 
 </header>
 
 
 
-
-
-<main>
-
+<main class="main">
 
 
 
+<!-- IZQUIERDA -->
 
-<!-- PANEL IZQUIERDO -->
+<aside class="panel">
 
-<section class="panel">
-
-
-<h2>
-🛠 Diseño
-</h2>
-
+<h2>🛠 Diseño</h2>
 
 
 <label>
-
 Largo
-
-<input id="largo" type="number" value="70">
-
+<input id="largo" value="70">
 cm
-
 </label>
 
 
-
 <label>
-
 Ancho
-
-<input id="ancho" type="number" value="30">
-
+<input id="ancho" value="30">
 cm
-
 </label>
-
 
 
 <label>
-
 Alto
-
-<input id="alto" type="number" value="40">
-
+<input id="alto" value="40">
 cm
-
 </label>
 
 
+
+<h3>Montaje</h3>
+
+
+<select id="montaje">
+
+<option value="interior">
+Base interior
+</option>
+
+
+<option value="exterior">
+Base exterior
+</option>
+
+
+</select>
 
 
 
@@ -96,55 +95,13 @@ cm
 
 
 
-
-
-<h2>
-
-🪨 Herramientas
-
-</h2>
-
-
-<button>
-
-🪨 Roca
-
-</button>
-
-
-<button>
-
-🌱 Planta
-
-</button>
-
-
-<button>
-
-🐟 Pez
-
-</button>
-
-
-<button>
-
-💡 Luz
-
-</button>
-
-
-
-</section>
+</aside>
 
 
 
 
 
-
-
-
-
-<!-- VISOR CENTRAL -->
+<!-- CENTRO -->
 
 <section class="visor">
 
@@ -152,20 +109,12 @@ cm
 <div class="aquarium">
 
 
-<div class="water">
+<div class="water"></div>
 
-</div>
-
-
-
-<div class="sand">
-
-</div>
-
+<div class="sand"></div>
 
 
 </div>
-
 
 
 </section>
@@ -174,82 +123,42 @@ cm
 
 
 
+<!-- DERECHA -->
 
 
+<aside class="panel">
 
 
-<!-- PANEL DERECHO -->
-
-
-<section class="panel">
-
-
-<h2>
-
-📊 Información
-
-</h2>
-
-
+<h2>📊 Información</h2>
 
 
 <div class="card">
 
-
-<h3>
-
-🐠 Acuario
-
-</h3>
-
-
-<p>
-
 Volumen:
 
-<br>
-
 <b id="litros">
-
 0 L
-
 </b>
 
-</p>
 
+<br><br>
 
-
-
-<p>
 
 Cristal:
 
-<br>
-
 <b id="cristal">
-
 -
-
 </b>
 
-</p>
 
+<br><br>
 
-
-<p>
 
 Medidas:
 
-<br>
-
 <b id="medidas">
-
 -
-
 </b>
-
-</p>
-
 
 
 </div>
@@ -258,29 +167,22 @@ Medidas:
 
 
 
-
-
 <div class="card">
 
 
 <h3>
-
 🛡 Seguridad
-
 </h3>
 
 
 <div id="seguridad">
 
-Esperando datos...
+Esperando...
 
 </div>
 
 
-
 </div>
-
-
 
 
 
@@ -290,9 +192,7 @@ Esperando datos...
 
 
 <h3>
-
-📋 Ficha técnica
-
+📋 Ficha fabricación
 </h3>
 
 
@@ -308,11 +208,7 @@ Sin generar
 
 
 
-
-
-</section>
-
-
+</aside>
 
 
 
@@ -320,11 +216,7 @@ Sin generar
 
 
 
-
-
 </div>
-
-
 
 
 
