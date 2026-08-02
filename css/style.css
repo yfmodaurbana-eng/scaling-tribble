@@ -1,6 +1,6 @@
 /* =====================================
    ACUARIO DESIGNER STUDIO V7
-   STYLE PRINCIPAL
+   CSS PRINCIPAL
 ===================================== */
 
 
@@ -34,6 +34,7 @@ color:white;
 
 
 
+
 .app{
 
 height:100vh;
@@ -51,13 +52,13 @@ flex-direction:column;
 
 
 
+
 /* =====================================
    CABECERA
 ===================================== */
 
 
 .header{
-
 
 height:60px;
 
@@ -75,8 +76,8 @@ padding:0 20px;
 
 border-bottom:1px solid #164e75;
 
-
 }
+
 
 
 
@@ -90,11 +91,12 @@ font-weight:bold;
 
 
 
+
 .logo span{
 
-color:#38bdf8;
-
 font-size:14px;
+
+color:#38bdf8;
 
 margin-left:8px;
 
@@ -103,8 +105,8 @@ margin-left:8px;
 
 
 
-.actions button{
 
+.actions button{
 
 background:#0284c7;
 
@@ -120,18 +122,18 @@ border-radius:8px;
 
 cursor:pointer;
 
-
 }
 
 
 
 .actions button:hover{
 
-
 background:#0ea5e9;
 
-
 }
+
+
+
 
 
 
@@ -139,12 +141,11 @@ background:#0ea5e9;
 
 
 /* =====================================
-   ESTRUCTURA PRINCIPAL
+   ZONA PRINCIPAL
 ===================================== */
 
 
 .main{
-
 
 flex:1;
 
@@ -162,7 +163,6 @@ grid-template-columns:
 min-height:0;
 
 overflow:hidden;
-
 
 }
 
@@ -195,9 +195,7 @@ overflow-y:auto;
 
 .sidebar{
 
-
 border-right:1px solid #163b5c;
-
 
 }
 
@@ -205,19 +203,14 @@ border-right:1px solid #163b5c;
 
 .panel{
 
-
 border-left:1px solid #163b5c;
-
 
 }
 
 
 
 
-
-
 h2{
-
 
 font-size:18px;
 
@@ -225,14 +218,11 @@ color:#38bdf8;
 
 margin-bottom:12px;
 
-
 }
 
 
 
-
 h3{
-
 
 font-size:15px;
 
@@ -240,8 +230,9 @@ color:#bae6fd;
 
 margin-bottom:10px;
 
-
 }
+
+
 
 
 
@@ -270,6 +261,7 @@ margin-bottom:15px;
 
 
 
+
 .tool{
 
 
@@ -294,12 +286,13 @@ transition:.2s;
 
 
 
+
 .tool:hover{
 
 
 background:#164e75;
 
-transform:scale(1.03);
+transform:scale(1.05);
 
 
 }
@@ -310,15 +303,14 @@ transform:scale(1.03);
 
 .config-panel{
 
-
 display:flex;
 
 flex-direction:column;
 
 gap:10px;
 
-
 }
+
 
 
 
@@ -338,6 +330,7 @@ margin-bottom:10px;
 
 
 }
+
 
 
 
@@ -365,6 +358,7 @@ margin-bottom:7px;
 
 
 
+
 .measure-row label{
 
 
@@ -372,6 +366,7 @@ color:#7dd3fc;
 
 
 }
+
 
 
 
@@ -416,7 +411,7 @@ margin-left:5px;
 
 
 /* =====================================
-   RESULTADOS
+   RESULTADOS SEGURIDAD
 ===================================== */
 
 
@@ -445,6 +440,8 @@ font-size:13px;
 
 
 
+
+
 .result-row strong{
 
 
@@ -456,35 +453,13 @@ color:#38bdf8;
 
 
 
-#resultadoCristal{
 
-
-background:#052e16;
-
-color:#86efac;
-
-padding:8px;
-
-border-radius:8px;
-
-text-align:center;
-
-font-size:12px;
-
-
-}
-
-
-
-
-
+#resultadoCristal,
 
 
 #estadoSeguridad{
 
 
-margin-top:8px;
-
 background:#052e16;
 
 color:#86efac;
@@ -493,9 +468,9 @@ padding:8px;
 
 border-radius:8px;
 
-font-size:12px;
-
 text-align:center;
+
+font-size:12px;
 
 
 }
@@ -508,7 +483,7 @@ text-align:center;
 
 
 /* =====================================
-   INFORMACION RAPIDA
+   INFO RAPIDA
 ===================================== */
 
 
@@ -527,14 +502,15 @@ gap:8px;
 
 
 
+
 .quick-info div{
 
 
 background:#102a43;
 
-padding:10px;
-
 border-radius:10px;
+
+padding:10px;
 
 text-align:center;
 
@@ -542,6 +518,7 @@ font-size:12px;
 
 
 }
+
 
 
 
@@ -563,6 +540,8 @@ margin-top:5px;
 
 
 
+
+
 .create{
 
 
@@ -570,16 +549,13 @@ width:100%;
 
 padding:10px;
 
-margin-top:8px;
-
-
 background:#059669;
-
-color:white;
 
 border:none;
 
 border-radius:8px;
+
+color:white;
 
 font-size:15px;
 
@@ -591,11 +567,10 @@ cursor:pointer;
 
 
 
+
 .create:hover{
 
-
 background:#10b981;
-
 
 }
 
@@ -629,6 +604,7 @@ margin-bottom:12px;
 
 
 
+
 .card h3{
 
 
@@ -640,15 +616,17 @@ color:#38bdf8;
 
 
 
+
 .card p{
 
 
-margin-bottom:8px;
-
 font-size:14px;
+
+margin-bottom:8px;
 
 
 }
+
 
 
 
@@ -687,28 +665,33 @@ font-size:12px;
 
 line-height:1.5;
 
+
 max-height:220px;
 
 overflow:auto;
 
+
 }
+
 
 
 
 #copiarFicha{
 
 
-margin-top:10px;
-
 width:100%;
 
+margin-top:10px;
+
 padding:8px;
+
+
+background:#0284c7;
 
 border:none;
 
 border-radius:8px;
 
-background:#0284c7;
 
 color:white;
 
@@ -716,6 +699,7 @@ cursor:pointer;
 
 
 }
+
 
 
 
@@ -731,9 +715,8 @@ background:#0ea5e9;
 
 
 
-
 /* =====================================
-   PIE
+   FOOTER
 ===================================== */
 
 
@@ -741,8 +724,6 @@ footer{
 
 
 height:30px;
-
-flex-shrink:0;
 
 background:#020617;
 
@@ -757,7 +738,7 @@ padding:7px;
 
 }
 /* =====================================
-   ACUARIO 3D
+   ZONA 3D ACUARIO
 ===================================== */
 
 
@@ -776,9 +757,13 @@ justify-content:center;
 background:
 
 radial-gradient(
+
 circle,
+
 #134e75,
+
 #020617
+
 );
 
 
@@ -794,12 +779,14 @@ perspective:1200px;
 
 
 
+
+
 .scene{
 
 
-width:80%;
+width:100%;
 
-height:70%;
+height:100%;
 
 
 display:flex;
@@ -812,10 +799,8 @@ justify-content:center;
 transform-style:preserve-3d;
 
 
-cursor:grab;
-
-
 }
+
 
 
 
@@ -830,7 +815,6 @@ position:relative;
 
 width:420px;
 
-
 height:260px;
 
 
@@ -838,6 +822,13 @@ transform-style:preserve-3d;
 
 
 transition:.3s;
+
+
+transform:
+
+rotateX(-15deg)
+
+rotateY(-30deg);
 
 
 }
@@ -848,11 +839,9 @@ transition:.3s;
 
 
 
-
 /* =====================================
-   CRISTALES DEL ACUARIO
+   CRISTALES
 ===================================== */
-
 
 
 .face{
@@ -863,33 +852,34 @@ position:absolute;
 
 background:
 
-
 linear-gradient(
 
 135deg,
 
-rgba(255,255,255,.25),
+rgba(255,255,255,.35),
 
 rgba(14,165,233,.20)
 
 );
 
 
+
 border:
 
-3px solid rgba(186,230,253,.7);
+3px solid rgba(186,230,253,.8);
 
 
 
 box-shadow:
 
 
-0 0 30px rgba(14,165,233,.45);
+0 0 30px rgba(14,165,233,.5);
 
+
+backface-visibility:hidden;
 
 
 }
-
 
 
 
@@ -908,8 +898,6 @@ translateZ(80px);
 
 
 }
-
-
 
 
 
@@ -973,7 +961,6 @@ rotateY(90deg);
 
 
 
-
 .top{
 
 
@@ -991,7 +978,6 @@ rotateX(90deg);
 
 
 }
-
 
 
 
@@ -1020,6 +1006,7 @@ rotateX(90deg);
 
 
 
+
 /* =====================================
    AGUA
 ===================================== */
@@ -1033,15 +1020,12 @@ position:absolute;
 
 width:400px;
 
-
 height:220px;
 
 
 left:10px;
 
-
 top:20px;
-
 
 
 background:
@@ -1051,18 +1035,16 @@ linear-gradient(
 
 180deg,
 
-rgba(56,189,248,.75),
+rgba(56,189,248,.8),
 
-rgba(7,89,133,.9)
+rgba(7,89,133,.95)
 
 );
 
 
-
 transform:
 
-translateZ(5px);
-
+translateZ(10px);
 
 
 overflow:hidden;
@@ -1082,12 +1064,10 @@ content:"";
 
 position:absolute;
 
-
 inset:0;
 
 
 background:
-
 
 linear-gradient(
 
@@ -1100,13 +1080,13 @@ transparent
 );
 
 
-
 animation:
 
-aguaMovimiento 6s infinite alternate;
+aguaMovimiento 5s infinite alternate;
 
 
 }
+
 
 
 
@@ -1116,20 +1096,19 @@ aguaMovimiento 6s infinite alternate;
 
 from{
 
-transform:translateX(-10%);
+transform:translateX(-15%);
 
 }
 
 
 to{
 
-transform:translateX(10%);
+transform:translateX(15%);
 
 }
 
 
 }
-
 
 
 
@@ -1160,9 +1139,7 @@ left:10px;
 bottom:20px;
 
 
-
 background:
-
 
 linear-gradient(
 
@@ -1176,8 +1153,7 @@ linear-gradient(
 
 transform:
 
-translateZ(10px);
-
+translateZ(20px);
 
 
 }
@@ -1188,9 +1164,8 @@ translateZ(10px);
 
 
 
-
 /* =====================================
-   OBJETOS 3D
+   DECORACION
 ===================================== */
 
 
@@ -1206,16 +1181,11 @@ font-size:45px;
 cursor:pointer;
 
 
-user-select:none;
-
-
 z-index:20;
 
 
-transform-style:preserve-3d;
-
-
 }
+
 
 
 
@@ -1227,12 +1197,13 @@ filter:
 
 drop-shadow(
 
-0 5px 5px #000
+0 5px 5px black
 
 );
 
 
 }
+
 
 
 
@@ -1244,7 +1215,6 @@ font-size:55px;
 
 
 }
-
 
 
 
@@ -1262,24 +1232,19 @@ nadar 6s infinite alternate;
 
 
 
-
 @keyframes nadar{
 
 
 from{
 
-
 transform:translateX(0);
-
 
 }
 
 
 to{
 
-
 transform:translateX(120px);
-
 
 }
 
@@ -1318,11 +1283,11 @@ gap:10px;
 
 
 
+
 .camera button{
 
 
 width:45px;
-
 
 height:45px;
 
@@ -1349,6 +1314,8 @@ cursor:pointer;
 
 
 
+
+
 .camera button:hover{
 
 
@@ -1365,9 +1332,8 @@ background:#0ea5e9;
 
 
 /* =====================================
-   RESPONSIVE
+   ADAPTACION
 ===================================== */
-
 
 
 @media(max-width:1100px){
@@ -1389,10 +1355,17 @@ grid-template-columns:
 
 
 
+
 .aquarium3d{
 
 
-transform:scale(.85);
+transform:
+
+scale(.8)
+
+rotateX(-15deg)
+
+rotateY(-30deg);
 
 
 }
@@ -1418,7 +1391,6 @@ grid-template-columns:1fr;
 
 
 
-
 .sidebar,
 .panel{
 
@@ -1430,37 +1402,18 @@ display:none;
 
 
 
-.aquarium3d{
-
-
-transform:scale(.75);
-
-
-}
-   /* PRUEBA VISUAL 3D */
 
 .aquarium3d{
 
-display:block !important;
 
-background:red !important;
+transform:
 
-width:420px !important;
+scale(.65)
 
-height:260px !important;
+rotateX(-15deg)
 
-position:relative !important;
+rotateY(-30deg);
 
-transform-style:preserve-3d !important;
-
-}
-
-
-.face{
-
-display:block !important;
-
-opacity:1 !important;
 
 }
 
