@@ -190,17 +190,34 @@ Montaje
 
 <div>
 
-<select id="montaje" class="select-modern">
+<div class="custom-select" id="selectorMontaje">
 
-<option value="interior">
+<button class="select-button" type="button">
+<span id="montajeTexto">Interior</span>
+<span>▼</span>
+</button>
+
+
+<div class="select-options">
+
+
+<div data-value="interior">
 Interior
-</option>
+</div>
 
-<option value="exterior">
+
+<div data-value="exterior">
 Exterior
-</option>
+</div>
 
-</select>
+
+</div>
+
+</div>
+
+
+<!-- Este mantiene la compatibilidad con ficha.js -->
+<input type="hidden" id="montaje" value="interior">
 
 
 </div>
