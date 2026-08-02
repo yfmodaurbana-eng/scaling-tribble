@@ -1,13 +1,13 @@
 /* =====================================
    ACUARIO DESIGNER V7
-   GENERADOR FICHA TECNICA
+   GENERADOR FICHA TECNICA + VALIDACION
 ===================================== */
 
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
 
-const boton = document.getElementById("crearAcuario");
+const boton=document.getElementById("crearAcuario");
 
 
 if(!boton){
@@ -20,7 +20,7 @@ return;
 
 
 
-boton.addEventListener("click", function(){
+boton.addEventListener("click",()=>{
 
 
 
@@ -38,39 +38,65 @@ Number(document.getElementById("alto").value);
 
 
 
+
 let litros =
 (largo*ancho*alto)/1000;
 
 
 
-let cristal = 6;
 
 
-if(litros <= 20){
 
-cristal = 3;
+/* =========================
+   CALCULO CRISTAL
+========================= */
 
-}
 
-else if(litros <= 60){
+let cristal=6;
 
-cristal = 4;
 
-}
 
-else if(alto > 45){
+if(litros<=20){
 
-cristal = 8;
+cristal=3;
 
 }
 
-else if(alto > 55){
+else if(litros<=60){
 
-cristal = 10;
+cristal=4;
+
+}
+
+else if(alto>45){
+
+cristal=8;
 
 }
 
 
+if(alto>55){
+
+cristal=10;
+
+}
+
+
+
+if(largo>200){
+
+cristal=12;
+
+}
+
+
+
+
+
+
+/* =========================
+   TIRANTES
+========================= */
 
 
 let tirantes="No necesarios";
@@ -88,6 +114,7 @@ cantidad=1;
 }
 
 
+
 if(largo>100){
 
 tirantes="Necesarios";
@@ -95,6 +122,7 @@ tirantes="Necesarios";
 cantidad=2;
 
 }
+
 
 
 if(largo>150){
@@ -108,52 +136,230 @@ cantidad=3;
 
 
 
-let ficha=document.getElementById("fichaTecnica");
 
 
 
-ficha.innerHTML=`
 
-<b>🐠 ACUARIO DESIGNER</b><br>
-
-----------------------<br>
-
-📐 MEDIDAS<br>
-
-Largo: ${largo} cm<br>
-
-Ancho: ${ancho} cm<br>
-
-Alto: ${alto} cm<br><br>
+/* =========================
+   VALIDACION DISEÑO
+========================= */
 
 
-💧 VOLUMEN<br>
-
-${litros.toFixed(1)} litros<br><br>
-
-
-🪟 CRISTALES<br>
-
-Grosor: ${cristal} mm<br><br>
+let estadoDiseño =
+"🟢 Diseño recomendado";
 
 
-🛡 TIRANTES<br>
-
-Estado: ${tirantes}<br>
-
-Cantidad: ${cantidad}<br>
-
-Ancho: ${ancho} cm<br>
-
-Grosor: ${cristal} mm<br><br>
 
 
-⚖️ PESO AGUA<br>
+if(alto>60){
 
-${litros.toFixed(1)} kg
+estadoDiseño =
+"🟡 Altura elevada. Revisar estructura";
+
+}
+
+
+
+
+
+if(largo>200){
+
+estadoDiseño =
+"🟡 Longitud grande. Fabricación especializada";
+
+}
+
+
+
+
+
+if(litros>500){
+
+estadoDiseño =
+"🟡 Gran volumen. Revisar cristales y soporte";
+
+}
+
+
+
+
+
+if(alto>80 || largo>300 || litros>1000){
+
+estadoDiseño =
+"🔴 Diseño no recomendado sin cálculo profesional";
+
+}
+
+
+
+
+
+// relación altura / largo
+
+
+if(alto > largo/2){
+
+estadoDiseño =
+"🔴 Proporción peligrosa: demasiada altura";
+
+}
+
+
+
+
+
+
+
+/* =========================
+   PESOS
+========================= */
+
+
+let pesoAgua=litros;
+
+
+let pesoTotal=
+
+pesoAgua+
+
+(litros*0.15)+
+
+(cristal*2);
+
+
+
+
+
+
+
+
+/* =========================
+   CREAR FICHA
+========================= */
+
+
+let ficha=
+document.getElementById("fichaTecnica");
+
+
+
+if(ficha){
+
+
+ficha.innerHTML=
+
+`
+
+<b>🐠 ACUARIO DESIGNER</b>
+
+<br>
+---------------------
+
+<br><br>
+
+
+📐 MEDIDAS
+
+<br>
+
+Largo: ${largo} cm
+
+<br>
+
+Ancho: ${ancho} cm
+
+<br>
+
+Alto: ${alto} cm
+
+
+<br><br>
+
+
+💧 VOLUMEN
+
+<br>
+
+${litros.toFixed(1)} litros
+
+
+<br><br>
+
+
+🪟 CRISTALES
+
+<br>
+
+Grosor recomendado:
+
+<b>${cristal} mm</b>
+
+
+<br><br>
+
+
+🛡 REFUERZOS
+
+<br>
+
+Tirantes:
+
+${tirantes}
+
+<br>
+
+Cantidad:
+
+${cantidad}
+
+
+<br>
+
+Medida tirante:
+
+${ancho} cm ancho
+
+<br>
+
+Grosor:
+
+${cristal} mm
+
+
+<br><br>
+
+
+⚖️ PESOS
+
+<br>
+
+Agua:
+
+${pesoAgua.toFixed(1)} kg
+
+<br>
+
+Peso total aprox:
+
+${pesoTotal.toFixed(1)} kg
+
+
+<br><br>
+
+
+🚦 VALIDACIÓN
+
+<br>
+
+<b>${estadoDiseño}</b>
 
 
 `;
+
+
+
+}
 
 
 
