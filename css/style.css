@@ -1,27 +1,697 @@
-*{
-    box-sizing:border-box;
+/* ==================================================
+   ACUARIO DESIGNER STUDIO V5
+   PROFESSIONAL UI SYSTEM
+================================================== */
+
+
+:root{
+
+    --bg:#050b12;
+    --panel:#0b1824;
+    --panel2:#102838;
+    --border:#1b8ab5;
+    --cyan:#00d9ff;
+    --text:#e8f8ff;
+    --green:#00ff9d;
+    --yellow:#ffd000;
+    --red:#ff4040;
+
 }
+
+
+
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
 
 body{
+
     margin:0;
-    background:#05080d !important;
-    color:white;
-    font-family:Arial;
+
+    min-height:100vh;
+
+    background:
+
+    radial-gradient(
+    circle at top,
+    #16445d,
+    #050b12 55%
+    );
+
+
+    font-family:
+
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+
+    color:var(--text);
+
+
 }
 
+
+
+
+
+
+/* =========================
+   APP
+========================= */
+
+
 .app{
-    border:10px solid red;
-    padding:20px;
+
+    width:100%;
+
+    max-width:1600px;
+
+    margin:auto;
+
+    padding:25px;
+
+
 }
+
+
+
+
+
+
+
+/* =========================
+   HEADER
+========================= */
+
 
 .header{
-    background:blue;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+    background:
+
+    linear-gradient(
+    145deg,
+    #132b3c,
+    #071018
+    );
+
+
     padding:20px;
-}
-body{
-    background:red !important;
+
+    border-radius:20px;
+
+    border:
+
+    1px solid var(--border);
+
+
+
+    box-shadow:
+
+    0 0 35px #001d2d;
+
+
 }
 
-.app{
-    border:20px solid yellow !important;
+
+
+.logo{
+
+    font-size:32px;
+
+    font-weight:900;
+
+
+    color:var(--cyan);
+
+
+    text-shadow:
+
+    0 0 20px var(--cyan);
+
+
+}
+
+
+.logo span{
+
+    display:block;
+
+    font-size:14px;
+
+    color:white;
+
+
+}
+
+
+
+
+
+.actions{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+
+
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+
+button{
+
+
+    background:
+
+    linear-gradient(
+    145deg,
+    #008dcc,
+    #00456a
+    );
+
+
+    color:white;
+
+    border:
+
+    1px solid #00cfff;
+
+
+    border-radius:12px;
+
+
+    padding:12px 22px;
+
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+    transition:.25s;
+
+
+
+    box-shadow:
+
+
+    0 5px 15px #00131f;
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:
+
+    translateY(-3px);
+
+
+
+    box-shadow:
+
+
+    0 0 25px var(--cyan);
+
+
+
+}
+
+
+
+
+
+
+/* =========================
+   MAIN GRID
+========================= */
+
+
+.main{
+
+
+    margin-top:25px;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    260px 1fr 320px;
+
+
+    gap:20px;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   PANELS
+========================= */
+
+
+.sidebar,
+.panel{
+
+
+    background:
+
+
+    linear-gradient(
+    160deg,
+    var(--panel2),
+    var(--panel)
+    );
+
+
+    border-radius:22px;
+
+
+    border:
+
+    1px solid var(--border);
+
+
+
+    padding:20px;
+
+
+
+    box-shadow:
+
+
+    inset 0 0 30px #000;
+
+
+}
+
+
+
+
+
+h2,
+h3{
+
+
+    color:var(--cyan);
+
+
+    text-shadow:
+
+    0 0 10px var(--cyan);
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   TOOLS
+========================= */
+
+
+.tools{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+
+    gap:15px;
+
+
+}
+
+
+.tools button{
+
+
+    height:90px;
+
+    font-size:18px;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   INPUTS
+========================= */
+
+
+input,
+select{
+
+
+    width:100%;
+
+
+    margin-top:8px;
+
+
+    padding:12px;
+
+
+    background:#02070c;
+
+
+    color:white;
+
+
+    border-radius:10px;
+
+
+    border:
+
+    1px solid #245d77;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   VIEWER 3D
+========================= */
+
+
+.viewer{
+
+
+    min-height:600px;
+
+
+    position:relative;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    background:
+
+
+    radial-gradient(
+    circle,
+    #0c5875,
+    #02070b 70%
+    );
+
+
+    border-radius:25px;
+
+
+    border:
+
+    2px solid #00bfff;
+
+
+
+    box-shadow:
+
+
+    inset 0 0 80px black,
+
+
+    0 0 40px #003b55;
+
+
+}
+
+
+
+
+
+
+
+/* ACUARIO */
+
+
+.aquarium{
+
+
+    width:75%;
+
+
+    height:65%;
+
+
+    position:relative;
+
+
+
+    overflow:hidden;
+
+
+
+    border-radius:20px;
+
+
+
+    border:
+
+    8px solid rgba(200,240,255,.4);
+
+
+
+    box-shadow:
+
+
+    0 0 60px var(--cyan);
+
+
+
+}
+
+
+
+
+
+.water{
+
+
+    position:absolute;
+
+
+    width:100%;
+
+
+    height:85%;
+
+
+    background:
+
+
+    linear-gradient(
+    180deg,
+    rgba(0,230,255,.55),
+    rgba(0,60,130,.8)
+    );
+
+
+}
+
+
+
+
+
+.sand{
+
+
+    position:absolute;
+
+
+    bottom:0;
+
+
+    width:100%;
+
+
+    height:15%;
+
+
+    background:
+
+    linear-gradient(
+    #e1ca7b,
+    #725128
+    );
+
+
+}
+
+
+
+
+
+
+
+.rock{
+
+
+    position:absolute;
+
+
+    bottom:15%;
+
+
+    left:35%;
+
+
+    width:110px;
+
+
+    height:80px;
+
+
+    background:
+
+
+    radial-gradient(
+    circle,
+    #999,
+    #222
+    );
+
+
+    border-radius:50%;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   CARDS
+========================= */
+
+
+.card{
+
+
+    background:
+
+
+    linear-gradient(
+    145deg,
+    #102333,
+    #05090e
+    );
+
+
+
+    border-radius:15px;
+
+
+    padding:18px;
+
+
+    margin-top:15px;
+
+
+
+    border:
+
+    1px solid #195675;
+
+
+
+}
+
+
+
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+
+@media(max-width:1100px){
+
+
+.main{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+
+.header{
+
+
+flex-direction:column;
+
+
+gap:20px;
+
+
+}
+
+
 }
