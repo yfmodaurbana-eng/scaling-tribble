@@ -9,7 +9,7 @@
 
 <title>Acuario Designer Studio V5</title>
 
-<link rel="stylesheet" href="./css/style.css?v=10">
+<link rel="stylesheet" href="./css/style.css?v=11">
 
 </head>
 
@@ -22,7 +22,6 @@
 
 <header class="header">
 
-
 <div class="logo">
 
 🐠 ACUARIO DESIGNER
@@ -32,7 +31,6 @@ STUDIO V5
 </span>
 
 </div>
-
 
 
 <div class="actions">
@@ -49,17 +47,14 @@ Guardar
 Exportar
 </button>
 
-</div>
 
+</div>
 
 </header>
 
 
 
-
-
 <main class="main">
-
 
 
 <aside class="sidebar">
@@ -81,7 +76,6 @@ Roca
 </button>
 
 
-
 <button class="tool">
 🌱
 <br>
@@ -89,13 +83,11 @@ Planta
 </button>
 
 
-
 <button class="tool">
 🐟
 <br>
 Pez
 </button>
-
 
 
 <button class="tool">
@@ -111,47 +103,37 @@ Luz
 
 
 
-
 <div class="panel-box">
 
 
 <h3>
-📐 Diseño
+📐 Diseño del acuario
 </h3>
 
 
 
 <label>
-
-Largo
+Largo (cm)
 
 <input id="largo" value="70">
 
-cm
-
 </label>
 
 
 
 <label>
-
-Ancho
+Ancho (cm)
 
 <input id="ancho" value="30">
 
-cm
-
 </label>
 
 
 
 <label>
-
-Alto
+Alto (cm)
 
 <input id="alto" value="40">
-
-cm
 
 </label>
 
@@ -180,14 +162,15 @@ Base exterior
 
 <div class="panel-box">
 
+
 <h3>
-🪟 Especificaciones del cristal
+🪟 Especificaciones estructurales
 </h3>
 
 
 
 <p>
-Grosor recomendado:
+📏 Grosor recomendado:
 <br>
 
 <strong id="cristalDiseño">
@@ -200,11 +183,11 @@ Calculando...
 
 
 <p>
-Tipo:
+🔹 Tipo de vidrio:
 <br>
 
-<strong>
-Vidrio float para acuario
+<strong id="tipoCristal">
+Vidrio float recocido para acuarios
 </strong>
 
 </p>
@@ -213,10 +196,74 @@ Vidrio float para acuario
 
 
 <p>
-Seguridad:
+📐 Cortes de cristal:
 <br>
 
-<strong id="seguridadDiseño">
+<strong id="cortesCristalDiseño">
+Calculando...
+</strong>
+
+</p>
+
+
+
+
+<p>
+🔩 Tirantes necesarios:
+<br>
+
+<strong id="tirantesDiseño">
+Calculando...
+</strong>
+
+</p>
+
+
+
+
+<p>
+📏 Medidas del refuerzo:
+<br>
+
+<strong id="medidaTirante">
+Calculando...
+</strong>
+
+</p>
+
+
+
+
+<p>
+⚙ Tipo de refuerzo:
+<br>
+
+<strong id="tipoRefuerzo">
+Calculando...
+</strong>
+
+</p>
+
+
+
+
+
+<hr>
+
+
+
+<h3>
+🛡 Seguridad estructural
+</h3>
+
+
+
+
+<p>
+Nivel:
+<br>
+
+<strong id="nivelEstructural">
 Analizando...
 </strong>
 
@@ -226,18 +273,17 @@ Analizando...
 
 
 <p>
-Refuerzos:
+Motivo:
 <br>
 
-<strong id="refuerzosDiseño">
-Calculando...
+<strong id="motivoSeguridad">
+Analizando...
 </strong>
 
 </p>
 
 
 
-</div>
 </div>
 
 
