@@ -1078,5 +1078,87 @@ linear-gradient(
 z-index:5;
 
 }
+/* =====================================
+   LIMPIEZA VISOR 3D V2
+   ELIMINA EFECTO ESPECTRAL
+===================================== */
 
+
+/* quitar capas antiguas */
+
+.aquarium::before{
+
+display:none;
+
+}
+
+
+.aquarium::after{
+
+display:none;
+
+}
+
+
+
+/* urna principal */
+
+.aquarium{
+
+background:#00304a;
+
+overflow:hidden;
+
+transform:
+
+rotateX(6deg)
+rotateY(-8deg);
+
+}
+
+
+
+/* fondo */
+
+.glass-back{
+
+opacity:.8;
+
+}
+
+
+
+/* agua más sólida */
+
+.water{
+
+opacity:1;
+
+}
+
+
+
+/* cristal frontal limpio */
+
+.glass-front{
+
+background:
+
+linear-gradient(
+120deg,
+rgba(255,255,255,.12),
+transparent 40%
+);
+
+}
+
+
+
+/* lateral más discreto */
+
+.glass-side{
+
+opacity:.7;
+
+}
 
