@@ -2,9 +2,7 @@
    ACUARIO DESIGNER V3.0
    UI estilo simulador virtual
 ================================ */
-body{
-    background:red !important;
-}
+
 *{
     box-sizing:border-box;
 }
