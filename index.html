@@ -7,9 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer Studio PRO</title>
+<title>Acuario Designer PRO</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="./css/style.css">
 
 </head>
 
@@ -20,187 +20,63 @@
 <div class="app">
 
 
-<header class="header">
+<header>
 
-
-<div class="logo">
-
-🐠 Acuario Designer
-
-<span>PRO</span>
-
-</div>
-
-
-<div class="actions">
-
-<button>Nuevo</button>
-
-<button>Guardar</button>
-
-<button>Exportar</button>
-
-</div>
-
+<h1>🐠 Acuario Designer PRO</h1>
 
 </header>
 
 
 
-
-<main class="main">
-
+<main>
 
 
-<!-- PANEL IZQUIERDO -->
+<section class="panel">
 
-
-<aside class="sidebar">
-
-
-<h2>🛠 Herramientas</h2>
-
-
-<div class="tool-grid">
-
-
-<button class="tool">
-🪨<br>
-Roca
-</button>
-
-
-<button class="tool">
-🌱<br>
-Planta
-</button>
-
-
-<button class="tool">
-🐟<br>
-Pez
-</button>
-
-
-<button class="tool">
-💡<br>
-Luz
-</button>
-
-
-</div>
-
-
-
-
-
-<section class="config">
-
-
-<h2>📐 Diseño</h2>
-
+<h2>📐 Medidas</h2>
 
 
 <label>
-
 Largo
-
 <input id="largo" value="70">
-
 cm
-
 </label>
 
 
-
 <label>
-
 Ancho
-
 <input id="ancho" value="30">
-
 cm
-
 </label>
-
 
 
 <label>
-
 Alto
-
 <input id="alto" value="40">
-
 cm
-
 </label>
 
 
-
-
-
-<div class="card">
-
-
-<h3>🪟 Cristal</h3>
-
-
-<div id="cristal">
-
-Calculando...
-
-</div>
-
-
-<div id="resultadoCristal">
-
-Esperando datos
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<button id="crearAcuario" class="create">
-
-🏗 Crear acuario
-
+<button id="crearAcuario">
+Crear acuario
 </button>
-
 
 
 </section>
 
 
-</aside>
 
 
 
-
-
-
-
-<!-- VISOR -->
-
-
-<section class="viewer">
-
+<section class="visor">
 
 <div class="aquarium">
-
 
 <div class="water"></div>
 
 <div class="sand"></div>
 
-
 </div>
-
 
 
 </section>
@@ -209,64 +85,27 @@ Esperando datos
 
 
 
+<section class="panel">
 
 
-<!-- PANEL DERECHO -->
-
-
-<aside class="panel">
-
-
-<h2>📊 Información</h2>
-
-
-
-
-<div class="card">
-
-
-<h3>🐠 Acuario</h3>
+<h2>📊 Datos</h2>
 
 
 <p>
-
 Volumen:
-
 <b id="litros">
-
 0 L
-
 </b>
-
 </p>
-
 
 
 <p>
-
-Medidas:
-
-<b id="medidas">
-
+Cristal:
+<b id="cristal">
 -
-
 </b>
-
 </p>
 
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>🛡 Seguridad</h3>
 
 
 <div id="seguridad">
@@ -276,35 +115,20 @@ Esperando datos
 </div>
 
 
-</div>
+
+
+<h2>📋 Ficha</h2>
+
+
+<pre id="fichaTecnica">
+
+Sin generar
+
+</pre>
 
 
 
-
-
-
-<div class="card">
-
-
-<h3>📋 Ficha técnica</h3>
-
-
-<div id="fichaTecnica">
-
-Pulsa crear
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-</aside>
-
+</section>
 
 
 
@@ -312,32 +136,15 @@ Pulsa crear
 
 
 
-
-<footer>
-
-Acuario Designer Studio © 2026
-
-</footer>
-
-
-
-
 </div>
 
 
 
+<script src="./js/engine.js"></script>
 
-
-<script src="js/engine.js"></script>
-
-<script src="js/ficha.js"></script>
-
-<script src="js/objects.js"></script>
-
-<script src="js/save.js"></script>
+<script src="./js/ficha.js"></script>
 
 
 </body>
-
 
 </html>
