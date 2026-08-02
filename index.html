@@ -4,11 +4,12 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Acuario Designer Studio V5</title>
 
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/style.css?v=10">
 
 </head>
 
@@ -31,6 +32,7 @@ STUDIO V5
 </span>
 
 </div>
+
 
 
 <div class="actions">
@@ -60,8 +62,6 @@ Exportar
 
 
 
-<!-- PANEL IZQUIERDO -->
-
 <aside class="sidebar">
 
 
@@ -74,28 +74,31 @@ Exportar
 <div class="tools">
 
 
-<button>
+<button class="tool">
 🪨
 <br>
 Roca
 </button>
 
 
-<button>
+
+<button class="tool">
 🌱
 <br>
 Planta
 </button>
 
 
-<button>
+
+<button class="tool">
 🐟
 <br>
 Pez
 </button>
 
 
-<button>
+
+<button class="tool">
 💡
 <br>
 Luz
@@ -108,12 +111,14 @@ Luz
 
 
 
+
 <div class="panel-box">
 
 
 <h3>
 📐 Diseño
 </h3>
+
 
 
 
@@ -143,7 +148,6 @@ cm
 
 
 
-
 <label>
 
 Alto
@@ -157,9 +161,7 @@ cm
 
 
 
-
 <select id="montaje">
-
 
 <option value="interior">
 Base interior
@@ -172,7 +174,6 @@ Base exterior
 
 
 </select>
-
 
 
 </div>
@@ -189,25 +190,19 @@ Base exterior
 
 
 
-<!-- ACUARIO 3D -->
-
-
 <section class="viewer">
 
 
 <div class="aquarium">
 
 
-<div class="water">
-</div>
+<div class="water"></div>
 
 
-<div class="sand">
-</div>
+<div class="sand"></div>
 
 
-<div class="rock">
-</div>
+<div class="rock"></div>
 
 
 </div>
@@ -248,8 +243,6 @@ Base exterior
 
 
 
-<!-- PANEL DERECHO -->
-
 
 <aside class="panel">
 
@@ -257,6 +250,7 @@ Base exterior
 <h2>
 📊 Información
 </h2>
+
 
 
 
@@ -306,7 +300,6 @@ Base exterior
 
 
 
-
 <div class="card">
 
 
@@ -323,6 +316,7 @@ Cristal:
 </p>
 
 
+
 <p>
 Peso:
 <span id="pesoTotal">
@@ -331,12 +325,14 @@ Peso:
 </p>
 
 
+
 <p>
 Tirantes:
 <span id="tirantes">
 No necesarios
 </span>
 </p>
+
 
 
 </div>
@@ -349,8 +345,8 @@ No necesarios
 
 
 
-</main>
 
+</main>
 
 
 </div>
@@ -359,7 +355,18 @@ No necesarios
 
 
 
+
+
 <script src="./js/engine.js"></script>
+
+<script src="./js/3d-engine.js"></script>
+
+<script src="./js/objects.js"></script>
+
+<script src="./js/ficha.js"></script>
+
+<script src="./js/save.js"></script>
+
 
 
 </body>
