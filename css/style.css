@@ -18,3 +18,10 @@ body{
     background:blue;
     padding:20px;
 }
+body{
+    background:red !important;
+}
+
+.app{
+    border:20px solid yellow !important;
+}
