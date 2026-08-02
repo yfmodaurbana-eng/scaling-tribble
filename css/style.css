@@ -334,72 +334,48 @@ color:var(--red)!important;
 
 
 /* =========================
-   VISOR CENTRAL
+   VISOR CENTRAL LIMPIO
 ========================= */
 
 
 .viewer{
 
-
 position:relative;
-
 
 display:flex;
 
-
 align-items:center;
-
 
 justify-content:center;
 
-
-
 background:
-
 
 radial-gradient(circle,#0c5875,#02070b);
 
-
-
 border-radius:25px;
 
-
-border:
-
-2px solid #00bfff;
-
-
+border:2px solid #00bfff;
 
 overflow:hidden;
 
-
-perspective:1400px;
-
+perspective:1200px;
 
 }
-/* ==================================================
-   ACUARIO DESIGNER STUDIO
-   MOTOR VISUAL 3D V1
-   URNA REALISTA
-================================================== */
+
 
 
 /* =========================
-   CUERPO DEL ACUARIO
+   URNA 3D BASE
 ========================= */
 
 
 .aquarium{
 
-
 position:relative;
-
 
 width:70%;
 
-
 height:60%;
-
 
 
 min-width:260px;
@@ -407,94 +383,36 @@ min-width:260px;
 min-height:180px;
 
 
-
 max-width:900px;
 
 max-height:550px;
 
 
+background:
 
-transform-style:preserve-3d;
-
-
-
-transform:
-
-rotateX(8deg)
-rotateY(-12deg);
-
-
-
-background:#00131d;
-
+linear-gradient(
+180deg,
+#006080,
+#001522
+);
 
 
 border-radius:18px;
 
 
+overflow:hidden;
+
 
 box-shadow:
 
-
-0 40px 80px rgba(0,0,0,.8),
-
-
-0 0 50px rgba(0,220,255,.45);
-
+0 30px 80px rgba(0,0,0,.8),
+0 0 50px rgba(0,220,255,.5);
 
 
 transition:
 
 width .4s ease,
-height .4s ease,
-transform .4s ease;
-
-
-
-}
-
-
-
-
-/* =========================
-   AGUA
-========================= */
-
-
-.water{
-
-
-position:absolute;
-
-
-left:0;
-
-bottom:0;
-
-
-width:100%;
-
-
-height:82%;
-
-
-background:
-
-
-linear-gradient(
-
-180deg,
-
-rgba(100,240,255,.45),
-
-rgba(0,60,150,.9)
-
-);
-
-
-
-z-index:2;
-
+height .4s ease;
 
 
 }
@@ -502,391 +420,15 @@ z-index:2;
 
 
 
-/* REFLEJO DEL AGUA */
+/* ELIMINAR CAPAS ANTIGUAS */
 
 
-.water::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-top:0;
-
-left:-100%;
-
-
-width:70%;
-
-height:100%;
-
-
-
-background:
-
-
-linear-gradient(
-
-120deg,
-
-transparent,
-
-rgba(255,255,255,.35),
-
-transparent
-
-);
-
-
-
-animation:
-
-aguaMovimiento 6s infinite linear;
-
-
-
-}
-
-
-
-@keyframes aguaMovimiento{
-
-
-from{
-
-transform:translateX(0);
-
-}
-
-
-to{
-
-transform:translateX(300%);
-
-}
-
-
-}
-
-
-
-
-
-
-/* =========================
-   GRAVA
-========================= */
-
-
-.sand{
-
-
-position:absolute;
-
-
-bottom:0;
-
-
-left:0;
-
-
-width:100%;
-
-
-height:18%;
-
-
-
-background:
-
-
-linear-gradient(
-
-180deg,
-
-#e4cf7c,
-
-#60451f
-
-);
-
-
-
-z-index:4;
-
-
-}
-
-
-
-
-
-
-/* =========================
-   CRISTAL FRONTAL
-========================= */
-
-
+.aquarium::before,
 .aquarium::after{
 
-
-content:"";
-
-
-position:absolute;
-
-
-inset:0;
-
-
-
-border:
-
-
-8px solid rgba(220,245,255,.45);
-
-
-
-border-radius:18px;
-
-
-
-background:
-
-
-linear-gradient(
-
-120deg,
-
-rgba(255,255,255,.18),
-
-transparent 35%
-
-);
-
-
-
-pointer-events:none;
-
-
-
-z-index:20;
-
-
+display:none!important;
 
 }
-
-
-
-
-
-
-/* =========================
-   LATERAL PROFUNDIDAD
-========================= */
-
-
-.aquarium::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-
-right:-45px;
-
-
-
-top:20px;
-
-
-
-width:45px;
-
-
-
-height:calc(100% - 40px);
-
-
-
-
-background:
-
-
-linear-gradient(
-
-90deg,
-
-rgba(120,220,255,.25),
-
-rgba(0,40,90,.8)
-
-);
-
-
-
-transform:
-
-
-skewY(-15deg);
-
-
-
-z-index:1;
-
-
-
-}
-
-
-
-
-
-/* =========================
-   TIRANTES SUPERIORES
-========================= */
-
-
-/* =====================================
-   TIRANTES ESTRUCTURALES REALISTAS
-===================================== */
-
-.tirante3d{
-
-position:absolute;
-
-top:-10px;
-
-height:10px;
-
-background:
-
-linear-gradient(
-180deg,
-#ffffff,
-#999,
-#444
-);
-
-border-radius:4px;
-
-box-shadow:
-
-0 3px 8px rgba(0,0,0,.8),
-inset 0 1px 2px rgba(255,255,255,.8);
-
-z-index:60;
-
-pointer-events:none;
-
-transform:
-translateZ(30px);
-
-}
-
-
-/* 1 tirante */
-
-.tirante3d:not(.izquierdo):not(.derecho){
-
-left:20%;
-
-width:60%;
-
-}
-
-
-
-/* 2 tirantes */
-
-.tirante3d.izquierdo{
-
-left:15%;
-
-width:30%;
-
-}
-
-
-
-.tirante3d.derecho{
-
-left:55%;
-
-width:30%;
-
-}
-
-
-
-
-.tirante3d.izquierdo{
-
-
-left:10%;
-
-
-width:35%;
-
-
-}
-
-
-
-
-.tirante3d.derecho{
-
-
-left:55%;
-
-
-width:35%;
-
-
-}
-
-
-
-
-
-/* =========================
-   REFUERZO PERIMETRAL
-========================= */
-
-
-.refuerzo3d{
-
-
-position:absolute;
-
-
-inset:0;
-
-
-border:
-
-
-8px solid rgba(220,220,220,.45);
-
-
-
-z-index:35;
-
-
-pointer-events:none;
-
-
-}
-
-
-
-
 /* =========================
    OBJETOS DENTRO
 ========================= */
