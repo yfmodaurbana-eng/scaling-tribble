@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer Studio V6</title>
+<title>Acuario Designer Studio V7</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -27,10 +27,9 @@
 
 🐠 Acuario Designer
 
-<span>STUDIO V6</span>
+<span>STUDIO V7</span>
 
 </div>
-
 
 
 <div class="actions">
@@ -39,13 +38,16 @@
 Nuevo
 </button>
 
+
 <button id="guardar">
 Guardar
 </button>
 
+
 <button id="exportar">
 Exportar
 </button>
+
 
 </div>
 
@@ -54,18 +56,15 @@ Exportar
 
 
 
-
-
 <main class="main">
 
-
-
-<!-- PANEL IZQUIERDO -->
 
 <aside class="sidebar">
 
 
-<h2>🛠 Herramientas</h2>
+<h2>
+🛠 Herramientas
+</h2>
 
 
 <div class="tool-grid">
@@ -110,12 +109,12 @@ Agua
 
 
 
-
 <section class="config-panel">
 
 
-<h2>📐 Configuración</h2>
-
+<h2>
+📐 Configuración
+</h2>
 
 
 <div class="config-card">
@@ -123,11 +122,16 @@ Agua
 
 <div class="measure-row">
 
-<label>Largo</label>
+<label>
+Largo
+</label>
 
 <div>
+
 <input id="largo" type="number" value="70">
+
 <span>cm</span>
+
 </div>
 
 </div>
@@ -136,11 +140,16 @@ Agua
 
 <div class="measure-row">
 
-<label>Ancho</label>
+<label>
+Ancho
+</label>
 
 <div>
+
 <input id="ancho" type="number" value="30">
+
 <span>cm</span>
+
 </div>
 
 </div>
@@ -149,37 +158,54 @@ Agua
 
 <div class="measure-row">
 
-<label>Alto</label>
+<label>
+Alto
+</label>
 
 <div>
+
 <input id="alto" type="number" value="40">
+
 <span>cm</span>
-</div>
 
 </div>
 
-
 </div>
 
 
+</div>
 
+<!-- =========================
+     CRISTAL INTELIGENTE
+========================= -->
 
 
 <div class="config-card">
 
 
-<h3>🪟 Cristal recomendado</h3>
+<h3>
+🪟 Cristal recomendado
+</h3>
+
 
 
 <div class="result-row">
 
-<span>Grosor</span>
+
+<span>
+Grosor
+</span>
+
 
 <strong id="cristal">
+
 6 mm
+
 </strong>
 
+
 </div>
+
 
 
 <div id="resultadoCristal">
@@ -195,54 +221,81 @@ Agua
 
 
 
+<!-- =========================
+     SEGURIDAD ESTRUCTURAL
+========================= -->
 
 
 <div class="config-card">
 
 
-<h3>🛡 Seguridad estructural</h3>
+<h3>
+🛡 Seguridad estructural
+</h3>
 
 
 
 <div class="result-row">
 
-<span>Peso agua</span>
+<span>
+Peso agua
+</span>
+
 
 <strong id="pesoAgua">
+
 84 kg
+
 </strong>
+
 
 </div>
 
 
 
+
 <div class="result-row">
 
-<span>Tirantes</span>
+<span>
+Tirantes
+</span>
+
 
 <strong id="tirantes">
+
 No necesarios
+
 </strong>
 
+
 </div>
+
+
 
 
 
 <div class="result-row">
 
-<span>Nivel carga</span>
+<span>
+Nivel carga
+</span>
+
 
 <strong id="nivelCarga">
+
 Baja
+
 </strong>
 
+
 </div>
+
 
 
 
 <div id="estadoSeguridad">
 
-🟢 Estructura correcta
+🟢 Diseño correcto
 
 </div>
 
@@ -253,21 +306,32 @@ Baja
 
 
 
+
+
+<!-- =========================
+     INFORMACION RAPIDA
+========================= -->
 
 
 <div class="quick-info">
 
 
+
 <div>
 
 💧
+
 <br>
 
 Litros
 
+
 <strong id="litros">
+
 84 L
+
 </strong>
+
 
 </div>
 
@@ -276,16 +340,20 @@ Litros
 <div>
 
 ⚖️
+
 <br>
 
 Peso
 
+
 <strong id="pesoTotal">
+
 100 kg
+
 </strong>
 
-</div>
 
+</div>
 
 
 </div>
@@ -302,8 +370,9 @@ Peso
 
 
 
-</section>
 
+
+</section>
 
 
 </aside>
@@ -314,31 +383,50 @@ Peso
 
 
 
-<!-- ACUARIO 3D -->
+<!-- =========================
+     ZONA CENTRAL 3D
+========================= -->
 
 
 <section class="viewer">
 
 
+
 <div class="aquarium">
 
 
-<div class="background-3d"></div>
+<div class="background-3d">
+
+</div>
 
 
-<div class="water"></div>
+
+<div class="water">
+
+</div>
 
 
-<div class="sand"></div>
+
+<div class="sand">
+
+</div>
 
 
-<div class="decor"></div>
+
+<div class="decor">
+
+</div>
 
 
-<div class="glass"></div>
+
+<div class="glass">
+
+</div>
+
 
 
 </div>
+
 
 
 
@@ -346,17 +434,17 @@ Peso
 <div class="camera">
 
 
-<button id="zoomMas">
+<button>
 +
 </button>
 
 
-<button id="zoomMenos">
+<button>
 -
 </button>
 
 
-<button id="resetCam">
+<button>
 ⟳
 </button>
 
@@ -364,16 +452,12 @@ Peso
 </div>
 
 
+
 </section>
 
-
-
-
-
-
-
-
-<!-- PANEL DERECHO -->
+<!-- =========================
+     PANEL DERECHO
+========================= -->
 
 
 <aside class="panel">
@@ -394,29 +478,51 @@ Peso
 </h3>
 
 
+
 <p>
+
 Volumen:
+
 <strong id="infoLitros">
+
 84 L
+
 </strong>
+
 </p>
 
 
+
+
 <p>
+
 Medidas:
+
 <br>
+
 <strong id="infoMedidas">
+
 70 × 30 × 40 cm
+
 </strong>
+
 </p>
+
+
 
 
 <p>
+
 Cristal:
+
 <strong id="infoCristal">
+
 6 mm
+
 </strong>
+
 </p>
+
 
 
 </div>
@@ -435,31 +541,50 @@ Cristal:
 </h3>
 
 
+
 <p>
+
 pH:
+
 <strong>
 7.0
 </strong>
+
+
 </p>
 
 
+
+
 <p>
+
 Temperatura:
+
 <strong>
 25 ºC
 </strong>
+
+
 </p>
+
+
 
 
 <p>
+
 Nitratos:
+
 <strong>
 20 mg/L
 </strong>
+
+
 </p>
 
 
+
 </div>
+
 
 
 
@@ -475,9 +600,43 @@ Nitratos:
 </h3>
 
 
+
 <p>
+
 Sin peces añadidos
+
 </p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- FICHA TECNICA -->
+
+<div class="card">
+
+
+<h3>
+📋 Ficha técnica
+</h3>
+
+
+<div id="fichaTecnica">
+
+
+Pulsa "Crear acuario"
+
+para generar ficha.
+
+
+</div>
+
 
 
 </div>
@@ -505,13 +664,20 @@ Acuario Designer Studio © 2026
 
 
 
+
+
 </div>
 
 
 
 
 
-<!-- SCRIPTS AL FINAL -->
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 
 <script src="js/engine.js"></script>
 
