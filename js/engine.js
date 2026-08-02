@@ -1,11 +1,11 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V10
+   ACUARIO DESIGNER STUDIO V12
    MOTOR ESTRUCTURAL PROFESIONAL
    CRISTAL + TIRANTES TRANSVERSALES
 ================================================== */
 
 
-console.log("ENGINE V10 PROFESIONAL CARGADO");
+console.log("ENGINE V12 PROFESIONAL CARGADO");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -25,6 +25,20 @@ return;
 
 
 
+function actualizar(id,texto){
+
+let elemento=document.getElementById(id);
+
+if(elemento){
+
+elemento.textContent=texto;
+
+}
+
+}
+
+
+
 
 function calcular(){
 
@@ -35,9 +49,14 @@ let H=Number(alto.value)||0;
 
 
 
-// ==========================
-// VOLUMEN
-// ==========================
+if(L<=0 || A<=0 || H<=0)return;
+
+
+
+
+/* =========================
+ VOLUMEN
+========================= */
 
 
 let litros=(L*A*H)/1000;
@@ -46,9 +65,9 @@ let litros=(L*A*H)/1000;
 
 
 
-// ==========================
-// CATEGORIA
-// ==========================
+/* =========================
+ CATEGORIA
+========================= */
 
 
 let categoria="Acuario doméstico";
@@ -79,18 +98,16 @@ categoria="Acuario gigante";
 
 
 
-// ==========================
-// CRISTAL
-// ==========================
+/* =========================
+ CRISTAL
+ MINIMO COMERCIAL 6mm
+========================= */
 
 
 let cristal=6;
 
-
 let motivo=
-"Dimensiones dentro de parámetros normales.";
-
-
+"Dimensiones dentro de parámetros comerciales normales.";
 
 
 
@@ -99,11 +116,9 @@ if((L>100 && L<=150) || H>45){
 cristal=8;
 
 motivo=
-"Mayor longitud o altura de agua.";
+"Mayor longitud o altura de columna de agua.";
 
 }
-
-
 
 
 
@@ -112,10 +127,9 @@ if(L>150 || H>=60){
 cristal=10;
 
 motivo=
-"Dimensiones elevadas, necesita mayor rigidez.";
+"Acuario de grandes dimensiones. Mayor presión estructural.";
 
 }
-
 
 
 
@@ -124,7 +138,7 @@ if(L>250 || H>=70){
 cristal=12;
 
 motivo=
-"Dimensiones extremas, requiere fabricación especial.";
+"Proyecto especial de gran volumen.";
 
 }
 
@@ -134,26 +148,24 @@ motivo=
 
 
 
-// ==========================
-// CORTES
-// ==========================
+/* =========================
+ CORTES CRISTAL
+========================= */
 
 
-let lateral=
+let lateral =
 A-(cristal/10*2);
 
 
-let base=
-A-(cristal/10*2);
-
-
-
-let cortes=
+let cortes =
 
 `Frontal: ${L} × ${H} cm | `+
+
 `Trasera: ${L} × ${H} cm | `+
+
 `Laterales: ${lateral.toFixed(1)} × ${H} cm | `+
-`Base: ${L} × ${base.toFixed(1)} cm`;
+
+`Base: ${L} × ${lateral.toFixed(1)} cm`;
 
 
 
@@ -161,28 +173,20 @@ let cortes=
 
 
 
-// ==========================
-// TIRANTES TRANSVERSALES
-// ==========================
+
+/* =========================
+ TIRANTES SUPERIORES
+ TRANSVERSALES
+========================= */
 
 
-let tirantes=
-"No necesarios";
+let tirantes="No necesarios";
 
+let medida="No aplica";
 
-let medida=
-"No aplica";
-
-
-let tipo=
-"Sin refuerzo";
-
-
+let tipo="Sin refuerzo";
 
 let cantidad=0;
-
-
-
 
 
 
@@ -190,15 +194,15 @@ if(L>120 && L<=180){
 
 
 tirantes=
-"1 tirante transversal superior recomendado";
+"1 tirante transversal superior";
 
 
 medida=
-`${lateral.toFixed(1)} cm × ${cristal} mm grosor × 5 cm ancho`;
+`${A} × 5 cm | Cristal ${cristal} mm`;
 
 
 tipo=
-"Tirante transversal superior central";
+"Tirante superior central transversal";
 
 
 cantidad=1;
@@ -210,27 +214,25 @@ cantidad=1;
 
 
 
-
 if(L>180 && L<=250){
 
 
 tirantes=
-"2 tirantes transversales superiores recomendados";
+"2 tirantes transversales superiores";
 
 
 medida=
-`${lateral.toFixed(1)} cm × ${cristal} mm grosor × 6 cm ancho`;
+`${A} × 6 cm | Cristal ${cristal} mm`;
 
 
 tipo=
-"Dos tirantes transversales superiores repartidos";
+"Dos tirantes superiores transversales repartidos";
 
 
 cantidad=2;
 
 
 }
-
 
 
 
@@ -244,7 +246,7 @@ tirantes=
 
 
 medida=
-`${lateral.toFixed(1)} cm × ${cristal} mm grosor × 8 cm ancho`;
+`${A} × 8 cm | Cristal ${cristal} mm`;
 
 
 tipo=
@@ -254,15 +256,18 @@ tipo=
 cantidad=
 "Según diseño";
 
+
 }
 
 
 
 
 
-// ==========================
-// SEGURIDAD
-// ==========================
+
+
+/* =========================
+ SEGURIDAD
+========================= */
 
 
 let nivel=
@@ -270,9 +275,7 @@ let nivel=
 
 
 let seguridad=
-"Acuario dentro de parámetros habituales.";
-
-
+motivo;
 
 
 
@@ -280,7 +283,7 @@ if(L>120 || H>50){
 
 
 nivel=
-"🟡 Diseño con refuerzo recomendado";
+"🟡 Refuerzo recomendado";
 
 
 seguridad=
@@ -300,7 +303,7 @@ nivel=
 
 
 seguridad=
-"Requiere cristal aumentado y refuerzo estructural.";
+"Necesita mayor grosor y refuerzo estructural.";
 
 }
 
@@ -316,7 +319,7 @@ nivel=
 
 
 seguridad=
-"Fuera de medidas domésticas. Requiere cálculo especializado.";
+"Dimensiones fuera del rango doméstico.";
 
 }
 
@@ -326,17 +329,22 @@ seguridad=
 
 
 
-// ==========================
-// PESO
-// ==========================
+
+/* =========================
+ PESO
+========================= */
 
 
-let pesoCristal=
+let pesoCristal =
 
 (((L*H*2)+(A*H*2)+(L*A))/10000)
+
 *
+
 cristal
+
 *
+
 2.5;
 
 
@@ -344,7 +352,9 @@ cristal
 let pesoTotal=
 
 litros+
+
 pesoCristal+
+
 (litros*0.15);
 
 
@@ -354,92 +364,86 @@ pesoCristal+
 
 
 
-// ==========================
-// ACTUALIZAR PANTALLA
-// ==========================
+/* =========================
+ ACTUALIZAR INTERFAZ
+========================= */
 
 
-actualizar("infoLitros",
-litros.toFixed(1)+" litros");
-
-
-
-actualizar("infoMedidas",
-`${L} × ${A} × ${H} cm`);
+actualizar(
+"infoLitros",
+litros.toFixed(1)+" litros"
+);
 
 
 
-
-actualizar("cristalDiseño",
-cristal+" mm");
-
-
-
-actualizar("infoCristal",
-`Vidrio float recocido ${cristal} mm`);
+actualizar(
+"infoMedidas",
+`${L} × ${A} × ${H} cm`
+);
 
 
 
 
-actualizar("cortesCristalDiseño",
-cortes);
+actualizar(
+"cristalDiseño",
+`${cristal} mm`
+);
 
 
 
-actualizar("cortesCristal",
-cortes);
+actualizar(
+"tipoCristal",
+`Vidrio float recocido ${cristal} mm`
+);
 
 
 
-
-actualizar("tirantesDiseño",
-tirantes);
-
-
-
-actualizar("tirantes",
-tirantes);
+actualizar(
+"infoCristal",
+`Vidrio float recocido ${cristal} mm`
+);
 
 
 
-
-actualizar("medidaTirante",
-medida);
-
-
-
-actualizar("tipoRefuerzo",
-tipo);
+actualizar(
+"cortesCristalDiseño",
+cortes
+);
 
 
 
-actualizar("nivelEstructural",
-nivel);
+actualizar(
+"tirantesDiseño",
+tirantes
+);
 
 
 
-actualizar("motivoSeguridad",
-seguridad);
+actualizar(
+"medidaTirante",
+medida
+);
 
 
 
-actualizar("estadoSeguridad",
-nivel);
+actualizar(
+"pesoTotal",
+pesoTotal.toFixed(1)+" kg"
+);
 
 
 
-actualizar("pesoTotal",
-pesoTotal.toFixed(1)+" kg");
+actualizar(
+"riesgo",
+nivel
+);
 
 
 
-actualizar("riesgo",
-nivel);
-
-
-
-actualizar("soporte",
-"Soporte nivelado preparado para carga total");
+actualizar(
+"soporte",
+"Soporte nivelado preparado para carga total"
+);
 
 
 
@@ -447,28 +451,24 @@ actualizar("soporte",
 
 
 
-
-// ==========================
-// DATOS PARA FICHA TECNICA
-// ==========================
+/* =========================
+ DATOS PARA FICHA
+========================= */
 
 
 window.acuario={
 
 
-categoria:categoria,
+categoria,
 
 
 dimensiones:{
 
 largo:L,
-
 ancho:A,
-
 alto:H
 
 },
-
 
 
 volumen:litros,
@@ -487,7 +487,7 @@ estado:nivel
 
 
 
-cortes:cortes,
+cortes,
 
 
 
@@ -495,11 +495,11 @@ tirantes:{
 
 estado:tirantes,
 
-medida:medida,
+cantidad,
 
-tipo:tipo,
+medida,
 
-cantidad:cantidad
+tipo
 
 },
 
@@ -507,7 +507,7 @@ cantidad:cantidad
 
 seguridad:{
 
-nivel:nivel,
+nivel,
 
 mensaje:seguridad
 
@@ -535,40 +535,18 @@ total:pesoTotal
 
 
 
+[largo,ancho,alto].forEach(campo=>{
 
-function actualizar(id,texto){
-
-
-let elemento=document.getElementById(id);
-
-
-if(elemento){
-
-elemento.textContent=texto;
-
-}
-
-
-}
-
-
-
-
-[largo,ancho,alto].forEach(input=>{
-
-
-input.addEventListener(
+campo.addEventListener(
 "input",
 calcular
 );
-
 
 });
 
 
 
 calcular();
-
 
 
 });
