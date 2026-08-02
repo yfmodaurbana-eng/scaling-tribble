@@ -1,41 +1,37 @@
 /* =====================================
    ACUARIO DESIGNER STUDIO PRO
-   STYLE V1
+   STYLE CSS V1 LIMPIO
 ===================================== */
 
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
-
 
 
 body{
 
-margin:0;
+    margin:0;
+    height:100vh;
+    overflow:hidden;
 
-height:100vh;
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
-font-family:
-Segoe UI,Arial,sans-serif;
-
-background:#07111f;
-
-color:white;
-
-overflow:hidden;
-
+    background:#07111f;
+    color:white;
 }
 
 
+/* APP */
 
 .app{
 
-height:100vh;
-
-display:flex;
-
-flex-direction:column;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
 
 }
 
@@ -45,19 +41,18 @@ flex-direction:column;
 
 .header{
 
-height:70px;
+    height:70px;
 
-display:flex;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-align-items:center;
+    padding:0 25px;
 
-justify-content:space-between;
+    background:#111827;
 
-padding:0 25px;
-
-background:#111827;
-
-border-bottom:1px solid #334155;
+    border-bottom:
+    1px solid #334155;
 
 }
 
@@ -65,22 +60,21 @@ border-bottom:1px solid #334155;
 
 .logo{
 
-font-size:24px;
-
-font-weight:bold;
+    font-size:24px;
+    font-weight:700;
 
 }
 
 
 .logo span{
 
-display:block;
+    display:block;
 
-font-size:12px;
+    font-size:12px;
 
-color:#38bdf8;
+    color:#38bdf8;
 
-letter-spacing:3px;
+    letter-spacing:3px;
 
 }
 
@@ -88,95 +82,91 @@ letter-spacing:3px;
 
 .actions{
 
-display:flex;
+    display:flex;
 
-gap:10px;
+    gap:10px;
 
 }
 
 
 
-
+/* BOTONES */
 
 button{
 
-border:none;
+    background:#1e293b;
 
-background:#1e293b;
+    color:white;
 
-color:white;
+    border:1px solid #334155;
 
-padding:10px 18px;
+    padding:10px 18px;
 
-border-radius:10px;
+    border-radius:10px;
 
-cursor:pointer;
+    cursor:pointer;
 
-font-weight:bold;
+    font-weight:bold;
 
 }
-
 
 
 button:hover{
 
-background:#2563eb;
+    background:#2563eb;
 
 }
-
-
 
 
 
 /* ZONA PRINCIPAL */
 
-
 .main{
 
-flex:1;
+    flex:1;
 
-display:grid;
+    display:grid;
 
-grid-template-columns:
+    grid-template-columns:
 
-280px
+    280px
+    1fr
+    330px;
 
-1fr
 
-330px;
+    gap:15px;
 
-gap:15px;
-
-padding:15px;
+    padding:15px;
 
 }
 
 
 
+/* PANELES */
 
 .sidebar,
 .panel{
 
+    background:#111827;
 
-background:#111827;
+    border-radius:18px;
 
-border-radius:18px;
+    padding:18px;
 
-padding:18px;
-
-overflow:auto;
+    overflow:auto;
 
 }
+
 
 
 
 h2{
 
-margin-top:0;
+    margin-top:0;
 
-color:#38bdf8;
+    color:#38bdf8;
 
-font-size:18px;
+    font-size:18px;
 
 }
 
@@ -184,11 +174,9 @@ font-size:18px;
 
 h3{
 
-font-size:15px;
+    font-size:15px;
 
 }
-
-
 
 
 
@@ -197,11 +185,11 @@ font-size:15px;
 
 .tool-grid{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr 1fr;
 
-gap:10px;
+    gap:10px;
 
 }
 
@@ -209,11 +197,9 @@ gap:10px;
 
 .tool{
 
-height:70px;
+    height:70px;
 
 }
-
-
 
 
 
@@ -222,7 +208,7 @@ height:70px;
 
 .config{
 
-margin-top:20px;
+    margin-top:20px;
 
 }
 
@@ -230,13 +216,13 @@ margin-top:20px;
 
 label{
 
-display:flex;
+    display:flex;
 
-justify-content:space-between;
+    justify-content:space-between;
 
-align-items:center;
+    align-items:center;
 
-margin-bottom:15px;
+    margin-bottom:14px;
 
 }
 
@@ -244,23 +230,21 @@ margin-bottom:15px;
 
 input{
 
-width:80px;
+    width:80px;
 
-padding:8px;
+    padding:8px;
 
-border-radius:8px;
+    border-radius:8px;
 
-background:#020617;
+    border:1px solid #334155;
 
-color:white;
+    background:#020617;
 
-border:1px solid #334155;
+    color:white;
 
-text-align:center;
+    text-align:center;
 
 }
-
-
 
 
 
@@ -269,28 +253,25 @@ text-align:center;
 
 .card{
 
-background:#020617;
+    background:#020617;
 
-padding:15px;
+    border-radius:14px;
 
-border-radius:14px;
+    padding:15px;
 
-margin-bottom:15px;
+    margin-bottom:15px;
 
-border:1px solid #1e293b;
+    border:1px solid #1e293b;
 
 }
-
-
 
 
 
 .card b{
 
-color:#38bdf8;
+    color:#38bdf8;
 
 }
-
 
 
 
@@ -300,17 +281,15 @@ color:#38bdf8;
 
 .create{
 
-width:100%;
+    width:100%;
 
-margin-top:15px;
+    margin-top:20px;
 
-background:#2563eb;
+    height:45px;
 
-height:45px;
+    background:#2563eb;
 
 }
-
-
 
 
 
@@ -319,39 +298,47 @@ height:45px;
 
 .viewer{
 
-background:
+    background:
 
-radial-gradient(circle,#1e293b,#020617);
+    radial-gradient(
+    circle,
+    #1e293b,
+    #020617
+    );
 
-border-radius:20px;
 
-display:flex;
+    border-radius:20px;
 
-align-items:center;
+    display:flex;
 
-justify-content:center;
+    align-items:center;
 
-overflow:hidden;
+    justify-content:center;
 
 }
 
 
 
 
+/* ACUARIO VISUAL */
 
 .aquarium{
 
-width:420px;
+    width:420px;
 
-height:250px;
+    height:250px;
 
-border:3px solid rgba(255,255,255,.3);
+    border-radius:15px;
 
-border-radius:15px;
+    border:
 
-position:relative;
+    3px solid rgba(255,255,255,.3);
 
-overflow:hidden;
+    position:relative;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.05);
 
 }
 
@@ -359,15 +346,17 @@ overflow:hidden;
 
 .water{
 
-position:absolute;
+    position:absolute;
 
-bottom:0;
+    bottom:0;
 
-width:100%;
+    width:100%;
 
-height:75%;
+    height:75%;
 
-background:rgba(14,165,233,.35);
+    background:
+
+    rgba(14,165,233,.35);
 
 }
 
@@ -375,19 +364,17 @@ background:rgba(14,165,233,.35);
 
 .sand{
 
-position:absolute;
+    position:absolute;
 
-bottom:0;
+    bottom:0;
 
-width:100%;
+    width:100%;
 
-height:30px;
+    height:35px;
 
-background:#c2a878;
+    background:#c2a878;
 
 }
-
-
 
 
 
@@ -396,68 +383,64 @@ background:#c2a878;
 
 #fichaTecnica{
 
-font-size:13px;
+    white-space:pre-line;
 
-line-height:1.5;
+    font-size:13px;
 
-white-space:pre-line;
+    line-height:1.5;
 
-max-height:350px;
+    max-height:350px;
 
-overflow:auto;
+    overflow:auto;
 
 }
-
 
 
 
 /* PIE */
 
-
 footer{
 
-height:35px;
+    height:35px;
 
-display:flex;
+    display:flex;
 
-justify-content:center;
+    justify-content:center;
 
-align-items:center;
+    align-items:center;
 
-font-size:12px;
+    color:#94a3b8;
 
-color:#94a3b8;
+    font-size:12px;
 
 }
 
 
 
-
-/* RESPONSIVE */
-
+/* MOVIL */
 
 @media(max-width:1000px){
 
 
 body{
 
-overflow:auto;
+    overflow:auto;
 
 }
 
 
 .main{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
 }
-
 
 
 .viewer{
 
-height:400px;
+    height:400px;
 
 }
+
 
 }
