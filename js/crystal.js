@@ -3,7 +3,7 @@
    CRISTAL INTELIGENTE
 ===================================== */
 
-
+console.log("CRYSTAL.JS CARGADO");
 function calcularCristal(largo, ancho, alto){
 
 
