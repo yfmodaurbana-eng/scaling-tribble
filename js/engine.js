@@ -1,195 +1,117 @@
-/* =====================================
-   ACUARIO DESIGNER V4
-   MOTOR PRINCIPAL
-===================================== */
+/* ======================================
+   ACUARIO DESIGNER STUDIO V6
+   ENGINE PRINCIPAL
+====================================== */
 
 
-// DATOS DEL ACUARIO
+document.addEventListener("DOMContentLoaded",()=>{
 
-let aquariumData = {
 
-    largo:70,
-    ancho:30,
-    alto:40,
-    litros:84,
-    cristal:6
-
-};
+const largo = document.getElementById("largo");
+const ancho = document.getElementById("ancho");
+const alto = document.getElementById("alto");
 
 
 
+function calcularAcuario(){
 
 
-// CREAR ACUARIO
-
-function crearAcuario(){
-
-
-    let largo =
-    Number(
-    document.getElementById("largo").value
-    );
-
-
-    let ancho =
-    Number(
-    document.getElementById("ancho").value
-    );
-
-
-    let alto =
-    Number(
-    document.getElementById("alto").value
-    );
-
-
-    let cristal =
-    Number(
-    document.getElementById("cristal").value
-    );
+if(!largo || !ancho || !alto) return;
 
 
 
-    let litros =
-    (largo * ancho * alto) / 1000;
+let L = Number(largo.value);
+let A = Number(ancho.value);
+let H = Number(alto.value);
 
 
 
-    aquariumData.largo=largo;
-    aquariumData.ancho=ancho;
-    aquariumData.alto=alto;
-    aquariumData.litros=litros;
-    aquariumData.cristal=cristal;
+// litros
+
+let litros = (L*A*H)/1000;
 
 
 
-    document
-    .getElementById("liters")
-    .innerHTML=
-    litros.toFixed(1)+" L";
+litros = litros.toFixed(1);
 
 
 
-    document
-    .getElementById("infoCristal")
-    .innerHTML=
-    cristal+" mm";
+// peso agua
+
+let pesoAgua = litros;
 
 
 
-    comprobarCristal();
+// peso aproximado total
+// agua + cristal + decoración
 
-
-
-}
-
-
-
-
-
-
-
-// COMPROBAR GROSOR CRISTAL
-
-
-function comprobarCristal(){
-
-
-
-let largo =
-Number(
-document.getElementById("largo").value
-);
-
-
-let alto =
-Number(
-document.getElementById("alto").value
-);
-
-
-let cristal =
-Number(
-document.getElementById("cristal").value
+let pesoTotal = Math.round(
+pesoAgua * 1.15
 );
 
 
 
-let recomendado=6;
+
+
+// actualizar litros
+
+
+let elementosLitros=[
+
+"litros",
+"infoLitros",
+"volume"
+
+];
 
 
 
-if(largo>100 || alto>50){
+elementosLitros.forEach(id=>{
 
-    recomendado=10;
+let el=document.getElementById(id);
 
-}
+if(el){
 
-else if(largo>80 || alto>45){
-
-    recomendado=8;
-
-}
-
-
-
-
-
-let caja =
-document.getElementById("resultadoCristal");
-
-
-
-
-if(cristal < recomendado){
-
-
-caja.innerHTML=
-
-"❌ Cristal insuficiente<br>"+
-"Recomendado: "+
-recomendado+
-" mm";
-
-
-caja.style.color="#ef4444";
-
+el.textContent =
+litros+" L";
 
 }
 
+});
 
 
-else if(cristal==recomendado){
 
 
-caja.innerHTML=
 
-"✅ Grosor correcto<br>"+
-"Recomendado para este acuario";
+// peso agua
 
 
-caja.style.color="#22c55e";
+let agua =
+document.getElementById("pesoAgua");
 
+
+if(agua){
+
+agua.textContent =
+pesoAgua+" kg";
 
 }
 
 
 
-else{
 
 
-caja.innerHTML=
-
-"⭐ Cristal reforzado<br>"+
-"Grosor superior al recomendado";
+// peso total
 
 
-caja.style.color="#38bdf8";
+let total =
+document.getElementById("pesoTotal");
 
 
-}
+if(total){
 
-
+total.textContent =
+pesoTotal+" kg";
 
 }
 
@@ -198,49 +120,63 @@ caja.style.color="#38bdf8";
 
 
 
-
-// BOTON CREAR
-
-
-document
-.querySelector(".create")
-.onclick=
-crearAcuario;
+// medidas
 
 
+let medidas =
+document.getElementById("infoMedidas");
+
+
+if(medidas){
+
+medidas.textContent =
+`${L} × ${A} × ${H} cm`;
+
+}
 
 
 
-// ACTUALIZAR AL CAMBIAR DATOS
 
 
-document
-.getElementById("cristal")
-.addEventListener(
+// actualizar cristal
+
+
+calcularCristal(L,A,H);
+
+
+
+}
+
+
+
+
+
+// eventos
+
+
+[largo,ancho,alto].forEach(input=>{
+
+
+if(input){
+
+input.addEventListener(
 "input",
-comprobarCristal
+calcularAcuario
 );
 
 
-document
-.getElementById("largo")
-.addEventListener(
-"input",
-comprobarCristal
-);
+}
 
 
-document
-.getElementById("alto")
-.addEventListener(
-"input",
-comprobarCristal
-);
+});
 
 
 
-window.onload=function(){
 
-    comprobarCristal();
+// inicio
 
-};
+calcularAcuario();
+
+
+
+});
