@@ -2,7 +2,9 @@
    ACUARIO DESIGNER STUDIO V5
    STYLE PRINCIPAL
 =================================== */
-
+body{
+    background:lime !important;
+}
 
 *{
     box-sizing:border-box;
