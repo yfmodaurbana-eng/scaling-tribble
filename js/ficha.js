@@ -1,11 +1,11 @@
 /* ==================================================
    ACUARIO DESIGNER STUDIO
-   FICHA TECNICA PROFESIONAL V5
+   FICHA TECNICA PROFESIONAL V6
    GENERADOR + COPIAR
 ================================================== */
 
 
-console.log("FICHA TECNICA V5 CARGADA");
+console.log("FICHA TECNICA V6 CARGADA");
 
 
 
@@ -50,8 +50,8 @@ copiarFicha
 
 
 
-function generarFicha(){
 
+function generarFicha(){
 
 
 let a = window.acuario;
@@ -69,6 +69,7 @@ return;
 
 
 
+
 let fecha =
 new Date().toLocaleDateString("es-ES");
 
@@ -79,17 +80,31 @@ a.volumenUtil || (a.volumen * 0.85);
 
 
 
-let tiranteTexto =
+
+
+let estadoRefuerzo =
 a.tirantes.estado;
 
 
 
-if(tiranteTexto==="No necesarios"){
+let ubicacion =
+"Refuerzo superior transversal";
 
-tiranteTexto=
+
+
+
+if(a.tirantes.cantidad===0){
+
+estadoRefuerzo=
 "No requiere tirantes superiores";
 
+
+ubicacion=
+"No aplica";
+
 }
+
+
 
 
 
@@ -156,7 +171,7 @@ ${a.cristal.tipo}
 
 Sistema:
 
-Construcción mediante silicona estructural específica para acuarios
+Acuario de vidrio pegado mediante silicona estructural
 
 
 
@@ -190,9 +205,9 @@ ${a.cortes}
 ================================
 
 
-Necesidad:
+Estado:
 
-${tiranteTexto}
+${estadoRefuerzo}
 
 
 
@@ -202,7 +217,7 @@ ${a.tirantes.cantidad}
 
 
 
-Medidas:
+Medida:
 
 ${a.tirantes.medida}
 
@@ -216,7 +231,7 @@ ${a.tirantes.tipo}
 
 Ubicación:
 
-Refuerzo superior transversal
+${ubicacion}
 
 
 
@@ -290,13 +305,10 @@ Mínimo 7 días antes del llenado completo
 ================================
 
 
-✔ Utilizar superficie perfectamente nivelada
+✔ Usar mueble perfectamente nivelado
 
 
-✔ Verificar resistencia del mueble
-
-
-✔ Colocar apoyo inferior adecuado
+✔ Colocar base de apoyo adecuada
 
 
 ✔ Utilizar cantos pulidos
@@ -316,6 +328,7 @@ Mínimo 7 días antes del llenado completo
 FIN DE FICHA TÉCNICA
 
 `;
+
 
 
 
@@ -370,14 +383,18 @@ window.fichaActual
 
 .then(()=>{
 
+
 alert("Ficha técnica copiada correctamente");
+
 
 })
 
 
 .catch(()=>{
 
+
 alert("No se pudo copiar la ficha");
+
 
 });
 
