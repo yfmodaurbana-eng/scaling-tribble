@@ -3,7 +3,7 @@
    FICHA FABRICACION PROFESIONAL
 ===================================== */
 
-console.log("FICHA V10 CARGADA");
+alert("FICHA NUEVA CARGADA");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
