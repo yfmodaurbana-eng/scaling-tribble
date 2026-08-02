@@ -1,6 +1,6 @@
 /* =====================================
    ACUARIO DESIGNER STUDIO
-   GENERADOR FICHA TECNICA
+   FICHA TECNICA V1
 ===================================== */
 
 
@@ -15,13 +15,13 @@ if(!boton) return;
 
 
 
-boton.addEventListener("click", generarFicha);
+boton.addEventListener("click", crearFicha);
 
 
 
 
 
-function generarFicha(){
+function crearFicha(){
 
 
 let largo =
@@ -37,174 +37,151 @@ Number(document.getElementById("alto").value);
 
 
 
-// litros
+
+
+// VOLUMEN
 
 let litros =
-(largo*ancho*alto)/1000;
+(largo * ancho * alto) / 1000;
 
 
 
-// cristal
-
-let cristal = 6;
 
 
-if(litros <=20){
+// CRISTAL
 
-cristal = 3;
+let cristal = 3;
 
-}
 
-else if(alto >45){
+if(litros > 20)
+cristal = 5;
 
+
+if(litros > 100)
+cristal = 6;
+
+
+if(alto > 45)
 cristal = 8;
 
-}
 
-else if(alto >55){
-
+if(alto > 55)
 cristal = 10;
 
-}
 
-else if(largo >150){
-
-cristal = 10;
-
-}
+if(largo > 200)
+cristal = 12;
 
 
 
 
 
-// tirantes
 
-let tirantes = 0;
-
-
-if(largo >80){
-
-tirantes = 1;
-
-}
+// TIRANTES
 
 
-if(largo >120){
-
-tirantes = 2;
-
-}
+let cantidadTirantes = 0;
 
 
-if(largo >200){
+if(largo > 80)
+cantidadTirantes = 1;
 
-tirantes = 3;
 
-}
+if(largo > 120)
+cantidadTirantes = 2;
+
+
+if(largo > 200)
+cantidadTirantes = 3;
 
 
 
-// peso
+let tirantesTexto =
+cantidadTirantes === 0
+?
+"No necesarios"
+:
+cantidadTirantes+" unidades";
+
+
+
+
+
 
 let peso =
-litros + (litros*0.4);
+litros * 1.4;
 
 
 
-
-
-// crear ficha
 
 
 let ficha = `
 
-📋 FICHA TÉCNICA ACUARIO
+📋 FICHA TÉCNICA
 
-━━━━━━━━━━━━━━
+━━━━━━━━━━━━
 
-MEDIDAS
+ACUARIO
 
-${largo} × ${ancho} × ${alto} cm
+${largo} x ${ancho} x ${alto} cm
 
+Volumen:
+${litros.toFixed(1)} L
 
-VOLUMEN
-
-${litros.toFixed(1)} litros
-
-
-PESO ESTIMADO
-
+Peso estimado:
 ${peso.toFixed(1)} kg
 
 
-━━━━━━━━━━━━━━
+━━━━━━━━━━━━
 
 🪟 CRISTALES
 
 Frontal:
-${largo} × ${alto} mm
+${largo} x ${alto} cm
 
-1 unidad
-
-
-Trasero:
-${largo} × ${alto} mm
-
-1 unidad
+Trasera:
+${largo} x ${alto} cm
 
 
 Laterales:
-${ancho} × ${alto} mm
+${ancho} x ${alto} cm
 
-2 unidades
+Cantidad:
+2
 
 
 Base:
-${largo} × ${ancho} mm
-
-1 unidad
+${largo} x ${ancho} cm
 
 
 Grosor:
-
 ${cristal} mm
 
 
-━━━━━━━━━━━━━━
+━━━━━━━━━━━━
+
+🛡 REFUERZO
 
 
-🛡 TIRANTES
+Tirantes:
+${tirantesTexto}
 
 
-Cantidad:
+Medida:
 
-${tirantes}
-
-
-
-Medida tirante:
-
-Ancho acuario:
-${ancho} mm
+${ancho} cm x 8 cm x ${cristal} mm
 
 
-Ancho tirante:
-80 mm
+Colocación:
+
+Superior transversal
 
 
-Grosor:
-
-${cristal} mm
-
-
-━━━━━━━━━━━━━━
-
+━━━━━━━━━━━━
 
 SILICONA
 
-Silicona neutra especial acuarios
-
-
+Neutra especial acuarios
 
 `;
 
@@ -225,48 +202,33 @@ mostrarFicha(ficha);
 function mostrarFicha(texto){
 
 
-let contenedor =
+let zona =
 document.getElementById("fichaTecnica");
 
 
 
-if(!contenedor){
+zona.innerHTML = `
 
 
-contenedor =
-document.createElement("div");
+<pre class="texto-ficha">
+${texto}
+</pre>
 
-
-contenedor.id="fichaTecnica";
-
-
-contenedor.innerHTML=`
-
-<h3>📋 Ficha técnica</h3>
-
-<pre id="textoFicha"></pre>
 
 <button id="copiarFicha">
+
 📋 Copiar ficha
+
 </button>
+
 
 `;
 
 
 
-document.body.appendChild(contenedor);
 
-
-}
-
-
-
-document.getElementById("textoFicha").textContent=texto;
-
-
-
-
-document.getElementById("copiarFicha")
+document
+.getElementById("copiarFicha")
 .onclick=()=>{
 
 
@@ -275,9 +237,7 @@ navigator.clipboard.writeText(texto);
 
 alert("Ficha copiada");
 
-
 };
-
 
 
 }
