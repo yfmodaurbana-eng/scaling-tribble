@@ -350,7 +350,7 @@ info.innerHTML=`
 
 
 
-crearRefuerzos();
+setTimeout(crearRefuerzos,100);
 
 
 
@@ -402,7 +402,7 @@ setTimeout(actualizar3D,50);
 
 
 
-actualizar3D();
+setTimeout(actualizar3D,500);
 
 
 
