@@ -1,11 +1,11 @@
 /* =====================================
    ACUARIO DESIGNER STUDIO
-   MOTOR 3D V3 INTELIGENTE
-   ESCALADO + DATOS + REFUERZOS 3D
+   MOTOR 3D V4 INTELIGENTE
+   VISOR ESTABLE + DATOS TECNICOS
 ===================================== */
 
 
-console.log("MOTOR 3D V3 INTELIGENTE CARGADO");
+console.log("MOTOR 3D V4 INTELIGENTE CARGADO");
 
 
 
@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 const acuario3D =
 document.querySelector(".aquarium");
+
+
+const visor =
+document.querySelector(".viewer");
 
 
 const largo =
@@ -29,11 +33,16 @@ document.getElementById("alto");
 
 
 
-if(!acuario3D || !largo || !ancho || !alto){
+if(!acuario3D || !visor || !largo || !ancho || !alto){
 
-console.error("Motor 3D: elementos no encontrados");
+
+console.error(
+"Motor 3D V4: elementos no encontrados"
+);
+
 
 return;
+
 
 }
 
@@ -41,16 +50,124 @@ return;
 
 
 
+
 /* =====================================
-   ACTUALIZAR INFORMACION
+   CONFIGURACION VISUAL
 ===================================== */
 
 
-function crearInfo(){
+let escalaBase = 1;
+
+
+
+function limitar(valor,min,max){
+
+
+return Math.min(
+Math.max(valor,min),
+max
+);
+
+
+}
+   /* =====================================
+   ESCALADO 3D ESTABLE
+===================================== */
+
+
+function actualizarEscala(L,A,H){
+
+
+/*
+ No cambia el tamaño real del contenedor.
+ Solo escala visualmente.
+*/
+
+
+let escalaL =
+limitar(L/100,0.65,1.35);
+
+
+
+let escalaH =
+limitar(H/50,0.75,1.25);
+
+
+
+let escalaA =
+limitar(A/35,0.75,1.20);
+
+
+
+
+escalaBase =
+(escalaL + escalaH + escalaA) / 3;
+
+
+
+acuario3D.style.transform =
+
+`
+perspective(900px)
+rotateX(5deg)
+scale(${escalaBase})
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   AGUA Y ARENA
+===================================== */
+
+
+function actualizarInterior(){
+
+
+let agua =
+acuario3D.querySelector(".water");
+
+
+let arena =
+acuario3D.querySelector(".sand");
+
+
+
+if(agua){
+
+agua.style.height="82%";
+
+}
+
+
+
+if(arena){
+
+arena.style.height="18%";
+
+}
+
+
+}
+   /* =====================================
+   PANEL TECNICO 3D
+===================================== */
+
+
+function crearInfo3D(){
 
 
 let info =
-document.querySelector(".info3d");
+acuario3D.querySelector(".info3d");
+
 
 
 if(!info){
@@ -58,7 +175,9 @@ if(!info){
 
 info=document.createElement("div");
 
+
 info.className="info3d";
+
 
 acuario3D.appendChild(info);
 
@@ -77,17 +196,18 @@ return info;
 
 
 
-
 /* =====================================
-   CREAR REFUERZOS 3D
+   REFUERZOS 3D
 ===================================== */
 
 
 function limpiarRefuerzos(){
 
 
-document
-.querySelectorAll(".tirante3d,.refuerzo3d")
+acuario3D
+.querySelectorAll(
+".tirante3d,.refuerzo3d"
+)
 .forEach(e=>e.remove());
 
 
@@ -97,10 +217,12 @@ document
 
 
 
+
 function crearRefuerzos(){
 
 
 limpiarRefuerzos();
+
 
 
 let datos =
@@ -118,10 +240,6 @@ datos.tirantes.cantidad;
 
 
 
-
-// 1 TIRANTE
-
-
 if(cantidad===1){
 
 
@@ -129,7 +247,8 @@ let tirante =
 document.createElement("div");
 
 
-tirante.className="tirante3d";
+tirante.className=
+"tirante3d";
 
 
 acuario3D.appendChild(tirante);
@@ -141,13 +260,7 @@ acuario3D.appendChild(tirante);
 
 
 
-
-
-// 2 TIRANTES
-
-
 if(cantidad===2){
-
 
 
 let t1 =
@@ -174,15 +287,10 @@ t2.className=
 acuario3D.appendChild(t2);
 
 
-
 }
 
 
 
-
-
-
-// REFUERZO ESPECIAL
 
 
 if(cantidad==="Según diseño"){
@@ -192,7 +300,8 @@ let refuerzo =
 document.createElement("div");
 
 
-refuerzo.className="refuerzo3d";
+refuerzo.className=
+"refuerzo3d";
 
 
 acuario3D.appendChild(refuerzo);
@@ -201,8 +310,6 @@ acuario3D.appendChild(refuerzo);
 }
 
 
-
-
 }
 
 
@@ -211,15 +318,12 @@ acuario3D.appendChild(refuerzo);
 
 
 
-
-
 /* =====================================
-   ACTUALIZAR VISOR
+   ACTUALIZACION PRINCIPAL
 ===================================== */
 
 
 function actualizar3D(){
-
 
 
 let L =
@@ -235,82 +339,26 @@ Number(alto.value)||40;
 
 
 
-
-
-/* ESCALA */
-
-
-let escalaL =
-Math.min(Math.max(L/100,0.55),1.8);
-
-
-
-let escalaH =
-Math.min(Math.max(H/50,0.6),1.4);
+actualizarEscala(
+L,
+A,
+H
+);
 
 
 
-
-acuario3D.style.width =
-(escalaL*70)+"%";
+actualizarInterior();
 
 
-acuario3D.style.height =
-(escalaH*65)+"%";
-
-
-
-
-
-
-
-/* AGUA */
-
-
-let agua =
-acuario3D.querySelector(".water");
-
-
-if(agua){
-
-agua.style.height="82%";
-
-}
-
-
-
-
-
-
-/* ARENA */
-
-
-let arena =
-acuario3D.querySelector(".sand");
-
-
-if(arena){
-
-arena.style.height="18%";
-
-}
-
-
-
-
-
-
-
-
-/* INFORMACION TECNICA */
 
 
 let datos =
 window.acuario;
 
 
+
 let info =
-crearInfo();
+crearInfo3D();
 
 
 
@@ -349,26 +397,11 @@ info.innerHTML=`
 }
 
 
-
-setTimeout(crearRefuerzos,100);
-
-
-
+crearRefuerzos();
 
 
 acuario3D.dataset.medidas =
 `${L} x ${A} x ${H} cm`;
-
-
-
-
-
-console.log(
-"3D actualizado:",
-L,
-A,
-H
-);
 
 
 
@@ -380,6 +413,9 @@ H
 
 
 
+/* =====================================
+   SINCRONIZACION
+===================================== */
 
 
 [largo,ancho,alto].forEach(input=>{
@@ -389,7 +425,11 @@ input.addEventListener(
 "input",
 ()=>{
 
-setTimeout(actualizar3D,50);
+setTimeout(
+actualizar3D,
+150
+);
+
 
 }
 
@@ -400,9 +440,10 @@ setTimeout(actualizar3D,50);
 
 
 
-
-
-setTimeout(actualizar3D,500);
+setTimeout(
+actualizar3D,
+500
+);
 
 
 
