@@ -1,33 +1,105 @@
 /* =====================================
- ACUARIO DESIGNER STUDIO V8
- MOTOR DE CALCULO
+   ACUARIO DESIGNER STUDIO PRO V9
+   ENGINE - MOTOR DE CALCULO
 ===================================== */
 
 
-console.log("ENGINE CALCULO V8 CARGADO");
+console.log("ENGINE PRO V9 CARGADO");
+
+
+// Datos globales del acuario
+
+window.acuario = {
+
+dimensiones:{
+largo:0,
+ancho:0,
+alto:0
+},
+
+
+volumen:0,
+
+
+cristal:{
+grosor:0,
+estado:""
+},
+
+
+peso:{
+agua:0,
+cristal:0,
+decoracion:0,
+total:0
+},
+
+
+seguridad:{
+nivel:"",
+mensaje:""
+},
+
+
+tirantes:{
+cantidad:0,
+estado:""
+}
+
+
+};
+
+
+
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const largo=document.getElementById("largo");
-const ancho=document.getElementById("ancho");
-const alto=document.getElementById("alto");
+
+const largo =
+document.getElementById("largo");
+
+
+const ancho =
+document.getElementById("ancho");
+
+
+const alto =
+document.getElementById("alto");
+
+
+const boton =
+document.getElementById("crearAcuario");
+
 
 
 if(!largo||!ancho||!alto)return;
 
 
 
+
 function calcular(){
 
 
-let L=Number(largo.value)||0;
-let A=Number(ancho.value)||0;
-let H=Number(alto.value)||0;
+let L =
+Number(largo.value)||0;
 
 
-let litros=(L*A*H)/1000;
+let A =
+Number(ancho.value)||0;
+
+
+let H =
+Number(alto.value)||0;
+
+
+
+
+// VOLUMEN
+
+let litros =
+(L*A*H)/1000;
 
 
 
@@ -35,82 +107,85 @@ let litros=(L*A*H)/1000;
 
 let cristal=6;
 
+let estadoCristal=
+"Correcto";
+
 
 if(litros<=20){
 
 cristal=3;
 
-}else if(litros<=60){
+}
+
+
+else if(litros<=60){
 
 cristal=4;
 
-}else if(H<=45){
+}
+
+
+else if(H<=45){
 
 cristal=6;
 
-}else if(H<=55){
+}
+
+
+else if(H<=60){
 
 cristal=8;
 
-}else{
+}
+
+
+else{
 
 cristal=10;
 
+estadoCristal=
+"Revisar diseño";
+
 }
+
 
 
 
 
 // TIRANTES
 
-let tirantes="No necesarios";
+let cantidad=0;
+
+let estadoTirantes=
+"No necesarios";
 
 
 if(L>80){
 
-tirantes="1 recomendado";
+cantidad=1;
+
+estadoTirantes=
+"Recomendados";
 
 }
 
 
-if(L>100){
+if(L>120){
 
-tirantes="2 necesarios";
+cantidad=2;
 
-}
-
-
-if(L>150){
-
-tirantes="Diseño especial (3 tirantes)";
+estadoTirantes=
+"Necesarios";
 
 }
 
 
+if(L>180){
 
+cantidad=3;
 
-// SEGURIDAD
-
-let estado="🟢 Estructura correcta";
-
-let carga="Baja";
-
-
-if(H>45)carga="Media";
-
-if(H>55)carga="Alta";
-
-
-if(L>200){
-
-estado="🟡 Revisar diseño";
-
-}
-
-
-if(L>300 || H>80 || litros>1000){
-
-estado="🔴 Diseño especial";
+estadoTirantes=
+"Refuerzo estructural";
 
 }
 
@@ -120,53 +195,172 @@ estado="🔴 Diseño especial";
 
 // PESOS
 
-let pesoAgua=litros;
+let pesoAgua=
+litros;
+
+
+
+let pesoCristal=
+
+(
+((L*H*2)+(A*H*2)+(L*A))
+/10000
+)
+*
+cristal
+*
+2.5;
+
+
+
+let decoracion=
+litros*0.10;
+
+
 
 let pesoTotal=
-litros+(litros*0.15);
+pesoAgua+
+pesoCristal+
+decoracion;
 
 
 
 
 
-actualizar("litros",
-litros.toFixed(1)+" L");
+// SEGURIDAD
+
+let nivel=
+"🟢 Diseño correcto";
 
 
-actualizar("infoLitros",
-litros.toFixed(1)+" L");
+let mensaje=
+"Medidas dentro de parámetros normales";
 
 
-actualizar("pesoAgua",
-pesoAgua.toFixed(1)+" kg");
+
+if(L>200){
+
+nivel=
+"🟡 Revisar diseño";
 
 
-actualizar("pesoTotal",
-pesoTotal.toFixed(1)+" kg");
+mensaje=
+"Longitud elevada, revisar refuerzos";
+
+}
 
 
-actualizar("cristal",
-cristal+" mm");
+
+if(L>300 || H>80 || litros>1000){
 
 
-actualizar("infoCristal",
-cristal+" mm");
+nivel=
+"🔴 Diseño especial";
 
 
-actualizar("tirantes",
-tirantes);
+mensaje=
+"Requiere cálculo estructural";
+
+}
 
 
-actualizar("nivelCarga",
-carga);
 
 
-actualizar("estadoSeguridad",
-estado);
+// GUARDAR DATOS
+
+window.acuario={
 
 
-actualizar("infoMedidas",
-`${L} × ${A} × ${H} cm`);
+dimensiones:{
+
+largo:L,
+ancho:A,
+alto:H
+
+},
+
+
+volumen:litros,
+
+
+cristal:{
+
+grosor:cristal,
+estado:estadoCristal
+
+},
+
+
+peso:{
+
+agua:pesoAgua,
+cristal:pesoCristal,
+decoracion:decoracion,
+total:pesoTotal
+
+},
+
+
+seguridad:{
+
+nivel:nivel,
+mensaje:mensaje
+
+},
+
+
+tirantes:{
+
+cantidad:cantidad,
+estado:estadoTirantes
+
+}
+
+
+};
+
+
+
+
+actualizarPanel();
+
+
+
+}
+
+
+
+
+
+function actualizarPanel(){
+
+
+const a=
+window.acuario;
+
+
+
+actualizar(
+"litros",
+a.volumen.toFixed(1)+" L"
+);
+
+
+
+actualizar(
+"cristal",
+a.cristal.grosor+" mm"
+);
+
+
+
+actualizar(
+"seguridad",
+a.seguridad.nivel+
+"<br>"+
+a.seguridad.mensaje
+);
+
 
 
 }
@@ -175,90 +369,48 @@ actualizar("infoMedidas",
 
 function actualizar(id,texto){
 
-let e=document.getElementById(id);
 
-if(e)e.textContent=texto;
+let elemento=
+document.getElementById(id);
+
+
+if(elemento){
+
+elemento.innerHTML=texto;
+
+}
+
 
 }
 
 
 
-[largo,ancho,alto].forEach(x=>{
 
-x.addEventListener("input",calcular);
+[largo,ancho,alto].forEach(input=>{
+
+
+input.addEventListener(
+"input",
+calcular
+);
+
 
 });
+
+
+
+if(boton){
+
+boton.addEventListener(
+"click",
+calcular
+);
+
+}
+
 
 
 calcular();
-
-
-});
-/* =====================================
-   SELECTOR MONTAJE ESTILO APP
-===================================== */
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-const selector =
-document.getElementById("selectorMontaje");
-
-
-if(!selector)return;
-
-
-
-const boton =
-selector.querySelector(".select-button");
-
-
-const opciones =
-selector.querySelectorAll(".select-options div");
-
-
-const campo =
-document.getElementById("montaje");
-
-
-const texto =
-document.getElementById("montajeTexto");
-
-
-
-boton.addEventListener("click",()=>{
-
-selector.classList.toggle("active");
-
-});
-
-
-
-
-opciones.forEach(opcion=>{
-
-
-opcion.addEventListener("click",()=>{
-
-
-campo.value =
-opcion.dataset.value;
-
-
-texto.textContent =
-opcion.textContent;
-
-
-selector.classList.remove("active");
-
-
-
-});
-
-
-
-});
 
 
 
