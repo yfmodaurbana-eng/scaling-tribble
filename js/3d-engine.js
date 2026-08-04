@@ -87,6 +87,19 @@ anchoVisual+"px";
 acuario.style.height =
 altoVisual+"px";
 
+   let profundidadVisual =
+A * 5;
+
+
+profundidadVisual =
+Math.min(Math.max(profundidadVisual,80),400);
+
+
+acuario.style.setProperty(
+"--profundidad",
+profundidadVisual+"px"
+);
+
 
 
 acuario.dataset.medidas =
