@@ -951,9 +951,7 @@ top:0;
 
 
 transform:
-
-
-translateZ(50px);
+translateZ(calc(var(--profundidad) / 2));
 
 
 
@@ -985,7 +983,7 @@ top:0;
 transform:
 
 
-translateZ(-50px);
+translateZ(calc(var(--profundidad) / -2));
 
 
 
@@ -1000,11 +998,11 @@ opacity:.35;
 
 .glass-left{
 
-width:240px;
+width:var(--profundidad);
 
 height:100%;
 
-left:-120px;
+left:calc(var(--profundidad) / -2);
 
 top:0;
 
@@ -1017,11 +1015,11 @@ rotateY(90deg);
 
 .glass-right{
 
-width:240px;
+width:var(--profundidad);
 
 height:100%;
 
-right:-120px;
+right:calc(var(--profundidad) / -2);
 
 top:0;
 
