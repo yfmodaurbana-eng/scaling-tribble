@@ -1229,50 +1229,36 @@ inset 0 10px 20px rgba(255,255,255,.15);
 
 
 /* =========================
-   REFLEJO CRISTAL
+   REFLEJO CRISTAL 3D
 ========================= */
 
 
 .tank-3d::after{
 
-
 content:"";
 
-
-
 position:absolute;
-
 
 inset:0;
 
 
-
 background:
 
-
 linear-gradient(
-
 120deg,
-
-
-rgba(255,255,255,.35),
-
-
-transparent 35%
-
+rgba(255,255,255,.22),
+transparent 30%
 );
-
 
 
 transform:
 
-
-translateZ(60px);
-
+translateZ(80px);
 
 
 pointer-events:none;
 
+z-index:30;
 
 }
 
