@@ -892,7 +892,7 @@ rotateY(-5deg);
 
 position:absolute;
 
-
+pointer-events:none;
 
 background:
 
