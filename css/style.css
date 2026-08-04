@@ -833,48 +833,15 @@ inset 0 0 50px rgba(0,0,0,.8),
 
 .aquarium{
 
+width:85%;
 
-position:relative;
+height:75%;
 
+max-width:1000px;
 
-
-width:
-
-min(75%,900px);
-
-
-
-height:
-
-min(65%,600px);
-
-
-
-aspect-ratio:
-
-16 / 9;
-
-
-
-transform-style:
-
-preserve-3d;
-
-
-
-perspective:
-
-1400px;
-
-
-
-transition:
-
-.4s ease;
-
+max-height:650px;
 
 }
-
 
 
 
