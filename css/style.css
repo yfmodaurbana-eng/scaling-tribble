@@ -992,15 +992,10 @@ opacity:.35;
 
 .glass-left{
 
-
-width:280px;
-
-
+width:120px;
 height:100%;
 
-
-
-left:-140px;
+left:-60px;
 
 
 top:0;
@@ -1024,16 +1019,10 @@ rotateY(90deg);
 
 .glass-right{
 
-
-width:280px;
-
-
+width:120px;
 height:100%;
 
-
-
-right:-140px;
-
+right:-60px;
 
 top:0;
 
