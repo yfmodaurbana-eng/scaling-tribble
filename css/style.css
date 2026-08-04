@@ -1000,55 +1000,33 @@ opacity:.35;
 
 .glass-left{
 
-
-width:80px;
-
+width:240px;
 
 height:100%;
 
-
-
-left:-40px;
-
+left:-120px;
 
 top:0;
 
-
-
 transform:
-
-
 rotateY(90deg);
-
 
 }
 
 
 
-
-
 .glass-right{
 
-
-width:80px;
-
+width:240px;
 
 height:100%;
 
-
-
-right:-40px;
-
+right:-120px;
 
 top:0;
 
-
-
 transform:
-
-
 rotateY(-90deg);
-
 
 }
 
