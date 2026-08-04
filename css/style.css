@@ -1034,61 +1034,42 @@ rgba(100,180,220,.20);
 
 .water-3d{
 
-
 position:absolute;
-
-
 
 left:0;
 
-
 bottom:0;
 
-
-
 width:100%;
-
 
 height:82%;
 
 
-
 transform:
 
-
-translateZ(0px)
+translateZ(20px)
 translateY(5%);
-
 
 
 background:
 
-
 linear-gradient(
-
 180deg,
-
-
-rgba(130,245,255,.25),
-rgba(0,60,160,.65)
-
+rgba(170,250,255,.45),
+rgba(0,80,180,.85)
 );
-
 
 
 z-index:5;
 
-
-
 overflow:hidden;
 
+border-radius:0 0 5px 5px;
 
 
 box-shadow:
 
-
-inset 0 0 40px rgba(0,200,255,.5);
-
+inset 0 0 60px rgba(0,220,255,.6);
 
 }
 
