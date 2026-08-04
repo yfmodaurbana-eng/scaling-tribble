@@ -775,6 +775,8 @@ align-items:center;
 
 justify-content:center;
 
+padding:40px;
+
 
 
 background:
@@ -833,13 +835,13 @@ inset 0 0 50px rgba(0,0,0,.8),
 
 .aquarium{
 
-width:85%;
+width:65%;
 
-height:75%;
+height:60%;
 
-max-width:1000px;
+max-width:750px;
 
-max-height:650px;
+max-height:500px;
 
 }
 
@@ -851,33 +853,17 @@ max-height:650px;
 
 .tank-3d{
 
-
 position:absolute;
-
-
 
 inset:0;
 
-
-
-transform-style:
-
-preserve-3d;
-
-
+transform-style:preserve-3d;
 
 transform:
+rotateX(0deg)
+rotateY(0deg);
 
-
-rotateX(5deg)
-
-rotateY(-10deg);
-
-
-transition:
-
-transform .4s ease;
-
+transition:.4s ease;
 
 }
 
@@ -953,33 +939,16 @@ backface-visibility:hidden;
 
 .glass-front{
 
-
 width:100%;
-
 
 height:100%;
 
-
 left:0;
-
 
 top:0;
 
-
-
 transform:
-
-
-translateZ(140px);
-
-
-
-z-index:20;
-
-
-
-pointer-events:none;
-
+translateZ(80px);
 
 }
 
@@ -1006,9 +975,7 @@ top:0;
 
 
 transform:
-
-
-translateZ(-140px);
+translateZ(-80px);
 
 
 
@@ -1152,7 +1119,7 @@ height:82%;
 transform:
 
 
-translateZ(100px);
+translateZ(60px);
 
 
 
@@ -1309,7 +1276,7 @@ height:18%;
 transform:
 
 
-translateZ(110px);
+translateZ(65px);
 
 
 
@@ -1388,7 +1355,7 @@ transparent 35%
 transform:
 
 
-translateZ(160px);
+translateZ(90px);
 
 
 
