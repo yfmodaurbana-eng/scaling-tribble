@@ -1050,31 +1050,85 @@ content:"";
 
 position:absolute;
 
-inset:0;
+
+inset:-50%;
 
 
 background:
 
-repeating-linear-gradient(
 
-120deg,
+radial-gradient(
 
-transparent 0px,
+ellipse at 50% 30%,
 
-transparent 25px,
+rgba(255,255,255,.22),
 
-rgba(255,255,255,.08) 40px
+transparent 35%
+
+),
+
+
+linear-gradient(
+
+110deg,
+
+transparent 30%,
+
+rgba(255,255,255,.12),
+
+transparent 60%
 
 );
 
 
+
 animation:
 
-waterMove 12s linear infinite;
+waterFlow 10s infinite linear;
+
 
 
 }
 
+
+
+
+@keyframes waterFlow{
+
+
+0%{
+
+transform:
+
+translateX(-20%)
+
+translateY(-10%);
+
+}
+
+
+
+50%{
+
+transform:
+
+translateX(20%)
+
+translateY(10%);
+
+}
+
+
+
+100%{
+
+transform:
+
+translateX(-20%)
+
+translateY(-10%);
+
+}
 
 
 .water-surface{
