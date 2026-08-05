@@ -972,68 +972,109 @@ rgba(120,200,240,.15);
 
 }
 /* =================================================
-   AGUA 3D REAL
+   AGUA 3D REAL PRO V7.4
 ================================================= */
-
 
 .water-3d{
 
-
 position:absolute;
 
-
 left:0;
-
-
 bottom:0;
 
-
 width:100%;
-
-
 height:82%;
-
-
-transform:
-
-
-translateZ(0px);
-
 
 background:
 
-
 linear-gradient(
-
 180deg,
-
-rgba(190,250,255,.35),
-
-rgba(0,80,180,.85)
-
+rgba(220,250,255,.55),
+rgba(0,150,220,.55) 35%,
+rgba(0,50,120,.95)
 );
 
 
-
 z-index:10;
-
 
 overflow:hidden;
 
 
 box-shadow:
 
+inset 0 0 80px rgba(0,220,255,.8),
+inset 0 -40px 80px rgba(0,0,80,.8);
 
-inset 0 0 60px rgba(0,220,255,.55);
+
+transform-style:preserve-3d;
+
+
+}
+
+
+/* profundidad del agua */
+
+.water-3d::before{
+
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+
+background:
+
+radial-gradient(
+ellipse at center,
+rgba(255,255,255,.35),
+transparent 45%
+);
+
+
+animation:
+
+waterLight 8s infinite ease-in-out;
 
 
 }
 
 
 
+.water-3d::after{
 
 
-/* SUPERFICIE DEL AGUA */
+content:"";
+
+
+position:absolute;
+
+inset:0;
+
+
+background:
+
+repeating-linear-gradient(
+
+120deg,
+
+transparent 0px,
+
+transparent 25px,
+
+rgba(255,255,255,.08) 40px
+
+);
+
+
+animation:
+
+waterMove 12s linear infinite;
+
+
+}
+
 
 
 .water-surface{
@@ -1044,27 +1085,25 @@ position:absolute;
 
 top:0;
 
-
 left:0;
 
 
 width:100%;
 
-
-height:10px;
-
+height:14px;
 
 
 background:
-
 
 linear-gradient(
 
 90deg,
 
-rgba(255,255,255,.7),
+rgba(255,255,255,.9),
 
-rgba(150,240,255,.9)
+rgba(100,220,255,.6),
+
+rgba(255,255,255,.9)
 
 );
 
@@ -1073,38 +1112,53 @@ rgba(150,240,255,.9)
 box-shadow:
 
 
-0 0 30px var(--cyan);
+0 0 35px #00dcff;
 
 
 
 animation:
 
-wave 4s infinite ease-in-out;
+wave 3s infinite ease-in-out;
 
 
 }
 
 
 
-@keyframes wave{
+
+@keyframes waterMove{
+
+
+from{
+
+transform:translateX(0);
+
+}
+
+
+to{
+
+transform:translateX(-80px);
+
+}
+
+
+}
+
+
+
+
+@keyframes waterLight{
 
 
 0%{
 
-transform:
-
-scaleX(1);
-
-opacity:.7;
+opacity:.5;
 
 }
 
 
 50%{
-
-transform:
-
-scaleX(1.03);
 
 opacity:1;
 
@@ -1113,18 +1167,11 @@ opacity:1;
 
 100%{
 
-transform:
-
-scaleX(1);
-
-opacity:.7;
+opacity:.5;
 
 }
 
-
 }
-
-
 
 
 /* =================================================
