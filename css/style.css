@@ -1089,13 +1089,12 @@ animation:
 waterFlow 10s infinite linear;
 
 
-
 }
 
 
 
 
-@keyframes waterFlow{
+@keyframes waterFlow
 
 
 0%{
@@ -1120,6 +1119,7 @@ translateY(10%);
 
 }
 
+}
 
 
 100%{
