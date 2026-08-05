@@ -2711,3 +2711,35 @@ height:65px;
 /* =================================================
    FIN CSS V8 REAL AQUARIUM ENGINE
 ================================================= */
+.workspace{
+
+display:grid;
+
+grid-template-columns:260px minmax(500px,1fr) 320px;
+
+gap:15px;
+
+align-items:stretch;
+
+}
+
+
+.sidebar{
+
+grid-column:1;
+
+}
+
+
+.viewer{
+
+grid-column:2;
+
+}
+
+
+.panel{
+
+grid-column:3;
+
+}
