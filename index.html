@@ -7,9 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acuario Designer Studio V6 Professional</title>
+<title>Acuario Designer Studio V8 Professional 3D</title>
 
-<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="css/style.css?v=8">
+
 
 </head>
 
@@ -20,79 +22,135 @@
 <div class="app">
 
 
+
+<!-- =========================
+     CABECERA
+========================= -->
+
+
 <header class="header">
 
+
 <div class="logo">
+
 🐠 ACUARIO DESIGNER
-<span>STUDIO V6 PROFESSIONAL</span>
+
+<span>
+REAL 3D AQUARIUM ENGINE V8
+</span>
+
 </div>
 
 
+
 <div class="actions">
+
 
 <button id="nuevo">
 🆕 Nuevo
 </button>
 
+
 <button id="guardar">
 💾 Guardar
 </button>
+
 
 <button id="exportar">
 📄 Exportar
 </button>
 
+
 </div>
+
 
 </header>
 
 
 
 
+
+<!-- =========================
+     ZONA PRINCIPAL
+========================= -->
+
+
 <main class="workspace">
 
 
 
-<!-- PANEL IZQUIERDO -->
+
+
+<!-- =========================
+     PANEL IZQUIERDO
+========================= -->
+
 
 <aside class="sidebar">
 
 
-<h2>🛠 Diseño</h2>
+
+<h2>
+🛠 Diseño
+</h2>
 
 
 
 <div class="tools">
 
-<button class="tool">
+
+
+<button class="tool" id="addRoca">
+
 🪨
+
 <br>
+
 Roca
+
 </button>
 
 
-<button class="tool">
+
+<button class="tool" id="addPlanta">
+
 🌱
+
 <br>
+
 Planta
+
 </button>
 
 
-<button class="tool">
+
+<button class="tool" id="addPez">
+
 🐟
+
 <br>
+
 Pez
+
 </button>
 
 
-<button class="tool">
+
+<button class="tool" id="addLuz">
+
 💡
+
 <br>
+
 Luz
+
 </button>
+
 
 
 </div>
+
+
 
 
 
@@ -101,11 +159,13 @@ Luz
 
 
 <h3>
-📐 Medidas
+📐 Dimensiones
 </h3>
 
 
+
 <label>
+
 Largo cm
 
 <input id="largo" value="70">
@@ -113,7 +173,10 @@ Largo cm
 </label>
 
 
+
+
 <label>
+
 Ancho cm
 
 <input id="ancho" value="30">
@@ -121,7 +184,10 @@ Ancho cm
 </label>
 
 
+
+
 <label>
+
 Alto cm
 
 <input id="alto" value="40">
@@ -130,22 +196,31 @@ Alto cm
 
 
 
+
 <select id="montaje">
 
+
 <option value="interior">
+
 Base interior
+
 </option>
+
 
 
 <option value="exterior">
+
 Base exterior
+
 </option>
+
 
 
 </select>
 
 
 </div>
+
 
 
 
@@ -159,105 +234,104 @@ Base exterior
 </h3>
 
 
+
+
 <p>
+
 Grosor:
+
 <br>
+
 <strong id="cristalDiseño">
+
 Calculando...
+
 </strong>
+
 </p>
 
 
+
+
 <p>
+
 Tipo:
+
 <br>
+
 <strong id="tipoCristal">
+
 Calculando...
+
 </strong>
+
 </p>
 
 
+
+
 <p>
+
 Cortes:
+
 <br>
+
 <strong id="cortesCristalDiseño">
+
 Calculando...
+
 </strong>
+
 </p>
 
 
+
+
 <p>
+
 🔩 Tirantes:
+
 <br>
+
 <strong id="tirantesDiseño">
+
 Calculando...
+
 </strong>
+
 </p>
+
 
 
 <p>
+
 Refuerzo:
+
 <br>
+
 <strong id="medidaTirante">
+
 Calculando...
+
 </strong>
+
 </p>
+
 
 
 </div>
+
+
 
 
 </aside>
+<!-- =========================
+     PANEL DERECHO
+========================= -->
 
-
-
-
-<!-- VISOR 3D ACUARIO -->
-
-<section class="viewer">
-
-
-<div class="aquarium">
-
-<div class="tank-3d">
-
-<div class="glass glass-back"></div>
-
-<div class="glass glass-left"></div>
-
-<div class="glass glass-right"></div>
-
-<div class="glass glass-front"></div>
-
-<div class="glass glass-bottom"></div>
-
-
-<div class="water-3d">
-
-<div class="water-surface"></div>
-
-</div>
-
-
-<div class="substrate"></div>
-
-
-</div>
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- PANEL DERECHO -->
 
 <aside class="panel">
+
 
 
 <h2>
@@ -268,6 +342,8 @@ Calculando...
 
 
 
+<!-- DATOS DEL ACUARIO -->
+
 <div class="card">
 
 
@@ -276,9 +352,11 @@ Calculando...
 </h3>
 
 
+
 <p id="infoLitros">
 0 litros
 </p>
+
 
 
 <p id="infoMedidas">
@@ -286,50 +364,146 @@ Calculando...
 </p>
 
 
+
+<p>
+
+Volumen útil:
+
+<br>
+
+<span id="volumenUtil">
+-
+
+</span>
+
+</p>
+
+
+
 </div>
 
 
 
 
 
+
+
+<!-- SEGURIDAD ESTRUCTURAL -->
 
 
 <div class="card">
 
 
 <h3>
-📋 Resumen técnico
+🪟 Seguridad estructural
 </h3>
 
 
+
 <p>
+
 Cristal:
 
-<span id="infoCristal">
+<br>
+
+<strong id="infoCristal">
 -
-</span>
+</strong>
 
 </p>
 
 
 
-<p>
-Peso:
 
-<span id="pesoTotal">
+<p>
+
+Tipo:
+
+<br>
+
+<strong id="infoTipoCristal">
 -
-</span>
+</strong>
 
 </p>
 
 
 
+
 <p>
+
+Peso aproximado:
+
+<br>
+
+<strong id="pesoTotal">
+-
+</strong>
+
+</p>
+
+
+
+
+<p>
+
 Seguridad:
 
-<span id="riesgo">
+<br>
+
+<strong id="riesgo">
 -
-</span>
+</strong>
+
+</p>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- REFUERZOS -->
+
+
+<div class="card">
+
+
+<h3>
+🔩 Refuerzos
+</h3>
+
+
+
+<p>
+
+Tirantes:
+
+<br>
+
+<strong id="infoTirantes">
+-
+</strong>
+
+</p>
+
+
+
+
+<p>
+
+Medida:
+
+<br>
+
+<strong id="infoMedidaTirante">
+-
+</strong>
 
 </p>
 
@@ -341,6 +515,9 @@ Seguridad:
 
 
 
+
+
+<!-- FICHA TÉCNICA -->
 
 
 <div class="card">
@@ -353,33 +530,32 @@ Seguridad:
 
 
 <button id="generarFicha">
+
 Generar ficha
+
 </button>
+
+
 
 
 <button id="copiarFicha">
+
 📋 Copiar
+
 </button>
+
+
 
 
 
 <pre id="fichaTecnica">
+
 Diseña el acuario para generar ficha técnica
+
 </pre>
 
 
 
-</div>
-
-
-
-
-</aside>
-
-
-
-</main>
-
 
 </div>
 
@@ -388,19 +564,39 @@ Diseña el acuario para generar ficha técnica
 
 
 
-<script src="./js/engine.js"></script>
+</aside></main>
 
-<script src="./js/3d-engine.js?v=5"></script>
 
-<script src="./js/ficha.js"></script>
+</div>
 
-<script src="./js/objects.js"></script>
 
-<script src="./js/save.js"></script>
+
+
+
+<!-- =========================
+     MOTORES JAVASCRIPT
+========================= -->
+
+
+<script src="./js/engine.js?v=8"></script>
+
+
+<script src="./js/3d-engine.js?v=8"></script>
+
+
+<script src="./js/objects.js?v=8"></script>
+
+
+<script src="./js/ficha.js?v=8"></script>
+
+
+<script src="./js/save.js?v=8"></script>
+
 
 
 
 
 </body>
+
 
 </html>
