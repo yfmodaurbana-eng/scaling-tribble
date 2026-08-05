@@ -1007,7 +1007,9 @@ inset 0 -40px 80px rgba(0,0,80,.8);
 
 
 transform-style:preserve-3d;
-
+display:block!important;
+opacity:1!important;
+visibility:visible!important;
 
 }
 
@@ -1286,7 +1288,9 @@ inset 0 12px 25px rgba(255,255,255,.18),
 
 0 0 20px rgba(0,0,0,.6);
 
-
+display:block!important;
+opacity:1!important;
+visibility:visible!important;
 
 }
 
