@@ -142,21 +142,24 @@ function cargarAcuario(){
 
 
 
-// Botones superiores
+// =========================
+// BOTONES V8
+// =========================
 
+const btnNuevo = document.getElementById("nuevo");
+const btnGuardar = document.getElementById("guardar");
+const btnExportar = document.getElementById("exportar");
 
-document
-.querySelectorAll(".top-buttons button")[1]
-.onclick=guardarAcuario;
+if (btnGuardar) {
+    btnGuardar.onclick = guardarAcuario;
+}
 
+if (btnNuevo) {
+    btnNuevo.onclick = () => location.reload();
+}
 
-document
-.querySelectorAll(".top-buttons button")[0]
-.onclick=function(){
-
-    location.reload();
-
-};
-
-
-
+if (btnExportar) {
+    btnExportar.onclick = () => {
+        alert("Exportación próximamente disponible.");
+    };
+}
