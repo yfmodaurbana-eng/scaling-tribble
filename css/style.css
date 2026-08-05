@@ -1,26 +1,25 @@
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V8 PROFESSIONAL
-   REAL 3D AQUARIUM ENGINE
-   CSS PARTE 1/4
+ ACUARIO DESIGNER STUDIO V7.4 PROFESSIONAL
+ REAL 3D AQUARIUM ENGINE
+ PARTE 1/4
 ================================================== */
 
 
 /* =========================
-   VARIABLES
+ VARIABLES
 ========================= */
-
 
 :root{
 
---bg:#02070c;
+--bg:#050b12;
 
---panel:#081722;
+--panel:#091824;
 
---panel2:#102c3e;
+--panel2:#102b3d;
+
+--border:#159ac5;
 
 --cyan:#00dcff;
-
---blue:#007ca8;
 
 --green:#00ff9d;
 
@@ -28,12 +27,8 @@
 
 --red:#ff4040;
 
---border:#159ac5;
-
---glass:rgba(220,250,255,.18);
-
 --shadow:
-0 20px 50px rgba(0,0,0,.65);
+0 15px 40px rgba(0,0,0,.55);
 
 }
 
@@ -42,7 +37,7 @@
 
 
 /* =========================
-   RESET
+ RESET
 ========================= */
 
 
@@ -51,7 +46,6 @@
 box-sizing:border-box;
 
 }
-
 
 
 
@@ -72,26 +66,25 @@ overflow:hidden;
 
 font-family:
 
-"Segoe UI",
+'Segoe UI',
 Arial,
 sans-serif;
 
 
-color:white;
-
-
 background:
-
 
 radial-gradient(
 
 circle at top,
 
-#14506c,
+#17506b,
 
-#02060b 75%
+#03070b 75%
 
 );
+
+
+color:white;
 
 
 }
@@ -100,10 +93,8 @@ circle at top,
 
 
 
-
-
 /* =========================
-   APP
+ APP
 ========================= */
 
 
@@ -132,9 +123,8 @@ padding:15px;
 
 
 
-
 /* =========================
-   HEADER
+ HEADER
 ========================= */
 
 
@@ -142,6 +132,9 @@ padding:15px;
 
 
 height:80px;
+
+
+flex-shrink:0;
 
 
 display:flex;
@@ -163,19 +156,19 @@ linear-gradient(
 
 145deg,
 
-#163649,
+#143044,
 
-#050b11
+#060d14
 
 );
+
+
+border-radius:20px;
 
 
 border:
 
 1px solid var(--border);
-
-
-border-radius:22px;
 
 
 box-shadow:
@@ -204,7 +197,7 @@ color:var(--cyan);
 text-shadow:
 
 
-0 0 15px rgba(0,220,255,.8);
+0 0 15px rgba(0,220,255,.7);
 
 
 }
@@ -223,9 +216,6 @@ font-size:13px;
 
 
 font-weight:400;
-
-
-color:white;
 
 
 opacity:.8;
@@ -255,7 +245,7 @@ gap:10px;
 
 
 /* =========================
-   BOTONES
+ BOTONES
 ========================= */
 
 
@@ -271,25 +261,25 @@ linear-gradient(
 
 #008dcc,
 
-#00486b
+#00476b
 
 );
-
-
-border:
-
-1px solid #00d5ff;
 
 
 color:white;
 
 
-padding:
+border:
 
-10px 18px;
+1px solid #00cfff;
 
 
 border-radius:12px;
+
+
+padding:
+
+10px 18px;
 
 
 font-weight:bold;
@@ -304,7 +294,7 @@ transition:.25s;
 box-shadow:
 
 
-0 8px 20px rgba(0,0,0,.45);
+0 5px 15px rgba(0,0,0,.35);
 
 
 }
@@ -324,7 +314,7 @@ translateY(-3px);
 box-shadow:
 
 
-0 0 25px rgba(0,220,255,.7);
+0 0 25px rgba(0,220,255,.6);
 
 
 }
@@ -336,7 +326,7 @@ box-shadow:
 
 
 /* =========================
-   WORKSPACE
+ WORKSPACE
 ========================= */
 
 
@@ -354,8 +344,7 @@ display:grid;
 
 grid-template-columns:
 
-
-260px minmax(400px,1fr) 320px;
+260px minmax(500px,1fr) 320px;
 
 
 gap:15px;
@@ -370,10 +359,8 @@ margin-top:15px;
 
 
 
-
-
 /* =========================
-   PANELES
+ PANELES
 ========================= */
 
 
@@ -395,12 +382,12 @@ var(--panel)
 );
 
 
+border-radius:20px;
+
+
 border:
 
 1px solid var(--border);
-
-
-border-radius:22px;
 
 
 padding:18px;
@@ -411,39 +398,7 @@ overflow-y:auto;
 
 box-shadow:
 
-
 var(--shadow);
-
-
-}
-
-
-
-
-
-.sidebar::-webkit-scrollbar,
-.panel::-webkit-scrollbar{
-
-
-width:6px;
-
-
-}
-
-
-
-
-
-.sidebar::-webkit-scrollbar-thumb,
-.panel::-webkit-scrollbar-thumb{
-
-
-background:
-
-var(--cyan);
-
-
-border-radius:20px;
 
 
 }
@@ -456,15 +411,13 @@ h2,
 h3{
 
 
-color:
-
-var(--cyan);
+color:var(--cyan);
 
 
 text-shadow:
 
 
-0 0 10px rgba(0,220,255,.5);
+0 0 10px rgba(0,220,255,.4);
 
 
 }
@@ -473,10 +426,8 @@ text-shadow:
 
 
 
-
-
 /* =========================
-   CARDS
+ CARDS
 ========================= */
 
 
@@ -490,19 +441,14 @@ linear-gradient(
 
 145deg,
 
-#112b3d,
+#102333,
 
-#050a10
+#05090e
 
 );
 
 
-border:
-
-1px solid #195675;
-
-
-border-radius:16px;
+border-radius:15px;
 
 
 padding:15px;
@@ -511,10 +457,9 @@ padding:15px;
 margin-bottom:15px;
 
 
-box-shadow:
+border:
 
-
-inset 0 0 25px rgba(0,0,0,.45);
+1px solid #195675;
 
 
 }
@@ -523,10 +468,8 @@ inset 0 0 25px rgba(0,0,0,.45);
 
 
 
-
-
 /* =========================
-   INPUTS
+ INPUTS
 ========================= */
 
 
@@ -552,9 +495,12 @@ linear-gradient(
 
 #02070c,
 
-#091b26
+#07141d
 
 );
+
+
+color:white;
 
 
 border:
@@ -563,33 +509,6 @@ border:
 
 
 border-radius:8px;
-
-
-color:white;
-
-
-outline:none;
-
-
-}
-
-
-
-
-
-input:focus,
-select:focus{
-
-
-border-color:
-
-var(--cyan);
-
-
-box-shadow:
-
-
-0 0 15px rgba(0,220,255,.5);
 
 
 }
@@ -601,7 +520,7 @@ box-shadow:
 
 
 /* =========================
-   TOOLS
+ TOOLS
 ========================= */
 
 
@@ -634,10 +553,10 @@ height:75px;
 display:flex;
 
 
-justify-content:center;
-
-
 align-items:center;
+
+
+justify-content:center;
 
 
 font-size:18px;
@@ -650,7 +569,7 @@ linear-gradient(
 
 145deg,
 
-#12384d,
+#11364c,
 
 #061018
 
@@ -662,42 +581,17 @@ border:
 1px solid var(--border);
 
 
-border-radius:14px;
-
-
-cursor:pointer;
+border-radius:12px;
 
 
 }
-
-
-
-
-
-.tool:hover{
-
-
-transform:
-
-translateY(-4px);
-
-
-box-shadow:
-
-
-0 0 20px rgba(0,220,255,.5);
-
-
-}
-
-
 
 
 
 
 
 /* =================================================
-   VISOR CENTRAL 3D
+ VISOR CENTRAL 3D
 ================================================= */
 
 
@@ -722,17 +616,6 @@ align-items:center;
 justify-content:center;
 
 
-overflow:hidden;
-
-
-border-radius:30px;
-
-
-border:
-
-2px solid var(--cyan);
-
-
 background:
 
 
@@ -740,24 +623,36 @@ radial-gradient(
 
 circle,
 
-#12617e,
+#0c5875,
 
 #02070b 75%
 
 );
 
 
+border-radius:25px;
+
+
+border:
+
+2px solid #00bfff;
+
+
+overflow:hidden;
+
+
 perspective:
 
-2200px;
+1800px;
 
 
 box-shadow:
 
 
-inset 0 0 80px rgba(0,0,0,.9),
+inset 0 0 60px rgba(0,0,0,.9),
 
-0 0 40px rgba(0,220,255,.35);
+
+0 0 30px rgba(0,200,255,.35);
 
 
 }
@@ -766,11 +661,7 @@ inset 0 0 80px rgba(0,0,0,.9),
 
 
 
-
-
-/* =================================================
-   CONTENEDOR ACUARIO
-================================================= */
+/* CONTENEDOR ACUARIO */
 
 
 .aquarium{
@@ -785,6 +676,12 @@ width:520px;
 height:340px;
 
 
+max-width:85%;
+
+
+max-height:75%;
+
+
 transform-style:
 
 preserve-3d;
@@ -794,6 +691,10 @@ preserve-3d;
 
 
 
+
+
+
+/* MOTOR 3D */
 
 
 .tank-3d{
@@ -815,53 +716,35 @@ transform:
 
 rotateX(-8deg)
 
-rotateY(-22deg);
+rotateY(-20deg);
 
 
-transition:.5s;
-
-
-}
-
-
-
-
-
-.tank-3d:hover{
-
-
-transform:
-
-
-rotateX(-5deg)
-
-rotateY(-30deg)
-
-scale(1.05);
+transition:.4s;
 
 
 }
-/* =================================================
-   CSS V8 REAL 3D AQUARIUM ENGINE
+/* ==================================================
+   CSS V7.4 PROFESSIONAL 3D ENGINE
    PARTE 2/4
-   CRISTALES Y ESTRUCTURA 3D
-================================================= */
+   CRISTALES 3D
+================================================== */
 
 
 
 /* =========================
-   VARIABLES DINÁMICAS TANQUE
+   VARIABLES TANQUE
 ========================= */
 
 
 .tank-3d{
 
 
---largo:520px;
-
---alto:340px;
-
 --profundidad:180px;
+
+
+transform-style:
+
+preserve-3d;
 
 
 }
@@ -871,7 +754,7 @@ scale(1.05);
 
 
 /* =========================
-   CRISTAL BASE
+   CRISTAL GENERAL
 ========================= */
 
 
@@ -884,6 +767,9 @@ position:absolute;
 pointer-events:none;
 
 
+display:block;
+
+
 background:
 
 
@@ -891,22 +777,22 @@ linear-gradient(
 
 120deg,
 
-rgba(255,255,255,.28),
+rgba(255,255,255,.25),
 
-rgba(0,160,220,.10)
+rgba(0,150,220,.12)
 
 );
 
 
 border:
 
-2px solid rgba(220,250,255,.65);
+3px solid rgba(220,250,255,.55);
 
 
 box-shadow:
 
 
-inset 0 0 40px rgba(255,255,255,.25),
+inset 0 0 35px rgba(255,255,255,.25),
 
 
 0 0 35px rgba(0,200,255,.45);
@@ -936,10 +822,10 @@ preserve-3d;
 .glass-front{
 
 
-width:var(--largo);
+width:100%;
 
 
-height:var(--alto);
+height:100%;
 
 
 left:0;
@@ -958,7 +844,7 @@ calc(var(--profundidad) / 2)
 );
 
 
-z-index:50;
+z-index:40;
 
 
 }
@@ -986,14 +872,19 @@ linear-gradient(
 
 120deg,
 
-rgba(255,255,255,.45),
+rgba(255,255,255,.35),
 
-transparent 30%
+transparent 35%
 
 );
 
 
+pointer-events:none;
+
+
 }
+
+
 
 
 
@@ -1007,10 +898,10 @@ transparent 30%
 .glass-back{
 
 
-width:var(--largo);
+width:100%;
 
 
-height:var(--alto);
+height:100%;
 
 
 left:0;
@@ -1032,13 +923,15 @@ calc(var(--profundidad) / -2)
 background:
 
 
-rgba(30,120,160,.18);
+rgba(20,120,170,.18);
 
 
-opacity:.7;
+opacity:.55;
 
 
 }
+
+
 
 
 
@@ -1052,14 +945,15 @@ opacity:.7;
 .glass-left{
 
 
-width:var(--profundidad);
+width:
+
+var(--profundidad);
 
 
-height:var(--alto);
+height:100%;
 
 
 left:
-
 
 calc(var(--profundidad) / -2);
 
@@ -1074,6 +968,8 @@ rotateY(90deg);
 
 
 }
+
+
 
 
 
@@ -1087,14 +983,15 @@ rotateY(90deg);
 .glass-right{
 
 
-width:var(--profundidad);
+width:
+
+var(--profundidad);
 
 
-height:var(--alto);
+height:100%;
 
 
 right:
-
 
 calc(var(--profundidad) / -2);
 
@@ -1105,7 +1002,7 @@ top:0;
 transform:
 
 
-rotateY(90deg);
+rotateY(-90deg);
 
 
 }
@@ -1114,25 +1011,28 @@ rotateY(90deg);
 
 
 
+
+
 /* =========================
-   CRISTAL INFERIOR
+   BASE DEL ACUARIO
 ========================= */
 
 
 .glass-bottom{
 
 
-width:var(--largo);
+width:100%;
 
 
-height:var(--profundidad);
+height:
+
+var(--profundidad);
 
 
 left:0;
 
 
 bottom:
-
 
 calc(var(--profundidad) / -2);
 
@@ -1146,7 +1046,7 @@ rotateX(90deg);
 background:
 
 
-rgba(100,200,240,.18);
+rgba(120,200,240,.18);
 
 
 }
@@ -1155,12 +1055,85 @@ rgba(100,200,240,.18);
 
 
 
+
+
 /* =========================
-   REFLEJO FRONTAL
+   BORDE SUPERIOR
 ========================= */
 
 
-.glass-reflection{
+.tank-3d::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:-4px;
+
+
+left:0;
+
+
+width:100%;
+
+
+height:8px;
+
+
+background:
+
+
+linear-gradient(
+
+90deg,
+
+rgba(255,255,255,.7),
+
+rgba(0,220,255,.3),
+
+rgba(255,255,255,.7)
+
+);
+
+
+transform:
+
+
+translateZ(
+
+calc(var(--profundidad) / 2)
+
+);
+
+
+z-index:80;
+
+
+filter:
+
+blur(1px);
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   REFLEJO CRISTAL
+========================= */
+
+
+.tank-3d::after{
+
+
+content:"";
 
 
 position:absolute;
@@ -1176,200 +1149,9 @@ linear-gradient(
 
 120deg,
 
-rgba(255,255,255,.35),
+rgba(255,255,255,.28),
 
 transparent 35%
-
-);
-
-
-opacity:.7;
-
-
-pointer-events:none;
-
-
-}
-
-
-
-
-
-
-
-/* =================================================
-   INTERIOR DEL ACUARIO
-================================================= */
-
-
-.aquarium-inside{
-
-
-position:absolute;
-
-
-inset:0;
-
-
-transform-style:
-
-preserve-3d;
-
-
-overflow:hidden;
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   CAPA DECORACIÓN
-========================= */
-
-
-.decor-layer{
-
-
-position:absolute;
-
-
-inset:0;
-
-
-transform-style:
-
-preserve-3d;
-
-
-z-index:20;
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   EQUIPAMIENTO
-========================= */
-
-
-.equipment-layer{
-
-
-position:absolute;
-
-
-inset:0;
-
-
-transform-style:
-
-preserve-3d;
-
-
-z-index:25;
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   PROFUNDIDAD INTERIOR
-========================= */
-
-
-.aquarium-inside::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-inset:0;
-
-
-background:
-
-
-radial-gradient(
-
-ellipse at center,
-
-rgba(0,200,255,.15),
-
-transparent 70%
-
-);
-
-
-transform:
-
-
-translateZ(-80px);
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   BORDE SUPERIOR CRISTAL
-========================= */
-
-
-.tank-3d::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-top:-5px;
-
-
-left:0;
-
-
-width:100%;
-
-
-height:10px;
-
-
-background:
-
-
-linear-gradient(
-
-90deg,
-
-rgba(255,255,255,.5),
-
-rgba(0,200,255,.25),
-
-rgba(255,255,255,.5)
 
 );
 
@@ -1379,30 +1161,66 @@ transform:
 
 translateZ(
 
-calc(var(--profundidad) / 2)
+calc(var(--profundidad) / 2 + 5px)
 
 );
 
 
-filter:
-
-blur(2px);
+pointer-events:none;
 
 
-z-index:80;
+z-index:90;
 
 
 }
-/* =================================================
-   CSS V8 REAL 3D AQUARIUM ENGINE
-   PARTE 3/4
-   AGUA + ARENA + ILUMINACIÓN
-================================================= */
+
+
+
+
 
 
 
 /* =========================
-   AGUA VOLUMÉTRICA
+   INTERIOR 3D
+========================= */
+
+
+.water-3d,
+.substrate{
+
+
+transform-style:
+
+preserve-3d;
+
+
+}
+
+
+
+
+
+/* Evita desaparición */
+
+.glass,
+.water-3d,
+.substrate{
+
+
+visibility:visible;
+
+
+}
+/* ==================================================
+   CSS V7.4 PROFESSIONAL 3D ENGINE
+   PARTE 3/4
+   AGUA + SUSTRATO + ILUMINACION
+================================================== */
+
+
+
+/* =========================
+   AGUA PRINCIPAL
 ========================= */
 
 
@@ -1415,7 +1233,7 @@ position:absolute;
 left:0;
 
 
-bottom:0;
+top:0;
 
 
 width:100%;
@@ -1427,7 +1245,7 @@ height:82%;
 transform:
 
 
-translateZ(20px);
+translateZ(10px);
 
 
 background:
@@ -1437,9 +1255,9 @@ linear-gradient(
 
 180deg,
 
-rgba(0,220,255,.25),
+rgba(0,220,255,.35),
 
-rgba(0,80,150,.55)
+rgba(0,70,140,.75)
 
 );
 
@@ -1450,24 +1268,27 @@ overflow:hidden;
 z-index:10;
 
 
-transform-style:
-
-preserve-3d;
-
-
 }
 
 
 
 
 
-.water-volume{
+/* =========================
+   MOVIMIENTO DEL AGUA
+========================= */
+
+
+.water-3d::before{
+
+
+content:"";
 
 
 position:absolute;
 
 
-inset:0;
+inset:-20%;
 
 
 background:
@@ -1475,29 +1296,29 @@ background:
 
 radial-gradient(
 
-ellipse at top,
+ellipse at 30% 20%,
 
 rgba(255,255,255,.35),
 
-transparent 40%
+transparent 25%
 
 ),
 
 
-linear-gradient(
+radial-gradient(
 
-180deg,
+ellipse at 70% 60%,
 
-rgba(0,230,255,.25),
+rgba(0,220,255,.35),
 
-rgba(0,80,160,.65)
+transparent 35%
 
 );
 
 
 animation:
 
-waterMove 8s infinite linear;
+waterMove 8s infinite ease-in-out;
 
 
 }
@@ -1514,7 +1335,9 @@ waterMove 8s infinite linear;
 
 transform:
 
-translateX(-3%);
+translateX(-4%)
+
+translateY(-2%);
 
 
 }
@@ -1525,7 +1348,9 @@ translateX(-3%);
 
 transform:
 
-translateX(3%);
+translateX(4%)
+
+translateY(2%);
 
 
 }
@@ -1536,7 +1361,9 @@ translateX(3%);
 
 transform:
 
-translateX(-3%);
+translateX(-4%)
+
+translateY(-2%);
 
 
 }
@@ -1551,7 +1378,7 @@ translateX(-3%);
 
 
 /* =========================
-   SUPERFICIE DEL AGUA
+   SUPERFICIE AGUA
 ========================= */
 
 
@@ -1582,7 +1409,7 @@ linear-gradient(
 
 rgba(255,255,255,.7),
 
-rgba(0,220,255,.35),
+rgba(0,220,255,.3),
 
 rgba(255,255,255,.7)
 
@@ -1592,44 +1419,12 @@ rgba(255,255,255,.7)
 box-shadow:
 
 
-0 0 25px rgba(0,220,255,.7);
-
-
-overflow:hidden;
-
-
-}
-
-
-
-
-
-.surface-wave{
-
-
-width:200%;
-
-
-height:100%;
-
-
-background:
-
-
-repeating-linear-gradient(
-
-90deg,
-
-transparent 0 40px,
-
-rgba(255,255,255,.35) 45px 60px
-
-);
+0 0 25px rgba(0,220,255,.8);
 
 
 animation:
 
-waveMove 5s infinite linear;
+surfaceMove 4s infinite linear;
 
 
 }
@@ -1638,26 +1433,37 @@ waveMove 5s infinite linear;
 
 
 
-@keyframes waveMove{
+@keyframes surfaceMove{
 
 
-from{
+0%{
 
 
 transform:
 
-translateX(0);
+translateX(-10px);
 
 
 }
 
 
-to{
+50%{
 
 
 transform:
 
-translateX(-50%);
+translateX(10px);
+
+
+}
+
+
+100%{
+
+
+transform:
+
+translateX(-10px);
 
 
 }
@@ -1672,7 +1478,7 @@ translateX(-50%);
 
 
 /* =========================
-   ARENA / SUSTRATO 3D
+   SUSTRATO / ARENA
 ========================= */
 
 
@@ -1682,10 +1488,10 @@ translateX(-50%);
 position:absolute;
 
 
-bottom:0;
-
-
 left:0;
+
+
+bottom:0;
 
 
 width:100%;
@@ -1707,23 +1513,23 @@ linear-gradient(
 
 180deg,
 
-#d9bf73,
+#e4cb83,
 
-#68431c
+#68451c
 
 );
 
 
-z-index:15;
+z-index:20;
 
 
 box-shadow:
 
 
-inset 0 20px 35px rgba(255,255,255,.18),
+inset 0 15px 30px rgba(255,255,255,.2),
 
 
-0 -10px 25px rgba(0,0,0,.7);
+0 -10px 25px rgba(0,0,0,.6);
 
 
 }
@@ -1732,7 +1538,10 @@ inset 0 20px 35px rgba(255,255,255,.18),
 
 
 
-.sand-texture{
+.substrate::before{
+
+
+content:"";
 
 
 position:absolute;
@@ -1748,7 +1557,7 @@ radial-gradient(
 
 circle at 20% 30%,
 
-rgba(255,255,255,.3),
+rgba(255,255,255,.35),
 
 transparent 15%
 
@@ -1766,7 +1575,7 @@ transparent 20%
 );
 
 
-opacity:.8;
+opacity:.7;
 
 
 }
@@ -1778,91 +1587,29 @@ opacity:.8;
 
 
 /* =========================
-   LUZ LED SUPERIOR
+   LUZ SUPERIOR
 ========================= */
 
 
-.led-light{
+.viewer::before{
+
+
+content:"";
 
 
 position:absolute;
 
 
-top:-40px;
+top:0;
 
 
-left:10%;
+left:20%;
 
 
-width:80%;
+width:60%;
 
 
-height:25px;
-
-
-background:
-
-
-linear-gradient(
-
-90deg,
-
-#ffffff,
-
-#00dcff,
-
-#ffffff
-
-);
-
-
-border-radius:20px;
-
-
-box-shadow:
-
-
-0 0 35px rgba(0,220,255,.9);
-
-
-transform:
-
-
-translateZ(120px);
-
-
-z-index:100;
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   HAZ DE LUZ
-========================= */
-
-
-.light-beam{
-
-
-position:absolute;
-
-
-top:20px;
-
-
-left:10%;
-
-
-width:80%;
-
-
-height:250px;
+height:80%;
 
 
 background:
@@ -1872,73 +1619,33 @@ linear-gradient(
 
 180deg,
 
-rgba(255,255,255,.25),
+rgba(255,255,255,.18),
 
-transparent
+transparent 70%
 
 );
 
 
 filter:
 
-blur(15px);
+blur(25px);
 
 
-transform-origin:
-
-top;
-
-
-animation:
-
-lightMove 6s infinite alternate;
+pointer-events:none;
 
 
 }
-
-
-
-
-
-@keyframes lightMove{
-
-
-from{
-
-
-transform:
-
-skewX(-8deg);
-
-
-}
-
-
-to{
-
-
-transform:
-
-skewX(8deg);
-
-
-}
-
-
-}
-
-
 
 
 
 
 
 /* =========================
-   EFECTO PROFUNDIDAD AGUA
+   EFECTO PROFUNDIDAD
 ========================= */
 
 
-.water-3d::after{
+.viewer::after{
 
 
 content:"";
@@ -1957,9 +1664,9 @@ radial-gradient(
 
 ellipse,
 
-transparent 30%,
+transparent 35%,
 
-rgba(0,0,0,.35)
+rgba(0,0,0,.45)
 
 );
 
@@ -1976,7 +1683,7 @@ pointer-events:none;
 
 
 /* =========================
-   BURBUJAS FUTURAS
+   BURBUJAS PREPARADAS
 ========================= */
 
 
@@ -1986,10 +1693,10 @@ pointer-events:none;
 position:absolute;
 
 
-width:8px;
+width:7px;
 
 
-height:8px;
+height:7px;
 
 
 border-radius:50%;
@@ -1997,7 +1704,7 @@ border-radius:50%;
 
 background:
 
-rgba(255,255,255,.7);
+rgba(255,255,255,.8);
 
 
 box-shadow:
@@ -2020,7 +1727,7 @@ bubbleUp 5s infinite;
 @keyframes bubbleUp{
 
 
-from{
+0%{
 
 
 transform:
@@ -2043,7 +1750,7 @@ opacity:1;
 }
 
 
-to{
+100%{
 
 
 transform:
@@ -2058,16 +1765,16 @@ opacity:0;
 
 
 }
-/* =================================================
-   CSS V8 REAL 3D AQUARIUM ENGINE
+/* ==================================================
+   CSS V7.4 PROFESSIONAL 3D ENGINE
    PARTE 4/4
-   DECORACIÓN + ANIMACIONES + FINAL
-================================================= */
+   DECORACION + FINAL
+================================================== */
 
 
 
 /* =========================
-   CAPAS DECORACIÓN 3D
+   OBJETOS 3D
 ========================= */
 
 
@@ -2113,7 +1820,7 @@ drop-shadow(
 
 animation:
 
-plantMove 4s infinite ease-in-out;
+plantWave 5s infinite ease-in-out;
 
 
 }
@@ -2122,7 +1829,7 @@ plantMove 4s infinite ease-in-out;
 
 
 
-@keyframes plantMove{
+@keyframes plantWave{
 
 
 0%{
@@ -2179,15 +1886,14 @@ filter:
 
 drop-shadow(
 
-0 12px 15px rgba(0,0,0,.8)
+0 12px 18px rgba(0,0,0,.8)
 
 );
 
 
-transform:
+transform-style:
 
-
-translateZ(30px);
+preserve-3d;
 
 
 }
@@ -2218,8 +1924,7 @@ drop-shadow(
 
 animation:
 
-
-fishSwim 12s infinite linear;
+fishMove 12s infinite linear;
 
 
 }
@@ -2228,7 +1933,7 @@ fishSwim 12s infinite linear;
 
 
 
-@keyframes fishSwim{
+@keyframes fishMove{
 
 
 0%{
@@ -2244,6 +1949,7 @@ translateZ(40px);
 }
 
 
+
 50%{
 
 
@@ -2257,12 +1963,13 @@ translateZ(80px);
 }
 
 
+
 100%{
 
 
 transform:
 
-translateX(500px)
+translateX(450px)
 
 translateZ(40px);
 
@@ -2279,46 +1986,8 @@ translateZ(40px);
 
 
 /* =========================
-   EFECTO CRISTAL GENERAL
+   EFECTO CRISTAL MOVIL
 ========================= */
-
-
-.tank-3d{
-
-
-filter:
-
-
-drop-shadow(
-
-0 0 30px rgba(0,220,255,.25)
-
-);
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   REFLEJOS EN CRISTAL
-========================= */
-
-
-.glass-front{
-
-
-overflow:hidden;
-
-
-}
-
-
-
 
 
 .glass-front::before{
@@ -2336,7 +2005,7 @@ top:0;
 left:-80%;
 
 
-width:50%;
+width:45%;
 
 
 height:100%;
@@ -2360,7 +2029,7 @@ transparent
 
 animation:
 
-glassReflection 8s infinite;
+glassMove 8s infinite;
 
 
 }
@@ -2369,7 +2038,7 @@ glassReflection 8s infinite;
 
 
 
-@keyframes glassReflection{
+@keyframes glassMove{
 
 
 from{
@@ -2399,7 +2068,7 @@ left:150%;
 
 
 /* =========================
-   ESTADO SEGURIDAD
+   ESTADOS SEGURIDAD
 ========================= */
 
 
@@ -2408,17 +2077,16 @@ left:150%;
 
 color:
 
-var(--green)!important;
+#00ff9d!important;
 
 
 text-shadow:
 
-0 0 10px rgba(0,255,150,.7);
+
+0 0 10px rgba(0,255,157,.7);
 
 
 }
-
-
 
 
 
@@ -2427,12 +2095,10 @@ text-shadow:
 
 color:
 
-var(--yellow)!important;
+#ffd000!important;
 
 
 }
-
-
 
 
 
@@ -2441,7 +2107,7 @@ var(--yellow)!important;
 
 color:
 
-var(--red)!important;
+#ff4040!important;
 
 
 }
@@ -2479,14 +2145,45 @@ scrollbar-color:
 
 
 /* =========================
-   OCULTAR
+   RESPONSIVE
 ========================= */
 
 
-.hidden{
+@media(max-width:1100px){
 
 
-display:none!important;
+.workspace{
+
+
+grid-template-columns:
+
+
+220px 1fr;
+
+
+}
+
+
+.panel{
+
+
+display:none;
+
+
+}
+
+
+
+.aquarium{
+
+
+width:450px;
+
+
+height:300px;
+
+
+}
 
 
 }
@@ -2495,15 +2192,95 @@ display:none!important;
 
 
 
+@media(max-width:700px){
 
 
-/* =========================
-   GRANDES PANTALLAS
-========================= */
+html,
+body{
+
+
+overflow:auto;
+
+
+}
+
+
+
+.app{
+
+
+height:auto;
+
+
+min-height:100vh;
+
+
+}
+
+
+
+.header{
+
+
+height:auto;
+
+
+flex-direction:column;
+
+
+gap:15px;
+
+
+}
+
+
+
+.workspace{
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+}
+
+
+
+.viewer{
+
+
+height:500px;
+
+
+min-height:500px;
+
+
+}
+
+
+
+.aquarium{
+
+
+width:90%;
+
+
+height:300px;
+
+
+}
+
+
+
+}
+
+
+
 
 
 @media(min-width:1600px){
-
 
 
 .workspace{
@@ -2531,7 +2308,6 @@ height:420px;
 }
 
 
-
 }
 
 
@@ -2541,205 +2317,19 @@ height:420px;
 
 
 /* =========================
-   TABLET
+   FINAL
 ========================= */
 
 
-@media(max-width:1100px){
+.hidden{
 
 
-
-.workspace{
-
-
-grid-template-columns:
-
-
-220px 1fr;
+display:none!important;
 
 
 }
 
 
-
-.panel{
-
-
-display:none;
-
-
-}
-
-
-
-.aquarium{
-
-
-width:450px;
-
-
-height:300px;
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   MÓVIL
-========================= */
-
-
-@media(max-width:700px){
-
-
-
-html,
-body{
-
-
-overflow:auto;
-
-
-}
-
-
-
-
-
-.app{
-
-
-height:auto;
-
-
-min-height:100vh;
-
-
-}
-
-
-
-
-
-.header{
-
-
-flex-direction:column;
-
-
-height:auto;
-
-
-gap:15px;
-
-
-}
-
-
-
-
-
-.workspace{
-
-
-display:flex;
-
-
-flex-direction:column;
-
-
-}
-
-
-
-
-
-.viewer{
-
-
-height:500px;
-
-
-}
-
-
-
-
-
-.aquarium{
-
-
-width:90%;
-
-
-height:300px;
-
-
-}
-
-
-
-
-
-.tool{
-
-
-height:65px;
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-/* =================================================
-   FIN CSS V8 REAL AQUARIUM ENGINE
-================================================= */
-.workspace{
-
-display:grid;
-
-grid-template-columns:260px minmax(500px,1fr) 320px;
-
-gap:15px;
-
-align-items:stretch;
-
-}
-
-
-.sidebar{
-
-grid-column:1;
-
-}
-
-
-.viewer{
-
-grid-column:2;
-
-}
-
-
-.panel{
-
-grid-column:3;
-
-}
+/* ==================================================
+   FIN CSS V7.4 PROFESSIONAL
+================================================== */
