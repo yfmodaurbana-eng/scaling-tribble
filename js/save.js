@@ -47,7 +47,7 @@ function guardarAcuario(){
 
 function cargarAcuario(){
 
-
+document.querySelectorAll(".objeto").forEach(o=>o.remove());
     let datos =
     JSON.parse(
 
