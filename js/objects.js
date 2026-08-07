@@ -91,7 +91,7 @@ activarAgua();
 
 
 
-function crearObjeto(tipo,icono){
+window.crearObjeto = function(tipo,icono){
 
 
 
