@@ -1,20 +1,21 @@
 /* =====================================
-   ACUARIO DESIGNER STUDIO V6
-   SISTEMA DE OBJETOS 3D
+   ACUARIO DESIGNER STUDIO V7
+   SISTEMA OBJETOS 3D REAL
 ===================================== */
+
+console.log("OBJECTS ENGINE V7 CARGADO");
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const aquarium =
-document.querySelector(".aquarium");
+const tanque =
+document.querySelector(".tank-3d");
 
 
+if(!tanque){
 
-if(!aquarium){
-
-console.error("No existe el acuario 3D");
+console.error("No existe tank-3d");
 
 return;
 
@@ -22,63 +23,40 @@ return;
 
 
 
-
-// BOTONES HERRAMIENTAS
-
-const herramientas =
-document.querySelectorAll(".tool");
+/* =========================
+   BOTONES
+========================= */
 
 
-
-herramientas.forEach(btn=>{
+document.querySelectorAll(".tool")
+.forEach(btn=>{
 
 
 btn.addEventListener("click",()=>{
 
 
-let tipo =
-btn.innerText.trim();
+let texto =
+btn.innerText;
 
 
-
-if(tipo.includes("Roca")){
-
+if(texto.includes("Roca")){
 crearObjeto("roca","🪨");
-
 }
 
 
-
-if(tipo.includes("Planta")){
-
+if(texto.includes("Planta")){
 crearObjeto("planta","🌱");
-
 }
 
 
-
-if(tipo.includes("Pez")){
-
+if(texto.includes("Pez")){
 crearObjeto("pez","🐟");
-
 }
 
 
-
-if(tipo.includes("Luz")){
-
+if(texto.includes("Luz")){
 activarLuz();
-
 }
-
-
-
-if(tipo.includes("Agua")){
-
-activarAgua();
-
-}
-
 
 
 });
@@ -88,16 +66,16 @@ activarAgua();
 
 
 
+/* =========================
+   CREAR OBJETO 3D
+========================= */
 
 
-
-window.crearObjeto = function(tipo,icono){
-
+window.crearObjeto=function(tipo,icono){
 
 
 let objeto =
 document.createElement("div");
-
 
 
 objeto.className =
@@ -110,21 +88,57 @@ icono;
 
 
 
-objeto.style.left =
-Math.random()*70+10+"%";
+let x =
+Math.random()*60+20;
+
+
+let y =
+60;
+
+
+let z =
+Math.random()*80;
 
 
 
-objeto.style.bottom =
-"20%";
+objeto.dataset.x=x;
+objeto.dataset.y=y;
+objeto.dataset.z=z;
 
 
 
-aquarium.appendChild(objeto);
+actualizarPosicion3D(objeto);
 
 
 
-hacerArrastrable(objeto);
+tanque.appendChild(objeto);
+
+
+
+hacerArrastrable3D(objeto);
+
+
+
+};
+
+
+
+/* =========================
+   POSICION 3D
+========================= */
+
+
+function actualizarPosicion3D(obj){
+
+
+obj.style.transform =
+`
+translate3d(
+${obj.dataset.x}%,
+${obj.dataset.y}%,
+${obj.dataset.z}px
+)
+`;
 
 
 
@@ -133,25 +147,36 @@ hacerArrastrable(objeto);
 
 
 
+/* =========================
+   ARRASTRE 3D
+========================= */
 
 
-
-function hacerArrastrable(elemento){
-
+function hacerArrastrable3D(obj){
 
 
 let moviendo=false;
 
+let inicioX;
+let inicioY;
 
 
-elemento.addEventListener(
+
+obj.addEventListener(
 "mousedown",
-()=>{
+(e)=>{
+
 
 moviendo=true;
 
-});
+inicioX=e.clientX;
+inicioY=e.clientY;
 
+
+e.stopPropagation();
+
+
+});
 
 
 
@@ -167,7 +192,6 @@ moviendo=false;
 
 
 
-
 document.addEventListener(
 "mousemove",
 (e)=>{
@@ -177,33 +201,41 @@ if(!moviendo)return;
 
 
 
-let rect =
-aquarium.getBoundingClientRect();
+let dx =
+e.clientX-inicioX;
+
+
+let dy =
+e.clientY-inicioY;
 
 
 
-let x =
-e.clientX-rect.left;
+obj.dataset.x =
+Number(obj.dataset.x)+dx*0.15;
+
+
+obj.dataset.y =
+Number(obj.dataset.y)+dy*0.15;
 
 
 
-let y =
-e.clientY-rect.top;
+obj.dataset.y =
+Math.max(
+10,
+Math.min(
+90,
+obj.dataset.y
+)
+);
 
 
 
-elemento.style.left =
-x-20+"px";
+actualizarPosicion3D(obj);
 
 
 
-elemento.style.top =
-y-20+"px";
-
-
-
-elemento.style.bottom =
-"auto";
+inicioX=e.clientX;
+inicioY=e.clientY;
 
 
 
@@ -216,30 +248,18 @@ elemento.style.bottom =
 
 
 
-
+/* =========================
+   LUZ
+========================= */
 
 
 function activarLuz(){
 
 
-aquarium.classList.toggle("iluminado");
+tanque.classList.toggle("iluminado");
 
 
 }
-
-
-
-
-
-function activarAgua(){
-
-
-aquarium.classList.toggle("agua-activa");
-
-
-}
-
-
 
 
 
