@@ -1,40 +1,60 @@
 /* =====================================
-   ACUARIO DESIGNER V3.0
-   GUARDAR Y CARGAR PROYECTOS
+   ACUARIO DESIGNER STUDIO V17
+   SAVE SYSTEM 3D OBJECTS
 ===================================== */
+
+
+console.log("SAVE ENGINE V17 CARGADO");
+
 
 
 function guardarAcuario(){
 
 
-let objetos = document.querySelectorAll(".objeto");
+let objetos =
+document.querySelectorAll(".objeto");
 
 
-let datos = {
+
+let datos={
 
 
-    medidas: window.acuario,
+medidas:
+window.acuario,
 
-    objetos: []
+
+objetos:[]
+
+
 
 };
 
 
 
-objetos.forEach(function(obj){
+objetos.forEach(obj=>{
 
 
-    datos.objetos.push({
+datos.objetos.push({
 
 
-        tipo: obj.innerHTML,
-
-        x: obj.style.left,
-
-        y: obj.style.bottom || obj.style.top
+tipo:
+obj.innerHTML,
 
 
-    });
+x:
+obj.dataset.x,
+
+
+y:
+obj.dataset.y,
+
+
+z:
+obj.dataset.z
+
+
+
+});
 
 
 });
@@ -42,11 +62,8 @@ objetos.forEach(function(obj){
 
 
 localStorage.setItem(
-
-    "miAcuario",
-
-    JSON.stringify(datos)
-
+"miAcuario",
+JSON.stringify(datos)
 );
 
 
@@ -59,12 +76,16 @@ alert("Acuario guardado correctamente");
 
 
 
+window.guardarAcuario =
+guardarAcuario;
+
+
+
+
 
 function cargarAcuario(){
 
 
-
-// limpiar escena antes de cargar
 
 document
 .querySelectorAll(".objeto")
@@ -72,73 +93,94 @@ document
 
 
 
-let datos = JSON.parse(
-
+let datos =
+JSON.parse(
 localStorage.getItem("miAcuario")
-
 );
 
 
 
 if(!datos){
 
+alert("No hay diseño guardado");
 
-    alert("No hay ningún diseño guardado");
-
-    return;
-
+return;
 
 }
 
 
 
-
-datos.objetos.forEach(function(obj){
-
-
-
-    if(obj.tipo=="🪨"){
-
-        crearObjeto("roca","🪨");
-
-    }
+datos.objetos.forEach(obj=>{
 
 
 
-    if(obj.tipo=="🌱"){
-
-        crearObjeto("planta","🌱");
-
-    }
+let nuevo;
 
 
 
-    if(obj.tipo=="🐟"){
+if(obj.tipo=="🌱"){
 
-        crearObjeto("pez","🐟");
+crearObjeto(
+"planta",
+"🌱"
+);
 
-    }
-
-
-
-    let lista =
-    document.querySelectorAll(".objeto");
+}
 
 
-    let nuevo =
-    lista[lista.length-1];
+if(obj.tipo=="🪨"){
+
+crearObjeto(
+"roca",
+"🪨"
+);
+
+}
+
+
+if(obj.tipo=="🐟"){
+
+crearObjeto(
+"pez",
+"🐟"
+);
+
+}
 
 
 
-    if(nuevo){
+nuevo =
+document.querySelectorAll(".objeto");
 
 
-        nuevo.style.left = obj.x;
 
-        nuevo.style.bottom = obj.y;
+nuevo =
+nuevo[nuevo.length-1];
 
 
-    }
+
+nuevo.dataset.x =
+obj.x;
+
+
+nuevo.dataset.y =
+obj.y;
+
+
+nuevo.dataset.z =
+obj.z;
+
+
+
+nuevo.style.transform =
+
+`
+translate3d(
+${obj.x}%,
+${obj.y}%,
+${obj.z}px
+)
+`;
 
 
 
@@ -153,17 +195,16 @@ alert("Diseño cargado");
 
 
 
+window.cargarAcuario =
+cargarAcuario;
 
 
 
 
-// =========================
-// BOTONES V9
-// =========================
 
-
-document.addEventListener("DOMContentLoaded",()=>{
-
+/* =========================
+   BOTONES
+========================= */
 
 
 const btnNuevo =
@@ -183,11 +224,10 @@ document.getElementById("exportar");
 
 
 
-
-
 if(btnGuardar){
 
-    btnGuardar.onclick = guardarAcuario;
+btnGuardar.onclick =
+guardarAcuario;
 
 }
 
@@ -195,7 +235,8 @@ if(btnGuardar){
 
 if(btnCargar){
 
-    btnCargar.onclick = cargarAcuario;
+btnCargar.onclick =
+cargarAcuario;
 
 }
 
@@ -203,11 +244,8 @@ if(btnCargar){
 
 if(btnNuevo){
 
-    btnNuevo.onclick = ()=>{
-
-        location.reload();
-
-    };
+btnNuevo.onclick =
+()=>location.reload();
 
 }
 
@@ -215,14 +253,9 @@ if(btnNuevo){
 
 if(btnExportar){
 
-    btnExportar.onclick = ()=>{
-
-        alert("Exportación próximamente disponible.");
-
-    };
+btnExportar.onclick =
+()=>alert(
+"Exportación próximamente disponible"
+);
 
 }
-
-
-
-});
