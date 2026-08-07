@@ -89,21 +89,21 @@ function cargarAcuario(){
 
         if(obj.tipo=="🪨"){
 
-            crearObjeto("roca");
+            crearObjeto("roca","🪨");
 
         }
 
 
         if(obj.tipo=="🌱"){
 
-            crearObjeto("planta");
+            crearObjeto("planta","🌱");
 
         }
 
 
         if(obj.tipo=="🐟"){
 
-            crearObjeto("pez");
+            crearObjeto("pez","🐟");
 
         }
 
