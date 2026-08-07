@@ -131,7 +131,7 @@ nuevo.style.bottom=obj.y;
 const btnNuevo = document.getElementById("nuevo");
 const btnGuardar = document.getElementById("guardar");
 const btnExportar = document.getElementById("exportar");
-
+const btnCargar = document.getElementById("cargar");
 if (btnGuardar) {
     btnGuardar.onclick = guardarAcuario;
 }
