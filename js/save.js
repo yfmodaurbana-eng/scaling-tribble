@@ -4,7 +4,6 @@
 ===================================== */
 
 
-
 function guardarAcuario(){
 
 
@@ -35,7 +34,7 @@ function guardarAcuario(){
 
             x:obj.style.left,
 
-            y:obj.style.top
+           y:obj.style.bottom || obj.style.top
 
 
         });
