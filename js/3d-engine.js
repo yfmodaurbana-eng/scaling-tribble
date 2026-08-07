@@ -1,423 +1,418 @@
 /* ==========================================
-   ACUARIO DESIGNER STUDIO
-   MOTOR 3D INTELIGENTE V6
-   REAL VOLUME ENGINE
+   ACUARIO DESIGNER STUDIO V6
+   REAL 3D AQUARIUM ENGINE
+   PROFUNDIDAD REAL DINÁMICA
 ========================================== */
 
 console.log("3D ENGINE V6 CARGADO");
 
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
 
-const acuario =
-document.querySelector(".aquarium");
+    /* =========================
+       ELEMENTOS
+    ========================= */
 
-const tanque =
-document.querySelector(".tank-3d");
+    const acuario = document.querySelector(".aquarium");
+    const tanque = document.querySelector(".tank-3d");
 
+    const largo = document.getElementById("largo");
+    const ancho = document.getElementById("ancho");
+    const alto = document.getElementById("alto");
 
-const largo =
-document.getElementById("largo");
 
-const ancho =
-document.getElementById("ancho");
+    if (!acuario || !tanque || !largo || !ancho || !alto) {
 
-const alto =
-document.getElementById("alto");
+        console.error("3D ENGINE: faltan elementos necesarios");
 
+        return;
 
-if(!acuario || !tanque || !largo || !ancho || !alto){
+    }
 
-console.error("Faltan elementos del motor 3D");
 
-return;
+    /* =========================
+       VARIABLES CÁMARA
+    ========================= */
 
-}
+    let rotX = -10;
+    let rotY = -25;
 
+    let zoom = 1;
 
+    let pulsado = false;
 
-/* =====================================
-   CÁMARA 3D GLOBAL
-===================================== */
+    let inicioX = 0;
+    let inicioY = 0;
 
 
-window.camera3D={
+    /* =========================
+       ACTUALIZAR TAMAÑO 3D
+    ========================= */
 
-rotX:-10,
-rotY:-25,
-zoom:1
+    function actualizar3D() {
 
-};
+        let L = Number(largo.value) || 70;
+        let A = Number(ancho.value) || 30;
+        let H = Number(alto.value) || 40;
 
 
+        /* =========================
+           ESCALA VISUAL
+        ========================= */
 
-/* =====================================
-   ACTUALIZAR VOLUMEN
-===================================== */
+        const escala = 5;
 
 
-function actualizar3D(){
+        /* LARGO = X */
 
+        let anchoVisual =
+            L * escala;
 
-let L =
-Number(largo.value)||70;
 
+        anchoVisual =
+            Math.min(
+                Math.max(anchoVisual, 260),
+                850
+            );
 
-let A =
-Number(ancho.value)||30;
 
+        /* ALTO = Y */
 
-let H =
-Number(alto.value)||40;
+        let altoVisual =
+            H * escala;
 
 
+        altoVisual =
+            Math.min(
+                Math.max(altoVisual, 180),
+                500
+            );
 
-let escala = 5;
 
+        /* ANCHO = PROFUNDIDAD Z */
 
+        let profundidadVisual =
+            A * escala;
 
-let anchoVisual =
-L * escala;
 
+        profundidadVisual =
+            Math.min(
+                Math.max(profundidadVisual, 80),
+                400
+            );
 
-let altoVisual =
-H * escala;
 
+        /* =========================
+           APLICAR DIMENSIONES
+        ========================= */
 
+        acuario.style.width =
+            anchoVisual + "px";
 
-anchoVisual =
-Math.min(
-Math.max(anchoVisual,260),
-850
-);
 
+        acuario.style.height =
+            altoVisual + "px";
 
 
-altoVisual =
-Math.min(
-Math.max(altoVisual,180),
-500
-);
+        /*
+           ESTA ES LA CLAVE:
 
+           --depth pertenece a .tank-3d
+        */
 
+        tanque.style.setProperty(
+            "--depth",
+            profundidadVisual + "px"
+        );
 
-let profundidad =
-A * escala;
 
+        /*
+           También guardamos la profundidad
+           en el contenedor.
+        */
 
+        acuario.style.setProperty(
+            "--profundidad",
+            profundidadVisual + "px"
+        );
 
-profundidad =
-Math.min(
-Math.max(profundidad,80),
-400
-);
 
+        /* =========================
+           DATOS DEL ACUARIO
+        ========================= */
 
+        acuario.dataset.medidas =
+            `${L} x ${A} x ${H} cm`;
 
 
-/*
- CONTENEDOR
-*/
+        acuario.dataset.largo = L;
+        acuario.dataset.ancho = A;
+        acuario.dataset.alto = H;
 
+        acuario.dataset.profundidad =
+            profundidadVisual;
 
-acuario.style.width =
-anchoVisual+"px";
 
+        /* =========================
+           TIRANTES
+        ========================= */
 
-acuario.style.height =
-altoVisual+"px";
+        document
+            .querySelectorAll(".tirante3d")
+            .forEach(e => e.remove());
 
 
+        let litros =
+            (L * A * H) / 1000;
 
-/*
- PROFUNDIDAD REAL DEL CUBO
-*/
 
+        if (litros > 150) {
 
-tanque.style.setProperty(
-"--depth",
-profundidad+"px"
-);
+            let tirante =
+                document.createElement("div");
 
 
+            tirante.className =
+                "tirante3d";
 
-acuario.style.setProperty(
-"--profundidad",
-profundidad+"px"
-);
 
+            /*
+               El tirante cruza
+               el ancho/profundidad
+               del acuario.
+            */
 
+            tirante.style.position =
+                "absolute";
 
-acuario.dataset.medidas =
-`${L} x ${A} x ${H} cm`;
 
+            tirante.style.top =
+                "-8px";
 
 
-/*
- TIRANTE
-*/
+            tirante.style.left =
+                "15%";
 
 
-document
-.querySelectorAll(".tirante3d")
-.forEach(e=>e.remove());
+            tirante.style.width =
+                "70%";
 
 
+            tirante.style.height =
+                "10px";
 
-let litros =
-(L*A*H)/1000;
 
+            tirante.style.transform =
+                `translateZ(${profundidadVisual / 2}px)`;
 
 
-if(litros>150){
+            tirante.style.background =
+                "rgba(220,250,255,.65)";
 
 
-let tirante =
-document.createElement("div");
+            tirante.style.border =
+                "2px solid rgba(255,255,255,.8)";
 
 
-tirante.className =
-"tirante3d";
+            tirante.style.boxShadow =
+                "0 0 15px rgba(0,220,255,.6)";
 
 
+            tirante.style.zIndex =
+                "120";
 
-tirante.style.top="-8px";
 
-tirante.style.left="15%";
+            tanque.appendChild(tirante);
 
-tirante.style.width="70%";
+        }
 
-tirante.style.height="10px";
 
+        console.log(
+            "3D V6:",
+            `${L} x ${A} x ${H} cm`,
+            "Profundidad:",
+            profundidadVisual + "px",
+            "Volumen:",
+            litros.toFixed(1) + "L"
+        );
 
 
-acuario.appendChild(tirante);
+    }
 
 
-}
+    /* =========================
+       ACTUALIZAR CÁMARA
+    ========================= */
 
+    function actualizarVista() {
 
 
-console.log(
-"3D:",
-L,
-A,
-H,
-litros.toFixed(1)+"L"
-);
+        tanque.style.transform =
+            `
+            scale(${zoom})
+            rotateX(${rotX}deg)
+            rotateY(${rotY}deg)
+            `;
 
 
+    }
 
-}
 
+    /* =========================
+       CAMBIO DE DIMENSIONES
+    ========================= */
 
+    [largo, ancho, alto]
+        .forEach(input => {
 
-window.actualizar3D =
-actualizar3D;
+            input.addEventListener(
+                "input",
+                actualizar3D
+            );
 
+        });
 
 
-[largo,ancho,alto]
-.forEach(input=>{
+    /* =========================
+       RATÓN — ROTACIÓN
+    ========================= */
 
-input.addEventListener(
-"input",
-actualizar3D
-);
+    tanque.addEventListener(
+        "mousedown",
+        e => {
 
-});
+            pulsado = true;
 
+            inicioX = e.clientX;
+            inicioY = e.clientY;
 
+            tanque.style.cursor =
+                "grabbing";
 
+            e.preventDefault();
 
+        }
+    );
 
-/* =====================================
-   VISTA 3D
-===================================== */
 
+    document.addEventListener(
+        "mousemove",
+        e => {
 
-function actualizarVista(){
+            if (!pulsado) return;
 
 
-let cam =
-window.camera3D;
+            let movimientoX =
+                e.clientX - inicioX;
 
 
+            let movimientoY =
+                e.clientY - inicioY;
 
-tanque.style.transform =
 
-`
-translateZ(0px)
-rotateX(${cam.rotX}deg)
-rotateY(${cam.rotY}deg)
-scale(${cam.zoom})
-`;
+            rotY +=
+                movimientoX * 0.4;
 
 
+            rotX -=
+                movimientoY * 0.3;
 
-}
 
+            rotX =
+                Math.max(
+                    -60,
+                    Math.min(
+                        60,
+                        rotX
+                    )
+                );
 
 
-window.actualizarVista =
-actualizarVista;
+            inicioX =
+                e.clientX;
 
 
+            inicioY =
+                e.clientY;
 
 
+            actualizarVista();
 
-let pulsado=false;
+        }
+    );
 
-let inicioX=0;
 
-let inicioY=0;
+    document.addEventListener(
+        "mouseup",
+        () => {
 
+            pulsado = false;
 
+            tanque.style.cursor =
+                "grab";
 
-tanque.addEventListener(
-"mousedown",
-(e)=>{
+        }
+    );
 
 
-pulsado=true;
+    /* =========================
+       RUEDA — ZOOM
+    ========================= */
 
+    tanque.addEventListener(
+        "wheel",
+        e => {
 
-inicioX=e.clientX;
+            e.preventDefault();
 
-inicioY=e.clientY;
 
+            zoom +=
+                e.deltaY * -0.001;
 
-tanque.style.cursor="grabbing";
 
+            zoom =
+                Math.max(
+                    0.6,
+                    Math.min(
+                        1.6,
+                        zoom
+                    )
+                );
 
-});
 
+            actualizarVista();
 
+        },
+        {
+            passive: false
+        }
+    );
 
 
+    /* =========================
+       FUNCIONES GLOBALES
+    ========================= */
 
-document.addEventListener(
-"mousemove",
-(e)=>{
+    window.actualizar3D =
+        actualizar3D;
 
 
-if(!pulsado)return;
+    window.actualizarVista =
+        actualizarVista;
 
 
+    /* =========================
+       INICIALIZAR
+    ========================= */
 
-let cam =
-window.camera3D;
+    tanque.style.cursor =
+        "grab";
 
 
+    actualizar3D();
 
-let dx =
-e.clientX-inicioX;
-
-
-let dy =
-e.clientY-inicioY;
-
-
-
-cam.rotY += dx*0.4;
-
-cam.rotX -= dy*0.3;
-
-
-
-cam.rotX =
-Math.max(
--45,
-Math.min(45,cam.rotX)
-);
-
-
-
-inicioX=e.clientX;
-
-inicioY=e.clientY;
-
-
-
-actualizarVista();
-
-
-
-});
-
-
-
-
-
-document.addEventListener(
-"mouseup",
-()=>{
-
-
-pulsado=false;
-
-
-tanque.style.cursor="grab";
-
-
-});
-
-
-
-
-
-/* ZOOM */
-
-
-tanque.addEventListener(
-"wheel",
-(e)=>{
-
-
-e.preventDefault();
-
-
-
-let cam =
-window.camera3D;
-
-
-
-cam.zoom +=
-e.deltaY*-0.001;
-
-
-
-cam.zoom =
-Math.max(
-0.6,
-Math.min(1.6,cam.zoom)
-);
-
-
-
-actualizarVista();
-
-
-
-},
-{
-passive:false
-});
-
-
-
-
-
-tanque.style.cursor="grab";
-
-
-
-actualizar3D();
-
-actualizarVista();
-
+    actualizarVista();
 
 
 });
