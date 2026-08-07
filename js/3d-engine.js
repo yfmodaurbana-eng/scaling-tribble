@@ -50,6 +50,8 @@ return;
 
 
 function actualizar3D(){
+   
+window.actualizar3D = actualizar3D;
 
 
 let L = Number(largo.value)||70;
@@ -196,6 +198,7 @@ let inicioY = 0;
 
 
 function actualizarVista(){
+window.actualizarVista = actualizarVista;
 
 
 tanque.style.transform =
