@@ -625,11 +625,15 @@ Diseña el acuario para generar ficha técnica
 ========================= -->
 
 
-<script src="./js/engine.js?v=8"></script>
-<script src="./js/3d-engine.js?v=8"></script>
-<script src="./js/objects.js?v=9"></script>
-<script src="./js/ficha.js?v=8"></script>
-<script src="./js/save.js?v=16"></script>
+<script>
+const VERSION = Date.now();
+
+document.write(`<script src="./js/engine.js?v=${VERSION}"><\/script>`);
+document.write(`<script src="./js/3d-engine.js?v=${VERSION}"><\/script>`);
+document.write(`<script src="./js/objects.js?v=${VERSION}"><\/script>`);
+document.write(`<script src="./js/ficha.js?v=${VERSION}"><\/script>`);
+document.write(`<script src="./js/save.js?v=${VERSION}"><\/script>`);
+</script>
 
 
 
