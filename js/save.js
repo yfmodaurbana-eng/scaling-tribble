@@ -41,10 +41,6 @@ function guardarAcuario(){
         });
 
 
-    });
-
-
-
     localStorage.setItem(
 
         "miAcuario",
