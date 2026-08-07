@@ -15,7 +15,7 @@ function guardarAcuario(){
     let datos = {
 
 
-        medidas: aquariumData,
+       medidas: window.acuario,
 
 
         objetos:[]
