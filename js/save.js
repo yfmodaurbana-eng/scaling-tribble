@@ -27,14 +27,15 @@ function guardarAcuario(){
     objetos.forEach(function(obj){
 
 
-        datos.objetos.push({
+    datos.objetos.push({
 
+    tipo:obj.innerHTML,
 
-            tipo:obj.innerHTML,
+    x:obj.style.left,
 
-            x:obj.style.left,
+    y:obj.style.bottom || obj.style.top
 
-           y:obj.style.bottom || obj.style.top
+});
 
 
         });
@@ -123,9 +124,9 @@ function cargarAcuario(){
 
 
 
-        nuevo.style.left=obj.x;
+nuevo.style.left=obj.x;
 
-        nuevo.style.top=obj.y;
+nuevo.style.bottom=obj.y;
 
 
 
