@@ -16,16 +16,16 @@ window.crearObjeto = function(tipo, icono) {
     objeto.textContent = icono;
 
     objeto.style.position = "absolute";
-    objeto.style.left = "0";
-    objeto.style.top = "0";
+    objeto.style.left = "50%";
+    objeto.style.top = "50%";
     objeto.style.zIndex = "300";
     objeto.style.fontSize = "40px";
     objeto.style.transformStyle = "preserve-3d";
     objeto.style.cursor = "grab";
 
-    var x = Math.random() * 60 + 20;
-    var y = Math.random() * 60 + 20;
-    var z = Math.random() * 100;
+var x = 50;
+var y = 70;
+var z = 20;
 
     objeto.dataset.x = x;
     objeto.dataset.y = y;
@@ -54,10 +54,10 @@ function actualizarPosicion(objeto) {
     var y = Number(objeto.dataset.y);
     var z = Number(objeto.dataset.z);
 
-    objeto.style.transform =
+   objeto.style.transform =
         "translate3d(" +
-        x + "%," +
-        y + "%," +
+        (x - 50) + "%," +
+        (y - 50) + "%," +
         z + "px)";
 }
 
