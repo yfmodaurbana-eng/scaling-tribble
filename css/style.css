@@ -2086,21 +2086,3 @@ pre{
 /* ==================================================
    FIN CSS V8.2 PROFESSIONAL
 ================================================== */
-.interior-3d{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-
-    transform-style:preserve-3d;
-
-    pointer-events:none;
-
-    z-index:200;
-}
-
-.interior-3d .objeto{
-    pointer-events:auto;
-    transform-style:preserve-3d;
-}
