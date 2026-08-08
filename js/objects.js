@@ -141,3 +141,28 @@ function hacerArrastrable(objeto, tanque) {
     });
 
 }
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.querySelectorAll(".tool").forEach(function(boton) {
+
+        boton.addEventListener("click", function() {
+
+            var texto = boton.innerText;
+
+            if (texto.includes("Roca")) {
+                crearObjeto("roca", "🪨");
+            }
+
+            if (texto.includes("Planta")) {
+                crearObjeto("planta", "🌱");
+            }
+
+            if (texto.includes("Pez")) {
+                crearObjeto("pez", "🐟");
+            }
+
+        });
+
+    });
+
+});
