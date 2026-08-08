@@ -75,7 +75,26 @@ function hacerArrastrable(objeto) {
 
         objeto.style.cursor = "grabbing";
     });
+    
+objeto.addEventListener("wheel", function(e) {
 
+    e.preventDefault();
+
+    e.stopPropagation();
+
+    var z = Number(objeto.dataset.z);
+
+    z -= e.deltaY * 0.15;
+
+    z = Math.max(-70, Math.min(70, z));
+
+    objeto.dataset.z = z;
+
+    actualizarPosicion(objeto);
+
+    console.log("PROFUNDIDAD Z:", z);
+
+}, { passive: false });
 
     document.addEventListener("mousemove", function(e) {
 
