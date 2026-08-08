@@ -1,16 +1,16 @@
 ```javascript
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V8.3
+   ACUARIO DESIGNER STUDIO V8.4
    SISTEMA DE OBJETOS 3D REAL
    X + Y + Z
 ================================================== */
 
-console.log("OBJECTS ENGINE V8.3 CARGADO");
+console.log("OBJECTS ENGINE V8.4 CARGADO");
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const tanque = document.querySelector(".tank-3d");
+    var tanque = document.querySelector(".tank-3d");
 
     if (!tanque) {
         console.error("No existe .tank-3d");
@@ -22,12 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
        CONFIGURACIÓN
     ================================================== */
 
-    const CONFIG = {
+    var CONFIG = {
+
         xMin: 5,
         xMax: 95,
+
         yMin: 8,
         yMax: 88,
+
         zMin: 0
+
     };
 
 
@@ -35,25 +39,29 @@ document.addEventListener("DOMContentLoaded", () => {
        BOTONES
     ================================================== */
 
-    document.querySelectorAll(".tool").forEach(btn => {
+    document.querySelectorAll(".tool").forEach(function (btn) {
 
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", function () {
 
-            const texto = btn.innerText;
+            var texto = btn.innerText || "";
 
-            if (texto.includes("Roca")) {
+
+            if (texto.indexOf("Roca") !== -1) {
                 crearObjeto("roca", "🪨");
             }
 
-            if (texto.includes("Planta")) {
+
+            if (texto.indexOf("Planta") !== -1) {
                 crearObjeto("planta", "🌱");
             }
 
-            if (texto.includes("Pez")) {
+
+            if (texto.indexOf("Pez") !== -1) {
                 crearObjeto("pez", "🐟");
             }
 
-            if (texto.includes("Luz")) {
+
+            if (texto.indexOf("Luz") !== -1) {
                 activarLuz();
             }
 
@@ -63,31 +71,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       CREAR OBJETO 3D
+       CREAR OBJETO
     ================================================== */
 
-    window.crearObjeto = function(tipo, icono) {
+    window.crearObjeto = function (tipo, icono) {
 
-        const objeto = document.createElement("div");
-
-        objeto.className = "objeto " + tipo;
-
-        objeto.innerHTML = icono;
+        var objeto =
+            document.createElement("div");
 
 
-        /* POSICIÓN ALEATORIA */
+        objeto.className =
+            "objeto " + tipo;
 
-        const x = random(15, 85);
 
-        const y = random(20, 75);
+        objeto.innerHTML =
+            icono;
 
-        const z = random(
-            10,
-            Math.max(
-                20,
-                obtenerProfundidad() - 10
-            )
-        );
+
+        /* POSICIÓN INICIAL */
+
+        var x =
+            random(15, 85);
+
+
+        var y =
+            random(20, 75);
+
+
+        var z =
+            random(
+                10,
+                Math.max(
+                    20,
+                    obtenerProfundidad() - 10
+                )
+            );
 
 
         objeto.dataset.x = x;
@@ -97,25 +115,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* POSICIONAMIENTO */
 
-        objeto.style.left = "0px";
-        objeto.style.top = "0px";
-        objeto.style.right = "auto";
-        objeto.style.bottom = "auto";
+        objeto.style.position =
+            "absolute";
 
-        objeto.style.position = "absolute";
+
+        objeto.style.left =
+            "0px";
+
+
+        objeto.style.top =
+            "0px";
+
+
+        objeto.style.right =
+            "auto";
+
+
+        objeto.style.bottom =
+            "auto";
+
 
         objeto.style.transformStyle =
             "preserve-3d";
 
 
+        objeto.style.cursor =
+            "grab";
+
+
+        /* AÑADIR AL TANQUE */
+
         tanque.appendChild(objeto);
 
 
-        actualizarPosicion3D(objeto);
+        /* APLICAR POSICIÓN */
 
-        hacerArrastrable3D(objeto);
+        actualizarPosicion3D(
+            objeto
+        );
 
-        activarControlRueda(objeto);
+
+        /* ACTIVAR CONTROLES */
+
+        hacerArrastrable3D(
+            objeto
+        );
+
+
+        activarControlRueda(
+            objeto
+        );
+
+
+        console.log(
+            "Objeto creado:",
+            tipo,
+            "X:",
+            x,
+            "Y:",
+            y,
+            "Z:",
+            z
+        );
 
 
         return objeto;
@@ -129,16 +190,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function obtenerProfundidad() {
 
-        const valor =
+        var valor =
             getComputedStyle(tanque)
             .getPropertyValue("--depth");
 
-        const profundidad =
+
+        var profundidad =
             parseFloat(valor);
+
 
         if (Number.isFinite(profundidad)) {
             return profundidad;
         }
+
 
         return 150;
 
@@ -146,58 +210,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       POSICIÓN 3D
+       ACTUALIZAR POSICIÓN 3D
     ================================================== */
 
     function actualizarPosicion3D(objeto) {
 
-        let x =
+        var x =
             Number(objeto.dataset.x);
 
-        let y =
+
+        var y =
             Number(objeto.dataset.y);
 
-        let z =
+
+        var z =
             Number(objeto.dataset.z);
 
 
-        const profundidad =
+        var profundidad =
             obtenerProfundidad();
 
 
-        x = limitar(
-            x,
-            CONFIG.xMin,
-            CONFIG.xMax
-        );
+        x =
+            limitar(
+                x,
+                CONFIG.xMin,
+                CONFIG.xMax
+            );
 
 
-        y = limitar(
-            y,
-            CONFIG.yMin,
-            CONFIG.yMax
-        );
+        y =
+            limitar(
+                y,
+                CONFIG.yMin,
+                CONFIG.yMax
+            );
 
 
-        z = limitar(
-            z,
-            CONFIG.zMin,
-            profundidad
-        );
+        z =
+            limitar(
+                z,
+                CONFIG.zMin,
+                profundidad
+            );
 
 
-        objeto.dataset.x = x;
-        objeto.dataset.y = y;
-        objeto.dataset.z = z;
+        objeto.dataset.x =
+            x;
+
+
+        objeto.dataset.y =
+            y;
+
+
+        objeto.dataset.z =
+            z;
 
 
         /*
-         * AQUÍ ESTÁ LA CORRECCIÓN
-         * La plantilla utiliza backticks.
+         * SIN BACKTICKS.
+         *
+         * Construimos translate3d
+         * mediante concatenación.
          */
 
         objeto.style.transform =
-            `translate3d(${x}%, ${y}%, ${z}px)`;
+            "translate3d(" +
+            x +
+            "%, " +
+            y +
+            "%, " +
+            z +
+            "px)";
+
 
     }
 
@@ -208,29 +293,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hacerArrastrable3D(objeto) {
 
-        let moviendo = false;
+        var moviendo =
+            false;
 
-        let inicioMouseX = 0;
-        let inicioMouseY = 0;
 
-        let inicioX = 0;
-        let inicioY = 0;
+        var inicioMouseX =
+            0;
+
+
+        var inicioMouseY =
+            0;
+
+
+        var inicioX =
+            0;
+
+
+        var inicioY =
+            0;
 
 
         objeto.addEventListener(
             "mousedown",
-            e => {
+            function (e) {
 
                 if (e.button !== 0) {
                     return;
                 }
 
 
-                moviendo = true;
+                moviendo =
+                    true;
 
 
                 inicioMouseX =
                     e.clientX;
+
 
                 inicioMouseY =
                     e.clientY;
@@ -240,6 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     Number(
                         objeto.dataset.x
                     );
+
 
                 inicioY =
                     Number(
@@ -261,19 +360,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.addEventListener(
             "mousemove",
-            e => {
+            function (e) {
 
                 if (!moviendo) {
                     return;
                 }
 
 
-                const dx =
+                var dx =
                     e.clientX -
                     inicioMouseX;
 
 
-                const dy =
+                var dy =
                     e.clientY -
                     inicioMouseY;
 
@@ -306,14 +405,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.addEventListener(
             "mouseup",
-            () => {
+            function () {
 
                 if (!moviendo) {
                     return;
                 }
 
 
-                moviendo = false;
+                moviendo =
+                    false;
 
 
                 objeto.style.cursor =
@@ -326,19 +426,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       PROFUNDIDAD CON RUEDA
+       PROFUNDIDAD Z
+       RUEDA DEL RATÓN
     ================================================== */
 
     function activarControlRueda(objeto) {
 
         objeto.addEventListener(
             "wheel",
-            e => {
+            function (e) {
 
                 e.preventDefault();
 
 
-                let z =
+                var z =
                     Number(
                         objeto.dataset.z
                     );
@@ -383,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       UTILIDADES
+       LIMITAR VALORES
     ================================================== */
 
     function limitar(
@@ -411,6 +512,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+
+    /* ==================================================
+       NÚMERO ALEATORIO
+    ================================================== */
 
     function random(
         minimo,
