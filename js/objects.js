@@ -1,4 +1,3 @@
-```javascript
 console.log("OBJECTS ENGINE V11");
 
 window.crearObjeto = function(tipo, icono) {
@@ -54,7 +53,7 @@ function actualizarPosicion(objeto) {
         x + "%," +
         y + "%," +
         z + "px)";
-};
+}
 
 
 function hacerArrastrable(objeto) {
@@ -110,13 +109,8 @@ function hacerArrastrable(objeto) {
 
         objeto.style.cursor = "grab";
     });
+}
 
-};
-
-
-/* =========================
-   BOTONES
-========================= */
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -143,4 +137,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
-```
