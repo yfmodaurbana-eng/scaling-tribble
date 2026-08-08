@@ -1,25 +1,21 @@
+```javascript
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V8.2
+   ACUARIO DESIGNER STUDIO V8.3
    SISTEMA DE OBJETOS 3D REAL
    X + Y + Z
+   MOTOR ESTABLE
 ================================================== */
 
-console.log("OBJECTS ENGINE V8.2 CARGADO");
+console.log("OBJECTS ENGINE V8.3 CARGADO");
 
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
-    const tanque =
-        document.querySelector(".tank-3d");
-
+    const tanque = document.querySelector(".tank-3d");
 
     if (!tanque) {
-
         console.error("No existe .tank-3d");
-
         return;
-
     }
 
 
@@ -35,8 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         yMin: 8,
         yMax: 88,
 
-        zMin: 0,
-        zMax: 250
+        zMin: 0
 
     };
 
@@ -45,178 +40,113 @@ document.addEventListener("DOMContentLoaded", () => {
        BOTONES
     ================================================== */
 
-    document
-        .querySelectorAll(".tool")
-        .forEach(btn => {
+    document.querySelectorAll(".tool").forEach(btn => {
 
-            btn.addEventListener("click", () => {
+        btn.addEventListener("click", () => {
 
-                const texto =
-                    btn.innerText;
+            const texto = btn.innerText;
 
+            if (texto.includes("Roca")) {
+                crearObjeto("roca", "🪨");
+            }
 
-                if (texto.includes("Roca")) {
+            if (texto.includes("Planta")) {
+                crearObjeto("planta", "🌱");
+            }
 
-                    crearObjeto(
-                        "roca",
-                        "🪨"
-                    );
+            if (texto.includes("Pez")) {
+                crearObjeto("pez", "🐟");
+            }
 
-                }
-
-
-                if (texto.includes("Planta")) {
-
-                    crearObjeto(
-                        "planta",
-                        "🌱"
-                    );
-
-                }
-
-
-                if (texto.includes("Pez")) {
-
-                    crearObjeto(
-                        "pez",
-                        "🐟"
-                    );
-
-                }
-
-
-                if (texto.includes("Luz")) {
-
-                    activarLuz();
-
-                }
-
-            });
+            if (texto.includes("Luz")) {
+                activarLuz();
+            }
 
         });
 
+    });
+
 
     /* ==================================================
-       CREAR OBJETO 3D
+       CREAR OBJETO
     ================================================== */
 
-    window.crearObjeto =
-        function(tipo, icono) {
+    window.crearObjeto = function(tipo, icono) {
 
+        const objeto = document.createElement("div");
 
-            const objeto =
-                document.createElement("div");
+        objeto.className = "objeto " + tipo;
 
+        objeto.innerHTML = icono;
 
-            objeto.className =
-                "objeto " + tipo;
+        /*
+            Posición inicial aleatoria.
+        */
 
+        const x =
+            random(15, 85);
 
-            objeto.innerHTML =
-                icono;
+        const y =
+            random(20, 75);
 
-
-            /*
-                Posición inicial aleatoria
-                en X, Y y Z.
-            */
-
-            const x =
-                random(
-                    CONFIG.xMin + 10,
-                    CONFIG.xMax - 10
-                );
-
-
-            const y =
-                random(
+        const z =
+            random(
+                10,
+                Math.max(
                     20,
-                    78
-                );
-
-
-            const z =
-                random(
-                    CONFIG.zMin + 10,
-                    Math.min(
-                        CONFIG.zMax - 10,
-                        obtenerProfundidad()
-                    )
-                );
-
-
-            objeto.dataset.x =
-                x;
-
-
-            objeto.dataset.y =
-                y;
-
-
-            objeto.dataset.z =
-                z;
-
-
-            /*
-                Evitamos que el CSS
-                antiguo interfiera.
-            */
-
-            objeto.style.left =
-                "0";
-
-
-            objeto.style.top =
-                "0";
-
-
-            objeto.style.bottom =
-                "auto";
-
-
-            objeto.style.transformStyle =
-                "preserve-3d";
-
-
-            actualizarPosicion3D(
-                objeto
+                    obtenerProfundidad() - 10
+                )
             );
 
 
-            tanque.appendChild(
-                objeto
-            );
+        objeto.dataset.x = x;
+        objeto.dataset.y = y;
+        objeto.dataset.z = z;
 
 
-            hacerArrastrable3D(
-                objeto
-            );
+        /*
+            Eliminamos cualquier posicionamiento
+            2D anterior.
+        */
+
+        objeto.style.left = "0px";
+        objeto.style.top = "0px";
+        objeto.style.right = "auto";
+        objeto.style.bottom = "auto";
 
 
-            /*
-                Animación solamente para
-                peces y plantas.
-            */
+        objeto.style.position = "absolute";
 
-            if (
-                tipo === "pez" ||
-                tipo === "planta"
-            ) {
-
-                objeto.classList.add(
-                    "animada"
-                );
-
-            }
+        objeto.style.transformStyle =
+            "preserve-3d";
 
 
-            return objeto;
+        /*
+            MUY IMPORTANTE:
+            no añadimos ninguna animación
+            que modifique transform.
+        */
 
-        };
+
+        tanque.appendChild(objeto);
+
+
+        actualizarPosicion3D(objeto);
+
+
+        hacerArrastrable3D(objeto);
+
+
+        activarControlRueda(objeto);
+
+
+        return objeto;
+
+    };
 
 
     /* ==================================================
-       OBTENER PROFUNDIDAD ACTUAL
+       PROFUNDIDAD
     ================================================== */
 
     function obtenerProfundidad() {
@@ -225,21 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
             getComputedStyle(tanque)
             .getPropertyValue("--depth");
 
-
         const profundidad =
             parseFloat(valor);
 
-
-        if (
-            Number.isFinite(
-                profundidad
-            )
-        ) {
-
+        if (Number.isFinite(profundidad)) {
             return profundidad;
-
         }
-
 
         return 150;
 
@@ -250,50 +171,54 @@ document.addEventListener("DOMContentLoaded", () => {
        POSICIÓN 3D
     ================================================== */
 
-    function actualizarPosicion3D(
-        objeto
-    ) {
+    function actualizarPosicion3D(objeto) {
+
+        let x =
+            Number(objeto.dataset.x);
+
+        let y =
+            Number(objeto.dataset.y);
+
+        let z =
+            Number(objeto.dataset.z);
 
 
-        const x =
+        const profundidad =
+            obtenerProfundidad();
+
+
+        x =
             limitar(
-                Number(objeto.dataset.x),
+                x,
                 CONFIG.xMin,
                 CONFIG.xMax
             );
 
 
-        const y =
+        y =
             limitar(
-                Number(objeto.dataset.y),
+                y,
                 CONFIG.yMin,
                 CONFIG.yMax
             );
 
 
-        const zMax =
-            obtenerProfundidad();
-
-
-        const z =
+        z =
             limitar(
-                Number(objeto.dataset.z),
+                z,
                 CONFIG.zMin,
-                zMax
+                profundidad
             );
 
 
-        objeto.dataset.x =
-            x;
+        objeto.dataset.x = x;
+        objeto.dataset.y = y;
+        objeto.dataset.z = z;
 
 
-        objeto.dataset.y =
-            y;
-
-
-        objeto.dataset.z =
-            z;
-
+        /*
+            ÚNICO transform del objeto.
+        */
 
         objeto.style.transform =
             `translate3d(
@@ -306,63 +231,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       ARRASTRE 3D
+       ARRASTRE X + Y
     ================================================== */
 
-    function hacerArrastrable3D(
-        objeto
-    ) {
+    function hacerArrastrable3D(objeto) {
 
+        let moviendo = false;
 
-        let moviendo =
-            false;
+        let inicioMouseX = 0;
+        let inicioMouseY = 0;
 
-
-        let inicioX =
-            0;
-
-
-        let inicioY =
-            0;
-
-
-        let inicioZ =
-            0;
-
-
-        let inicioMouseX =
-            0;
-
-
-        let inicioMouseY =
-            0;
+        let inicioX = 0;
+        let inicioY = 0;
 
 
         objeto.addEventListener(
             "mousedown",
             e => {
 
-
-                /*
-                    Solo botón izquierdo.
-                */
-
-                if (
-                    e.button !== 0
-                ) {
-
+                if (e.button !== 0) {
                     return;
-
                 }
 
 
-                moviendo =
-                    true;
+                moviendo = true;
 
 
                 inicioMouseX =
                     e.clientX;
-
 
                 inicioMouseY =
                     e.clientY;
@@ -373,22 +269,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         objeto.dataset.x
                     );
 
-
                 inicioY =
                     Number(
                         objeto.dataset.y
                     );
-
-
-                inicioZ =
-                    Number(
-                        objeto.dataset.z
-                    );
-
-
-                objeto.classList.add(
-                    "seleccionado"
-                );
 
 
                 objeto.style.cursor =
@@ -396,7 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 e.preventDefault();
-
 
                 e.stopPropagation();
 
@@ -408,11 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "mousemove",
             e => {
 
-
                 if (!moviendo) {
-
                     return;
-
                 }
 
 
@@ -427,84 +307,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                    Movimiento horizontal:
                     X
                 */
 
-                let nuevoX =
-                    inicioX +
-                    dx * 0.18;
-
-
-                /*
-                    Movimiento vertical:
-                    Y
-                */
-
-                let nuevoY =
-                    inicioY +
-                    dy * 0.18;
-
-
-                /*
-                    Movimiento de profundidad:
-                    
-                    SHIFT + ratón
-                    modifica Z.
-
-                    Esto permite controlar
-                    las tres dimensiones sin
-                    añadir botones todavía.
-                */
-
-                let nuevoZ =
-                    inicioZ;
-
-
-                if (e.shiftKey) {
-
-                    nuevoZ =
-                        inicioZ -
-                        dy * 0.9;
-
-                }
-
-
-                /*
-                    ALT + ratón también
-                    permite controlar Z.
-                */
-
-                if (e.altKey) {
-
-                    nuevoZ =
-                        inicioZ +
-                        dx * 0.9;
-
-                }
-
-
                 objeto.dataset.x =
                     limitar(
-                        nuevoX,
+                        inicioX +
+                        dx * 0.20,
+
                         CONFIG.xMin,
                         CONFIG.xMax
                     );
 
 
+                /*
+                    Y
+                */
+
                 objeto.dataset.y =
                     limitar(
-                        nuevoY,
+                        inicioY +
+                        dy * 0.20,
+
                         CONFIG.yMin,
                         CONFIG.yMax
-                    );
-
-
-                objeto.dataset.z =
-                    limitar(
-                        nuevoZ,
-                        CONFIG.zMin,
-                        obtenerProfundidad()
                     );
 
 
@@ -520,25 +346,14 @@ document.addEventListener("DOMContentLoaded", () => {
             "mouseup",
             () => {
 
-
                 if (!moviendo) {
-
                     return;
-
                 }
 
-
-                moviendo =
-                    false;
-
+                moviendo = false;
 
                 objeto.style.cursor =
                     "grab";
-
-
-                objeto.classList.remove(
-                    "seleccionado"
-                );
 
             }
         );
@@ -547,22 +362,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       RUEDA DEL RATÓN
-       CONTROL DE PROFUNDIDAD
+       PROFUNDIDAD CON RUEDA
     ================================================== */
 
-    function activarControlRueda(
-        objeto
-    ) {
-
+    function activarControlRueda(objeto) {
 
         objeto.addEventListener(
             "wheel",
             e => {
 
-
                 e.preventDefault();
-
 
                 let z =
                     Number(
@@ -571,7 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 z +=
-                    e.deltaY * -0.35;
+                    e.deltaY * -0.5;
 
 
                 objeto.dataset.z =
@@ -593,58 +402,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     }
-
-
-    /* ==================================================
-       OBSERVAR NUEVOS OBJETOS
-    ================================================== */
-
-    const observer =
-        new MutationObserver(
-            cambios => {
-
-
-                cambios.forEach(
-                    cambio => {
-
-
-                        cambio.addedNodes
-                            .forEach(
-                                nodo => {
-
-
-                                    if (
-                                        !nodo.classList ||
-                                        !nodo.classList.contains(
-                                            "objeto"
-                                        )
-                                    ) {
-
-                                        return;
-
-                                    }
-
-
-                                    activarControlRueda(
-                                        nodo
-                                    );
-
-                                }
-                            );
-
-                    }
-                );
-
-            }
-        );
-
-
-    observer.observe(
-        tanque,
-        {
-            childList: true
-        }
-    );
 
 
     /* ==================================================
@@ -670,17 +427,12 @@ document.addEventListener("DOMContentLoaded", () => {
         maximo
     ) {
 
-
         valor =
             Number(valor);
 
 
-        if (
-            !Number.isFinite(valor)
-        ) {
-
+        if (!Number.isFinite(valor)) {
             return minimo;
-
         }
 
 
@@ -710,11 +462,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       EXPONER FUNCIÓN
+       FUNCIÓN GLOBAL
     ================================================== */
 
     window.actualizarPosicion3D =
         actualizarPosicion3D;
 
-
 });
+```
