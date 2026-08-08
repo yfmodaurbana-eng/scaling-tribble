@@ -1,15 +1,56 @@
-
 /* ==================================================
-   ACUARIO DESIGNER STUDIO V7.2 PROFESSIONAL
-   CSS MOTOR 3D REBUILD
+   ACUARIO DESIGNER STUDIO V8.1 PROFESSIONAL
+   REAL 3D AQUARIUM ENGINE
+   CSS LIMPIO
+   PARTE 1/4
+   INTERFAZ + ESTRUCTURA
 ================================================== */
 
 
 /* =========================
-   VARIABLES
+   RESET GENERAL
+========================= */
+
+*{
+
+box-sizing:border-box;
+
+margin:0;
+
+padding:0;
+
+}
+
+
+html,
+body{
+
+width:100%;
+
+height:100%;
+
+overflow:hidden;
+
+font-family:
+
+"Segoe UI",
+Arial,
+sans-serif;
+
+background:#050b12;
+
+color:#e8fbff;
+
+}
+
+
+
+/* =========================
+   VARIABLES GLOBALES
 ========================= */
 
 :root{
+
 
 --bg:#050b12;
 
@@ -27,156 +68,124 @@
 
 --red:#ff4040;
 
---shadow:0 15px 40px rgba(0,0,0,.55);
+--glass:
+
+rgba(220,250,255,.55);
+
+
+--shadow:
+
+0 0 25px rgba(0,220,255,.25);
+
 
 }
 
 
 
 /* =========================
-   RESET
-========================= */
-
-*{
-
-box-sizing:border-box;
-
-}
-
-
-
-html,
-body{
-
-margin:0;
-
-width:100%;
-
-height:100%;
-
-
-overflow:hidden;
-
-
-font-family:
-
-'Segoe UI',
-Arial,
-sans-serif;
-
-
-background:
-
-radial-gradient(
-circle at top,
-#17506b,
-#03070b 75%
-);
-
-
-color:white;
-
-}
-
-
-
-
-/* =========================
-   APP
+   APP PRINCIPAL
 ========================= */
 
 
 .app{
 
-width:100%;
+
+width:100vw;
 
 height:100vh;
-
 
 display:flex;
 
 flex-direction:column;
 
+background:
 
-padding:15px;
+radial-gradient(
+
+ellipse at center,
+
+#102b3d 0%,
+
+#050b12 70%
+
+);
 
 }
 
 
 
-
-
 /* =========================
-   HEADER
+   CABECERA
 ========================= */
 
 
 .header{
 
-height:80px;
 
-
-flex-shrink:0;
-
+height:75px;
 
 display:flex;
 
-
 align-items:center;
-
 
 justify-content:space-between;
 
+padding:
 
-padding:15px 25px;
-
+0 25px;
 
 
 background:
 
 linear-gradient(
-145deg,
-#143044,
-#060d14
+
+90deg,
+
+#06111c,
+
+#102b3d,
+
+#06111c
+
 );
 
 
-
-border-radius:20px;
-
-
-
-border:
+border-bottom:
 
 1px solid var(--border);
 
 
-
 box-shadow:
 
-var(--shadow);
+0 5px 25px rgba(0,0,0,.6);
+
+
+z-index:100;
+
+
 
 }
 
 
 
+/* LOGO */
+
 
 .logo{
 
 
-font-size:30px;
-
+font-size:24px;
 
 font-weight:900;
 
+letter-spacing:2px;
 
 color:var(--cyan);
 
 
-
 text-shadow:
 
-0 0 15px rgba(0,220,255,.7);
+0 0 15px rgba(0,220,255,.8);
 
 
 }
@@ -188,22 +197,22 @@ text-shadow:
 
 display:block;
 
+font-size:12px;
 
-font-size:13px;
-
-
-font-weight:400;
-
+letter-spacing:3px;
 
 color:white;
 
-
-opacity:.8;
+margin-top:5px;
 
 
 }
 
 
+
+/* =========================
+   BOTONES CABECERA
+========================= */
 
 
 .actions{
@@ -211,73 +220,54 @@ opacity:.8;
 
 display:flex;
 
-
-gap:10px;
+gap:12px;
 
 
 }
 
-
-
-
-
-/* =========================
-   BOTONES
-========================= */
 
 
 button{
 
 
-background:
+cursor:pointer;
 
-linear-gradient(
-145deg,
-#008dcc,
-#00476b
-);
+border:none;
 
-
-
-color:white;
-
-
-
-border:
-
-1px solid #00cfff;
-
-
-
-border-radius:12px;
-
-
+border-radius:8px;
 
 padding:
 
-10px 18px;
-
+10px 16px;
 
 
 font-weight:bold;
 
+color:white;
 
 
-cursor:pointer;
+background:
 
+linear-gradient(
+
+145deg,
+
+#123449,
+
+#06111c
+
+);
+
+
+border:
+
+1px solid var(--border);
 
 
 transition:.25s;
 
 
-
-box-shadow:
-
-0 5px 15px rgba(0,0,0,.35);
-
-
 }
-
 
 
 
@@ -286,31 +276,18 @@ button:hover{
 
 transform:
 
-translateY(-3px);
-
+translateY(-2px);
 
 
 box-shadow:
 
-0 0 25px rgba(0,220,255,.6);
+0 0 20px rgba(0,220,255,.5);
+
+
+color:var(--cyan);
 
 
 }
-
-
-
-
-button:active{
-
-
-transform:
-
-scale(.96);
-
-
-}
-
-
 
 
 
@@ -324,13 +301,7 @@ scale(.96);
 
 flex:1;
 
-
-min-height:0;
-
-
-
 display:grid;
-
 
 
 grid-template-columns:
@@ -338,22 +309,21 @@ grid-template-columns:
 260px minmax(400px,1fr) 320px;
 
 
-
 gap:15px;
 
 
+padding:15px;
 
-margin-top:15px;
+
+overflow:hidden;
 
 
 }
 
 
 
-
-
 /* =========================
-   PANELES
+   PANELES LATERALES
 ========================= */
 
 
@@ -363,17 +333,15 @@ margin-top:15px;
 
 background:
 
-
 linear-gradient(
-160deg,
-var(--panel2),
-var(--panel)
+
+180deg,
+
+rgba(16,43,61,.95),
+
+rgba(5,11,18,.95)
+
 );
-
-
-
-border-radius:20px;
-
 
 
 border:
@@ -381,13 +349,13 @@ border:
 1px solid var(--border);
 
 
+border-radius:12px;
 
-padding:18px;
 
+padding:15px;
 
 
 overflow-y:auto;
-
 
 
 box-shadow:
@@ -399,245 +367,20 @@ var(--shadow);
 
 
 
-
-
-.sidebar::-webkit-scrollbar,
-.panel::-webkit-scrollbar{
-
-
-width:6px;
-
-
-}
-
-
-
-
-.sidebar::-webkit-scrollbar-thumb,
-.panel::-webkit-scrollbar-thumb{
-
-
-background:#159ac5;
-
-
-border-radius:10px;
-
-
-}
-
-
-
-
-
-h2,
-h3{
+.sidebar h2,
+.panel h2{
 
 
 color:var(--cyan);
 
-
-
-text-shadow:
-
-
-0 0 10px rgba(0,220,255,.4);
-
-
-}
-
-
-
-
-
-/* =========================
-   TARJETAS
-========================= */
-
-
-.card{
-
-
-background:
-
-
-linear-gradient(
-145deg,
-#102333,
-#05090e
-);
-
-
-
-border-radius:15px;
-
-
-
-padding:15px;
-
-
+font-size:20px;
 
 margin-bottom:15px;
 
-
-
-border:
-
-1px solid #195675;
-
-
-
-box-shadow:
-
-
-inset 0 0 20px rgba(0,0,0,.35);
+text-align:center;
 
 
 }
-
-
-
-
-
-.card:hover{
-
-
-border-color:var(--cyan);
-
-
-
-box-shadow:
-
-0 0 20px rgba(0,220,255,.25);
-
-
-}
-
-
-
-
-
-/* =========================
-   CAMPOS
-========================= */
-
-
-input,
-select{
-
-
-width:100%;
-
-
-
-padding:10px;
-
-
-
-margin:8px 0;
-
-
-
-background:
-
-
-linear-gradient(
-145deg,
-#02070c,
-#07141d
-);
-
-
-
-color:white;
-
-
-
-border:
-
-1px solid #245d77;
-
-
-
-border-radius:8px;
-
-
-
-outline:none;
-
-
-}
-
-
-
-input:focus,
-select:focus{
-
-
-border-color:var(--cyan);
-
-
-
-box-shadow:
-
-0 0 15px rgba(0,220,255,.35);
-
-
-}
-
-
-
-
-
-option{
-
-
-background:#08151f;
-
-
-color:white;
-
-
-}
-
-
-
-
-
-strong{
-
-
-color:#e8f8ff;
-
-
-}
-/* =========================
-   ESTADOS
-========================= */
-
-
-.seguro{
-
-color:var(--green)!important;
-
-}
-
-
-
-.alerta{
-
-color:var(--yellow)!important;
-
-}
-
-
-
-.peligro{
-
-color:var(--red)!important;
-
-}
-
-
 
 
 
@@ -651,13 +394,14 @@ color:var(--red)!important;
 
 display:grid;
 
-
 grid-template-columns:
 
-repeat(2,1fr);
+1fr 1fr;
 
 
 gap:10px;
+
+margin-bottom:15px;
 
 
 }
@@ -667,39 +411,9 @@ gap:10px;
 .tool{
 
 
-height:75px;
+height:80px;
 
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-font-size:18px;
-
-
-
-background:
-
-
-linear-gradient(
-145deg,
-#11364c,
-#061018
-);
-
-
-
-border:
-
-1px solid #159ac5;
-
-
-border-radius:12px;
+font-size:14px;
 
 
 }
@@ -711,22 +425,168 @@ border-radius:12px;
 
 background:
 
-
-linear-gradient(
-145deg,
-#006c99,
-#052232
-);
+rgba(0,220,255,.15);
 
 
 }
 
 
 
+/* =========================
+   TARJETAS
+========================= */
+
+
+.card{
+
+
+background:
+
+rgba(0,0,0,.25);
+
+
+border:
+
+1px solid rgba(21,154,197,.5);
+
+
+border-radius:10px;
+
+
+padding:12px;
+
+
+margin-bottom:15px;
+
+
+}
+
+
+
+.card h3{
+
+
+font-size:15px;
+
+color:var(--green);
+
+margin-bottom:10px;
+
+
+}
+
 
 
 /* =========================
-   VISOR CENTRAL 3D
+   FORMULARIOS
+========================= */
+
+
+label{
+
+
+display:block;
+
+font-size:13px;
+
+margin-bottom:10px;
+
+
+}
+
+
+
+input,
+select{
+
+
+width:100%;
+
+
+margin-top:5px;
+
+
+padding:8px;
+
+
+background:#02080d;
+
+
+color:white;
+
+
+border:
+
+1px solid var(--border);
+
+
+border-radius:6px;
+
+
+}
+
+
+
+strong{
+
+
+color:var(--cyan);
+
+
+}
+
+
+
+/* =========================
+   SCROLL PERSONALIZADO
+========================= */
+
+
+::-webkit-scrollbar{
+
+
+width:8px;
+
+
+}
+
+
+::-webkit-scrollbar-track{
+
+
+background:#02080d;
+
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+
+background:#159ac5;
+
+
+border-radius:10px;
+
+
+}
+
+
+
+/* ==================================================
+   FIN PARTE 1/4
+================================================== */
+/* ==================================================
+   ACUARIO DESIGNER STUDIO V8.1 PROFESSIONAL
+   REAL 3D AQUARIUM ENGINE
+   CSS LIMPIO
+   PARTE 2/4
+   VISOR CENTRAL + URNA 3D + CRISTALES
+================================================== */
+
+
+/* =========================
+   VISOR CENTRAL
 ========================= */
 
 
@@ -736,21 +596,14 @@ linear-gradient(
 position:relative;
 
 
-width:100%;
-
-
-height:100%;
-
-
-
 display:flex;
-
 
 align-items:center;
 
-
 justify-content:center;
 
+
+overflow:hidden;
 
 
 background:
@@ -758,55 +611,42 @@ background:
 
 radial-gradient(
 
-circle,
+ellipse at center,
 
-#0c5875,
+#123449 0%,
 
-#02070b 75%
+#050b12 75%
 
 );
 
 
-
-
-border-radius:25px;
-
-
-
 border:
 
-2px solid #00bfff;
+1px solid rgba(0,220,255,.35);
 
 
-
-overflow:hidden;
-
-
-
-perspective:
-
-1200px;
-
+border-radius:15px;
 
 
 box-shadow:
 
 
-inset 0 0 50px rgba(0,0,0,.8),
+inset 0 0 80px rgba(0,0,0,.9),
+
+0 0 35px rgba(0,220,255,.25);
 
 
-0 0 30px rgba(0,200,255,.3);
+perspective:
+
+1600px;
 
 
 }
 
 
 
-
-
-
 /* =========================
-   ACUARIO 3D
+   CONTENEDOR URNA
 ========================= */
 
 
@@ -822,16 +662,32 @@ width:520px;
 height:340px;
 
 
+display:flex;
 
-max-width:75%;
+
+align-items:center;
 
 
-max-height:65%;
+justify-content:center;
 
+
+transform-style:
+
+preserve-3d;
+
+
+perspective:
+
+1600px;
 
 
 }
 
+
+
+/* =========================
+   CUERPO 3D PRINCIPAL
+========================= */
 
 
 .tank-3d{
@@ -840,50 +696,57 @@ max-height:65%;
 position:absolute;
 
 
-inset:0;
+width:100%;
+
+height:100%;
 
 
+transform-style:
 
-transform-style:preserve-3d;
+preserve-3d;
 
+
+--depth:180px;
 
 
 transform:
 
 
-rotateX(0deg)
+rotateX(-10deg)
 
-rotateY(0deg);
+rotateY(-25deg);
 
 
+transition:
 
-transition:.4s ease;
+transform .8s ease;
 
 
 }
 
 
 
+/* Movimiento 3D */
 
-.tank-3d:hover{
+.viewer:hover .tank-3d{
 
 
 transform:
 
 
-rotateX(3deg)
+rotateX(-14deg)
 
-rotateY(-5deg);
+rotateY(-35deg)
+
+scale(1.05);
 
 
 }
-
-
 
 
 
 /* =========================
-   CRISTAL
+   CRISTAL GENERAL
 ========================= */
 
 
@@ -892,37 +755,45 @@ rotateY(-5deg);
 
 position:absolute;
 
+
+display:block;
+
+
 pointer-events:none;
+
+
+transform-style:
+
+preserve-3d;
+
 
 background:
 
 
 linear-gradient(
 
-120deg,
+135deg,
 
-rgba(230,250,255,.25),
+rgba(255,255,255,.28),
 
-rgba(0,140,220,.10)
+rgba(0,180,255,.12),
+
+rgba(0,70,120,.25)
 
 );
 
 
-
 border:
 
-3px solid rgba(230,250,255,.55);
-
+4px solid rgba(220,250,255,.55);
 
 
 box-shadow:
 
 
-inset 0 0 35px rgba(255,255,255,.25),
+inset 0 0 35px rgba(255,255,255,.2),
 
-
-0 0 30px rgba(0,200,255,.35);
-
+0 0 25px rgba(0,220,255,.45);
 
 
 backface-visibility:hidden;
@@ -931,81 +802,191 @@ backface-visibility:hidden;
 }
 
 
+
+/* =========================
+   CRISTAL FRONTAL
+========================= */
+
+
 .glass-front{
+
 
 width:100%;
 
 height:100%;
 
-left:0;
 
 top:0;
 
-transform:
-translateZ(calc(var(--profundidad,150px) / 2));
+left:0;
 
-z-index:20;
+
+transform:
+
+
+translateZ(
+
+calc(var(--depth) / 2)
+
+);
+
+
+z-index:40;
+
 
 }
 
+
+
+/* Reflejo frontal */
+
+.glass-front::after{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:0;
+
+
+background:
+
+
+linear-gradient(
+
+120deg,
+
+rgba(255,255,255,.45),
+
+transparent 35%
+
+);
+
+
+}
+
+
+
+/* =========================
+   CRISTAL TRASERO
+========================= */
 
 
 .glass-back{
 
+
 width:100%;
 
 height:100%;
 
-left:0;
 
 top:0;
 
-transform:
-translateZ(calc(var(--profundidad,150px) / -2));
+left:0;
 
-opacity:.35;
+
+transform:
+
+
+translateZ(
+
+calc(var(--depth) / -2)
+
+);
+
+
+background:
+
+
+rgba(0,120,200,.18);
+
+
+opacity:.7;
+
+
+z-index:10;
+
 
 }
 
 
 
+/* =========================
+   LATERAL IZQUIERDO
+========================= */
 
 
 .glass-left{
 
-width:var(--profundidad,150px);
+
+width:var(--depth);
+
 
 height:100%;
 
-left:0;
+
+left:
+
+calc(var(--depth) / -2);
+
 
 top:0;
 
+
 transform:
-translateX(-50%)
+
+
 rotateY(90deg);
+
+
+z-index:20;
+
 
 }
 
+
+
+/* =========================
+   LATERAL DERECHO
+========================= */
 
 
 .glass-right{
 
-width:var(--profundidad,150px);
+
+width:var(--depth);
+
 
 height:100%;
 
-right:0;
+
+right:
+
+calc(var(--depth) / -2);
+
 
 top:0;
 
+
 transform:
-translateX(50%)
+
+
 rotateY(-90deg);
+
+
+z-index:20;
+
 
 }
 
 
+
+/* =========================
+   BASE CRISTAL
+========================= */
 
 
 .glass-bottom{
@@ -1014,15 +995,15 @@ rotateY(-90deg);
 width:100%;
 
 
-height:80px;
-
+height:var(--depth);
 
 
 left:0;
 
 
-bottom:-40px;
+bottom:
 
+calc(var(--depth) / -2);
 
 
 transform:
@@ -1031,21 +1012,171 @@ transform:
 rotateX(90deg);
 
 
-
 background:
 
 
-rgba(100,180,220,.20);
+rgba(100,200,240,.18);
+
+
+z-index:15;
 
 
 }
 
 
 
+/* =========================
+   BORDE SUPERIOR
+========================= */
+
+
+.tank-3d::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:-5px;
+
+
+left:0;
+
+
+width:100%;
+
+
+height:8px;
+
+
+background:
+
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.9),
+
+transparent
+
+);
+
+
+transform:
+
+
+translateZ(
+
+calc(var(--depth) / 2)
+
+);
+
+
+box-shadow:
+
+
+0 0 25px rgba(0,220,255,.8);
+
+
+z-index:100;
+
+
+}
+
 
 
 /* =========================
-   AGUA
+   REFLEJO EXTERIOR
+========================= */
+
+
+.tank-3d::after{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:0;
+
+
+background:
+
+
+linear-gradient(
+
+120deg,
+
+rgba(255,255,255,.25),
+
+transparent 30%
+
+);
+
+
+transform:
+
+
+translateZ(
+
+calc(var(--depth) / 2 + 8px)
+
+);
+
+
+pointer-events:none;
+
+
+z-index:110;
+
+
+}
+
+
+
+/* =========================
+   SOMBRA 3D
+========================= */
+
+
+.tank-3d{
+
+
+filter:
+
+
+drop-shadow(
+
+0 35px 50px rgba(0,0,0,.85)
+
+);
+
+
+}
+
+
+
+/* ==================================================
+   FIN PARTE 2/4
+================================================== */
+/* ==================================================
+   ACUARIO DESIGNER STUDIO V8.1 PROFESSIONAL
+   REAL 3D AQUARIUM ENGINE
+   CSS LIMPIO
+   PARTE 3/4
+   AGUA + SUSTRATO + ILUMINACION
+================================================== */
+
+
+/* =========================
+   AGUA PRINCIPAL
 ========================= */
 
 
@@ -1055,12 +1186,9 @@ rgba(100,180,220,.20);
 position:absolute;
 
 
-
 left:0;
 
-
-bottom:0;
-
+top:0;
 
 
 width:100%;
@@ -1069,13 +1197,10 @@ width:100%;
 height:82%;
 
 
-
 transform:
 
 
-translateZ(0px)
-translateY(5%);
-
+translateZ(12px);
 
 
 background:
@@ -1085,31 +1210,178 @@ linear-gradient(
 
 180deg,
 
+rgba(120,240,255,.35),
 
-rgba(130,245,255,.25),
-rgba(0,60,160,.65)
+rgba(0,150,220,.55),
+
+rgba(0,60,130,.85)
 
 );
-
-
-
-z-index:5;
-
 
 
 overflow:hidden;
 
 
+z-index:25;
+
+
+transform-style:
+
+preserve-3d;
+
 
 box-shadow:
 
 
-inset 0 0 40px rgba(0,200,255,.5);
+inset 0 -50px 80px rgba(0,0,0,.55),
+
+inset 0 20px 40px rgba(255,255,255,.15);
 
 
 }
 
 
+
+/* =========================
+   PROFUNDIDAD AGUA
+========================= */
+
+
+.water-3d::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:-30%;
+
+
+background:
+
+
+radial-gradient(
+
+ellipse at 25% 20%,
+
+rgba(255,255,255,.45),
+
+transparent 25%
+
+),
+
+
+radial-gradient(
+
+ellipse at 75% 70%,
+
+rgba(0,220,255,.35),
+
+transparent 35%
+
+);
+
+
+animation:
+
+
+waterMove 10s infinite ease-in-out;
+
+
+}
+
+
+
+@keyframes waterMove{
+
+
+0%{
+
+
+transform:
+
+translate(-4%,-2%);
+
+
+}
+
+
+
+50%{
+
+
+transform:
+
+translate(4%,2%);
+
+
+}
+
+
+
+100%{
+
+
+transform:
+
+translate(-4%,-2%);
+
+
+}
+
+
+
+}
+
+
+
+/* =========================
+   CAPA DE LUZ DEL AGUA
+========================= */
+
+
+.water-3d::after{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:0;
+
+
+background:
+
+
+linear-gradient(
+
+90deg,
+
+rgba(255,255,255,.15),
+
+transparent 25%,
+
+transparent 75%,
+
+rgba(0,0,0,.3)
+
+);
+
+
+pointer-events:none;
+
+
+}
+
+
+
+/* =========================
+   SUPERFICIE AGUA
+========================= */
 
 
 .water-surface{
@@ -1127,27 +1399,35 @@ left:0;
 width:100%;
 
 
-height:8px;
-
+height:12px;
 
 
 background:
 
 
-rgba(220,255,255,.8);
+linear-gradient(
 
+90deg,
+
+rgba(255,255,255,.8),
+
+rgba(0,220,255,.45),
+
+rgba(255,255,255,.8)
+
+);
 
 
 box-shadow:
 
 
-0 0 25px var(--cyan);
-
+0 0 30px rgba(0,220,255,.9);
 
 
 animation:
 
-wave 4s infinite linear;
+
+waterWave 4s infinite ease-in-out;
 
 
 }
@@ -1155,31 +1435,135 @@ wave 4s infinite linear;
 
 
 
-@keyframes wave{
+@keyframes waterWave{
 
 
 0%{
 
-opacity:.7;
+
+transform:
+
+translateX(-10px);
+
 
 }
 
 
 50%{
 
-opacity:1;
+
+transform:
+
+translateX(10px);
+
 
 }
 
 
 100%{
 
-opacity:.7;
+
+transform:
+
+translateX(-10px);
+
 
 }
 
 
 }
+
+
+
+/* =========================
+   BURBUJAS
+========================= */
+
+
+.bubble{
+
+
+position:absolute;
+
+
+width:7px;
+
+
+height:7px;
+
+
+border-radius:50%;
+
+
+background:
+
+rgba(255,255,255,.85);
+
+
+box-shadow:
+
+
+0 0 12px white;
+
+
+animation:
+
+
+bubbleUp 6s infinite linear;
+
+
+z-index:60;
+
+
+}
+
+
+
+@keyframes bubbleUp{
+
+
+0%{
+
+
+transform:
+
+translateY(180px);
+
+
+opacity:0;
+
+
+}
+
+
+30%{
+
+
+opacity:1;
+
+
+}
+
+
+100%{
+
+
+transform:
+
+translateY(-220px);
+
+
+opacity:0;
+
+
+}
+
+
+
+}
+
+
+
 /* =========================
    SUSTRATO
 ========================= */
@@ -1191,11 +1575,10 @@ opacity:.7;
 position:absolute;
 
 
-bottom:0;
-
-
 left:0;
 
+
+bottom:0;
 
 
 width:100%;
@@ -1204,12 +1587,10 @@ width:100%;
 height:18%;
 
 
-
 transform:
 
 
-translateZ(35px);
-
+translateZ(25px);
 
 
 background:
@@ -1219,42 +1600,40 @@ linear-gradient(
 
 180deg,
 
-#d8bd72,
+#efd58c,
 
-#553719
+#b8863b 50%,
+
+#513018
 
 );
 
 
-
-z-index:10;
-
+z-index:35;
 
 
 box-shadow:
 
 
-inset 0 10px 20px rgba(255,255,255,.15);
+inset 0 15px 30px rgba(255,255,255,.25),
+
+inset 0 -25px 35px rgba(0,0,0,.65);
+
+
+overflow:hidden;
 
 
 }
 
 
 
+/* Textura arena */
 
 
-
-
-/* =========================
-   REFLEJO CRISTAL
-========================= */
-
-
-.tank-3d::after{
+.substrate::before{
 
 
 content:"";
-
 
 
 position:absolute;
@@ -1263,564 +1642,492 @@ position:absolute;
 inset:0;
 
 
+background:
+
+
+radial-gradient(
+
+circle at 20% 30%,
+
+rgba(255,255,255,.35),
+
+transparent 12%
+
+),
+
+
+radial-gradient(
+
+circle at 70% 60%,
+
+rgba(0,0,0,.3),
+
+transparent 15%
+
+);
+
+
+opacity:.8;
+
+
+}
+
+
+
+/* =========================
+   ILUMINACION SUPERIOR
+========================= */
+
+
+.viewer::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+
+left:15%;
+
+
+width:70%;
+
+
+height:70%;
+
 
 background:
 
 
 linear-gradient(
 
-120deg,
+180deg,
 
+rgba(255,255,255,.25),
 
-rgba(255,255,255,.35),
-
-
-transparent 35%
+transparent 70%
 
 );
 
 
+filter:
 
-transform:
 
-
-translateZ(60px);
-
+blur(35px);
 
 
 pointer-events:none;
 
 
+z-index:80;
+
+
 }
 
 
 
-
-
 /* =========================
-   DECORACION 3D
+   SOMBRA AMBIENTE
 ========================= */
 
 
-.planta,
-.roca,
-.pez{
+.viewer::after{
+
+
+content:"";
 
 
 position:absolute;
 
 
-transform-style:
-
-preserve-3d;
+inset:0;
 
 
+background:
 
-z-index:8;
+
+radial-gradient(
+
+ellipse,
+
+transparent 40%,
+
+rgba(0,0,0,.55)
+
+);
+
+
+pointer-events:none;
+
+
+z-index:70;
 
 
 }
 
 
 
+/* =========================
+   EFECTO PROFUNDIDAD FONDO
+========================= */
 
+
+.glass-back{
+
+
+box-shadow:
+
+
+inset 0 0 70px rgba(0,0,0,.7),
+
+inset 0 0 40px rgba(0,180,255,.25);
+
+
+}
+
+
+
+/* ==================================================
+   FIN PARTE 3/4
+================================================== */
+/* ==================================================
+   ACUARIO DESIGNER STUDIO V8.1 PROFESSIONAL
+   PARTE 4/4
+   OBJETOS + RESPONSIVE + ACABADO
+================================================== */
+
+
+/* =========================
+   OBJETOS 3D
+========================= */
+
+.planta,
+.roca,
+.pez{
+
+position:absolute;
+
+transform-style:preserve-3d;
+
+pointer-events:none;
+
+z-index:50;
+
+}
+
+
+/* =========================
+   PLANTAS
+========================= */
 
 .planta{
 
+transform-origin:bottom center;
+
+animation:plantWave 5s ease-in-out infinite;
 
 filter:
 
-drop-shadow(
-
-0 0 8px rgba(0,255,150,.5)
-
-);
-
+drop-shadow(0 0 12px rgba(0,255,120,.45));
 
 }
 
-
-
-
-.roca{
-
-
-filter:
-
-drop-shadow(
-
-0 0 10px rgba(0,0,0,.8)
-
-);
-
-
-}
-
-
-
-
-.pez{
-
-
-filter:
-
-drop-shadow(
-
-0 0 8px rgba(255,255,255,.4)
-
-);
-
-
-}
-
-
-
-
-
-
-/* =========================
-   ANIMACIONES
-========================= */
-
-
-@keyframes glow{
-
+@keyframes plantWave{
 
 0%{
 
-
-box-shadow:
-
-0 0 10px rgba(0,220,255,.3);
-
+transform:rotateZ(-3deg);
 
 }
-
-
 
 50%{
 
-
-box-shadow:
-
-0 0 30px rgba(0,220,255,.8);
-
+transform:rotateZ(3deg);
 
 }
-
-
 
 100%{
 
-
-box-shadow:
-
-0 0 10px rgba(0,220,255,.3);
-
+transform:rotateZ(-3deg);
 
 }
 
-
 }
-
-
-
-
-
-.viewer:hover{
-
-
-animation:
-
-glow 3s infinite;
-
-
-}
-
-
-
-
 
 
 /* =========================
-   INFORMACION DERECHA
+   ROCAS
 ========================= */
 
+.roca{
 
-.panel .card p{
+filter:
 
+drop-shadow(0 12px 20px rgba(0,0,0,.75));
 
-margin:8px 0;
+transform:
 
-
-
-font-size:14px;
-
-
-
-line-height:1.4;
-
+translateZ(15px);
 
 }
-
-
-
-.panel label{
-
-
-color:#9edfff;
-
-
-font-size:13px;
-
-
-}
-
-
-
 
 
 /* =========================
-   SCROLL
+   PECES
 ========================= */
 
+.pez{
 
-*{
+animation:fishSwim 14s linear infinite;
 
+filter:
 
-scrollbar-width:thin;
-
-
-scrollbar-color:
-
-#159ac5 transparent;
-
+drop-shadow(0 0 10px rgba(255,255,255,.7));
 
 }
 
+@keyframes fishSwim{
 
+0%{
 
+transform:
+
+translateX(-180px)
+
+translateZ(25px);
+
+}
+
+50%{
+
+transform:
+
+translateX(180px)
+
+translateZ(70px);
+
+}
+
+100%{
+
+transform:
+
+translateX(520px)
+
+translateZ(35px);
+
+}
+
+}
 
 
 /* =========================
-   BOTONES HERRAMIENTAS
+   ESTADOS
 ========================= */
 
+.seguro{
 
-.tool button{
+color:#00ff9d!important;
 
+}
 
-width:100%;
+.alerta{
 
+color:#ffd000!important;
 
-height:100%;
+}
 
+.peligro{
+
+color:#ff5050!important;
 
 }
 
 
+/* =========================
+   FICHA TECNICA
+========================= */
 
+pre{
 
+margin-top:10px;
 
-.neon{
+padding:12px;
 
+border-radius:8px;
 
-text-shadow:
+background:#021018;
 
+border:1px solid rgba(21,154,197,.45);
 
-0 0 10px var(--cyan),
+color:#d9faff;
 
+font-size:12px;
 
-0 0 25px var(--cyan);
+line-height:1.45;
 
+white-space:pre-wrap;
 
-}
-
-
-
-
-
-.border-glow{
-
-
-animation:
-
-glow 4s infinite;
-
+overflow:auto;
 
 }
 
 
-
-
-
-.hidden{
-
-
-display:none!important;
-
-
-}
 /* =========================
    RESPONSIVE TABLET
 ========================= */
 
-
-@media(max-width:1100px){
-
+@media (max-width:1100px){
 
 .workspace{
 
-
 grid-template-columns:
 
-220px 1fr;
-
+240px 1fr;
 
 }
-
-
 
 .panel{
 
-
 display:none;
 
-
 }
-
-
 
 .aquarium{
 
-
-width:450px;
-
+width:440px;
 
 height:300px;
 
-
 }
 
-
 }
-
-
-
-
 
 
 /* =========================
    RESPONSIVE MOVIL
 ========================= */
 
-
-@media(max-width:700px){
-
-
+@media (max-width:700px){
 
 html,
 body{
 
-
 overflow:auto;
 
-
 }
-
-
-
-
 
 .app{
 
-
 height:auto;
-
 
 min-height:100vh;
 
-
-padding:10px;
-
-
 }
-
-
-
-
 
 .header{
 
-
 height:auto;
 
+padding:15px;
 
 flex-direction:column;
-
 
 gap:15px;
 
-
 }
-
-
-
-
-
-.logo{
-
-
-font-size:24px;
-
-
-}
-
-
-
-
-
-.actions{
-
-
-width:100%;
-
-
-justify-content:center;
-
-
-flex-wrap:wrap;
-
-
-}
-
-
-
-
 
 .workspace{
 
-
 display:flex;
-
 
 flex-direction:column;
 
-
-height:auto;
-
-
 }
-
-
-
-
-
-.sidebar{
-
-
-height:auto;
-
-
-}
-
-
-
-
 
 .viewer{
 
-
-height:500px;
-
-
 min-height:500px;
 
-
 }
-
-
-
-
 
 .aquarium{
 
-
 width:90%;
 
-
-height:300px;
-
+height:280px;
 
 }
 
-
-
-
-.tool{
-
-
-height:65px;
-
-
-font-size:16px;
-
-
 }
-
-
-
-}
-
-
-
-
-
 
 
 /* =========================
    PANTALLAS GRANDES
 ========================= */
 
-
-@media(min-width:1600px){
-
-
+@media (min-width:1600px){
 
 .workspace{
 
-
 grid-template-columns:
 
-
-300px 1fr 360px;
-
+300px minmax(700px,1fr) 360px;
 
 }
-
-
-
 
 .aquarium{
 
+width:680px;
 
-width:600px;
-
-
-height:400px;
-
+height:440px;
 
 }
 
-
 }
-
-
-
-
 
 
 /* =========================
-   FINAL ACUARIO DESIGNER
-   V7.2
+   UTILIDADES
 ========================= */
+
+.hidden{
+
+display:none!important;
+
+}
+
+.fade{
+
+animation:fadeIn .35s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(10px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+/* ==================================================
+   FIN CSS V8.1 PROFESSIONAL
+================================================== */
