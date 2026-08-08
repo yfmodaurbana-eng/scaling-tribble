@@ -1,266 +1,720 @@
-/* =====================================
-   ACUARIO DESIGNER STUDIO V7
-   SISTEMA OBJETOS 3D REAL
-===================================== */
+/* ==================================================
+   ACUARIO DESIGNER STUDIO V8.2
+   SISTEMA DE OBJETOS 3D REAL
+   X + Y + Z
+================================================== */
 
-console.log("OBJECTS ENGINE V7 CARGADO");
+console.log("OBJECTS ENGINE V8.2 CARGADO");
 
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
 
-const tanque =
-document.querySelector(".tank-3d");
+    const tanque =
+        document.querySelector(".tank-3d");
 
 
-if(!tanque){
+    if (!tanque) {
 
-console.error("No existe tank-3d");
+        console.error("No existe .tank-3d");
 
-return;
+        return;
 
-}
+    }
 
 
+    /* ==================================================
+       CONFIGURACIÓN
+    ================================================== */
 
-/* =========================
-   BOTONES
-========================= */
+    const CONFIG = {
 
+        xMin: 5,
+        xMax: 95,
 
-document.querySelectorAll(".tool")
-.forEach(btn=>{
+        yMin: 8,
+        yMax: 88,
 
+        zMin: 0,
+        zMax: 250
 
-btn.addEventListener("click",()=>{
+    };
 
 
-let texto =
-btn.innerText;
+    /* ==================================================
+       BOTONES
+    ================================================== */
 
+    document
+        .querySelectorAll(".tool")
+        .forEach(btn => {
 
-if(texto.includes("Roca")){
-crearObjeto("roca","🪨");
-}
+            btn.addEventListener("click", () => {
 
+                const texto =
+                    btn.innerText;
 
-if(texto.includes("Planta")){
-crearObjeto("planta","🌱");
-}
 
+                if (texto.includes("Roca")) {
 
-if(texto.includes("Pez")){
-crearObjeto("pez","🐟");
-}
+                    crearObjeto(
+                        "roca",
+                        "🪨"
+                    );
 
+                }
 
-if(texto.includes("Luz")){
-activarLuz();
-}
 
+                if (texto.includes("Planta")) {
 
-});
+                    crearObjeto(
+                        "planta",
+                        "🌱"
+                    );
 
+                }
 
-});
 
+                if (texto.includes("Pez")) {
 
+                    crearObjeto(
+                        "pez",
+                        "🐟"
+                    );
 
-/* =========================
-   CREAR OBJETO 3D
-========================= */
+                }
 
 
-window.crearObjeto=function(tipo,icono){
+                if (texto.includes("Luz")) {
 
+                    activarLuz();
 
-let objeto =
-document.createElement("div");
+                }
 
+            });
 
-objeto.className =
-"objeto "+tipo;
+        });
 
 
+    /* ==================================================
+       CREAR OBJETO 3D
+    ================================================== */
 
-objeto.innerHTML =
-icono;
+    window.crearObjeto =
+        function(tipo, icono) {
 
 
+            const objeto =
+                document.createElement("div");
 
-let x =
-Math.random()*60+20;
 
+            objeto.className =
+                "objeto " + tipo;
 
-let y =
-60;
 
+            objeto.innerHTML =
+                icono;
 
-let z =
-Math.random()*80;
 
+            /*
+                Posición inicial aleatoria
+                en X, Y y Z.
+            */
 
+            const x =
+                random(
+                    CONFIG.xMin + 10,
+                    CONFIG.xMax - 10
+                );
 
-objeto.dataset.x=x;
-objeto.dataset.y=y;
-objeto.dataset.z=z;
 
+            const y =
+                random(
+                    20,
+                    78
+                );
 
 
-actualizarPosicion3D(objeto);
+            const z =
+                random(
+                    CONFIG.zMin + 10,
+                    Math.min(
+                        CONFIG.zMax - 10,
+                        obtenerProfundidad()
+                    )
+                );
 
 
+            objeto.dataset.x =
+                x;
 
-tanque.appendChild(objeto);
 
+            objeto.dataset.y =
+                y;
 
 
-hacerArrastrable3D(objeto);
+            objeto.dataset.z =
+                z;
 
 
+            /*
+                Evitamos que el CSS
+                antiguo interfiera.
+            */
 
-};
+            objeto.style.left =
+                "0";
 
 
+            objeto.style.top =
+                "0";
 
-/* =========================
-   POSICION 3D
-========================= */
 
+            objeto.style.bottom =
+                "auto";
 
-function actualizarPosicion3D(obj){
 
+            objeto.style.transformStyle =
+                "preserve-3d";
 
-obj.style.transform =
-`
-translate3d(
-${obj.dataset.x}%,
-${obj.dataset.y}%,
-${obj.dataset.z}px
-)
-`;
 
+            actualizarPosicion3D(
+                objeto
+            );
 
 
-}
+            tanque.appendChild(
+                objeto
+            );
 
 
+            hacerArrastrable3D(
+                objeto
+            );
 
 
-/* =========================
-   ARRASTRE 3D
-========================= */
+            /*
+                Animación solamente para
+                peces y plantas.
+            */
 
+            if (
+                tipo === "pez" ||
+                tipo === "planta"
+            ) {
 
-function hacerArrastrable3D(obj){
+                objeto.classList.add(
+                    "animada"
+                );
 
+            }
 
-let moviendo=false;
 
-let inicioX;
-let inicioY;
+            return objeto;
 
+        };
 
 
-obj.addEventListener(
-"mousedown",
-(e)=>{
+    /* ==================================================
+       OBTENER PROFUNDIDAD ACTUAL
+    ================================================== */
 
+    function obtenerProfundidad() {
 
-moviendo=true;
+        const valor =
+            getComputedStyle(tanque)
+            .getPropertyValue("--depth");
 
-inicioX=e.clientX;
-inicioY=e.clientY;
 
+        const profundidad =
+            parseFloat(valor);
 
-e.stopPropagation();
 
+        if (
+            Number.isFinite(
+                profundidad
+            )
+        ) {
 
-});
+            return profundidad;
 
+        }
 
 
+        return 150;
 
-document.addEventListener(
-"mouseup",
-()=>{
+    }
 
-moviendo=false;
 
-});
+    /* ==================================================
+       POSICIÓN 3D
+    ================================================== */
 
+    function actualizarPosicion3D(
+        objeto
+    ) {
 
 
+        const x =
+            limitar(
+                Number(objeto.dataset.x),
+                CONFIG.xMin,
+                CONFIG.xMax
+            );
 
-document.addEventListener(
-"mousemove",
-(e)=>{
 
+        const y =
+            limitar(
+                Number(objeto.dataset.y),
+                CONFIG.yMin,
+                CONFIG.yMax
+            );
 
-if(!moviendo)return;
 
+        const zMax =
+            obtenerProfundidad();
 
 
-let dx =
-e.clientX-inicioX;
+        const z =
+            limitar(
+                Number(objeto.dataset.z),
+                CONFIG.zMin,
+                zMax
+            );
 
 
-let dy =
-e.clientY-inicioY;
+        objeto.dataset.x =
+            x;
 
 
+        objeto.dataset.y =
+            y;
 
-obj.dataset.x =
-Number(obj.dataset.x)+dx*0.15;
 
+        objeto.dataset.z =
+            z;
 
-obj.dataset.y =
-Number(obj.dataset.y)+dy*0.15;
 
+        objeto.style.transform =
+            `translate3d(
+                ${x}%,
+                ${y}%,
+                ${z}px
+            )`;
 
+    }
 
-obj.dataset.y =
-Math.max(
-10,
-Math.min(
-90,
-obj.dataset.y
-)
-);
 
+    /* ==================================================
+       ARRASTRE 3D
+    ================================================== */
 
+    function hacerArrastrable3D(
+        objeto
+    ) {
 
-actualizarPosicion3D(obj);
 
+        let moviendo =
+            false;
 
 
-inicioX=e.clientX;
-inicioY=e.clientY;
+        let inicioX =
+            0;
 
 
+        let inicioY =
+            0;
 
-});
 
+        let inicioZ =
+            0;
 
 
-}
+        let inicioMouseX =
+            0;
 
 
+        let inicioMouseY =
+            0;
 
 
-/* =========================
-   LUZ
-========================= */
+        objeto.addEventListener(
+            "mousedown",
+            e => {
 
 
-function activarLuz(){
+                /*
+                    Solo botón izquierdo.
+                */
 
+                if (
+                    e.button !== 0
+                ) {
 
-tanque.classList.toggle("iluminado");
+                    return;
 
+                }
 
-}
 
+                moviendo =
+                    true;
+
+
+                inicioMouseX =
+                    e.clientX;
+
+
+                inicioMouseY =
+                    e.clientY;
+
+
+                inicioX =
+                    Number(
+                        objeto.dataset.x
+                    );
+
+
+                inicioY =
+                    Number(
+                        objeto.dataset.y
+                    );
+
+
+                inicioZ =
+                    Number(
+                        objeto.dataset.z
+                    );
+
+
+                objeto.classList.add(
+                    "seleccionado"
+                );
+
+
+                objeto.style.cursor =
+                    "grabbing";
+
+
+                e.preventDefault();
+
+
+                e.stopPropagation();
+
+            }
+        );
+
+
+        document.addEventListener(
+            "mousemove",
+            e => {
+
+
+                if (!moviendo) {
+
+                    return;
+
+                }
+
+
+                const dx =
+                    e.clientX -
+                    inicioMouseX;
+
+
+                const dy =
+                    e.clientY -
+                    inicioMouseY;
+
+
+                /*
+                    Movimiento horizontal:
+                    X
+                */
+
+                let nuevoX =
+                    inicioX +
+                    dx * 0.18;
+
+
+                /*
+                    Movimiento vertical:
+                    Y
+                */
+
+                let nuevoY =
+                    inicioY +
+                    dy * 0.18;
+
+
+                /*
+                    Movimiento de profundidad:
+                    
+                    SHIFT + ratón
+                    modifica Z.
+
+                    Esto permite controlar
+                    las tres dimensiones sin
+                    añadir botones todavía.
+                */
+
+                let nuevoZ =
+                    inicioZ;
+
+
+                if (e.shiftKey) {
+
+                    nuevoZ =
+                        inicioZ -
+                        dy * 0.9;
+
+                }
+
+
+                /*
+                    ALT + ratón también
+                    permite controlar Z.
+                */
+
+                if (e.altKey) {
+
+                    nuevoZ =
+                        inicioZ +
+                        dx * 0.9;
+
+                }
+
+
+                objeto.dataset.x =
+                    limitar(
+                        nuevoX,
+                        CONFIG.xMin,
+                        CONFIG.xMax
+                    );
+
+
+                objeto.dataset.y =
+                    limitar(
+                        nuevoY,
+                        CONFIG.yMin,
+                        CONFIG.yMax
+                    );
+
+
+                objeto.dataset.z =
+                    limitar(
+                        nuevoZ,
+                        CONFIG.zMin,
+                        obtenerProfundidad()
+                    );
+
+
+                actualizarPosicion3D(
+                    objeto
+                );
+
+            }
+        );
+
+
+        document.addEventListener(
+            "mouseup",
+            () => {
+
+
+                if (!moviendo) {
+
+                    return;
+
+                }
+
+
+                moviendo =
+                    false;
+
+
+                objeto.style.cursor =
+                    "grab";
+
+
+                objeto.classList.remove(
+                    "seleccionado"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       RUEDA DEL RATÓN
+       CONTROL DE PROFUNDIDAD
+    ================================================== */
+
+    function activarControlRueda(
+        objeto
+    ) {
+
+
+        objeto.addEventListener(
+            "wheel",
+            e => {
+
+
+                e.preventDefault();
+
+
+                let z =
+                    Number(
+                        objeto.dataset.z
+                    );
+
+
+                z +=
+                    e.deltaY * -0.35;
+
+
+                objeto.dataset.z =
+                    limitar(
+                        z,
+                        CONFIG.zMin,
+                        obtenerProfundidad()
+                    );
+
+
+                actualizarPosicion3D(
+                    objeto
+                );
+
+            },
+            {
+                passive: false
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       OBSERVAR NUEVOS OBJETOS
+    ================================================== */
+
+    const observer =
+        new MutationObserver(
+            cambios => {
+
+
+                cambios.forEach(
+                    cambio => {
+
+
+                        cambio.addedNodes
+                            .forEach(
+                                nodo => {
+
+
+                                    if (
+                                        !nodo.classList ||
+                                        !nodo.classList.contains(
+                                            "objeto"
+                                        )
+                                    ) {
+
+                                        return;
+
+                                    }
+
+
+                                    activarControlRueda(
+                                        nodo
+                                    );
+
+                                }
+                            );
+
+                    }
+                );
+
+            }
+        );
+
+
+    observer.observe(
+        tanque,
+        {
+            childList: true
+        }
+    );
+
+
+    /* ==================================================
+       LUZ
+    ================================================== */
+
+    function activarLuz() {
+
+        tanque.classList.toggle(
+            "iluminado"
+        );
+
+    }
+
+
+    /* ==================================================
+       UTILIDADES
+    ================================================== */
+
+    function limitar(
+        valor,
+        minimo,
+        maximo
+    ) {
+
+
+        valor =
+            Number(valor);
+
+
+        if (
+            !Number.isFinite(valor)
+        ) {
+
+            return minimo;
+
+        }
+
+
+        return Math.max(
+            minimo,
+            Math.min(
+                maximo,
+                valor
+            )
+        );
+
+    }
+
+
+    function random(
+        minimo,
+        maximo
+    ) {
+
+        return (
+            Math.random() *
+            (maximo - minimo) +
+            minimo
+        );
+
+    }
+
+
+    /* ==================================================
+       EXPONER FUNCIÓN
+    ================================================== */
+
+    window.actualizarPosicion3D =
+        actualizarPosicion3D;
 
 
 });
