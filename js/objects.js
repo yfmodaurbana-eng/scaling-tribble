@@ -82,11 +82,21 @@ objeto.addEventListener("wheel", function(e) {
 
     e.stopPropagation();
 
-    var z = Number(objeto.dataset.z);
+var z = Number(objeto.dataset.z);
 
-    z -= e.deltaY * 0.15;
+z -= e.deltaY * 0.15;
 
-    z = Math.max(-70, Math.min(70, z));
+var anchoAcuario =
+    Number(document.getElementById("ancho").value) || 30;
+
+var limiteZ =
+    anchoAcuario * 2;
+
+z =
+    Math.max(
+        -limiteZ,
+        Math.min(limiteZ, z)
+    );
 
     objeto.dataset.z = z;
 
