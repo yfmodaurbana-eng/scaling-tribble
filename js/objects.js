@@ -3,7 +3,6 @@
    ACUARIO DESIGNER STUDIO V8.3
    SISTEMA DE OBJETOS 3D REAL
    X + Y + Z
-   MOTOR ESTABLE
 ================================================== */
 
 console.log("OBJECTS ENGINE V8.3 CARGADO");
@@ -24,15 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ================================================== */
 
     const CONFIG = {
-
         xMin: 5,
         xMax: 95,
-
         yMin: 8,
         yMax: 88,
-
         zMin: 0
-
     };
 
 
@@ -68,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       CREAR OBJETO
+       CREAR OBJETO 3D
     ================================================== */
 
     window.crearObjeto = function(tipo, icono) {
@@ -79,24 +74,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         objeto.innerHTML = icono;
 
-        /*
-            Posición inicial aleatoria.
-        */
 
-        const x =
-            random(15, 85);
+        /* POSICIÓN ALEATORIA */
 
-        const y =
-            random(20, 75);
+        const x = random(15, 85);
 
-        const z =
-            random(
-                10,
-                Math.max(
-                    20,
-                    obtenerProfundidad() - 10
-                )
-            );
+        const y = random(20, 75);
+
+        const z = random(
+            10,
+            Math.max(
+                20,
+                obtenerProfundidad() - 10
+            )
+        );
 
 
         objeto.dataset.x = x;
@@ -104,16 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
         objeto.dataset.z = z;
 
 
-        /*
-            Eliminamos cualquier posicionamiento
-            2D anterior.
-        */
+        /* POSICIONAMIENTO */
 
         objeto.style.left = "0px";
         objeto.style.top = "0px";
         objeto.style.right = "auto";
         objeto.style.bottom = "auto";
-
 
         objeto.style.position = "absolute";
 
@@ -121,21 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "preserve-3d";
 
 
-        /*
-            MUY IMPORTANTE:
-            no añadimos ninguna animación
-            que modifique transform.
-        */
-
-
         tanque.appendChild(objeto);
 
 
         actualizarPosicion3D(objeto);
 
-
         hacerArrastrable3D(objeto);
-
 
         activarControlRueda(objeto);
 
@@ -146,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ==================================================
-       PROFUNDIDAD
+       OBTENER PROFUNDIDAD
     ================================================== */
 
     function obtenerProfundidad() {
@@ -187,28 +165,25 @@ document.addEventListener("DOMContentLoaded", () => {
             obtenerProfundidad();
 
 
-        x =
-            limitar(
-                x,
-                CONFIG.xMin,
-                CONFIG.xMax
-            );
+        x = limitar(
+            x,
+            CONFIG.xMin,
+            CONFIG.xMax
+        );
 
 
-        y =
-            limitar(
-                y,
-                CONFIG.yMin,
-                CONFIG.yMax
-            );
+        y = limitar(
+            y,
+            CONFIG.yMin,
+            CONFIG.yMax
+        );
 
 
-        z =
-            limitar(
-                z,
-                CONFIG.zMin,
-                profundidad
-            );
+        z = limitar(
+            z,
+            CONFIG.zMin,
+            profundidad
+        );
 
 
         objeto.dataset.x = x;
@@ -217,15 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-            ÚNICO transform del objeto.
-        */
+         * AQUÍ ESTÁ LA CORRECCIÓN
+         * La plantilla utiliza backticks.
+         */
 
         objeto.style.transform =
-            `translate3d(
-                ${x}%,
-                ${y}%,
-                ${z}px
-            )`;
+            `translate3d(${x}%, ${y}%, ${z}px)`;
 
     }
 
@@ -306,29 +278,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     inicioMouseY;
 
 
-                /*
-                    X
-                */
-
                 objeto.dataset.x =
                     limitar(
                         inicioX +
                         dx * 0.20,
-
                         CONFIG.xMin,
                         CONFIG.xMax
                     );
 
 
-                /*
-                    Y
-                */
-
                 objeto.dataset.y =
                     limitar(
                         inicioY +
                         dy * 0.20,
-
                         CONFIG.yMin,
                         CONFIG.yMax
                     );
@@ -350,7 +312,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
+
                 moviendo = false;
+
 
                 objeto.style.cursor =
                     "grab";
@@ -372,6 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e => {
 
                 e.preventDefault();
+
 
                 let z =
                     Number(
@@ -467,6 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.actualizarPosicion3D =
         actualizarPosicion3D;
+
 
 });
 ```
