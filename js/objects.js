@@ -1,4 +1,4 @@
-console.log("OBJECTS ENGINE V8 - 3D");
+console.log("OBJECTS ENGINE V9 - ARRASTRE 3D");
 
 window.crearObjeto = function(tipo, icono) {
 
@@ -21,6 +21,7 @@ window.crearObjeto = function(tipo, icono) {
     objeto.style.zIndex = "300";
     objeto.style.fontSize = "40px";
     objeto.style.transformStyle = "preserve-3d";
+    objeto.style.cursor = "grab";
 
     var x = Math.random() * 60 + 20;
     var y = Math.random() * 60 + 20;
@@ -34,8 +35,10 @@ window.crearObjeto = function(tipo, icono) {
 
     tanque.appendChild(objeto);
 
+    hacerArrastrable(objeto, tanque);
+
     console.log(
-        "OBJETO 3D:",
+        "OBJETO 3D CREADO:",
         x,
         y,
         z
@@ -56,4 +59,85 @@ function actualizarPosicion(objeto) {
         x + "%," +
         y + "%," +
         z + "px)";
+}
+
+
+function hacerArrastrable(objeto, tanque) {
+
+    var moviendo = false;
+
+    var inicioX = 0;
+    var inicioY = 0;
+
+    objeto.addEventListener("mousedown", function(e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        moviendo = true;
+
+        inicioX = e.clientX;
+        inicioY = e.clientY;
+
+        objeto.style.cursor = "grabbing";
+
+    });
+
+
+    document.addEventListener("mousemove", function(e) {
+
+        if (!moviendo) {
+            return;
+        }
+
+        var dx =
+            e.clientX - inicioX;
+
+        var dy =
+            e.clientY - inicioY;
+
+        var x =
+            Number(objeto.dataset.x);
+
+        var y =
+            Number(objeto.dataset.y);
+
+        x += dx * 0.20;
+        y += dy * 0.20;
+
+        x =
+            Math.max(
+                5,
+                Math.min(95, x)
+            );
+
+        y =
+            Math.max(
+                5,
+                Math.min(95, y)
+            );
+
+        objeto.dataset.x = x;
+        objeto.dataset.y = y;
+
+        inicioX = e.clientX;
+        inicioY = e.clientY;
+
+        actualizarPosicion(objeto);
+
+    });
+
+
+    document.addEventListener("mouseup", function() {
+
+        if (!moviendo) {
+            return;
+        }
+
+        moviendo = false;
+
+        objeto.style.cursor = "grab";
+
+    });
+
 }
