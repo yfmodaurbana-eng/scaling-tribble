@@ -1,14 +1,8 @@
 /* ============================================================
    ACUARIO DESIGNER STUDIO
-   STYLE ENGINE V21.1 PROFESSIONAL
+   STYLE ENGINE V21 PROFESSIONAL
    AQUARIUM REALISM SYSTEM
-   COMPATIBLE CON:
-   - INDEX V8
-   - ENGINE V15
-   - 3D ENGINE V7
-   - OBJECTS ENGINE V21
-============================================================ */
-
+   ============================================================ */
 
 /* ============================================================
    VARIABLES
@@ -16,29 +10,42 @@
 
 :root{
 
-    --bg:#03070b;
+    --bg:
+        #03070b;
 
-    --panel:#07131d;
+    --panel:
+        #07131d;
 
-    --panel2:#0b1d29;
+    --panel2:
+        #0b1d29;
 
-    --panel3:#102b3a;
+    --panel3:
+        #102b3a;
 
-    --border:#12647d;
+    --border:
+        #12647d;
 
-    --cyan:#00d9ff;
+    --cyan:
+        #00d9ff;
 
-    --cyan-soft:rgba(0,217,255,.28);
+    --cyan-soft:
+        rgba(0,217,255,.28);
 
-    --green:#00ff9d;
+    --green:
+        #00ff9d;
 
-    --yellow:#ffd84a;
+    --yellow:
+        #ffd84a;
 
-    --text:#e9faff;
+    --text:
+        #e9faff;
 
-    --text-soft:#8da8b6;
+    --text-soft:
+        #8da8b6;
 
-    --shadow:rgba(0,0,0,.65);
+    --shadow:
+        rgba(0,0,0,.65);
+
 }
 
 
@@ -47,18 +54,28 @@
 ============================================================ */
 
 *{
-    box-sizing:border-box;
+
+    box-sizing:
+        border-box;
+
 }
 
 
 html,
 body{
 
-    width:100%;
-    height:100%;
+    width:
+        100%;
 
-    margin:0;
-    padding:0;
+    height:
+        100%;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
 }
 
 
@@ -72,30 +89,17 @@ body{
             #020508 100%
         );
 
-    color:var(--text);
+    color:
+        var(--text);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    overflow:hidden;
-}
+    overflow:
+        hidden;
 
-
-/* ============================================================
-   APP
-============================================================ */
-
-.app{
-
-    width:100%;
-    height:100vh;
-
-    display:flex;
-    flex-direction:column;
-
-    overflow:hidden;
 }
 
 
@@ -105,16 +109,20 @@ body{
 
 .header{
 
-    height:64px;
-    min-height:64px;
+    height:
+        64px;
 
-    display:flex;
+    display:
+        flex;
 
-    align-items:center;
+    align-items:
+        center;
 
-    justify-content:space-between;
+    justify-content:
+        space-between;
 
-    padding:0 20px;
+    padding:
+        0 20px;
 
     background:
         linear-gradient(
@@ -129,60 +137,43 @@ body{
     box-shadow:
         0 5px 25px rgba(0,0,0,.45);
 
-    position:relative;
+    position:
+        relative;
 
-    z-index:1000;
+    z-index:
+        1000;
+
 }
 
 
 .logo{
 
-    display:flex;
+    font-size:
+        19px;
 
-    flex-direction:column;
+    font-weight:
+        800;
 
-    justify-content:center;
+    letter-spacing:
+        1px;
 
-    font-size:19px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-    color:var(--cyan);
+    color:
+        var(--cyan);
 
     text-shadow:
         0 0 12px rgba(0,217,255,.35);
+
 }
 
-
-.logo span{
-
-    margin-top:2px;
-
-    font-size:10px;
-
-    font-weight:500;
-
-    letter-spacing:2px;
-
-    color:var(--text-soft);
-
-    text-shadow:none;
-}
-
-
-/* ============================================================
-   HEADER BUTTONS
-============================================================ */
 
 .actions{
 
-    display:flex;
+    display:
+        flex;
 
-    align-items:center;
+    gap:
+        8px;
 
-    gap:8px;
 }
 
 
@@ -198,35 +189,35 @@ body{
             #081923
         );
 
-    color:#dffaff;
+    color:
+        #dffaff;
 
-    padding:8px 14px;
+    padding:
+        8px 14px;
 
-    border-radius:6px;
+    border-radius:
+        6px;
 
-    cursor:pointer;
+    cursor:
+        pointer;
 
     transition:
         .2s ease;
+
 }
 
 
 .actions button:hover{
 
-    border-color:var(--cyan);
+    border-color:
+        var(--cyan);
 
     box-shadow:
         0 0 12px rgba(0,217,255,.22);
 
     transform:
         translateY(-1px);
-}
 
-
-.actions button:active{
-
-    transform:
-        translateY(0);
 }
 
 
@@ -236,37 +227,32 @@ body{
 
 .workspace{
 
-    flex:1;
+    height:
+        calc(100vh - 64px);
 
-    min-height:0;
-
-    width:100%;
-
-    display:grid;
+    display:
+        grid;
 
     grid-template-columns:
         250px
         minmax(400px,1fr)
         310px;
 
-    gap:10px;
+    gap:
+        10px;
 
-    padding:10px;
+    padding:
+        10px;
 
-    overflow:hidden;
 }
 
 
 /* ============================================================
-   PANEL IZQUIERDO + PANEL DERECHO
+   PANELS
 ============================================================ */
 
 .sidebar,
-.panel{
-
-    min-width:0;
-
-    min-height:0;
+.info-panel{
 
     background:
         linear-gradient(
@@ -278,66 +264,31 @@ body{
     border:
         1px solid var(--border);
 
-    border-radius:8px;
+    border-radius:
+        8px;
 
     box-shadow:
         0 10px 30px rgba(0,0,0,.35);
 
-    overflow:auto;
+    overflow:
+        auto;
+
 }
 
-
-/* ============================================================
-   SIDEBAR
-============================================================ */
 
 .sidebar{
 
-    padding:12px;
+    padding:
+        12px;
+
 }
 
 
-/* ============================================================
-   PANEL DERECHO
-============================================================ */
+.info-panel{
 
-.panel{
+    padding:
+        14px;
 
-    padding:14px;
-}
-
-
-/* ============================================================
-   TITULOS
-============================================================ */
-
-.sidebar h2,
-.panel h2{
-
-    margin:
-        0 0 14px 0;
-
-    color:var(--cyan);
-
-    font-size:18px;
-
-    text-shadow:
-        0 0 8px rgba(0,217,255,.2);
-}
-
-
-.sidebar h3,
-.panel h3{
-
-    margin:
-        0 0 10px 0;
-
-    color:var(--cyan);
-
-    font-size:14px;
-
-    text-shadow:
-        0 0 8px rgba(0,217,255,.18);
 }
 
 
@@ -345,38 +296,28 @@ body{
    TOOLS
 ============================================================ */
 
-.tools{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:8px;
-
-    margin-bottom:14px;
-}
-
-
 .tool{
 
-    width:100%;
+    width:
+        100%;
 
-    min-height:58px;
+    min-height:
+        42px;
 
-    margin:0;
+    margin-bottom:
+        8px;
 
-    padding:8px 6px;
+    padding:
+        8px 10px;
 
-    display:flex;
+    display:
+        flex;
 
-    flex-direction:column;
+    align-items:
+        center;
 
-    align-items:center;
-
-    justify-content:center;
-
-    gap:3px;
+    gap:
+        8px;
 
     background:
         linear-gradient(
@@ -388,22 +329,25 @@ body{
     border:
         1px solid #164e62;
 
-    border-radius:6px;
+    border-radius:
+        6px;
 
-    color:var(--text);
+    color:
+        var(--text);
 
-    cursor:pointer;
+    cursor:
+        pointer;
 
     transition:
         .2s ease;
 
-    font-size:12px;
 }
 
 
 .tool:hover{
 
-    border-color:var(--cyan);
+    border-color:
+        var(--cyan);
 
     background:
         linear-gradient(
@@ -416,95 +360,8 @@ body{
         0 0 12px rgba(0,217,255,.15);
 
     transform:
-        translateY(-1px);
-}
+        translateX(2px);
 
-
-.tool:active{
-
-    transform:
-        translateY(0);
-}
-
-
-/* ============================================================
-   CARDS
-============================================================ */
-
-.card{
-
-    margin-bottom:10px;
-
-    padding:10px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(8,28,39,.88),
-            rgba(3,12,18,.88)
-        );
-
-    border:
-        1px solid rgba(20,92,115,.65);
-
-    border-radius:6px;
-
-    box-shadow:
-        inset 0 0 20px rgba(0,100,130,.04);
-}
-
-
-.card:last-child{
-
-    margin-bottom:0;
-}
-
-
-.card p{
-
-    margin:
-        7px 0;
-
-    color:
-        var(--text-soft);
-
-    font-size:12px;
-
-    line-height:1.4;
-}
-
-
-.card strong{
-
-    color:
-        var(--text);
-
-    font-weight:700;
-}
-
-
-/* ============================================================
-   LABELS
-============================================================ */
-
-label{
-
-    display:block;
-
-    margin-bottom:10px;
-
-    color:
-        var(--text-soft);
-
-    font-size:12px;
-
-    font-weight:600;
-}
-
-
-label:last-child{
-
-    margin-bottom:0;
 }
 
 
@@ -515,9 +372,8 @@ label:last-child{
 input,
 select{
 
-    width:100%;
-
-    margin-top:5px;
+    width:
+        100%;
 
     background:
         #030a10;
@@ -528,16 +384,15 @@ select{
     border:
         1px solid #1b556a;
 
-    border-radius:5px;
+    border-radius:
+        5px;
 
-    padding:8px;
+    padding:
+        8px;
 
-    outline:none;
+    outline:
+        none;
 
-    font-size:13px;
-
-    transition:
-        .2s ease;
 }
 
 
@@ -549,51 +404,42 @@ select:focus{
 
     box-shadow:
         0 0 8px rgba(0,217,255,.18);
-}
 
-
-input:hover,
-select:hover{
-
-    border-color:
-        #28758d;
 }
 
 
 /* ============================================================
-   SELECT
-============================================================ */
-
-select{
-
-    cursor:pointer;
-}
-
-
-/* ============================================================
-   VIEWER CENTRAL
+   AQUARIUM VIEWER
 ============================================================ */
 
 .viewer{
 
-    position:relative;
+    position:
+        relative;
 
-    min-width:0;
+    min-width:
+        0;
 
-    min-height:0;
+    min-height:
+        0;
 
-    display:flex;
+    display:
+        flex;
 
-    align-items:center;
+    align-items:
+        center;
 
-    justify-content:center;
+    justify-content:
+        center;
 
-    overflow:hidden;
+    overflow:
+        hidden;
 
     border:
         1px solid #12495d;
 
-    border-radius:10px;
+    border-radius:
+        10px;
 
     background:
 
@@ -610,15 +456,9 @@ select{
         );
 
     box-shadow:
-
         inset 0 0 80px rgba(0,0,0,.55),
-
         0 10px 35px rgba(0,0,0,.4);
 
-    isolation:isolate;
-
-    animation:
-        aquariumAmbient 8s ease-in-out infinite;
 }
 
 
@@ -628,13 +468,17 @@ select{
 
 .viewer::before{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    inset:0;
+    inset:
+        0;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     background:
 
@@ -650,21 +494,23 @@ select{
             transparent 45%
         );
 
-    z-index:0;
+    z-index:
+        0;
+
 }
 
 
 /* ============================================================
-   AQUARIUM CONTENEDOR
+   AQUARIUM
 ============================================================ */
 
 .aquarium{
 
-    position:relative;
+    position:
+        relative;
 
-    display:block;
-
-    flex:none;
+    display:
+        block;
 
     transform-style:
         preserve-3d;
@@ -672,23 +518,26 @@ select{
     perspective:
         1200px;
 
-    isolation:isolate;
+    isolation:
+        isolate;
 
-    z-index:1;
 }
 
 
 /* ============================================================
-   TANQUE 3D
+   3D TANK
 ============================================================ */
 
 .tank-3d{
 
-    position:absolute;
+    position:
+        absolute;
 
-    left:50%;
+    left:
+        50%;
 
-    top:50%;
+    top:
+        50%;
 
     transform-style:
         preserve-3d;
@@ -696,27 +545,31 @@ select{
     transform-origin:
         center center;
 
-    cursor:grab;
+    cursor:
+        grab;
 
     transition:
         box-shadow .25s ease;
 
-    /*
-       IMPORTANTE:
-
-       NO SE AÑADE TRANSFORM AQUÍ.
-
-       JavaScript controla:
-       scale()
-       rotateX()
-       rotateY()
-    */
 }
+
+
+/*
+   No añadir transform aquí.
+
+   El JavaScript controla:
+
+   rotateX
+   rotateY
+   scale
+*/
 
 
 .tank-3d:active{
 
-    cursor:grabbing;
+    cursor:
+        grabbing;
+
 }
 
 
@@ -726,12 +579,14 @@ select{
 
 .glass{
 
-    position:absolute;
+    position:
+        absolute;
 
     transform-style:
         preserve-3d;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     background:
 
@@ -749,8 +604,8 @@ select{
     box-shadow:
 
         inset 0 0 20px rgba(125,225,255,.045),
-
         0 0 8px rgba(0,160,210,.08);
+
 }
 
 
@@ -760,7 +615,8 @@ select{
 
 .glass-front{
 
-    z-index:40;
+    z-index:
+        40;
 
     background:
 
@@ -778,10 +634,9 @@ select{
     box-shadow:
 
         inset 0 0 25px rgba(160,235,255,.07),
-
         inset 20px 0 35px rgba(255,255,255,.025),
-
         0 0 12px rgba(0,180,230,.08);
+
 }
 
 
@@ -791,7 +646,8 @@ select{
 
 .glass-back{
 
-    z-index:10;
+    z-index:
+        10;
 
     background:
 
@@ -800,11 +656,12 @@ select{
             rgba(30,90,120,.14),
             rgba(0,20,32,.18)
         );
+
 }
 
 
 /* ============================================================
-   CRISTALES LATERALES
+   CRISTAL LATERAL
 ============================================================ */
 
 .glass-left,
@@ -820,6 +677,7 @@ select{
 
     border-color:
         rgba(150,225,245,.22);
+
 }
 
 
@@ -829,7 +687,8 @@ select{
 
 .glass-bottom{
 
-    z-index:15;
+    z-index:
+        15;
 
     background:
 
@@ -842,22 +701,27 @@ select{
     box-shadow:
 
         inset 0 0 30px rgba(0,0,0,.3);
+
 }
 
 
 /* ============================================================
-   BORDE DEL CRISTAL
+   EFECTO DE BORDE DE CRISTAL
 ============================================================ */
 
 .glass::after{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    inset:0;
+    inset:
+        0;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     background:
 
@@ -868,7 +732,9 @@ select{
             transparent 100%
         );
 
-    opacity:.7;
+    opacity:
+        .7;
+
 }
 
 
@@ -878,25 +744,34 @@ select{
 
 .water-3d{
 
-    position:absolute;
+    position:
+        absolute;
 
-    z-index:25;
+    z-index:
+        25;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     transform-style:
         preserve-3d;
 
-    overflow:hidden;
+    overflow:
+        hidden;
 
     background:
 
         linear-gradient(
             180deg,
+
             rgba(87,218,240,.19) 0%,
+
             rgba(27,156,190,.22) 15%,
+
             rgba(5,92,123,.30) 45%,
+
             rgba(2,57,80,.38) 75%,
+
             rgba(1,33,48,.48) 100%
         );
 
@@ -905,6 +780,7 @@ select{
         inset 0 12px 30px rgba(165,245,255,.08),
 
         inset 0 -35px 55px rgba(0,0,0,.25);
+
 }
 
 
@@ -914,13 +790,17 @@ select{
 
 .water-3d::before{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    inset:0;
+    inset:
+        0;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     background:
 
@@ -938,7 +818,9 @@ select{
             rgba(0,20,35,.16)
         );
 
-    mix-blend-mode:screen;
+    mix-blend-mode:
+        screen;
+
 }
 
 
@@ -948,17 +830,23 @@ select{
 
 .water-surface{
 
-    position:absolute;
+    position:
+        absolute;
 
-    left:-4%;
+    left:
+        -4%;
 
-    width:108%;
+    width:
+        108%;
 
-    top:0;
+    top:
+        0;
 
-    height:7px;
+    height:
+        7px;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     background:
 
@@ -972,79 +860,89 @@ select{
     box-shadow:
 
         0 -1px 8px rgba(190,250,255,.2),
-
         0 2px 10px rgba(0,150,190,.16);
 
-    opacity:.85;
+    opacity:
+        .85;
+
 }
 
+
+/* ============================================================
+   ONDULACIÓN SUPERFICIAL
+============================================================ */
 
 .water-surface::before,
 .water-surface::after{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    left:-20%;
+    left:
+        -20%;
 
-    width:140%;
+    width:
+        140%;
 
-    height:3px;
+    height:
+        3px;
 
-    border-radius:50%;
+    border-radius:
+        50%;
 
     background:
         rgba(220,255,255,.18);
+
 }
 
 
 .water-surface::before{
 
-    top:1px;
+    top:
+        1px;
 
     transform:
         skewX(-18deg);
 
     animation:
         waterWaveOne 7s ease-in-out infinite;
+
 }
 
 
 .water-surface::after{
 
-    top:4px;
+    top:
+        4px;
 
-    opacity:.45;
+    opacity:
+        .45;
 
     transform:
         skewX(15deg);
 
     animation:
         waterWaveTwo 9s ease-in-out infinite;
+
 }
 
-
-/* ============================================================
-   ONDAS
-============================================================ */
 
 @keyframes waterWaveOne{
 
     0%,
     100%{
-
         transform:
-            translateX(-3%)
-            skewX(-18deg);
+            translateX(-3%) skewX(-18deg);
     }
 
     50%{
-
         transform:
-            translateX(3%)
-            skewX(-10deg);
+            translateX(3%) skewX(-10deg);
     }
+
 }
 
 
@@ -1052,38 +950,41 @@ select{
 
     0%,
     100%{
-
         transform:
-            translateX(3%)
-            skewX(15deg);
+            translateX(3%) skewX(15deg);
     }
 
     50%{
-
         transform:
-            translateX(-3%)
-            skewX(7deg);
+            translateX(-3%) skewX(7deg);
     }
+
 }
 
 
 /* ============================================================
-   REFLEJO DEL AGUA
+   REFLEJOS DEL AGUA
 ============================================================ */
 
 .water-3d::after{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    top:-15%;
+    top:
+        -15%;
 
-    left:-25%;
+    left:
+        -25%;
 
-    width:45%;
+    width:
+        45%;
 
-    height:140%;
+    height:
+        140%;
 
     transform:
         rotate(12deg);
@@ -1102,25 +1003,27 @@ select{
 
     animation:
         waterReflection 12s ease-in-out infinite;
+
 }
 
 
 @keyframes waterReflection{
 
     0%{
-
-        left:-30%;
+        left:
+            -30%;
     }
 
     50%{
-
-        left:80%;
+        left:
+            80%;
     }
 
     100%{
-
-        left:-30%;
+        left:
+            -30%;
     }
+
 }
 
 
@@ -1130,11 +1033,14 @@ select{
 
 .substrate{
 
-    position:absolute;
+    position:
+        absolute;
 
-    z-index:35;
+    z-index:
+        35;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
     background:
 
@@ -1178,24 +1084,26 @@ select{
     box-shadow:
 
         inset 0 12px 15px rgba(0,0,0,.22),
-
         inset 0 -10px 20px rgba(0,0,0,.35),
-
         0 -2px 8px rgba(0,0,0,.28);
+
 }
 
 
 /* ============================================================
-   TEXTURA GRAVA
+   TEXTURA DE GRAVA
 ============================================================ */
 
 .substrate::before{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    inset:0;
+    inset:
+        0;
 
     background:
 
@@ -1230,34 +1138,41 @@ select{
         );
 
     background-size:
-
         45px 32px,
         37px 29px,
         52px 41px,
         43px 35px,
         57px 38px;
 
-    opacity:.8;
+    opacity:
+        .8;
+
 }
 
 
 /* ============================================================
-   RELIEVE GRAVA
+   RELIEVE DE GRAVA
 ============================================================ */
 
 .substrate::after{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    left:0;
+    left:
+        0;
 
-    right:0;
+    right:
+        0;
 
-    top:0;
+    top:
+        0;
 
-    height:35%;
+    height:
+        35%;
 
     background:
 
@@ -1267,7 +1182,9 @@ select{
             transparent
         );
 
-    opacity:.65;
+    opacity:
+        .65;
+
 }
 
 
@@ -1277,20 +1194,26 @@ select{
 
 .objeto{
 
-    position:absolute;
+    position:
+        absolute;
 
     transform-style:
         preserve-3d;
 
-    z-index:99999;
+    z-index:
+        99999;
 
-    pointer-events:auto;
+    pointer-events:
+        auto;
 
-    user-select:none;
+    user-select:
+        none;
 
-    -webkit-user-select:none;
+    -webkit-user-select:
+        none;
 
-    cursor:grab;
+    cursor:
+        grab;
 
     filter:
         drop-shadow(
@@ -1299,8 +1222,13 @@ select{
 
     transition:
         filter .15s ease;
+
 }
 
+
+/* ============================================================
+   OBJETO SELECCIONADO / HOVER
+============================================================ */
 
 .objeto:hover{
 
@@ -1313,12 +1241,15 @@ select{
         drop-shadow(
             0 0 5px rgba(0,220,255,.16)
         );
+
 }
 
 
 .objeto:active{
 
-    cursor:grabbing;
+    cursor:
+        grabbing;
+
 }
 
 
@@ -1329,7 +1260,6 @@ select{
 .objeto.planta{
 
     filter:
-
         drop-shadow(
             0 5px 4px rgba(0,0,0,.55)
         )
@@ -1337,6 +1267,7 @@ select{
         drop-shadow(
             0 0 4px rgba(0,255,150,.08)
         );
+
 }
 
 
@@ -1350,6 +1281,7 @@ select{
         drop-shadow(
             0 6px 5px rgba(0,0,0,.65)
         );
+
 }
 
 
@@ -1363,50 +1295,7 @@ select{
         drop-shadow(
             0 3px 4px rgba(0,0,0,.5)
         );
-}
 
-
-/* ============================================================
-   LUZ
-============================================================ */
-
-.objeto.luz{
-
-    filter:
-
-        drop-shadow(
-            0 0 8px rgba(255,220,80,.6)
-        )
-
-        drop-shadow(
-            0 4px 4px rgba(0,0,0,.5)
-        );
-}
-
-
-/* ============================================================
-   TIRANTES 3D
-============================================================ */
-
-.tirante3d{
-
-    position:absolute;
-
-    pointer-events:none;
-
-    transform-style:
-        preserve-3d;
-
-    background:
-        rgba(220,250,255,.65);
-
-    border:
-        2px solid rgba(255,255,255,.8);
-
-    box-shadow:
-        0 0 12px rgba(0,220,255,.35);
-
-    z-index:120;
 }
 
 
@@ -1416,79 +1305,68 @@ select{
 
 .tank-3d::after{
 
-    content:"";
+    content:
+        "";
 
-    position:absolute;
+    position:
+        absolute;
 
-    pointer-events:none;
+    pointer-events:
+        none;
 
-    inset:-15px;
+    inset:
+        -15px;
 
-    border-radius:4px;
+    border-radius:
+        4px;
 
     box-shadow:
+
         0 25px 45px rgba(0,0,0,.38);
 
-    z-index:-10;
+    z-index:
+        -10;
+
 }
 
 
 /* ============================================================
-   PANEL DERECHO — INFORMACIÓN
+   PANEL INFORMACIÓN
 ============================================================ */
 
-.panel h2,
-.panel h3{
+.info-panel h2,
+.info-panel h3{
 
     color:
         var(--cyan);
+
+    margin-top:
+        0;
 
     text-shadow:
         0 0 8px rgba(0,217,255,.2);
+
 }
 
 
-/* ============================================================
-   DATOS
-============================================================ */
+.info-panel section,
+.info-box{
 
-#infoLitros{
+    background:
+        rgba(4,15,23,.7);
 
-    color:
-        var(--green) !important;
+    border:
+        1px solid rgba(20,92,115,.6);
 
-    font-size:17px !important;
+    border-radius:
+        6px;
 
-    font-weight:700;
-}
+    padding:
+        10px;
 
+    margin-bottom:
+        10px;
 
-#infoMedidas{
-
-    color:
-        var(--text);
-
-    font-weight:600;
-}
-
-
-/* ============================================================
-   VALORES ESTRUCTURALES
-============================================================ */
-
-#cristalDiseño,
-#tipoCristal,
-#tirantesDiseño,
-#medidaTirante,
-#infoCristal,
-#infoTipoCristal,
-#infoTirantes,
-#infoMedidaTirante,
-#pesoTotal,
-#riesgo{
-
-    color:
-        var(--cyan);
 }
 
 
@@ -1496,85 +1374,32 @@ select{
    FICHA TÉCNICA
 ============================================================ */
 
-#fichaTecnica{
-
-    margin:
-        10px 0 0 0;
-
-    padding:10px;
-
-    max-height:220px;
-
-    overflow:auto;
-
-    white-space:pre-wrap;
-
-    word-break:break-word;
-
-    background:
-        #02080d;
-
-    border:
-        1px solid #14556a;
-
-    border-radius:6px;
-
-    color:
-        #bfeefa;
-
-    font-family:
-        Consolas,
-        "Courier New",
-        monospace;
-
-    font-size:11px;
-
-    line-height:1.45;
-}
-
-
-/* ============================================================
-   BOTONES FICHA
-============================================================ */
-
-#generarFicha,
-#copiarFicha{
-
-    width:100%;
-
-    margin-top:6px;
-
-    padding:8px;
-
-    border:
-        1px solid #155a70;
+.ficha-tecnica{
 
     background:
         linear-gradient(
             180deg,
-            #123244,
-            #081923
+            rgba(8,28,39,.9),
+            rgba(3,12,18,.9)
         );
 
-    color:
-        #dffaff;
+    border:
+        1px solid #14556a;
 
-    border-radius:5px;
+    border-radius:
+        6px;
 
-    cursor:pointer;
+    padding:
+        10px;
 
-    transition:.2s ease;
 }
 
 
-#generarFicha:hover,
-#copiarFicha:hover{
+.ficha-tecnica strong{
 
-    border-color:
+    color:
         var(--cyan);
 
-    box-shadow:
-        0 0 10px rgba(0,217,255,.18);
 }
 
 
@@ -1584,34 +1409,109 @@ select{
 
 ::-webkit-scrollbar{
 
-    width:7px;
+    width:
+        7px;
 
-    height:7px;
+    height:
+        7px;
+
 }
 
 
 ::-webkit-scrollbar-track{
 
-    background:#030a0f;
+    background:
+        #030a0f;
+
 }
 
 
 ::-webkit-scrollbar-thumb{
 
-    background:#14546a;
+    background:
+        #14546a;
 
-    border-radius:10px;
+    border-radius:
+        10px;
+
 }
 
 
 ::-webkit-scrollbar-thumb:hover{
 
-    background:#1c7895;
+    background:
+        #1c7895;
+
 }
 
 
 /* ============================================================
-   ANIMACIÓN AMBIENTAL
+   RESPONSIVE
+============================================================ */
+
+@media(
+    max-width: 1100px
+){
+
+    .workspace{
+
+        grid-template-columns:
+            210px
+            minmax(300px,1fr)
+            260px;
+
+    }
+
+}
+
+
+@media(
+    max-width: 850px
+){
+
+    body{
+
+        overflow:
+            auto;
+
+    }
+
+
+    .workspace{
+
+        height:
+            auto;
+
+        min-height:
+            calc(100vh - 64px);
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .sidebar,
+    .info-panel{
+
+        max-height:
+            300px;
+
+    }
+
+
+    .viewer{
+
+        min-height:
+            500px;
+
+    }
+
+}
+
+
+/* ============================================================
+   ANIMACIÓN AMBIENTAL MUY SUAVE
 ============================================================ */
 
 @keyframes aquariumAmbient{
@@ -1621,103 +1521,34 @@ select{
 
         filter:
             brightness(1);
+
     }
 
     50%{
 
         filter:
             brightness(1.025);
+
     }
+
+}
+
+
+/*
+   Solo se aplica al visor.
+
+   No afecta a la posición ni al movimiento
+   de los objetos.
+*/
+
+.viewer{
+
+    animation:
+        aquariumAmbient 8s ease-in-out infinite;
+
 }
 
 
 /* ============================================================
-   RESPONSIVE
-============================================================ */
-
-@media(max-width:1100px){
-
-    .workspace{
-
-        grid-template-columns:
-            210px
-            minmax(300px,1fr)
-            260px;
-    }
-}
-
-
-@media(max-width:850px){
-
-    body{
-
-        overflow:auto;
-    }
-
-
-    .app{
-
-        height:auto;
-
-        min-height:100vh;
-
-        overflow:visible;
-    }
-
-
-    .header{
-
-        height:auto;
-
-        min-height:64px;
-
-        flex-wrap:wrap;
-
-        gap:8px;
-
-        padding:10px;
-    }
-
-
-    .actions{
-
-        flex-wrap:wrap;
-    }
-
-
-    .workspace{
-
-        height:auto;
-
-        min-height:
-            calc(100vh - 64px);
-
-        grid-template-columns:
-            1fr;
-
-        overflow:visible;
-    }
-
-
-    .sidebar,
-    .panel{
-
-        max-height:
-            none;
-    }
-
-
-    .viewer{
-
-        min-height:
-            500px;
-
-        height:
-            500px;
-    }
-}
-
-
-/* ============================================================
-   FIN STYLE ENGINE V21.1
+   FIN STYLE ENGINE V21
 ============================================================ */
