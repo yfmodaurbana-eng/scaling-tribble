@@ -1,5 +1,5 @@
 javascript
-console.log("OBJECTS ENGINE V16 - MOVIMIENTO 3D CORREGIDO");
+console.log("OBJECTS ENGINE V17 - MOVIMIENTO 3D + RUEDA OBJETO");
 
 
 /* ==================================================
@@ -120,6 +120,160 @@ window.crearObjeto = function(tipo, icono) {
     );
 
 
+    /* ==================================================
+       CONTROL DE RUEDA DEL OBJETO
+    ================================================== */
+
+    objeto.addEventListener(
+        "wheel",
+        function(e) {
+
+            /*
+               MUY IMPORTANTE:
+
+               Evita que la rueda llegue al
+               sistema de zoom del acuario.
+            */
+
+            e.preventDefault();
+
+
+            e.stopPropagation();
+
+
+            /* ==================================================
+               SHIFT + RUEDA = TAMAÑO
+            ================================================== */
+
+            if (e.shiftKey) {
+
+                var escala =
+                    Number(
+                        objeto.dataset.scale ||
+                        1
+                    );
+
+
+                escala -=
+                    e.deltaY * 0.001;
+
+
+                /*
+                   Tamaño mínimo 40%
+                   Tamaño máximo 300%
+                */
+
+                escala =
+                    Math.max(
+                        0.4,
+                        Math.min(
+                            3,
+                            escala
+                        )
+                    );
+
+
+                objeto.dataset.scale =
+                    escala;
+
+
+                actualizarPosicion(
+                    objeto
+                );
+
+
+                console.log(
+                    "TAMAÑO OBJETO:",
+                    escala
+                );
+
+
+                return;
+            }
+
+
+            /* ==================================================
+               RUEDA NORMAL = PROFUNDIDAD Z
+            ================================================== */
+
+            var z =
+                Number(
+                    objeto.dataset.z
+                );
+
+
+            z -=
+                e.deltaY * 0.15;
+
+
+            /* ==================================================
+               ANCHO DEL ACUARIO
+            ================================================== */
+
+            var campoAncho =
+                document.getElementById(
+                    "ancho"
+                );
+
+
+            var anchoAcuario =
+                campoAncho
+                    ? Number(
+                        campoAncho.value
+                    )
+                    : 30;
+
+
+            if (
+                !Number.isFinite(
+                    anchoAcuario
+                )
+            ) {
+
+                anchoAcuario =
+                    30;
+            }
+
+
+            /* ==================================================
+               LÍMITE Z
+            ================================================== */
+
+            var limiteZ =
+                anchoAcuario * 2;
+
+
+            z =
+                Math.max(
+                    -limiteZ,
+                    Math.min(
+                        limiteZ,
+                        z
+                    )
+                );
+
+
+            objeto.dataset.z =
+                z;
+
+
+            actualizarPosicion(
+                objeto
+            );
+
+
+            console.log(
+                "PROFUNDIDAD Z:",
+                z
+            );
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
     return objeto;
 };
 
@@ -150,7 +304,8 @@ function actualizarPosicion(objeto) {
 
     var escala =
         Number(
-            objeto.dataset.scale || 1
+            objeto.dataset.scale ||
+            1
         );
 
 
@@ -188,7 +343,7 @@ function buscarObjeto(x, y) {
 
     /*
        Empezamos por el último objeto
-       para solucionar objetos superpuestos.
+       para objetos superpuestos.
     */
 
     for (
@@ -223,7 +378,6 @@ function buscarObjeto(x, y) {
 
 /* ==================================================
    SELECCIONAR OBJETO
-   IMPORTANTE: MOUSEDOWN
 ================================================== */
 
 document.addEventListener(
@@ -238,7 +392,6 @@ document.addEventListener(
 
 
         if (!objeto) {
-
             return;
         }
 
@@ -300,7 +453,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           MOVIMIENTO DEL RATÓN
+           DELTA DEL RATÓN
         ================================================== */
 
         var dx =
@@ -314,7 +467,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           MATRIZ DEL TANQUE
+           MATRIZ DEL ACUARIO
         ================================================== */
 
         var estilo =
@@ -336,7 +489,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           CONVERSIÓN DE EJES
+           CONVERSIÓN A EJES LOCALES
         ================================================== */
 
         if (
@@ -426,7 +579,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           APLICAR MOVIMIENTO
+           MOVIMIENTO
         ================================================== */
 
         x +=
@@ -438,7 +591,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           DIMENSIONES DEL TANQUE
+           DIMENSIONES
         ================================================== */
 
         var ancho =
@@ -450,7 +603,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           MARGEN
+           MÁRGENES
         ================================================== */
 
         var margenX =
@@ -462,7 +615,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           LÍMITES X
+           LÍMITE X
         ================================================== */
 
         var limiteX =
@@ -481,7 +634,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           LÍMITES Y
+           LÍMITE Y
         ================================================== */
 
         var limiteY =
@@ -558,183 +711,6 @@ document.addEventListener(
             null;
 
     }
-);
-
-
-/* ==================================================
-   RUEDA DEL RATÓN
-   Z / TAMAÑO
-================================================== */
-
-document.addEventListener(
-    "wheel",
-    function(e) {
-
-        /*
-           Buscamos si el ratón está
-           encima de un objeto.
-        */
-
-        var objeto =
-            buscarObjeto(
-                e.clientX,
-                e.clientY
-            );
-
-
-        /*
-           Si no hay objeto,
-           dejamos pasar la rueda
-           para que el acuario pueda
-           hacer su zoom normal.
-        */
-
-        if (!objeto) {
-
-            return;
-        }
-
-
-        /*
-           MUY IMPORTANTE:
-           El objeto está debajo del ratón,
-           por lo tanto bloqueamos el
-           zoom del acuario.
-        */
-
-        e.preventDefault();
-
-        e.stopPropagation();
-
-
-        /* ==================================================
-           SHIFT + RUEDA = TAMAÑO
-        ================================================== */
-
-        if (e.shiftKey) {
-
-            var escala =
-                Number(
-                    objeto.dataset.scale ||
-                    1
-                );
-
-
-            escala -=
-                e.deltaY * 0.001;
-
-
-            /*
-               Mínimo 40%
-               Máximo 300%
-            */
-
-            escala =
-                Math.max(
-                    0.4,
-                    Math.min(
-                        3,
-                        escala
-                    )
-                );
-
-
-            objeto.dataset.scale =
-                escala;
-
-
-            actualizarPosicion(
-                objeto
-            );
-
-
-            console.log(
-                "TAMAÑO OBJETO:",
-                escala
-            );
-
-
-            return;
-        }
-
-
-        /* ==================================================
-           RUEDA NORMAL = PROFUNDIDAD Z
-        ================================================== */
-
-        var z =
-            Number(
-                objeto.dataset.z
-            );
-
-
-        z -=
-            e.deltaY * 0.15;
-
-
-        /* ==================================================
-           ANCHO DEL ACUARIO
-        ================================================== */
-
-        var campoAncho =
-            document.getElementById(
-                "ancho"
-            );
-
-
-        var anchoAcuario =
-            campoAncho
-                ? Number(
-                    campoAncho.value
-                )
-                : 30;
-
-
-        if (
-            !Number.isFinite(
-                anchoAcuario
-            )
-        ) {
-
-            anchoAcuario =
-                30;
-        }
-
-
-        /* ==================================================
-           LÍMITE Z
-        ================================================== */
-
-        var limiteZ =
-            anchoAcuario * 2;
-
-
-        z =
-            Math.max(
-                -limiteZ,
-                Math.min(
-                    limiteZ,
-                    z
-                )
-            );
-
-
-        objeto.dataset.z =
-            z;
-
-
-        actualizarPosicion(
-            objeto
-        );
-
-
-        console.log(
-            "PROFUNDIDAD Z:",
-            z
-        );
-
-    },
-    true
 );
 
 
