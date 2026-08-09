@@ -116,9 +116,9 @@ z =
         var x = Number(objeto.dataset.x);
         var y = Number(objeto.dataset.y);
 
-         x -= dx * 0.20;
-         y -= dy * 0.20;
-
+        x -= dx * 0.20;
+        y -= dy * 0.20;
+        
         x = Math.max(5, Math.min(95, x));
         y = Math.max(5, Math.min(95, y));
 
