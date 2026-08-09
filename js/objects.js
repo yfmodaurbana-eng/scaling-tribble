@@ -195,8 +195,8 @@ function buscarObjeto(x, y) {
    SELECCIONAR OBJETO
 ================================================== */
 
-tanque.addEventListener(
-    "mousedown",
+document.addEventListener(
+    "wheel",
     function(e) {
 
         var objeto =
