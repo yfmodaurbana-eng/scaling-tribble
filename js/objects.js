@@ -1,4 +1,6 @@
-console.log("OBJECTS ENGINE V11");
+```javascript
+console.log("OBJECTS ENGINE V12 - MOVIMIENTO 3D");
+
 
 window.crearObjeto = function(tipo, icono) {
 
@@ -9,160 +11,344 @@ window.crearObjeto = function(tipo, icono) {
         return;
     }
 
+
     var objeto = document.createElement("div");
 
     objeto.className = "objeto " + tipo;
 
     objeto.textContent = icono;
 
+
+    /* =========================
+       ESTILO
+    ========================= */
+
     objeto.style.position = "absolute";
-    objeto.style.left = "0px";
-    objeto.style.top = "0px";
+    objeto.style.left = "50%";
+    objeto.style.top = "50%";
+
     objeto.style.zIndex = "500";
+
     objeto.style.fontSize = "40px";
+
     objeto.style.transformStyle = "preserve-3d";
+
     objeto.style.cursor = "grab";
+
     objeto.style.userSelect = "none";
 
-    var x = Math.random() * 60 + 20;
-    var y = Math.random() * 50 + 25;
-    var z = Math.random() * 60 - 30;
+
+    /* =========================
+       POSICION INICIAL
+    ========================= */
+
+    var x = 0;
+    var y = 0;
+    var z = 0;
+
 
     objeto.dataset.x = x;
     objeto.dataset.y = y;
     objeto.dataset.z = z;
 
+
     actualizarPosicion(objeto);
+
 
     tanque.appendChild(objeto);
 
+
     hacerArrastrable(objeto);
+
 
     return objeto;
 };
 
 
+/* =========================
+   POSICION 3D
+========================= */
+
 function actualizarPosicion(objeto) {
 
     var x = Number(objeto.dataset.x);
+
     var y = Number(objeto.dataset.y);
+
     var z = Number(objeto.dataset.z);
+
 
     objeto.style.transform =
         "translate3d(" +
-        x + "%," +
-        y + "%," +
+        x + "px," +
+        y + "px," +
         z + "px)";
+
 }
 
+
+/* =========================
+   ARRASTRE X / Y
+========================= */
 
 function hacerArrastrable(objeto) {
 
     var moviendo = false;
 
     var inicioX = 0;
+
     var inicioY = 0;
 
-    objeto.addEventListener("mousedown", function(e) {
 
-        e.preventDefault();
-        e.stopPropagation();
+    objeto.addEventListener(
+        "mousedown",
+        function(e) {
 
-        moviendo = true;
+            e.preventDefault();
 
-        inicioX = e.clientX;
-        inicioY = e.clientY;
+            e.stopPropagation();
 
-        objeto.style.cursor = "grabbing";
-    });
-    
-objeto.addEventListener("wheel", function(e) {
 
-    e.preventDefault();
+            moviendo = true;
 
-    e.stopPropagation();
 
-var z = Number(objeto.dataset.z);
+            inicioX = e.clientX;
 
-z -= e.deltaY * 0.15;
+            inicioY = e.clientY;
 
-var anchoAcuario =
-    Number(document.getElementById("ancho").value) || 30;
 
-var limiteZ =
-    anchoAcuario * 2;
+            objeto.style.cursor = "grabbing";
 
-z =
-    Math.max(
-        -limiteZ,
-        Math.min(limiteZ, z)
+        }
     );
 
-    objeto.dataset.z = z;
 
-    actualizarPosicion(objeto);
+    document.addEventListener(
+        "mousemove",
+        function(e) {
 
-    console.log("PROFUNDIDAD Z:", z);
-
-}, { passive: false });
-
-    document.addEventListener("mousemove", function(e) {
-
-        if (!moviendo) return;
-
-        var dx = e.clientX - inicioX;
-        var dy = e.clientY - inicioY;
-
-        var x = Number(objeto.dataset.x);
-        var y = Number(objeto.dataset.y);
-
-        x -= dx * 0.20;
-        y -= dy * 0.20;
-        
-        x = Math.max(5, Math.min(95, x));
-        y = Math.max(5, Math.min(95, y));
-
-        objeto.dataset.x = x;
-        objeto.dataset.y = y;
-
-        inicioX = e.clientX;
-        inicioY = e.clientY;
-
-        actualizarPosicion(objeto);
-    });
+            if (!moviendo) return;
 
 
-    document.addEventListener("mouseup", function() {
+            var dx =
+                e.clientX - inicioX;
 
-        moviendo = false;
+            var dy =
+                e.clientY - inicioY;
 
-        objeto.style.cursor = "grab";
-    });
+
+            var x =
+                Number(objeto.dataset.x);
+
+            var y =
+                Number(objeto.dataset.y);
+
+
+            /* =========================
+               MOVIMIENTO NATURAL
+            ========================= */
+
+            x += dx;
+
+            y += dy;
+
+
+            /* =========================
+               LIMITES
+            ========================= */
+
+            var tanqueWidth =
+                tanque.offsetWidth;
+
+            var tanqueHeight =
+                tanque.offsetHeight;
+
+
+            var limiteX =
+                tanqueWidth / 2 - 25;
+
+
+            var limiteY =
+                tanqueHeight / 2 - 25;
+
+
+            x =
+                Math.max(
+                    -limiteX,
+                    Math.min(
+                        limiteX,
+                        x
+                    )
+                );
+
+
+            y =
+                Math.max(
+                    -limiteY,
+                    Math.min(
+                        limiteY,
+                        y
+                    )
+                );
+
+
+            objeto.dataset.x = x;
+
+            objeto.dataset.y = y;
+
+
+            inicioX = e.clientX;
+
+            inicioY = e.clientY;
+
+
+            actualizarPosicion(objeto);
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseup",
+        function() {
+
+            moviendo = false;
+
+            objeto.style.cursor = "grab";
+
+        }
+    );
+
+
+    /* =========================
+       PROFUNDIDAD Z
+    ========================= */
+
+    objeto.addEventListener(
+        "wheel",
+        function(e) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            var z =
+                Number(objeto.dataset.z);
+
+
+            z -=
+                e.deltaY * 0.15;
+
+
+            var anchoAcuario =
+                Number(
+                    document.getElementById(
+                        "ancho"
+                    ).value
+                ) || 30;
+
+
+            var limiteZ =
+                anchoAcuario * 2;
+
+
+            z =
+                Math.max(
+                    -limiteZ,
+                    Math.min(
+                        limiteZ,
+                        z
+                    )
+                );
+
+
+            objeto.dataset.z = z;
+
+
+            actualizarPosicion(objeto);
+
+
+            console.log(
+                "PROFUNDIDAD Z:",
+                z
+            );
+
+        },
+        { passive:false }
+    );
+
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
+/* =========================
+   BOTONES
+========================= */
 
-    document.querySelectorAll(".tool").forEach(function(boton) {
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-        boton.addEventListener("click", function() {
+        document
+            .querySelectorAll(".tool")
+            .forEach(
+                function(boton) {
 
-            var texto = boton.innerText;
+                    boton.addEventListener(
+                        "click",
+                        function() {
 
-            if (texto.includes("Roca")) {
-                crearObjeto("roca", "🪨");
-            }
+                            var texto =
+                                boton.innerText;
 
-            if (texto.includes("Planta")) {
-                crearObjeto("planta", "🌱");
-            }
 
-            if (texto.includes("Pez")) {
-                crearObjeto("pez", "🐟");
-            }
+                            if (
+                                texto.includes(
+                                    "Roca"
+                                )
+                            ) {
 
-        });
+                                crearObjeto(
+                                    "roca",
+                                    "🪨"
+                                );
 
-    });
+                            }
 
-});
+
+                            if (
+                                texto.includes(
+                                    "Planta"
+                                )
+                            ) {
+
+                                crearObjeto(
+                                    "planta",
+                                    "🌱"
+                                );
+
+                            }
+
+
+                            if (
+                                texto.includes(
+                                    "Pez"
+                                )
+                            ) {
+
+                                crearObjeto(
+                                    "pez",
+                                    "🐟"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+);
+```
