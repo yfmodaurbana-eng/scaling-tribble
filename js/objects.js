@@ -1,4 +1,3 @@
-javascript
 console.log("OBJECTS ENGINE V17 - MOVIMIENTO 3D + RUEDA OBJETO");
 
 
