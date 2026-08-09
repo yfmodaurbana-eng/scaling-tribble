@@ -375,109 +375,57 @@ function buscarObjeto(x, y) {
 function calcularLimitesObjeto(objeto) {
 
     if (!tanque || !objeto) {
-
         return {
             x: 0,
             y: 0
         };
     }
 
-
     /* ==========================================
-       DIMENSIONES INTERNAS DEL TANQUE
+       TAMAÑO REAL DEL TANQUE
     ========================================== */
 
-    var anchoTanque =
-        tanque.offsetWidth;
-
-
-    var altoTanque =
-        tanque.offsetHeight;
-
-
-    if (
-        !anchoTanque ||
-        !altoTanque
-    ) {
-
-        return {
-            x: 0,
-            y: 0
-        };
-    }
+    var anchoTanque = tanque.offsetWidth;
+    var altoTanque = tanque.offsetHeight;
 
 
     /* ==========================================
-       DIMENSIONES ORIGINALES DEL OBJETO
+       TAMAÑO REAL DEL OBJETO
     ========================================== */
 
-    var anchoObjeto =
-        objeto.offsetWidth;
+    var anchoObjeto = objeto.offsetWidth;
+    var altoObjeto = objeto.offsetHeight;
 
 
-    var altoObjeto =
-        objeto.offsetHeight;
+    var escala = Number(
+        objeto.dataset.scale || 1
+    );
 
-
-    /* ==========================================
-       ESCALA ACTUAL
-    ========================================== */
-
-    var escala =
-        Number(
-            objeto.dataset.scale || 1
-        );
-
-
-    if (
-        !Number.isFinite(escala) ||
-        escala <= 0
-    ) {
-
+    if (!Number.isFinite(escala)) {
         escala = 1;
     }
-
-
-    /* ==========================================
-       TAMAÑO REAL
-    ========================================== */
-
-    var anchoReal =
-        anchoObjeto * escala;
-
-
-    var altoReal =
-        altoObjeto * escala;
 
 
     /* ==========================================
        MITAD DEL OBJETO
     ========================================== */
 
-    var mitadX =
-        anchoReal / 2;
+    var mitadObjetoX =
+        (anchoObjeto * escala) / 2;
 
-
-    var mitadY =
-        altoReal / 2;
+    var mitadObjetoY =
+        (altoObjeto * escala) / 2;
 
 
     /* ==========================================
        MARGEN DE SEGURIDAD
+       
+       El margen se aplica igual
+       en los 4 lados.
     ========================================== */
 
-    /*
-       Este margen evita que el objeto
-       llegue físicamente al cristal.
-
-       Lo aumentamos ligeramente porque
-       estamos trabajando dentro de un
-       espacio 3D con perspectiva.
-    */
-
-    var margenX = 12;
-
-    var margenY = 12;
+    var margenX = 0;
+    var margenY = 0;
 
 
     /* ==========================================
@@ -486,66 +434,43 @@ function calcularLimitesObjeto(objeto) {
 
     var espacioX =
         (anchoTanque / 2) -
-        mitadX -
+        mitadObjetoX -
         margenX;
 
 
     var espacioY =
         (altoTanque / 2) -
-        mitadY -
+        mitadObjetoY -
         margenY;
-
-
-    /* ==========================================
-       FACTOR DE SEGURIDAD 3D
-    ========================================== */
-
-    /*
-       La perspectiva y las rotaciones
-       pueden hacer que visualmente el objeto
-       se acerque más al borde.
-
-       Dejamos un pequeño porcentaje
-       adicional de seguridad.
-    */
-
-    var factorSeguridad = 0.90;
-
-
-    var limiteX =
-        espacioX *
-        factorSeguridad;
-
-
-    var limiteY =
-        espacioY *
-        factorSeguridad;
 
 
     /* ==========================================
        EVITAR VALORES NEGATIVOS
     ========================================== */
 
-    limiteX =
+    espacioX =
         Math.max(
             0,
-            limiteX
+            espacioX
         );
 
 
-    limiteY =
+    espacioY =
         Math.max(
             0,
-            limiteY
+            espacioY
         );
 
 
     return {
-        x: limiteX,
-        y: limiteY
-    };
-}
 
+        x: espacioX,
+
+        y: espacioY
+
+    };
+
+}
 
 /* ==================================================
    SELECCIONAR OBJETO
