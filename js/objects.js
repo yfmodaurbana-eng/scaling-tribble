@@ -1,5 +1,4 @@
-javascript
-console.log("OBJECTS ENGINE V17 - MOVIMIENTO 3D + RUEDA OBJETO");
+console.log("OBJECTS ENGINE V18 - MOVIMIENTO 3D");
 
 
 /* ==================================================
@@ -44,10 +43,8 @@ window.crearObjeto = function(tipo, icono) {
 
     var objeto = document.createElement("div");
 
-
     objeto.className =
         "objeto " + tipo;
-
 
     objeto.textContent =
         icono;
@@ -89,54 +86,29 @@ window.crearObjeto = function(tipo, icono) {
        POSICIÓN INICIAL
     ================================================== */
 
-    objeto.dataset.x =
-        "0";
+    objeto.dataset.x = "0";
 
-    objeto.dataset.y =
-        "0";
+    objeto.dataset.y = "0";
 
-    objeto.dataset.z =
-        "0";
+    objeto.dataset.z = "0";
 
-    objeto.dataset.scale =
-        "1";
+    objeto.dataset.scale = "1";
 
 
     actualizarPosicion(objeto);
 
-
     tanque.appendChild(objeto);
 
 
-    console.log(
-        "OBJETO 3D CREADO:",
-        tipo,
-        "X:",
-        objeto.dataset.x,
-        "Y:",
-        objeto.dataset.y,
-        "Z:",
-        objeto.dataset.z
-    );
-
-
     /* ==================================================
-       CONTROL DE RUEDA DEL OBJETO
+       RUEDA EXCLUSIVA DEL OBJETO
     ================================================== */
 
     objeto.addEventListener(
         "wheel",
         function(e) {
 
-            /*
-               MUY IMPORTANTE:
-
-               Evita que la rueda llegue al
-               sistema de zoom del acuario.
-            */
-
             e.preventDefault();
-
 
             e.stopPropagation();
 
@@ -149,19 +121,13 @@ window.crearObjeto = function(tipo, icono) {
 
                 var escala =
                     Number(
-                        objeto.dataset.scale ||
-                        1
+                        objeto.dataset.scale || 1
                     );
 
 
                 escala -=
                     e.deltaY * 0.001;
 
-
-                /*
-                   Tamaño mínimo 40%
-                   Tamaño máximo 300%
-                */
 
                 escala =
                     Math.max(
@@ -193,22 +159,25 @@ window.crearObjeto = function(tipo, icono) {
 
 
             /* ==================================================
-               RUEDA NORMAL = PROFUNDIDAD Z
+               RUEDA = PROFUNDIDAD Z
             ================================================== */
 
-          var z =
-    Number(
-        objeto.dataset.z
-    );
+            var z =
+                Number(
+                    objeto.dataset.z
+                );
 
-/*
-   RUEDA:
-   arriba  = acerca
-   abajo   = aleja
-*/
 
-z +=
-    e.deltaY * 0.15;
+            /*
+               RUEDA ARRIBA
+               = ACERCAR
+
+               RUEDA ABAJO
+               = ALEJAR
+            */
+
+            z +=
+                e.deltaY * 0.15;
 
 
             /* ==================================================
@@ -235,13 +204,12 @@ z +=
                 )
             ) {
 
-                anchoAcuario =
-                    30;
+                anchoAcuario = 30;
             }
 
 
             /* ==================================================
-               LÍMITE Z
+               LÍMITES DE PROFUNDIDAD
             ================================================== */
 
             var limiteZ =
@@ -279,6 +247,18 @@ z +=
     );
 
 
+    console.log(
+        "OBJETO 3D CREADO:",
+        tipo,
+        "X:",
+        objeto.dataset.x,
+        "Y:",
+        objeto.dataset.y,
+        "Z:",
+        objeto.dataset.z
+    );
+
+
     return objeto;
 };
 
@@ -294,23 +274,19 @@ function actualizarPosicion(objeto) {
             objeto.dataset.x
         );
 
-
     var y =
         Number(
             objeto.dataset.y
         );
-
 
     var z =
         Number(
             objeto.dataset.z
         );
 
-
     var escala =
         Number(
-            objeto.dataset.scale ||
-            1
+            objeto.dataset.scale || 1
         );
 
 
@@ -328,7 +304,7 @@ function actualizarPosicion(objeto) {
 
 
 /* ==================================================
-   BUSCAR OBJETO BAJO EL RATÓN
+   BUSCAR OBJETO
 ================================================== */
 
 function buscarObjeto(x, y) {
@@ -345,11 +321,6 @@ function buscarObjeto(x, y) {
             )
         );
 
-
-    /*
-       Empezamos por el último objeto
-       para objetos superpuestos.
-    */
 
     for (
         var i = objetos.length - 1;
@@ -457,10 +428,6 @@ document.addEventListener(
         }
 
 
-        /* ==================================================
-           DELTA DEL RATÓN
-        ================================================== */
-
         var dx =
             e.clientX -
             inicioMouseX;
@@ -472,7 +439,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           MATRIZ DEL ACUARIO
+           MATRIZ REAL DEL ACUARIO
         ================================================== */
 
         var estilo =
@@ -493,10 +460,6 @@ document.addEventListener(
             dy;
 
 
-        /* ==================================================
-           CONVERSIÓN A EJES LOCALES
-        ================================================== */
-
         if (
             transform &&
             transform !== "none"
@@ -514,8 +477,7 @@ document.addEventListener(
 
             } catch (error) {
 
-                matriz =
-                    null;
+                matriz = null;
             }
 
 
@@ -524,14 +486,11 @@ document.addEventListener(
                 var a =
                     matriz.a;
 
-
                 var b =
                     matriz.b;
 
-
                 var c =
                     matriz.c;
-
 
                 var d =
                     matriz.d;
@@ -568,7 +527,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           POSICIÓN ACTUAL
+           POSICIÓN
         ================================================== */
 
         var x =
@@ -583,10 +542,6 @@ document.addEventListener(
             );
 
 
-        /* ==================================================
-           MOVIMIENTO
-        ================================================== */
-
         x +=
             localDX;
 
@@ -596,7 +551,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           DIMENSIONES
+           LÍMITES
         ================================================== */
 
         var ancho =
@@ -607,10 +562,6 @@ document.addEventListener(
             tanque.offsetHeight;
 
 
-        /* ==================================================
-           MÁRGENES
-        ================================================== */
-
         var margenX =
             25;
 
@@ -619,13 +570,14 @@ document.addEventListener(
             25;
 
 
-        /* ==================================================
-           LÍMITE X
-        ================================================== */
-
         var limiteX =
             ancho / 2 -
             margenX;
+
+
+        var limiteY =
+            alto / 2 -
+            margenY;
 
 
         x =
@@ -636,15 +588,6 @@ document.addEventListener(
                     x
                 )
             );
-
-
-        /* ==================================================
-           LÍMITE Y
-        ================================================== */
-
-        var limiteY =
-            alto / 2 -
-            margenY;
 
 
         y =
@@ -669,10 +612,6 @@ document.addEventListener(
             y;
 
 
-        /* ==================================================
-           ACTUALIZAR RATÓN
-        ================================================== */
-
         inicioMouseX =
             e.clientX;
 
@@ -680,10 +619,6 @@ document.addEventListener(
         inicioMouseY =
             e.clientY;
 
-
-        /* ==================================================
-           ACTUALIZAR OBJETO
-        ================================================== */
 
         actualizarPosicion(
             objetoActivo
@@ -694,7 +629,7 @@ document.addEventListener(
 
 
 /* ==================================================
-   SOLTAR OBJETO
+   SOLTAR
 ================================================== */
 
 document.addEventListener(
@@ -727,25 +662,18 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-
         document
             .querySelectorAll(".tool")
             .forEach(
                 function(boton) {
 
-
                     boton.addEventListener(
                         "click",
                         function() {
 
-
                             var texto =
                                 boton.innerText;
 
-
-                            /* =========================
-                               ROCA
-                            ========================= */
 
                             if (
                                 texto.includes(
@@ -760,10 +688,6 @@ document.addEventListener(
                             }
 
 
-                            /* =========================
-                               PLANTA
-                            ========================= */
-
                             if (
                                 texto.includes(
                                     "Planta"
@@ -776,10 +700,6 @@ document.addEventListener(
                                 );
                             }
 
-
-                            /* =========================
-                               PEZ
-                            ========================= */
 
                             if (
                                 texto.includes(
@@ -801,4 +721,4 @@ document.addEventListener(
 
     }
 );
-
+```
