@@ -1,4 +1,4 @@
-console.log("OBJECTS ENGINE V13 - MOVIMIENTO 3D");
+console.log("OBJECTS ENGINE V14 - SELECCION 3D REAL");
 
 
 /* ==================================================
@@ -7,9 +7,25 @@ console.log("OBJECTS ENGINE V13 - MOVIMIENTO 3D");
 
 var tanque = document.querySelector(".tank-3d");
 
+
 if (!tanque) {
+
     console.error("NO EXISTE TANK-3D");
+
 }
+
+
+/* ==================================================
+   VARIABLES DE INTERACCIÓN
+================================================== */
+
+var objetoActivo = null;
+
+var moviendoObjeto = false;
+
+var inicioMouseX = 0;
+
+var inicioMouseY = 0;
 
 
 /* ==================================================
@@ -18,21 +34,26 @@ if (!tanque) {
 
 window.crearObjeto = function(tipo, icono) {
 
-    /* Comprobar tanque */
 
     if (!tanque) {
-        tanque = document.querySelector(".tank-3d");
+
+        tanque =
+            document.querySelector(".tank-3d");
+
     }
 
+
     if (!tanque) {
+
         console.error("NO EXISTE TANK-3D");
+
         return;
+
     }
 
 
-    /* Crear elemento */
-
-    var objeto = document.createElement("div");
+    var objeto =
+        document.createElement("div");
 
 
     objeto.className =
@@ -50,26 +71,37 @@ window.crearObjeto = function(tipo, icono) {
     objeto.style.position =
         "absolute";
 
+
     objeto.style.left =
         "50%";
+
 
     objeto.style.top =
         "50%";
 
+
     objeto.style.zIndex =
         "99999";
+
 
     objeto.style.fontSize =
         "40px";
 
+
     objeto.style.transformStyle =
         "preserve-3d";
+
 
     objeto.style.cursor =
         "grab";
 
+
     objeto.style.userSelect =
         "none";
+
+
+    objeto.style.pointerEvents =
+        "auto";
 
 
     /* ==================================================
@@ -90,17 +122,13 @@ window.crearObjeto = function(tipo, icono) {
     objeto.dataset.z = z;
 
 
+    objeto.dataset.scale = "1";
+
+
     actualizarPosicion(objeto);
 
 
-    /* Añadir al tanque */
-
     tanque.appendChild(objeto);
-
-
-    /* Activar movimiento */
-
-    hacerArrastrable(objeto);
 
 
     console.log(
@@ -116,6 +144,7 @@ window.crearObjeto = function(tipo, icono) {
 
 
     return objeto;
+
 };
 
 
@@ -125,305 +154,503 @@ window.crearObjeto = function(tipo, icono) {
 
 function actualizarPosicion(objeto) {
 
+
     var x =
         Number(objeto.dataset.x);
+
 
     var y =
         Number(objeto.dataset.y);
 
+
     var z =
         Number(objeto.dataset.z);
+
+
+    var escala =
+        Number(
+            objeto.dataset.scale || 1
+        );
 
 
     objeto.style.transform =
         "translate3d(" +
         x + "px," +
         y + "px," +
-        z + "px)";
+        z + "px) " +
+        "scale(" +
+        escala +
+        ")";
 
 }
 
 
 /* ==================================================
-   ARRASTRE X / Y / Z
+   BUSCAR OBJETO BAJO EL RATÓN
 ================================================== */
 
-function hacerArrastrable(objeto) {
-
-    var moviendo = false;
+function buscarObjeto(x, y) {
 
 
-    var inicioX = 0;
-
-    var inicioY = 0;
+    var objetos =
+        Array.from(
+            tanque.querySelectorAll(
+                ".objeto"
+            )
+        );
 
 
     /* ==================================================
-       CLICK
+       RECORRER DE ARRIBA HACIA ABAJO
     ================================================== */
 
-    objeto.addEventListener(
-        "mousedown",
-        function(e) {
-
-            e.preventDefault();
-
-            e.stopPropagation();
+    for (
+        var i = objetos.length - 1;
+        i >= 0;
+        i--
+    ) {
 
 
-            moviendo = true;
+        var objeto =
+            objetos[i];
 
 
-            inicioX =
-                e.clientX;
-
-            inicioY =
-                e.clientY;
+        var rect =
+            objeto.getBoundingClientRect();
 
 
-            objeto.style.cursor =
-                "grabbing";
+        if (
+
+            x >= rect.left &&
+
+            x <= rect.right &&
+
+            y >= rect.top &&
+
+            y <= rect.bottom
+
+        ) {
+
+            return objeto;
 
         }
-    );
+
+    }
 
 
-    /* ==================================================
-       MOVIMIENTO X / Y
-    ================================================== */
+    return null;
 
-    document.addEventListener(
-        "mousemove",
-        function(e) {
-
-            if (!moviendo) {
-                return;
-            }
+}
 
 
-            var dx =
-                e.clientX -
-                inicioX;
+/* ==================================================
+   SELECCIÓN DEL OBJETO
+================================================== */
+
+tanque.addEventListener(
+    "mousedown",
+    function(e) {
 
 
-            var dy =
-                e.clientY -
-                inicioY;
-
-
-            var x =
-                Number(
-                    objeto.dataset.x
-                );
-
-
-            var y =
-                Number(
-                    objeto.dataset.y
-                );
-
-
-            /* Movimiento natural */
-
-            x += dx;
-
-            y += dy;
-
-
-            /* ==================================================
-               DIMENSIONES DEL TANQUE
-            ================================================== */
-
-            var tanqueWidth =
-                tanque.offsetWidth;
-
-
-            var tanqueHeight =
-                tanque.offsetHeight;
-
-
-            /* Margen del objeto */
-
-            var margenX =
-                25;
-
-
-            var margenY =
-                25;
-
-
-            /* Límites */
-
-            var limiteX =
-                tanqueWidth / 2 -
-                margenX;
-
-
-            var limiteY =
-                tanqueHeight / 2 -
-                margenY;
-
-
-            /* Limitar X */
-
-            x =
-                Math.max(
-                    -limiteX,
-                    Math.min(
-                        limiteX,
-                        x
-                    )
-                );
-
-
-            /* Limitar Y */
-
-            y =
-                Math.max(
-                    -limiteY,
-                    Math.min(
-                        limiteY,
-                        y
-                    )
-                );
-
-
-            objeto.dataset.x =
-                x;
-
-
-            objeto.dataset.y =
-                y;
-
-
-            inicioX =
-                e.clientX;
-
-
-            inicioY =
-                e.clientY;
-
-
-            actualizarPosicion(
-                objeto
+        var objeto =
+            buscarObjeto(
+                e.clientX,
+                e.clientY
             );
 
+
+        if (!objeto) {
+
+            objetoActivo = null;
+
+            moviendoObjeto = false;
+
+            return;
+
         }
-    );
 
 
-    /* ==================================================
-       SOLTAR
-    ================================================== */
+        e.preventDefault();
 
-    document.addEventListener(
-        "mouseup",
-        function() {
-
-            moviendo = false;
+        e.stopPropagation();
 
 
-            objeto.style.cursor =
+        objetoActivo =
+            objeto;
+
+
+        moviendoObjeto =
+            true;
+
+
+        inicioMouseX =
+            e.clientX;
+
+
+        inicioMouseY =
+            e.clientY;
+
+
+        objeto.style.cursor =
+            "grabbing";
+
+
+        objeto.style.zIndex =
+            "100000";
+
+
+        console.log(
+            "OBJETO SELECCIONADO:",
+            objeto.className
+        );
+
+    },
+    true
+);
+
+
+/* ==================================================
+   MOVIMIENTO DEL OBJETO
+================================================== */
+
+document.addEventListener(
+    "mousemove",
+    function(e) {
+
+
+        if (
+            !moviendoObjeto ||
+            !objetoActivo
+        ) {
+
+            return;
+
+        }
+
+
+        var dx =
+            e.clientX -
+            inicioMouseX;
+
+
+        var dy =
+            e.clientY -
+            inicioMouseY;
+
+
+        var x =
+            Number(
+                objetoActivo.dataset.x
+            );
+
+
+        var y =
+            Number(
+                objetoActivo.dataset.y
+            );
+
+
+        /* ==================================================
+           MOVIMIENTO NATURAL
+        ================================================== */
+
+        x += dx;
+
+        y += dy;
+
+
+        /* ==================================================
+           DIMENSIONES TANQUE
+        ================================================== */
+
+        var ancho =
+            tanque.offsetWidth;
+
+
+        var alto =
+            tanque.offsetHeight;
+
+
+        /* ==================================================
+           MARGEN
+        ================================================== */
+
+        var margenX =
+            25;
+
+
+        var margenY =
+            25;
+
+
+        /* ==================================================
+           LIMITES
+        ================================================== */
+
+        var limiteX =
+            ancho / 2 -
+            margenX;
+
+
+        var limiteY =
+            alto / 2 -
+            margenY;
+
+
+        x =
+            Math.max(
+                -limiteX,
+                Math.min(
+                    limiteX,
+                    x
+                )
+            );
+
+
+        y =
+            Math.max(
+                -limiteY,
+                Math.min(
+                    limiteY,
+                    y
+                )
+            );
+
+
+        objetoActivo.dataset.x =
+            x;
+
+
+        objetoActivo.dataset.y =
+            y;
+
+
+        inicioMouseX =
+            e.clientX;
+
+
+        inicioMouseY =
+            e.clientY;
+
+
+        actualizarPosicion(
+            objetoActivo
+        );
+
+    }
+);
+
+
+/* ==================================================
+   SOLTAR OBJETO
+================================================== */
+
+document.addEventListener(
+    "mouseup",
+    function() {
+
+
+        if (objetoActivo) {
+
+            objetoActivo.style.cursor =
                 "grab";
 
         }
-    );
 
 
-    /* ==================================================
-       PROFUNDIDAD Z
-    ================================================== */
-
-    objeto.addEventListener(
-        "wheel",
-        function(e) {
-
-            e.preventDefault();
-
-            e.stopPropagation();
+        moviendoObjeto =
+            false;
 
 
-            var z =
-                Number(
-                    objeto.dataset.z
-                );
+        objetoActivo =
+            null;
+
+    }
+);
 
 
-            /* Movimiento profundidad */
+/* ==================================================
+   RUEDA = PROFUNDIDAD Z
+================================================== */
 
-            z -=
-                e.deltaY * 0.15;
-
-
-            /* ==================================================
-               ANCHO REAL DEL ACUARIO
-            ================================================== */
-
-            var campoAncho =
-                document.getElementById(
-                    "ancho"
-                );
+tanque.addEventListener(
+    "wheel",
+    function(e) {
 
 
-            var anchoAcuario =
-                campoAncho
-                    ? Number(
-                        campoAncho.value
-                    )
-                    : 30;
-
-
-            if (
-                !Number.isFinite(
-                    anchoAcuario
-                )
-            ) {
-
-                anchoAcuario =
-                    30;
-
-            }
-
-
-            /* ==================================================
-               LÍMITE Z
-            ================================================== */
-
-            var limiteZ =
-                anchoAcuario * 2;
-
-
-            z =
-                Math.max(
-                    -limiteZ,
-                    Math.min(
-                        limiteZ,
-                        z
-                    )
-                );
-
-
-            objeto.dataset.z =
-                z;
-
-
-            actualizarPosicion(
-                objeto
+        var objeto =
+            buscarObjeto(
+                e.clientX,
+                e.clientY
             );
 
 
-            console.log(
-                "PROFUNDIDAD Z:",
-                z
-            );
+        if (!objeto) {
 
-        },
-        {
-            passive: false
+            return;
+
         }
-    );
 
-}
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+
+        var z =
+            Number(
+                objeto.dataset.z
+            );
+
+
+        z -=
+            e.deltaY * 0.15;
+
+
+        /* ==================================================
+           ANCHO DEL ACUARIO
+        ================================================== */
+
+        var campoAncho =
+            document.getElementById(
+                "ancho"
+            );
+
+
+        var anchoAcuario =
+            campoAncho
+                ? Number(
+                    campoAncho.value
+                )
+                : 30;
+
+
+        if (
+            !Number.isFinite(
+                anchoAcuario
+            )
+        ) {
+
+            anchoAcuario =
+                30;
+
+        }
+
+
+        /* ==================================================
+           LÍMITE Z
+        ================================================== */
+
+        var limiteZ =
+            anchoAcuario * 2;
+
+
+        z =
+            Math.max(
+                -limiteZ,
+                Math.min(
+                    limiteZ,
+                    z
+                )
+            );
+
+
+        objeto.dataset.z =
+            z;
+
+
+        actualizarPosicion(
+            objeto
+        );
+
+
+        console.log(
+            "PROFUNDIDAD Z:",
+            z
+        );
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* ==================================================
+   RUEDA + SHIFT = TAMAÑO
+================================================== */
+
+tanque.addEventListener(
+    "wheel",
+    function(e) {
+
+
+        if (!e.shiftKey) {
+
+            return;
+
+        }
+
+
+        var objeto =
+            buscarObjeto(
+                e.clientX,
+                e.clientY
+            );
+
+
+        if (!objeto) {
+
+            return;
+
+        }
+
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+
+        var escala =
+            Number(
+                objeto.dataset.scale ||
+                1
+            );
+
+
+        escala -=
+            e.deltaY * 0.001;
+
+
+        escala =
+            Math.max(
+                0.4,
+                Math.min(
+                    3,
+                    escala
+                )
+            );
+
+
+        objeto.dataset.scale =
+            escala;
+
+
+        actualizarPosicion(
+            objeto
+        );
+
+
+        console.log(
+            "TAMAÑO OBJETO:",
+            escala
+        );
+
+    },
+    {
+        passive: false
+    }
+);
 
 
 /* ==================================================
