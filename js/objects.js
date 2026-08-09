@@ -1,4 +1,3 @@
-```javascript
 console.log("OBJECTS ENGINE V20 - MOVIMIENTO 3D PROFESIONAL");
 
 /* ==================================================
@@ -967,4 +966,3 @@ document.addEventListener(
 console.log(
     "OBJECTS ENGINE V20 LISTO"
 );
-```
