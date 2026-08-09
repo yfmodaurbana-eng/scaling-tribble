@@ -1,4 +1,4 @@
-console.log("OBJECTS ENGINE V18 - MOVIMIENTO 3D");
+console.log("OBJECTS ENGINE V19 - MOVIMIENTO 3D ESTABLE");
 
 
 /* ==================================================
@@ -43,8 +43,10 @@ window.crearObjeto = function(tipo, icono) {
 
     var objeto = document.createElement("div");
 
+
     objeto.className =
         "objeto " + tipo;
+
 
     objeto.textContent =
         icono;
@@ -97,16 +99,23 @@ window.crearObjeto = function(tipo, icono) {
 
     actualizarPosicion(objeto);
 
+
     tanque.appendChild(objeto);
 
 
     /* ==================================================
-       RUEDA EXCLUSIVA DEL OBJETO
+       RUEDA DEL OBJETO
     ================================================== */
 
     objeto.addEventListener(
         "wheel",
         function(e) {
+
+            /*
+               IMPORTANTE:
+               La rueda sobre el objeto NO llega
+               al sistema de zoom del acuario.
+            */
 
             e.preventDefault();
 
@@ -125,8 +134,19 @@ window.crearObjeto = function(tipo, icono) {
                     );
 
 
-                escala -=
-                    e.deltaY * 0.001;
+                /*
+                   RUEDA ARRIBA = AGRANDAR
+                   RUEDA ABAJO = REDUCIR
+                */
+
+                if (e.deltaY < 0) {
+
+                    escala += 0.10;
+
+                } else {
+
+                    escala -= 0.10;
+                }
 
 
                 escala =
@@ -159,7 +179,7 @@ window.crearObjeto = function(tipo, icono) {
 
 
             /* ==================================================
-               RUEDA = PROFUNDIDAD Z
+               RUEDA NORMAL = PROFUNDIDAD Z
             ================================================== */
 
             var z =
@@ -176,17 +196,18 @@ window.crearObjeto = function(tipo, icono) {
                = ALEJAR
             */
 
-        var pasoZ = 15;
+            if (e.deltaY < 0) {
 
-if (e.deltaY < 0) {
-    z += pasoZ;
-} else {
-    z -= pasoZ;
-}
+                z += 15;
+
+            } else {
+
+                z -= 15;
+            }
 
 
             /* ==================================================
-               ANCHO DEL ACUARIO
+               ANCHO REAL DEL ACUARIO
             ================================================== */
 
             var campoAncho =
@@ -209,12 +230,13 @@ if (e.deltaY < 0) {
                 )
             ) {
 
-                anchoAcuario = 30;
+                anchoAcuario =
+                    30;
             }
 
 
             /* ==================================================
-               LÍMITES DE PROFUNDIDAD
+               LÍMITE Z
             ================================================== */
 
             var limiteZ =
@@ -252,6 +274,10 @@ if (e.deltaY < 0) {
     );
 
 
+    /* ==================================================
+       INFORMACIÓN
+    ================================================== */
+
     console.log(
         "OBJETO 3D CREADO:",
         tipo,
@@ -279,15 +305,18 @@ function actualizarPosicion(objeto) {
             objeto.dataset.x
         );
 
+
     var y =
         Number(
             objeto.dataset.y
         );
 
+
     var z =
         Number(
             objeto.dataset.z
         );
+
 
     var escala =
         Number(
@@ -309,7 +338,7 @@ function actualizarPosicion(objeto) {
 
 
 /* ==================================================
-   BUSCAR OBJETO
+   BUSCAR OBJETO BAJO EL RATÓN
 ================================================== */
 
 function buscarObjeto(x, y) {
@@ -326,6 +355,12 @@ function buscarObjeto(x, y) {
             )
         );
 
+
+    /*
+       Empezamos por el último creado
+       para seleccionar correctamente
+       objetos superpuestos.
+    */
 
     for (
         var i = objetos.length - 1;
@@ -376,6 +411,11 @@ document.addEventListener(
             return;
         }
 
+
+        /*
+           Evita que el acuario interprete
+           este movimiento como giro.
+        */
 
         e.preventDefault();
 
@@ -433,6 +473,10 @@ document.addEventListener(
         }
 
 
+        /* ==================================================
+           MOVIMIENTO DIRECTO DE PANTALLA
+        ================================================== */
+
         var dx =
             e.clientX -
             inicioMouseX;
@@ -443,97 +487,19 @@ document.addEventListener(
             inicioMouseY;
 
 
-        /* ==================================================
-           MATRIZ REAL DEL ACUARIO
-        ================================================== */
+        /*
+           IMPORTANTE:
 
-        var estilo =
-            window.getComputedStyle(
-                tanque
-            );
+           NO usamos DOMMatrix.
 
+           De esta forma:
+           derecha del ratón = derecha
+           izquierda del ratón = izquierda
+           arriba = arriba
+           abajo = abajo
 
-        var transform =
-            estilo.transform;
-
-
-        var localDX =
-            dx;
-
-
-        var localDY =
-            dy;
-
-
-        if (
-            transform &&
-            transform !== "none"
-        ) {
-
-            var matriz;
-
-
-            try {
-
-                matriz =
-                    new DOMMatrix(
-                        transform
-                    );
-
-            } catch (error) {
-
-                matriz = null;
-            }
-
-
-            if (matriz) {
-
-                var a =
-                    matriz.a;
-
-                var b =
-                    matriz.b;
-
-                var c =
-                    matriz.c;
-
-                var d =
-                    matriz.d;
-
-
-                var determinante =
-                    a * d -
-                    b * c;
-
-
-                if (
-                    Math.abs(
-                        determinante
-                    ) > 0.0001
-                ) {
-
-                    localDX =
-                        (
-                            d * dx -
-                            c * dy
-                        ) /
-                        determinante;
-
-
-                    localDY =
-                        (
-                            -b * dx +
-                            a * dy
-                        ) /
-                        determinante;
-                }
-            }
-        }
-
-
-        /* ==================================================
-           POSICIÓN
-        ================================================== */
+           Aunque el acuario esté girado.
+        */
 
         var x =
             Number(
@@ -548,15 +514,15 @@ document.addEventListener(
 
 
         x +=
-            localDX;
+            dx;
 
 
         y +=
-            localDY;
+            dy;
 
 
         /* ==================================================
-           LÍMITES
+           DIMENSIONES DEL TANQUE
         ================================================== */
 
         var ancho =
@@ -567,6 +533,10 @@ document.addEventListener(
             tanque.offsetHeight;
 
 
+        /* ==================================================
+           MARGEN
+        ================================================== */
+
         var margenX =
             25;
 
@@ -574,6 +544,10 @@ document.addEventListener(
         var margenY =
             25;
 
+
+        /* ==================================================
+           LÍMITES
+        ================================================== */
 
         var limiteX =
             ancho / 2 -
@@ -617,6 +591,10 @@ document.addEventListener(
             y;
 
 
+        /* ==================================================
+           ACTUALIZAR RATÓN
+        ================================================== */
+
         inicioMouseX =
             e.clientX;
 
@@ -625,16 +603,21 @@ document.addEventListener(
             e.clientY;
 
 
+        /* ==================================================
+           ACTUALIZAR OBJETO
+        ================================================== */
+
         actualizarPosicion(
             objetoActivo
         );
 
-    }
+    },
+    true
 );
 
 
 /* ==================================================
-   SOLTAR
+   SOLTAR OBJETO
 ================================================== */
 
 document.addEventListener(
@@ -655,12 +638,13 @@ document.addEventListener(
         objetoActivo =
             null;
 
-    }
+    },
+    true
 );
 
 
 /* ==================================================
-   BOTONES
+   BOTONES DE OBJETOS
 ================================================== */
 
 document.addEventListener(
@@ -674,11 +658,20 @@ document.addEventListener(
 
                     boton.addEventListener(
                         "click",
-                        function() {
+                        function(e) {
+
+                            e.preventDefault();
+
+                            e.stopPropagation();
+
 
                             var texto =
                                 boton.innerText;
 
+
+                            /* =========================
+                               ROCA
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -690,8 +683,14 @@ document.addEventListener(
                                     "roca",
                                     "🪨"
                                 );
+
+                                return;
                             }
 
+
+                            /* =========================
+                               PLANTA
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -703,8 +702,14 @@ document.addEventListener(
                                     "planta",
                                     "🌱"
                                 );
+
+                                return;
                             }
 
+
+                            /* =========================
+                               PEZ
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -716,6 +721,8 @@ document.addEventListener(
                                     "pez",
                                     "🐟"
                                 );
+
+                                return;
                             }
 
                         }
@@ -726,3 +733,4 @@ document.addEventListener(
 
     }
 );
+
