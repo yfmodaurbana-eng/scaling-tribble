@@ -196,14 +196,19 @@ window.crearObjeto = function(tipo, icono) {
                RUEDA NORMAL = PROFUNDIDAD Z
             ================================================== */
 
-            var z =
-                Number(
-                    objeto.dataset.z
-                );
+          var z =
+    Number(
+        objeto.dataset.z
+    );
 
+/*
+   RUEDA:
+   arriba  = acerca
+   abajo   = aleja
+*/
 
-            z -=
-                e.deltaY * 0.15;
+z +=
+    e.deltaY * 0.15;
 
 
             /* ==================================================
