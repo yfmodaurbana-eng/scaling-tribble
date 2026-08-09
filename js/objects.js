@@ -537,27 +537,79 @@ document.addEventListener(
            MARGEN
         ================================================== */
 
-        var margenX =
-            25;
+/* ==================================================
+   LÍMITES REALES DEL OBJETO
+================================================== */
+
+var rectTanque =
+    tanque.getBoundingClientRect();
+
+var rectObjeto =
+    objetoActivo.getBoundingClientRect();
 
 
-        var margenY =
-            25;
+/*
+   Centro del tanque
+*/
+
+var centroTanqueX =
+    rectTanque.left +
+    rectTanque.width / 2;
+
+var centroTanqueY =
+    rectTanque.top +
+    rectTanque.height / 2;
 
 
-        /* ==================================================
-           LÍMITES
-        ================================================== */
+/*
+   Tamaño visual del objeto
+*/
 
-        var limiteX =
-            ancho / 2 -
-            margenX;
+var mitadObjetoX =
+    rectObjeto.width / 2;
+
+var mitadObjetoY =
+    rectObjeto.height / 2;
 
 
-        var limiteY =
-            alto / 2 -
-            margenY;
+/*
+   Límites en píxeles locales
+*/
 
+var limiteX =
+    (rectTanque.width / 2) -
+    mitadObjetoX;
+
+var limiteY =
+    (rectTanque.height / 2) -
+    mitadObjetoY;
+
+
+/*
+   Pequeño margen de seguridad
+   para que nunca toque el cristal.
+*/
+
+limiteX -= 5;
+
+limiteY -= 5;
+
+
+/*
+   Evitar valores negativos
+*/
+
+limiteX =
+    Math.max(
+        0,
+        limiteX
+    );
+
+limiteY =
+    Math.max(
+        0,
+        limiteY
+    );
 
         x =
             Math.max(
