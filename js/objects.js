@@ -1,4 +1,5 @@
-console.log("OBJECTS ENGINE V14 - SELECCION 3D REAL");
+```javascript
+console.log("OBJECTS ENGINE V15 - MOVIMIENTO 3D CORREGIDO");
 
 
 /* ==================================================
@@ -7,11 +8,8 @@ console.log("OBJECTS ENGINE V14 - SELECCION 3D REAL");
 
 var tanque = document.querySelector(".tank-3d");
 
-
 if (!tanque) {
-
     console.error("NO EXISTE TANK-3D");
-
 }
 
 
@@ -34,99 +32,60 @@ var inicioMouseY = 0;
 
 window.crearObjeto = function(tipo, icono) {
 
-
     if (!tanque) {
-
-        tanque =
-            document.querySelector(".tank-3d");
-
+        tanque = document.querySelector(".tank-3d");
     }
 
-
     if (!tanque) {
-
         console.error("NO EXISTE TANK-3D");
-
         return;
-
     }
 
 
-    var objeto =
-        document.createElement("div");
+    var objeto = document.createElement("div");
 
+    objeto.className = "objeto " + tipo;
 
-    objeto.className =
-        "objeto " + tipo;
-
-
-    objeto.textContent =
-        icono;
+    objeto.textContent = icono;
 
 
     /* ==================================================
        ESTILO
     ================================================== */
 
-    objeto.style.position =
-        "absolute";
+    objeto.style.position = "absolute";
 
+    objeto.style.left = "50%";
 
-    objeto.style.left =
-        "50%";
+    objeto.style.top = "50%";
 
+    objeto.style.zIndex = "99999";
 
-    objeto.style.top =
-        "50%";
+    objeto.style.fontSize = "40px";
 
+    objeto.style.transformStyle = "preserve-3d";
 
-    objeto.style.zIndex =
-        "99999";
+    objeto.style.cursor = "grab";
 
+    objeto.style.userSelect = "none";
 
-    objeto.style.fontSize =
-        "40px";
-
-
-    objeto.style.transformStyle =
-        "preserve-3d";
-
-
-    objeto.style.cursor =
-        "grab";
-
-
-    objeto.style.userSelect =
-        "none";
-
-
-    objeto.style.pointerEvents =
-        "auto";
+    objeto.style.pointerEvents = "auto";
 
 
     /* ==================================================
        POSICIÓN INICIAL
     ================================================== */
 
-    var x = 0;
+    objeto.dataset.x = "0";
 
-    var y = 0;
+    objeto.dataset.y = "0";
 
-    var z = 0;
-
-
-    objeto.dataset.x = x;
-
-    objeto.dataset.y = y;
-
-    objeto.dataset.z = z;
-
+    objeto.dataset.z = "0";
 
     objeto.dataset.scale = "1";
 
 
     actualizarPosicion(objeto);
-
 
     tanque.appendChild(objeto);
 
@@ -135,37 +94,32 @@ window.crearObjeto = function(tipo, icono) {
         "OBJETO 3D CREADO:",
         tipo,
         "X:",
-        x,
+        objeto.dataset.x,
         "Y:",
-        y,
+        objeto.dataset.y,
         "Z:",
-        z
+        objeto.dataset.z
     );
 
 
     return objeto;
-
 };
 
 
 /* ==================================================
-   POSICIÓN 3D
+   ACTUALIZAR POSICIÓN 3D
 ================================================== */
 
 function actualizarPosicion(objeto) {
 
-
     var x =
         Number(objeto.dataset.x);
-
 
     var y =
         Number(objeto.dataset.y);
 
-
     var z =
         Number(objeto.dataset.z);
-
 
     var escala =
         Number(
@@ -175,13 +129,14 @@ function actualizarPosicion(objeto) {
 
     objeto.style.transform =
         "translate3d(" +
-        x + "px," +
-        y + "px," +
-        z + "px) " +
-        "scale(" +
+        x +
+        "px," +
+        y +
+        "px," +
+        z +
+        "px) scale(" +
         escala +
         ")";
-
 }
 
 
@@ -191,18 +146,22 @@ function actualizarPosicion(objeto) {
 
 function buscarObjeto(x, y) {
 
+    if (!tanque) {
+        return null;
+    }
+
 
     var objetos =
         Array.from(
-            tanque.querySelectorAll(
-                ".objeto"
-            )
+            tanque.querySelectorAll(".objeto")
         );
 
 
-    /* ==================================================
-       RECORRER DE ARRIBA HACIA ABAJO
-    ================================================== */
+    /*
+       Empezamos por el último objeto creado
+       para poder seleccionar correctamente
+       objetos superpuestos.
+    */
 
     for (
         var i = objetos.length - 1;
@@ -210,47 +169,36 @@ function buscarObjeto(x, y) {
         i--
     ) {
 
-
         var objeto =
             objetos[i];
-
 
         var rect =
             objeto.getBoundingClientRect();
 
 
         if (
-
             x >= rect.left &&
-
             x <= rect.right &&
-
             y >= rect.top &&
-
             y <= rect.bottom
-
         ) {
 
             return objeto;
-
         }
-
     }
 
 
     return null;
-
 }
 
 
 /* ==================================================
-   SELECCIÓN DEL OBJETO
+   SELECCIONAR OBJETO
 ================================================== */
 
 tanque.addEventListener(
     "mousedown",
     function(e) {
-
 
         var objeto =
             buscarObjeto(
@@ -266,7 +214,6 @@ tanque.addEventListener(
             moviendoObjeto = false;
 
             return;
-
         }
 
 
@@ -310,23 +257,24 @@ tanque.addEventListener(
 
 
 /* ==================================================
-   MOVIMIENTO DEL OBJETO
+   MOVIMIENTO 3D CORREGIDO
 ================================================== */
 
 document.addEventListener(
     "mousemove",
     function(e) {
 
-
         if (
             !moviendoObjeto ||
             !objetoActivo
         ) {
-
             return;
-
         }
 
+
+        /* ==================================================
+           MOVIMIENTO DEL RATÓN EN PANTALLA
+        ================================================== */
 
         var dx =
             e.clientX -
@@ -337,6 +285,101 @@ document.addEventListener(
             e.clientY -
             inicioMouseY;
 
+
+        /* ==================================================
+           MATRIZ REAL DEL TANQUE
+        ================================================== */
+
+        var estilo =
+            window.getComputedStyle(tanque);
+
+
+        var transform =
+            estilo.transform;
+
+
+        /*
+           Por defecto utilizamos el movimiento
+           normal del ratón.
+        */
+
+        var localDX = dx;
+
+        var localDY = dy;
+
+
+        /* ==================================================
+           CONVERSIÓN A EJES LOCALES
+        ================================================== */
+
+        if (
+            transform &&
+            transform !== "none"
+        ) {
+
+            var matriz;
+
+
+            try {
+
+                matriz =
+                    new DOMMatrix(transform);
+
+            } catch (error) {
+
+                matriz = null;
+
+            }
+
+
+            if (matriz) {
+
+                var a =
+                    matriz.a;
+
+                var b =
+                    matriz.b;
+
+                var c =
+                    matriz.c;
+
+                var d =
+                    matriz.d;
+
+
+                var determinante =
+                    a * d -
+                    b * c;
+
+
+                if (
+                    Math.abs(
+                        determinante
+                    ) > 0.0001
+                ) {
+
+                    localDX =
+                        (
+                            d * dx -
+                            c * dy
+                        ) /
+                        determinante;
+
+
+                    localDY =
+                        (
+                            -b * dx +
+                            a * dy
+                        ) /
+                        determinante;
+                }
+            }
+        }
+
+
+        /* ==================================================
+           POSICIÓN ACTUAL
+        ================================================== */
 
         var x =
             Number(
@@ -351,16 +394,16 @@ document.addEventListener(
 
 
         /* ==================================================
-           MOVIMIENTO NATURAL
+           MOVIMIENTO
         ================================================== */
 
-        x += dx;
+        x += localDX;
 
-        y += dy;
+        y += localDY;
 
 
         /* ==================================================
-           DIMENSIONES TANQUE
+           DIMENSIONES DEL TANQUE
         ================================================== */
 
         var ancho =
@@ -372,7 +415,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           MARGEN
+           MARGEN DEL OBJETO
         ================================================== */
 
         var margenX =
@@ -384,7 +427,7 @@ document.addEventListener(
 
 
         /* ==================================================
-           LIMITES
+           LÍMITES
         ================================================== */
 
         var limiteX =
@@ -417,6 +460,10 @@ document.addEventListener(
             );
 
 
+        /* ==================================================
+           GUARDAR POSICIÓN
+        ================================================== */
+
         objetoActivo.dataset.x =
             x;
 
@@ -425,6 +472,10 @@ document.addEventListener(
             y;
 
 
+        /* ==================================================
+           ACTUALIZAR REFERENCIA DEL RATÓN
+        ================================================== */
+
         inicioMouseX =
             e.clientX;
 
@@ -432,6 +483,10 @@ document.addEventListener(
         inicioMouseY =
             e.clientY;
 
+
+        /* ==================================================
+           ACTUALIZAR OBJETO
+        ================================================== */
 
         actualizarPosicion(
             objetoActivo
@@ -449,12 +504,10 @@ document.addEventListener(
     "mouseup",
     function() {
 
-
         if (objetoActivo) {
 
             objetoActivo.style.cursor =
                 "grab";
-
         }
 
 
@@ -477,6 +530,15 @@ tanque.addEventListener(
     "wheel",
     function(e) {
 
+        /*
+           Si SHIFT está pulsado,
+           lo gestiona el sistema de tamaño.
+        */
+
+        if (e.shiftKey) {
+            return;
+        }
+
 
         var objeto =
             buscarObjeto(
@@ -486,9 +548,7 @@ tanque.addEventListener(
 
 
         if (!objeto) {
-
             return;
-
         }
 
 
@@ -503,12 +563,16 @@ tanque.addEventListener(
             );
 
 
+        /*
+           Movimiento de profundidad.
+        */
+
         z -=
             e.deltaY * 0.15;
 
 
         /* ==================================================
-           ANCHO DEL ACUARIO
+           ANCHO REAL DEL ACUARIO
         ================================================== */
 
         var campoAncho =
@@ -533,7 +597,6 @@ tanque.addEventListener(
 
             anchoAcuario =
                 30;
-
         }
 
 
@@ -577,18 +640,15 @@ tanque.addEventListener(
 
 
 /* ==================================================
-   RUEDA + SHIFT = TAMAÑO
+   SHIFT + RUEDA = TAMAÑO
 ================================================== */
 
 tanque.addEventListener(
     "wheel",
     function(e) {
 
-
         if (!e.shiftKey) {
-
             return;
-
         }
 
 
@@ -600,9 +660,7 @@ tanque.addEventListener(
 
 
         if (!objeto) {
-
             return;
-
         }
 
 
@@ -621,6 +679,11 @@ tanque.addEventListener(
         escala -=
             e.deltaY * 0.001;
 
+
+        /*
+           Tamaño mínimo 40%
+           Tamaño máximo 300%.
+        */
 
         escala =
             Math.max(
@@ -677,7 +740,9 @@ document.addEventListener(
                                 boton.innerText;
 
 
-                            /* ROCA */
+                            /* =========================
+                               ROCA
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -689,11 +754,12 @@ document.addEventListener(
                                     "roca",
                                     "🪨"
                                 );
-
                             }
 
 
-                            /* PLANTA */
+                            /* =========================
+                               PLANTA
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -705,11 +771,12 @@ document.addEventListener(
                                     "planta",
                                     "🌱"
                                 );
-
                             }
 
 
-                            /* PEZ */
+                            /* =========================
+                               PEZ
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -721,7 +788,6 @@ document.addEventListener(
                                     "pez",
                                     "🐟"
                                 );
-
                             }
 
                         }
@@ -732,4 +798,4 @@ document.addEventListener(
 
     }
 );
-
+```
