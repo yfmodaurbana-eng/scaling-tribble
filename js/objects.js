@@ -176,8 +176,13 @@ window.crearObjeto = function(tipo, icono) {
                = ALEJAR
             */
 
-            z +=
-                e.deltaY * 0.15;
+        var pasoZ = 15;
+
+if (e.deltaY < 0) {
+    z += pasoZ;
+} else {
+    z -= pasoZ;
+}
 
 
             /* ==================================================
