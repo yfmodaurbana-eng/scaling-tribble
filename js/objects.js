@@ -1,4 +1,3 @@
-```javascript
 console.log("OBJECTS ENGINE V15 - MOVIMIENTO 3D CORREGIDO");
 
 
@@ -798,4 +797,4 @@ document.addEventListener(
 
     }
 );
-```
+
