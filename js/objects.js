@@ -1,15 +1,17 @@
 /* ============================================================
    ACUARIO DESIGNER STUDIO
-   OBJECTS ENGINE V20 PROFESSIONAL
+   OBJECTS ENGINE V21 FINAL
    MOTOR DE OBJETOS 3D
-   ============================================================ */
+   MOVIMIENTO + PROFUNDIDAD + ESCALA
+   LIMITES SIMETRICOS
+============================================================ */
 
-console.log("OBJECTS ENGINE V20 PROFESSIONAL CARGADO");
+console.log("OBJECTS ENGINE V21 FINAL CARGADO");
 
 
 /* ============================================================
    TANQUE
-   ============================================================ */
+============================================================ */
 
 var tanque =
     document.querySelector(".tank-3d");
@@ -18,7 +20,7 @@ var tanque =
 if (!tanque) {
 
     console.warn(
-        "OBJECTS V20: tank-3d todavía no encontrado."
+        "OBJECTS V21: tank-3d todavía no encontrado."
     );
 
 }
@@ -26,7 +28,7 @@ if (!tanque) {
 
 /* ============================================================
    ESTADO GLOBAL
-   ============================================================ */
+============================================================ */
 
 var objetoActivo = null;
 
@@ -39,7 +41,7 @@ var inicioMouseY = 0;
 
 /* ============================================================
    OBTENER TANQUE
-   ============================================================ */
+============================================================ */
 
 function obtenerTanque() {
 
@@ -64,7 +66,7 @@ function obtenerTanque() {
 
 /* ============================================================
    CREAR OBJETO
-   ============================================================ */
+============================================================ */
 
 window.crearObjeto =
 function(tipo, icono) {
@@ -76,7 +78,7 @@ function(tipo, icono) {
     if (!t) {
 
         console.error(
-            "OBJECTS V20: NO EXISTE .tank-3d"
+            "OBJECTS V21: NO EXISTE .tank-3d"
         );
 
         return null;
@@ -86,7 +88,7 @@ function(tipo, icono) {
 
     /* --------------------------------------------------------
        CREAR ELEMENTO
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     var objeto =
         document.createElement("div");
@@ -101,8 +103,8 @@ function(tipo, icono) {
 
 
     /* --------------------------------------------------------
-       ESTILO BASE
-       -------------------------------------------------------- */
+       ESTILO
+    -------------------------------------------------------- */
 
     objeto.style.position =
         "absolute";
@@ -119,6 +121,9 @@ function(tipo, icono) {
     objeto.style.fontSize =
         "40px";
 
+    objeto.style.lineHeight =
+        "1";
+
     objeto.style.transformStyle =
         "preserve-3d";
 
@@ -128,23 +133,27 @@ function(tipo, icono) {
     objeto.style.userSelect =
         "none";
 
+    objeto.style.webkitUserSelect =
+        "none";
+
     objeto.style.pointerEvents =
         "auto";
 
 
     /*
-       Evita que el navegador intente
-       seleccionar texto o arrastrar
-       el emoji como imagen.
+       Importante:
+
+       Evita que el navegador interprete
+       el emoji como elemento arrastrable.
     */
 
-    objeto.style.webkitUserSelect =
-        "none";
+    objeto.draggable =
+        false;
 
 
     /* --------------------------------------------------------
-       DATOS DE POSICIÓN
-       -------------------------------------------------------- */
+       DATOS 3D
+    -------------------------------------------------------- */
 
     objeto.dataset.x =
         "0";
@@ -161,7 +170,7 @@ function(tipo, icono) {
 
     /* --------------------------------------------------------
        AÑADIR AL TANQUE
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     t.appendChild(
         objeto
@@ -170,26 +179,24 @@ function(tipo, icono) {
 
     /* --------------------------------------------------------
        ACTUALIZAR
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     actualizarPosicion(
         objeto
     );
 
 
-    /* --------------------------------------------------------
-       RUEDA DEL OBJETO
-       -------------------------------------------------------- */
+    /* ========================================================
+       RUEDA EXCLUSIVA DEL OBJETO
+    ======================================================== */
 
     objeto.addEventListener(
         "wheel",
         function(e) {
 
             /*
-               MUY IMPORTANTE:
-
-               La rueda sobre el objeto
-               nunca debe llegar al tanque.
+               La rueda del objeto NO debe
+               llegar al sistema del tanque.
             */
 
             e.preventDefault();
@@ -197,10 +204,9 @@ function(tipo, icono) {
             e.stopPropagation();
 
 
-            /* ================================================
-               SHIFT + RUEDA
-               CAMBIAR TAMAÑO
-               ================================================ */
+            /* =================================================
+               SHIFT + RUEDA = ESCALA
+            ================================================= */
 
             if (e.shiftKey) {
 
@@ -214,10 +220,9 @@ function(tipo, icono) {
             }
 
 
-            /* ================================================
-               RUEDA NORMAL
-               PROFUNDIDAD Z
-               ================================================ */
+            /* =================================================
+               RUEDA NORMAL = PROFUNDIDAD Z
+            ================================================= */
 
             cambiarProfundidadObjeto(
                 objeto,
@@ -250,7 +255,7 @@ function(tipo, icono) {
 
 /* ============================================================
    ACTUALIZAR POSICIÓN 3D
-   ============================================================ */
+============================================================ */
 
 function actualizarPosicion(objeto) {
 
@@ -332,7 +337,7 @@ function actualizarPosicion(objeto) {
 
 /* ============================================================
    BUSCAR OBJETO BAJO EL RATÓN
-   ============================================================ */
+============================================================ */
 
 function buscarObjeto(
     mouseX,
@@ -359,8 +364,7 @@ function buscarObjeto(
 
 
     /*
-       El último objeto creado
-       se comprueba primero.
+       El último objeto está arriba.
     */
 
     for (
@@ -411,8 +415,8 @@ function buscarObjeto(
 
 
 /* ============================================================
-   OBTENER MATRIZ 2D DEL TANQUE
-   ============================================================ */
+   MATRIZ DEL TANQUE
+============================================================ */
 
 function obtenerMatrizTanque() {
 
@@ -460,8 +464,8 @@ function obtenerMatrizTanque() {
 
 /* ============================================================
    CONVERTIR MOVIMIENTO DE PANTALLA
-   A MOVIMIENTO LOCAL DEL TANQUE
-   ============================================================ */
+   A MOVIMIENTO LOCAL
+============================================================ */
 
 function convertirMovimientoLocal(
     dx,
@@ -471,11 +475,6 @@ function convertirMovimientoLocal(
     var matriz =
         obtenerMatrizTanque();
 
-
-    /*
-       Sin transformación:
-       movimiento normal.
-    */
 
     if (!matriz) {
 
@@ -507,11 +506,6 @@ function convertirMovimientoLocal(
         a * d -
         b * c;
 
-
-    /*
-       Si la matriz no se puede invertir,
-       usamos movimiento normal.
-    */
 
     if (
         !Number.isFinite(
@@ -549,24 +543,26 @@ function convertirMovimientoLocal(
         determinante;
 
 
-    /*
-       Evitamos valores corruptos.
-    */
-
     if (
-        !Number.isFinite(localX)
+        !Number.isFinite(
+            localX
+        )
     ) {
 
-        localX = dx;
+        localX =
+            dx;
 
     }
 
 
     if (
-        !Number.isFinite(localY)
+        !Number.isFinite(
+            localY
+        )
     ) {
 
-        localY = dy;
+        localY =
+            dy;
 
     }
 
@@ -583,8 +579,8 @@ function convertirMovimientoLocal(
 
 
 /* ============================================================
-   CALCULAR LÍMITES DEL OBJETO
-   ============================================================ */
+   CALCULAR LIMITES SIMETRICOS
+============================================================ */
 
 function calcularLimitesObjeto(
     objeto
@@ -594,7 +590,10 @@ function calcularLimitesObjeto(
         obtenerTanque();
 
 
-    if (!t || !objeto) {
+    if (
+        !t ||
+        !objeto
+    ) {
 
         return {
 
@@ -608,22 +607,19 @@ function calcularLimitesObjeto(
 
 
     /*
-       IMPORTANTE:
+       Usamos las dimensiones internas
+       del tanque, NO getBoundingClientRect().
 
-       Los límites se calculan en el espacio
-       interno del tanque.
-
-       NO utilizamos getBoundingClientRect()
-       para establecer los límites porque ese
-       valor cambia al rotar el acuario.
+       Así el giro del acuario no altera
+       los límites lógicos.
     */
 
     var anchoTanque =
-        t.offsetWidth;
+        t.clientWidth;
 
 
     var altoTanque =
-        t.offsetHeight;
+        t.clientHeight;
 
 
     if (
@@ -643,8 +639,8 @@ function calcularLimitesObjeto(
 
 
     /* --------------------------------------------------------
-       TAMAÑO DEL OBJETO
-       -------------------------------------------------------- */
+       MEDIDAS NATURALES DEL OBJETO
+    -------------------------------------------------------- */
 
     var anchoObjeto =
         objeto.offsetWidth;
@@ -661,7 +657,9 @@ function calcularLimitesObjeto(
 
 
     if (
-        !Number.isFinite(escala) ||
+        !Number.isFinite(
+            escala
+        ) ||
         escala <= 0
     ) {
 
@@ -670,52 +668,51 @@ function calcularLimitesObjeto(
     }
 
 
-    var anchoReal =
-        anchoObjeto *
-        escala;
+    /*
+       Como el objeto parte desde:
+
+       left: 50%
+       top: 50%
+
+       calculamos exactamente cuánto
+       puede desplazarse su CENTRO.
+    */
+
+    var mitadObjetoX =
+        (
+            anchoObjeto *
+            escala
+        ) / 2;
 
 
-    var altoReal =
-        altoObjeto *
-        escala;
-
-
-    /* --------------------------------------------------------
-       MITAD DEL OBJETO
-       -------------------------------------------------------- */
-
-    var mitadX =
-        anchoReal / 2;
-
-
-    var mitadY =
-        altoReal / 2;
+    var mitadObjetoY =
+        (
+            altoObjeto *
+            escala
+        ) / 2;
 
 
     /*
-       Pequeño margen para evitar
-       que el objeto atraviese el cristal.
+       Margen extremadamente pequeño.
 
-       No usamos margen grande.
+       El objetivo es permitir que el objeto
+       llegue prácticamente hasta el cristal
+       sin atravesarlo.
     */
 
     var margenX =
-        2;
+        1;
 
 
     var margenY =
-        2;
+        1;
 
-
-    /* --------------------------------------------------------
-       LÍMITES
-       -------------------------------------------------------- */
 
     var limiteX =
         (
             anchoTanque / 2
         ) -
-        mitadX -
+        mitadObjetoX -
         margenX;
 
 
@@ -723,13 +720,9 @@ function calcularLimitesObjeto(
         (
             altoTanque / 2
         ) -
-        mitadY -
+        mitadObjetoY -
         margenY;
 
-
-    /*
-       Seguridad.
-    */
 
     limiteX =
         Math.max(
@@ -758,7 +751,7 @@ function calcularLimitesObjeto(
 
 /* ============================================================
    LIMITAR POSICIÓN
-   ============================================================ */
+============================================================ */
 
 function limitarPosicion(
     objeto,
@@ -770,6 +763,24 @@ function limitarPosicion(
         calcularLimitesObjeto(
             objeto
         );
+
+
+    if (
+        !Number.isFinite(x)
+    ) {
+
+        x = 0;
+
+    }
+
+
+    if (
+        !Number.isFinite(y)
+    ) {
+
+        y = 0;
+
+    }
 
 
     x =
@@ -805,7 +816,7 @@ function limitarPosicion(
 
 /* ============================================================
    SELECCIONAR OBJETO
-   ============================================================ */
+============================================================ */
 
 document.addEventListener(
     "mousedown",
@@ -826,8 +837,8 @@ document.addEventListener(
 
 
         /*
-           Detenemos completamente
-           el sistema de giro del tanque.
+           Evitamos que el tanque
+           interprete el clic como giro.
         */
 
         e.preventDefault();
@@ -870,8 +881,8 @@ document.addEventListener(
 
 
 /* ============================================================
-   MOVIMIENTO DEL OBJETO
-   ============================================================ */
+   MOVIMIENTO X / Y
+============================================================ */
 
 document.addEventListener(
     "mousemove",
@@ -887,10 +898,6 @@ document.addEventListener(
         }
 
 
-        /* ----------------------------------------------------
-           MOVIMIENTO DEL RATÓN
-           ---------------------------------------------------- */
-
         var dx =
             e.clientX -
             inicioMouseX;
@@ -900,10 +907,6 @@ document.addEventListener(
             e.clientY -
             inicioMouseY;
 
-
-        /*
-           Ignorar movimientos microscópicos.
-        */
 
         if (
             Math.abs(dx) < 0.01 &&
@@ -915,9 +918,10 @@ document.addEventListener(
         }
 
 
-        /* ----------------------------------------------------
-           CONVERTIR A ESPACIO LOCAL
-           ---------------------------------------------------- */
+        /*
+           Convertimos el movimiento de pantalla
+           al espacio local del tanque.
+        */
 
         var movimiento =
             convertirMovimientoLocal(
@@ -925,10 +929,6 @@ document.addEventListener(
                 dy
             );
 
-
-        /* ----------------------------------------------------
-           POSICIÓN ACTUAL
-           ---------------------------------------------------- */
 
         var x =
             Number(
@@ -960,10 +960,6 @@ document.addEventListener(
         }
 
 
-        /* ----------------------------------------------------
-           APLICAR MOVIMIENTO
-           ---------------------------------------------------- */
-
         x +=
             movimiento.x;
 
@@ -972,9 +968,9 @@ document.addEventListener(
             movimiento.y;
 
 
-        /* ----------------------------------------------------
-           APLICAR LÍMITES
-           ---------------------------------------------------- */
+        /*
+           Aplicamos los límites.
+        */
 
         var posicion =
             limitarPosicion(
@@ -984,10 +980,6 @@ document.addEventListener(
             );
 
 
-        /* ----------------------------------------------------
-           GUARDAR
-           ---------------------------------------------------- */
-
         objetoActivo.dataset.x =
             posicion.x;
 
@@ -996,9 +988,10 @@ document.addEventListener(
             posicion.y;
 
 
-        /* ----------------------------------------------------
-           ACTUALIZAR REFERENCIA DEL RATÓN
-           ---------------------------------------------------- */
+        /*
+           Actualizamos el origen del movimiento
+           para que no acumule error.
+        */
 
         inicioMouseX =
             e.clientX;
@@ -1007,10 +1000,6 @@ document.addEventListener(
         inicioMouseY =
             e.clientY;
 
-
-        /* ----------------------------------------------------
-           ACTUALIZAR OBJETO
-           ---------------------------------------------------- */
 
         actualizarPosicion(
             objetoActivo
@@ -1022,7 +1011,7 @@ document.addEventListener(
 
 /* ============================================================
    SOLTAR OBJETO
-   ============================================================ */
+============================================================ */
 
 document.addEventListener(
     "mouseup",
@@ -1048,8 +1037,8 @@ document.addEventListener(
 
 
 /* ============================================================
-   CAMBIAR PROFUNDIDAD Z
-   ============================================================ */
+   PROFUNDIDAD Z
+============================================================ */
 
 function cambiarProfundidadObjeto(
     objeto,
@@ -1079,20 +1068,16 @@ function cambiarProfundidadObjeto(
 
 
     /*
-       Paso de profundidad.
-
-       Rueda arriba:
-       acercar.
-
-       Rueda abajo:
-       alejar.
+       Movimiento suave y reversible.
     */
 
     var pasoZ =
         15;
 
 
-    if (deltaY < 0) {
+    if (
+        deltaY < 0
+    ) {
 
         z +=
             pasoZ;
@@ -1105,9 +1090,9 @@ function cambiarProfundidadObjeto(
     }
 
 
-    /* --------------------------------------------------------
-       ANCHO DEL ACUARIO
-       -------------------------------------------------------- */
+    /*
+       Ancho real del acuario.
+    */
 
     var campoAncho =
         document.getElementById(
@@ -1136,8 +1121,7 @@ function cambiarProfundidadObjeto(
 
 
     /*
-       El sistema anterior ya funcionaba
-       con este límite.
+       Límite de profundidad.
     */
 
     var limiteZ =
@@ -1172,8 +1156,8 @@ function cambiarProfundidadObjeto(
 
 
 /* ============================================================
-   CAMBIAR ESCALA DEL OBJETO
-   ============================================================ */
+   ESCALA DEL OBJETO
+============================================================ */
 
 function cambiarEscalaObjeto(
     objeto,
@@ -1203,7 +1187,7 @@ function cambiarEscalaObjeto(
 
 
     /*
-       Zoom/tamaño suave.
+       Cambio progresivo.
 
        No modifica el tanque.
     */
@@ -1213,10 +1197,7 @@ function cambiarEscalaObjeto(
 
 
     /*
-       Límites:
-
-       40% mínimo
-       300% máximo
+       40% - 300%.
     */
 
     escala =
@@ -1234,9 +1215,8 @@ function cambiarEscalaObjeto(
 
 
     /*
-       Después de cambiar tamaño
-       reajustamos su posición para
-       evitar que salga del tanque.
+       Al cambiar el tamaño,
+       volvemos a comprobar los límites.
     */
 
     var x =
@@ -1282,7 +1262,7 @@ function cambiarEscalaObjeto(
 
 /* ============================================================
    BOTONES DE OBJETOS
-   ============================================================ */
+============================================================ */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1303,9 +1283,9 @@ document.addEventListener(
                                 boton.innerText;
 
 
-                            /* --------------------------------
+                            /* =========================
                                ROCA
-                            -------------------------------- */
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -1321,9 +1301,9 @@ document.addEventListener(
                             }
 
 
-                            /* --------------------------------
+                            /* =========================
                                PLANTA
-                            -------------------------------- */
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -1339,9 +1319,9 @@ document.addEventListener(
                             }
 
 
-                            /* --------------------------------
+                            /* =========================
                                PEZ
-                            -------------------------------- */
+                            ========================= */
 
                             if (
                                 texto.includes(
@@ -1368,13 +1348,7 @@ document.addEventListener(
 
 /* ============================================================
    COMPATIBILIDAD
-   ============================================================ */
-
-/*
-   Dejamos estas funciones disponibles
-   por si otros archivos del proyecto
-   las necesitan.
-*/
+============================================================ */
 
 window.actualizarPosicionObjeto =
     actualizarPosicion;
@@ -1386,8 +1360,8 @@ window.buscarObjeto3D =
 
 /* ============================================================
    FIN
-   ============================================================ */
+============================================================ */
 
 console.log(
-    "OBJECTS ENGINE V20 PROFESSIONAL LISTO"
+    "OBJECTS ENGINE V21 FINAL LISTO"
 );
