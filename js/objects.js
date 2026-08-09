@@ -1,4 +1,3 @@
-```javascript
 console.log("OBJECTS ENGINE V12 - MOVIMIENTO 3D");
 
 
