@@ -559,8 +559,8 @@ select:focus{
 
     position:relative;
 
-    width:650px;
-    height:380px;
+    width:480px;
+    height:275px;
 
     transform-style:preserve-3d;
 
@@ -1071,8 +1071,8 @@ pre{
 
     .tank{
 
-        width:560px;
-        height:330px;
+        width:460px;
+        height:265px;
     }
 }
 
@@ -1143,8 +1143,8 @@ pre{
 
     .tank{
 
-        width:440px;
-        height:260px;
+        width:390px;
+        height:235px;
     }
 }
 
@@ -1188,10 +1188,6 @@ pre{
 </header>
 
 <main class="workspace">
-
-<!-- =====================================================
-     PANEL IZQUIERDO
-===================================================== -->
 
 <aside class="sidebar">
 
@@ -1347,10 +1343,6 @@ pre{
 
 </aside>
 
-<!-- =====================================================
-     VISOR CENTRAL
-===================================================== -->
-
 <section class="viewer">
 
 ```
@@ -1360,14 +1352,12 @@ pre{
         3D VIEW • INTERACTIVE
     </div>
 
-
     <div
         class="stage-help"
         id="stageHelp"
     >
         Arrastra para girar · Rueda para zoom
     </div>
-
 
     <div
         class="tank"
@@ -1403,10 +1393,6 @@ pre{
 ```
 
 </section>
-
-<!-- =====================================================
-     PANEL DERECHO
-===================================================== -->
 
 <aside class="panel">
 
@@ -1675,42 +1661,86 @@ function calcularCristal(L,H){
 
 
 /* =========================================================
-   ESCALA VISUAL
-   IMPORTANTE:
-   NO LIMITA LAS MEDIDAS.
-   SOLO ADAPTA EL TAMAÑO DEL ACUARIO EN PANTALLA.
+   ESCALA VISUAL REALISTA
 ========================================================= */
 
 function calcularEscalaVisual(L,A,H){
 
-    const maxVisualWidth = 760;
+    /*
+        Las dimensiones introducidas NO tienen límites.
 
-    const maxVisualHeight = 470;
+        Esta función solamente adapta el tamaño
+        visual del acuario al visor.
 
-    const baseWidth = 650;
+        70 × 30 × 40 cm:
+        aproximadamente 480 × 275 px.
 
-    const baseHeight = 380;
+        Así queda espacio alrededor del acuario
+        y la proporción visual resulta más natural.
+    */
+
+    const BASE_L = 70;
+
+    const BASE_H = 40;
+
+    const BASE_WIDTH = 480;
+
+    const BASE_HEIGHT = 275;
+
+    const MIN_WIDTH = 260;
+
+    const MAX_WIDTH = 620;
+
+    const MIN_HEIGHT = 160;
+
+    const MAX_HEIGHT = 380;
 
 
-    let ratioL =
-        L / 70;
+    let scaleL =
+        L / BASE_L;
 
-    let ratioH =
-        H / 40;
+    let scaleH =
+        H / BASE_H;
+
+
+    /*
+        Escala progresiva.
+
+        Evita que duplicar una dimensión
+        duplique inmediatamente el tamaño visual.
+    */
+
+    scaleL =
+        Math.pow(
+            scaleL,
+            0.72
+        );
+
+
+    scaleH =
+        Math.pow(
+            scaleH,
+            0.72
+        );
 
 
     let width =
-        baseWidth * ratioL;
+        BASE_WIDTH * scaleL;
 
     let height =
-        baseHeight * ratioH;
+        BASE_HEIGHT * scaleH;
 
+
+    /*
+        Estos límites son exclusivamente visuales.
+        NO limitan las dimensiones introducidas.
+    */
 
     width =
         Math.max(
-            280,
+            MIN_WIDTH,
             Math.min(
-                maxVisualWidth,
+                MAX_WIDTH,
                 width
             )
         );
@@ -1718,9 +1748,9 @@ function calcularEscalaVisual(L,A,H){
 
     height =
         Math.max(
-            180,
+            MIN_HEIGHT,
             Math.min(
-                maxVisualHeight,
+                MAX_HEIGHT,
                 height
             )
         );
@@ -1775,6 +1805,7 @@ function actualizar(){
 
     tank.style.width =
         visual.width + "px";
+
 
     tank.style.height =
         visual.height + "px";
@@ -2006,7 +2037,7 @@ ACUARIO DESIGNER STUDIO V3`;
 
 
 /* =========================================================
-   ROTACIÓN DEL ACUARIO
+   ROTACIÓN
 ========================================================= */
 
 tank.addEventListener(
@@ -2355,7 +2386,7 @@ document
 
 
 /* =========================================================
-   ELIMINAR OBJETO
+   ELIMINAR
 ========================================================= */
 
 $("eliminar").onclick =
@@ -2813,6 +2844,10 @@ console.log(
 
 console.log(
     "Motor cargado correctamente."
+);
+
+console.log(
+    "Escala visual realista activada."
 );
 
 console.log(
