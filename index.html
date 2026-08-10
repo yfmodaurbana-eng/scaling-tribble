@@ -721,28 +721,56 @@
      de los scripts clásicos que aparece desde r160.
 ====================================================== -->
 
-<script
-    src="https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js"
-></script>
-
-
+```html
 <!-- =====================================================
-     ORBIT CONTROLS
+     MOTOR WEBGL 3D
 ====================================================== -->
 
-<script
-    src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/controls/OrbitControls.js"
-></script>
+<script type="module">
+
+    import * as THREE
+        from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+
+    import { OrbitControls }
+        from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 
+    /*
+        Exponemos Three.js para los demás sistemas
+        que puedan utilizar window.THREE.
+    */
 
-<!-- =====================================================
-     MOTOR 3D DEL ACUARIO
-====================================================== -->
+    window.THREE = THREE;
 
-<script
-    src="./js/aquarium-3d.js"
-></script>
+    window.OrbitControls = OrbitControls;
+
+
+    /*
+        Cargamos nuestro motor DESPUÉS de que
+        Three.js y OrbitControls estén preparados.
+    */
+
+    import(
+        "./js/aquarium-3d.js"
+    )
+    .then(() => {
+
+        console.log(
+            "✅ AQUARIUM 3D ENGINE CARGADO CORRECTAMENTE"
+        );
+
+    })
+    .catch(error => {
+
+        console.error(
+            "❌ ERROR CARGANDO AQUARIUM 3D ENGINE:",
+            error
+        );
+
+    });
+
+</script>
+```
 
 
 
