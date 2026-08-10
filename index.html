@@ -157,8 +157,7 @@ header{
       #081d2a
     );
 
-  transition:
-    .15s ease;
+  transition:.15s ease;
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.04);
@@ -416,14 +415,6 @@ select:focus{
     0 0 12px rgba(0,220,255,.12);
 }
 
-.tool.active{
-  border-color:var(--cyan);
-
-  box-shadow:
-    0 0 0 1px rgba(0,220,255,.25),
-    0 0 14px rgba(0,220,255,.12);
-}
-
 .info{
   display:flex;
   justify-content:space-between;
@@ -482,6 +473,8 @@ select:focus{
   perspective:1200px;
 
   cursor:grab;
+
+  touch-action:none;
 }
 
 .stage.dragging{
@@ -742,6 +735,7 @@ select:focus{
 }
 
 @keyframes waterShine{
+
   0%{
     left:-45%;
   }
@@ -753,6 +747,7 @@ select:focus{
   100%{
     left:-45%;
   }
+
 }
 
 /* =========================================================
@@ -903,7 +898,7 @@ select:focus{
 }
 
 /* =========================================================
-   DECORATION OBJECTS
+   OBJECTS
 ========================================================= */
 
 .object{
@@ -933,7 +928,10 @@ select:focus{
   cursor:grab;
 
   filter:
-    drop-shadow(0 4px 4px rgba(0,0,0,.75));
+    drop-shadow(
+      0 4px 4px
+      rgba(0,0,0,.75)
+    );
 
   touch-action:none;
 
@@ -954,39 +952,14 @@ select:focus{
   outline-offset:5px;
 
   filter:
-    drop-shadow(0 0 7px rgba(0,220,255,.75));
-}
-
-.object.fixed{
-  cursor:default;
-}
-
-.object.rock{
-  left:17%;
-  top:68%;
-}
-
-.object.plant{
-  left:45%;
-  top:50%;
-
-  font-size:42px;
-}
-
-.object.fish{
-  left:67%;
-  top:34%;
-
-  font-size:28px;
-}
-
-.object.light{
-  left:40%;
-  top:2%;
+    drop-shadow(
+      0 0 7px
+      rgba(0,220,255,.75)
+    );
 }
 
 /* =========================================================
-   SELECTION INFO
+   SELECTION
 ========================================================= */
 
 .selection{
@@ -1087,8 +1060,12 @@ pre{
   }
 
   .workspace{
-    grid-template-columns:210px 1fr;
-    height:calc(100vh - 66px);
+    grid-template-columns:
+      210px
+      1fr;
+
+    height:
+      calc(100vh - 66px);
   }
 
   .panel{
@@ -1111,7 +1088,9 @@ pre{
 
   .workspace{
     height:auto;
-    min-height:calc(100vh - 120px);
+
+    min-height:
+      calc(100vh - 120px);
 
     grid-template-columns:1fr;
 
@@ -1120,11 +1099,11 @@ pre{
 
   .sidebar{
     order:2;
-    max-height:none;
   }
 
   .viewer{
     order:1;
+
     height:520px;
     min-height:520px;
   }
@@ -1147,8 +1126,15 @@ pre{
 <header>
 
   <div class="logo">
-    🐠 ACUARIO DESIGNER
-    <small>PROFESSIONAL REAL 3D AQUARIUM ENGINE</small>
+
+```
+🐠 ACUARIO DESIGNER
+
+<small>
+  PROFESSIONAL REAL 3D AQUARIUM ENGINE
+</small>
+```
+
   </div>
 
   <div class="actions">
@@ -1176,10 +1162,6 @@ pre{
 </header>
 
 <main class="workspace">
-
-<!-- =====================================================
-     LEFT PANEL
-===================================================== -->
 
 <aside class="sidebar">
 
@@ -1218,36 +1200,39 @@ pre{
 
 <label>
   Largo (cm)
+
   <input
     id="largo"
     type="number"
     value="70"
-    min="10"
-    max="300"
     step="1">
+
 </label>
+
 
 <label>
   Ancho (cm)
+
   <input
     id="ancho"
     type="number"
     value="30"
-    min="10"
-    max="120"
     step="1">
+
 </label>
+
 
 <label>
   Alto (cm)
+
   <input
     id="alto"
     type="number"
     value="40"
-    min="10"
-    max="120"
     step="1">
+
 </label>
+
 
 <label>
   Montaje
@@ -1276,21 +1261,32 @@ pre{
 
 <div class="info">
   <span>Volumen</span>
-  <span class="value" id="sideLitros">
+
+  <span
+    class="value"
+    id="sideLitros">
     84 L
   </span>
 </div>
 
+
 <div class="info">
   <span>Cristal</span>
-  <span class="value" id="sideCristal">
+
+  <span
+    class="value"
+    id="sideCristal">
     6 mm
   </span>
 </div>
 
+
 <div class="info">
   <span>Refuerzo</span>
-  <span class="value" id="sideRefuerzo">
+
+  <span
+    class="value"
+    id="sideRefuerzo">
     No necesario
   </span>
 </div>
@@ -1310,6 +1306,7 @@ pre{
   </span>
 </div>
 
+
 <div class="info">
   <span>Zoom</span>
   <span class="value">
@@ -1317,12 +1314,14 @@ pre{
   </span>
 </div>
 
+
 <div class="info">
   <span>Objeto</span>
   <span class="value">
     Arrastrar
   </span>
 </div>
+
 
 <div class="info">
   <span>Eliminar</span>
@@ -1335,16 +1334,17 @@ pre{
   </div>
 
   <p class="footer-note">
-    El modelo 3D es una representación visual.
-    Las recomendaciones estructurales son orientativas
-    y deben verificarse antes de construir un acuario real.
+
+```
+El modelo 3D es una representación visual.
+
+Las recomendaciones estructurales son orientativas
+y deben verificarse antes de construir un acuario real.
+```
+
   </p>
 
 </aside>
-
-<!-- =====================================================
-     3D VIEWER
-===================================================== -->
 
 <section class="viewer" id="viewer">
 
@@ -1353,7 +1353,9 @@ pre{
 ```
 <div class="tank" id="tank">
 
-  <div class="tank-inner" id="tankInner">
+  <div
+    class="tank-inner"
+    id="tankInner">
 
     <div class="face front"></div>
 
@@ -1374,30 +1376,6 @@ pre{
 
     <div class="reflection"></div>
 
-
-    <!-- OBJECTOS BASE -->
-
-    <div
-      class="object fixed rock"
-      data-fixed="1"
-      data-name="Roca">
-      🪨
-    </div>
-
-    <div
-      class="object fixed plant"
-      data-fixed="1"
-      data-name="Planta">
-      🌿
-    </div>
-
-    <div
-      class="object fixed fish"
-      data-fixed="1"
-      data-name="Pez">
-      🐟
-    </div>
-
   </div>
 
 </div>
@@ -1405,16 +1383,19 @@ pre{
 
   </div>
 
-  <div class="selection" id="selection">
-    <strong>3D</strong>
-    Arrastra para girar el acuario
+  <div
+    class="selection"
+    id="selection">
+
+```
+<strong>3D</strong>
+
+Acuario vacío — añade un objeto para comenzar
+```
+
   </div>
 
 </section>
-
-<!-- =====================================================
-     RIGHT PANEL
-===================================================== -->
 
 <aside class="panel">
 
@@ -1425,25 +1406,49 @@ pre{
 ```
 <h3>🐠 Acuario</h3>
 
+
 <div class="info">
-  <span>Volumen bruto</span>
-  <span class="value" id="infoLitros">
+
+  <span>
+    Volumen bruto
+  </span>
+
+  <span
+    class="value"
+    id="infoLitros">
     84 L
   </span>
+
 </div>
 
+
 <div class="info">
-  <span>Medidas</span>
-  <span class="value" id="infoMedidas">
+
+  <span>
+    Medidas
+  </span>
+
+  <span
+    class="value"
+    id="infoMedidas">
     70 × 30 × 40 cm
   </span>
+
 </div>
 
+
 <div class="info">
-  <span>Volumen útil</span>
-  <span class="value" id="volumenUtil">
+
+  <span>
+    Volumen útil
+  </span>
+
+  <span
+    class="value"
+    id="volumenUtil">
     71.4 L
   </span>
+
 </div>
 ```
 
@@ -1452,29 +1457,51 @@ pre{
   <div class="card">
 
 ```
-<h3>🪟 Seguridad estructural</h3>
+<h3>
+  🪟 Seguridad estructural
+</h3>
+
 
 <div class="info">
-  <span>Cristal</span>
-  <span class="value" id="infoCristal">
+
+  <span>
+    Cristal
+  </span>
+
+  <span
+    class="value"
+    id="infoCristal">
     6 mm
   </span>
+
 </div>
 
+
 <div class="info">
-  <span>Tipo</span>
+
+  <span>
+    Tipo
+  </span>
+
   <span class="value">
     Float recocido
   </span>
+
 </div>
 
+
 <div class="info">
-  <span>Estado</span>
+
+  <span>
+    Estado
+  </span>
+
   <span
     class="status"
     id="riesgo">
     🟢 Diseño doméstico
   </span>
+
 </div>
 ```
 
@@ -1483,20 +1510,38 @@ pre{
   <div class="card">
 
 ```
-<h3>🔩 Refuerzos</h3>
+<h3>
+  🔩 Refuerzos
+</h3>
+
 
 <div class="info">
-  <span>Tirantes</span>
-  <span class="value" id="infoTirantes">
+
+  <span>
+    Tirantes
+  </span>
+
+  <span
+    class="value"
+    id="infoTirantes">
     No requiere
   </span>
+
 </div>
 
+
 <div class="info">
-  <span>Medida</span>
-  <span class="value" id="infoMedidaTirante">
+
+  <span>
+    Medida
+  </span>
+
+  <span
+    class="value"
+    id="infoMedidaTirante">
     —
   </span>
+
 </div>
 ```
 
@@ -1505,34 +1550,63 @@ pre{
   <div class="card">
 
 ```
-<h3>🎯 Objeto seleccionado</h3>
+<h3>
+  🎯 Objeto seleccionado
+</h3>
+
 
 <div class="info">
-  <span>Elemento</span>
-  <span class="value" id="selectedName">
+
+  <span>
+    Elemento
+  </span>
+
+  <span
+    class="value"
+    id="selectedName">
     Ninguno
   </span>
+
 </div>
 
-<div class="info">
-  <span>Posición X</span>
-  <span class="value" id="selectedX">
-    —
-  </span>
-</div>
 
 <div class="info">
-  <span>Posición Y</span>
-  <span class="value" id="selectedY">
+
+  <span>
+    Posición X
+  </span>
+
+  <span
+    class="value"
+    id="selectedX">
     —
   </span>
+
 </div>
+
+
+<div class="info">
+
+  <span>
+    Posición Y
+  </span>
+
+  <span
+    class="value"
+    id="selectedY">
+    —
+  </span>
+
+</div>
+
 
 <button
   class="btn"
   id="deleteObject"
   style="width:100%;margin-top:7px">
+
   🗑 Eliminar seleccionado
+
 </button>
 ```
 
@@ -1541,7 +1615,9 @@ pre{
   <div class="card">
 
 ```
-<h3>📄 Ficha técnica</h3>
+<h3>
+  📄 Ficha técnica
+</h3>
 
 <pre id="ficha">Pulsa «Ficha» para generar la ficha técnica.</pre>
 ```
@@ -1565,8 +1641,8 @@ pre{
    HELPERS
 ========================================================= */
 
-const $ = id =>
-  document.getElementById(id);
+const $ =
+  id => document.getElementById(id);
 
 
 /* =========================================================
@@ -1593,16 +1669,19 @@ const inputs = [
 
 
 /* =========================================================
-   ESTADO 3D
+   ESTADO
 ========================================================= */
 
 let rotX = -7;
+
 let rotY = -24;
+
 let zoom = 1;
 
 let rotating = false;
 
 let lastX = 0;
+
 let lastY = 0;
 
 let selectedObject = null;
@@ -1616,23 +1695,33 @@ let addedObjects = [];
 
 function medidas(){
 
+  let L =
+    Number($("largo").value);
+
+  let A =
+    Number($("ancho").value);
+
+  let H =
+    Number($("alto").value);
+
+
+  if(!Number.isFinite(L) || L <= 0){
+    L = 70;
+  }
+
+  if(!Number.isFinite(A) || A <= 0){
+    A = 30;
+  }
+
+  if(!Number.isFinite(H) || H <= 0){
+    H = 40;
+  }
+
+
   return {
-
-    L:Math.max(
-      10,
-      Number($("largo").value) || 70
-    ),
-
-    A:Math.max(
-      10,
-      Number($("ancho").value) || 30
-    ),
-
-    H:Math.max(
-      10,
-      Number($("alto").value) || 40
-    )
-
+    L,
+    A,
+    H
   };
 
 }
@@ -1653,6 +1742,7 @@ function calcularCristal(L,H){
 
   }
 
+
   if(
     L > 180 ||
     H >= 60
@@ -1661,6 +1751,7 @@ function calcularCristal(L,H){
     return 10;
 
   }
+
 
   if(
     L > 120 ||
@@ -1671,6 +1762,7 @@ function calcularCristal(L,H){
 
   }
 
+
   return 6;
 
 }
@@ -1680,10 +1772,17 @@ function calcularCristal(L,H){
    ESTRUCTURA
 ========================================================= */
 
-function calcularEstructura(L,A,H){
+function calcularEstructura(
+  L,
+  A,
+  H
+){
 
   let cristal =
-    calcularCristal(L,H);
+    calcularCristal(
+      L,
+      H
+    );
 
   let tirantes =
     "No requiere";
@@ -1725,12 +1824,15 @@ function calcularEstructura(L,A,H){
 
   }
 
-  else if(L > 180){
+  else if(
+    L > 180
+  ){
 
-    cristal = Math.max(
-      cristal,
-      10
-    );
+    cristal =
+      Math.max(
+        cristal,
+        10
+      );
 
     tirantes =
       "2 transversales";
@@ -1746,7 +1848,9 @@ function calcularEstructura(L,A,H){
 
   }
 
-  else if(L > 120){
+  else if(
+    L > 120
+  ){
 
     tirantes =
       "1 transversal";
@@ -1789,7 +1893,7 @@ function calcularEstructura(L,A,H){
 
 
 /* =========================================================
-   ESCALA 3D
+   ACTUALIZAR 3D
 ========================================================= */
 
 function actualizar3D(){
@@ -1800,11 +1904,6 @@ function actualizar3D(){
     H
   } = medidas();
 
-
-  /*
-   * Escala visual independiente de las
-   * dimensiones físicas.
-   */
 
   const anchoVisual =
     Math.max(
@@ -1826,10 +1925,6 @@ function actualizar3D(){
     );
 
 
-  /*
-   * Profundidad visual.
-   */
-
   const profundidad =
     Math.max(
       70,
@@ -1842,6 +1937,7 @@ function actualizar3D(){
 
   tank.style.width =
     anchoVisual + "px";
+
 
   tank.style.height =
     altoVisual + "px";
@@ -1865,7 +1961,7 @@ function actualizar3D(){
 
 
 /* =========================================================
-   CALCULADORA
+   ACTUALIZAR
 ========================================================= */
 
 function actualizar(){
@@ -1878,7 +1974,7 @@ function actualizar(){
 
 
   const litros =
-    (L * A * H) / 1000;
+    L * A * H / 1000;
 
 
   const volumenUtil =
@@ -1957,15 +2053,13 @@ function actualizar(){
 function aplicarVista(){
 
   inner.style.transform =
-    `rotateX(${rotX}deg)
-     rotateY(${rotY}deg)
-     scale(${zoom})`;
+    `rotateX(${rotX}deg) rotateY(${rotY}deg) scale(${zoom})`;
 
 }
 
 
 /* =========================================================
-   ROTACIÓN DEL ACUARIO
+   ROTACIÓN
 ========================================================= */
 
 stage.addEventListener(
@@ -1973,8 +2067,7 @@ stage.addEventListener(
   e => {
 
     if(
-      e.target.closest(".object") &&
-      !e.target.closest(".object").classList.contains("fixed")
+      e.target.closest(".object")
     ){
 
       return;
@@ -1984,8 +2077,10 @@ stage.addEventListener(
 
     rotating = true;
 
+
     lastX =
       e.clientX;
+
 
     lastY =
       e.clientY;
@@ -1997,9 +2092,11 @@ stage.addEventListener(
 
 
     try{
+
       stage.setPointerCapture(
         e.pointerId
       );
+
     }catch(_){}
 
   }
@@ -2011,12 +2108,15 @@ stage.addEventListener(
   e => {
 
     if(!rotating){
+
       return;
+
     }
 
 
     const dx =
       e.clientX - lastX;
+
 
     const dy =
       e.clientY - lastY;
@@ -2024,6 +2124,7 @@ stage.addEventListener(
 
     rotY +=
       dx * .45;
+
 
     rotX -=
       dy * .30;
@@ -2042,6 +2143,7 @@ stage.addEventListener(
     lastX =
       e.clientX;
 
+
     lastY =
       e.clientY;
 
@@ -2056,16 +2158,21 @@ stage.addEventListener(
   "pointerup",
   e => {
 
-    rotating = false;
+    rotating =
+      false;
+
 
     stage.classList.remove(
       "dragging"
     );
 
+
     try{
+
       stage.releasePointerCapture(
         e.pointerId
       );
+
     }catch(_){}
 
   }
@@ -2076,7 +2183,9 @@ stage.addEventListener(
   "pointercancel",
   () => {
 
-    rotating = false;
+    rotating =
+      false;
+
 
     stage.classList.remove(
       "dragging"
@@ -2124,7 +2233,9 @@ viewer.addEventListener(
    SELECCIONAR OBJETO
 ========================================================= */
 
-function seleccionarObjeto(obj){
+function seleccionarObjeto(
+  obj
+){
 
   if(
     selectedObject &&
@@ -2142,56 +2253,74 @@ function seleccionarObjeto(obj){
     obj;
 
 
-  if(obj){
-
-    obj.classList.add(
-      "selected"
-    );
-
+  if(!obj){
 
     $("selectedName").textContent =
-      obj.dataset.name ||
-      obj.textContent.trim();
-
+      "Ninguno";
 
     $("selectedX").textContent =
-      obj.style.left || "—";
-
+      "—";
 
     $("selectedY").textContent =
-      obj.style.top || "—";
-
-
-    $("selection").innerHTML =
-      `<strong>${obj.dataset.name || "Objeto"}</strong> seleccionado`;
-
-  }
-
-}
-
-
-/* =========================================================
-   ARRASTRAR OBJETOS
-========================================================= */
-
-function hacerObjetoMovible(obj){
-
-  if(
-    obj.dataset.fixed === "1"
-  ){
+      "—";
 
     return;
 
   }
 
 
-  let moving = false;
+  obj.classList.add(
+    "selected"
+  );
 
-  let startX = 0;
-  let startY = 0;
 
-  let initialLeft = 0;
-  let initialTop = 0;
+  $("selectedName").textContent =
+    obj.dataset.name ||
+    obj.textContent.trim();
+
+
+  $("selectedX").textContent =
+    obj.style.left ||
+    "—";
+
+
+  $("selectedY").textContent =
+    obj.style.top ||
+    "—";
+
+
+  $("selection").innerHTML =
+    `<strong>${obj.dataset.name || "Objeto"}</strong> seleccionado`;
+
+}
+
+
+/* =========================================================
+   OBJETOS MOVIBLES
+========================================================= */
+
+function hacerObjetoMovible(
+  obj
+){
+
+  let moving =
+    false;
+
+
+  let startX =
+    0;
+
+
+  let startY =
+    0;
+
+
+  let initialLeft =
+    0;
+
+
+  let initialTop =
+    0;
 
 
   obj.addEventListener(
@@ -2200,16 +2329,19 @@ function hacerObjetoMovible(obj){
 
       e.stopPropagation();
 
+
       seleccionarObjeto(
         obj
       );
 
 
-      moving = true;
+      moving =
+        true;
 
 
       startX =
         e.clientX;
+
 
       startY =
         e.clientY;
@@ -2227,11 +2359,9 @@ function hacerObjetoMovible(obj){
         ) || 50;
 
 
-      try{
-        obj.setPointerCapture(
-          e.pointerId
-        );
-      }catch(_){}
+      obj.setPointerCapture(
+        e.pointerId
+      );
 
     }
   );
@@ -2242,7 +2372,9 @@ function hacerObjetoMovible(obj){
     e => {
 
       if(!moving){
+
         return;
+
       }
 
 
@@ -2250,25 +2382,26 @@ function hacerObjetoMovible(obj){
         tank.getBoundingClientRect();
 
 
-      /*
-       * Movimiento proporcional al tamaño
-       * del acuario.
-       */
-
       const dx =
         (
-          (e.clientX - startX)
-          /
-          rect.width
-        ) * 100;
+          e.clientX -
+          startX
+        )
+        /
+        rect.width
+        *
+        100;
 
 
       const dy =
         (
-          (e.clientY - startY)
-          /
-          rect.height
-        ) * 100;
+          e.clientY -
+          startY
+        )
+        /
+        rect.height
+        *
+        100;
 
 
       let left =
@@ -2278,11 +2411,6 @@ function hacerObjetoMovible(obj){
       let top =
         initialTop + dy;
 
-
-      /*
-       * Mantener objeto dentro
-       * del acuario.
-       */
 
       left =
         Math.max(
@@ -2327,12 +2455,16 @@ function hacerObjetoMovible(obj){
     "pointerup",
     e => {
 
-      moving = false;
+      moving =
+        false;
+
 
       try{
+
         obj.releasePointerCapture(
           e.pointerId
         );
+
       }catch(_){}
 
     }
@@ -2342,7 +2474,7 @@ function hacerObjetoMovible(obj){
 
 
 /* =========================================================
-   OBJETOS
+   CREAR OBJETO
 ========================================================= */
 
 function crearObjeto(
@@ -2366,20 +2498,18 @@ function crearObjeto(
     emoji;
 
 
-  obj.dataset.fixed =
-    "0";
-
-
   obj.dataset.name =
     nombre;
 
 
   obj.style.left =
-    left ?? (20 + Math.random()*60) + "%";
+    left ||
+    (20 + Math.random() * 60) + "%";
 
 
   obj.style.top =
-    top ?? (20 + Math.random()*55) + "%";
+    top ||
+    (20 + Math.random() * 55) + "%";
 
 
   obj.style.zIndex =
@@ -2432,20 +2562,25 @@ document
 
           const nombres = {
 
-            "🪨":"Roca",
+            "🪨":
+              "Roca",
 
-            "🌿":"Planta",
+            "🌿":
+              "Planta",
 
-            "🐟":"Pez",
+            "🐟":
+              "Pez",
 
-            "💡":"Luz"
+            "💡":
+              "Luz"
 
           };
 
 
           crearObjeto(
             emoji,
-            nombres[emoji] || "Objeto"
+            nombres[emoji] ||
+            "Objeto"
           );
 
         }
@@ -2456,41 +2591,12 @@ document
 
 
 /* =========================================================
-   SELECCIONAR OBJETOS FIJOS
-========================================================= */
-
-inner
-  .querySelectorAll(".object.fixed")
-  .forEach(
-    obj => {
-
-      obj.addEventListener(
-        "pointerdown",
-        e => {
-
-          e.stopPropagation();
-
-          seleccionarObjeto(
-            obj
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   ELIMINAR
+   ELIMINAR OBJETO
 ========================================================= */
 
 function eliminarSeleccionado(){
 
-  if(
-    !selectedObject ||
-    selectedObject.classList.contains("fixed")
-  ){
+  if(!selectedObject){
 
     return;
 
@@ -2502,8 +2608,8 @@ function eliminarSeleccionado(){
 
   addedObjects =
     addedObjects.filter(
-      o =>
-        o !== selectedObject
+      obj =>
+        obj !== selectedObject
     );
 
 
@@ -2524,7 +2630,7 @@ function eliminarSeleccionado(){
 
 
   $("selection").innerHTML =
-    "<strong>3D</strong> Selecciona un objeto";
+    "<strong>3D</strong> Acuario vacío";
 
 }
 
@@ -2534,7 +2640,7 @@ $("deleteObject").onclick =
 
 
 /* =========================================================
-   TECLA SUPR
+   SUPR
 ========================================================= */
 
 window.addEventListener(
@@ -2563,8 +2669,10 @@ $("nuevo").onclick =
     $("largo").value =
       70;
 
+
     $("ancho").value =
       30;
+
 
     $("alto").value =
       40;
@@ -2587,8 +2695,10 @@ $("nuevo").onclick =
     rotX =
       -7;
 
+
     rotY =
       -24;
+
 
     zoom =
       1;
@@ -2604,6 +2714,10 @@ $("nuevo").onclick =
 
     $("selectedY").textContent =
       "—";
+
+
+    $("selection").innerHTML =
+      "<strong>3D</strong> Acuario vacío";
 
 
     aplicarVista();
@@ -2707,31 +2821,38 @@ $("cargar").onclick =
 
 
       $("largo").value =
-        datos.medidas?.L ?? 70;
+        datos.medidas?.L ??
+        70;
 
 
       $("ancho").value =
-        datos.medidas?.A ?? 30;
+        datos.medidas?.A ??
+        30;
 
 
       $("alto").value =
-        datos.medidas?.H ?? 40;
+        datos.medidas?.H ??
+        40;
 
 
       $("montaje").value =
-        datos.montaje ?? "interior";
+        datos.montaje ??
+        "interior";
 
 
       rotX =
-        datos.rotX ?? -7;
+        datos.rotX ??
+        -7;
 
 
       rotY =
-        datos.rotY ?? -24;
+        datos.rotY ??
+        -24;
 
 
       zoom =
-        datos.zoom ?? 1;
+        datos.zoom ??
+        1;
 
 
       addedObjects.forEach(
@@ -2748,19 +2869,21 @@ $("cargar").onclick =
         null;
 
 
-      (datos.objetos || [])
-        .forEach(
-          item => {
+      (
+        datos.objetos ||
+        []
+      ).forEach(
+        item => {
 
-            crearObjeto(
-              item.emoji,
-              item.nombre,
-              item.left,
-              item.top
-            );
+          crearObjeto(
+            item.emoji,
+            item.nombre,
+            item.left,
+            item.top
+          );
 
-          }
-        );
+        }
+      );
 
 
       aplicarVista();
@@ -2803,11 +2926,11 @@ function actualizarFicha(){
 
 
   const litros =
-    L*A*H/1000;
+    L * A * H / 1000;
 
 
   const util =
-    litros*.85;
+    litros * .85;
 
 
   const estructura =
@@ -2838,9 +2961,11 @@ Largo ............... ${L} cm
 Ancho ............... ${A} cm
 Alto ................ ${H} cm
 
-Montaje ............. ${montaje === "interior"
-  ? "Base interior"
-  : "Base exterior"}
+Montaje ............. ${
+    montaje === "interior"
+      ? "Base interior"
+      : "Base exterior"
+  }
 
 ========================================
 VOLUMEN
@@ -2927,7 +3052,7 @@ inputs.forEach(
 
 
 /* =========================================================
-   INICIALIZACIÓN
+   INICIO
 ========================================================= */
 
 actualizar();
