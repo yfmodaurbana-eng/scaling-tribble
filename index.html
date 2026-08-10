@@ -1,21 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Acuario Designer Studio PRO</title>
 
 <style>
-
-/* =========================================================
-   ACUARIO DESIGNER STUDIO
-   SINGLE FILE PROFESSIONAL VERSION
-========================================================= */
 
 *{
     box-sizing:border-box;
@@ -28,7 +23,7 @@ body{
     height:100%;
     overflow:hidden;
     font-family:Arial,Helvetica,sans-serif;
-    background:#03070c;
+    background:#03080d;
     color:#e9faff;
 }
 
@@ -42,11 +37,15 @@ body{
 ========================================================= */
 
 header{
-    height:72px;
-    min-height:72px;
+
+    height:70px;
+
+    flex-shrink:0;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     padding:0 22px;
@@ -54,61 +53,84 @@ header{
     background:
         linear-gradient(
             180deg,
-            #091722,
-            #061018
+            #0c1d2a,
+            #06111a
         );
 
     border-bottom:1px solid #16485e;
 
     box-shadow:
-        0 4px 20px rgba(0,0,0,.45);
+        0 5px 25px rgba(0,0,0,.5);
 
     z-index:20;
 }
 
 .logo{
+
     font-size:20px;
-    font-weight:700;
-    letter-spacing:.5px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    color:#dffaff;
+
 }
 
 .logo small{
+
     display:block;
+
     margin-top:4px;
-    color:#63dfff;
+
     font-size:10px;
+
     letter-spacing:2px;
-    font-weight:400;
+
+    color:#25cfff;
+
+    font-weight:500;
+
 }
 
 .actions{
+
     display:flex;
+
     gap:8px;
+
 }
 
 .btn{
-    border:1px solid #17647d;
-    background:#0b2431;
+
+    border:1px solid #19546b;
+
+    background:#0b1e2b;
+
     color:#dffaff;
 
-    padding:9px 14px;
+    padding:10px 14px;
 
     border-radius:7px;
 
     cursor:pointer;
 
-    font-weight:600;
-
     transition:.2s;
+
 }
 
 .btn:hover{
-    background:#10394a;
-    border-color:#20c9f4;
+
+    background:#103447;
+
+    border-color:#00d9ff;
+
+    box-shadow:0 0 12px rgba(0,217,255,.2);
+
 }
 
 /* =========================================================
-   MAIN WORKSPACE
+   MAIN LAYOUT
 ========================================================= */
 
 .workspace{
@@ -119,10 +141,7 @@ header{
 
     display:grid;
 
-    grid-template-columns:
-        260px
-        minmax(500px,1fr)
-        300px;
+    grid-template-columns:270px minmax(450px,1fr) 300px;
 
 }
 
@@ -136,71 +155,164 @@ header{
 
     overflow:auto;
 
-    padding:16px;
+    padding:18px;
 
     background:
         linear-gradient(
             180deg,
-            #07131c,
-            #050c13
+            #07131d,
+            #040b11
         );
 
-}
+    border-right:1px solid #12384a;
 
-.left-panel{
-    border-right:1px solid #123c4d;
 }
 
 .right-panel{
-    border-left:1px solid #123c4d;
+
+    border-right:0;
+
+    border-left:1px solid #12384a;
+
 }
 
 .sidebar h2{
-    margin:0 0 15px;
+
+    margin:0 0 16px;
 
     font-size:17px;
 
-    color:#8deaff;
+    color:#7eeaff;
+
+}
+
+.tools{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-bottom:12px;
+
+}
+
+.tool{
+
+    min-height:72px;
+
+    border:1px solid #16465a;
+
+    border-radius:9px;
+
+    background:#091b27;
+
+    color:white;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    transition:.2s;
+
+}
+
+.tool span{
+
+    font-size:26px;
+
+}
+
+.tool small{
+
+    color:#a7d9e7;
+
+}
+
+.tool:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#00d9ff;
+
+    background:#0d2b3b;
+
+}
+
+.danger{
+
+    width:100%;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    border:1px solid #71343d;
+
+    border-radius:7px;
+
+    background:#271016;
+
+    color:#ffb5bd;
+
+    cursor:pointer;
+
+}
+
+.danger:hover{
+
+    background:#42151d;
+
 }
 
 .card{
 
-    margin-top:14px;
+    margin-bottom:14px;
 
     padding:14px;
 
-    border:1px solid #123d4d;
+    border:1px solid #143c4e;
 
-    border-radius:10px;
+    border-radius:9px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(12,35,47,.95),
-            rgba(5,17,25,.95)
+            rgba(13,35,49,.95),
+            rgba(6,17,25,.95)
         );
 
-    box-shadow:
-        inset 0 0 20px rgba(0,150,200,.04);
 }
 
 .card h3{
-    margin:0 0 12px;
+
+    margin:0 0 13px;
 
     font-size:14px;
 
-    color:#79def9;
+    color:#7de9ff;
+
 }
 
 label{
 
     display:block;
 
-    margin-bottom:11px;
-
-    color:#9bb8c3;
+    margin-bottom:12px;
 
     font-size:12px;
+
+    color:#9dc5d1;
+
 }
 
 input,
@@ -212,104 +324,26 @@ select{
 
     padding:9px;
 
+    border:1px solid #225269;
+
     border-radius:6px;
 
-    border:1px solid #205267;
+    background:#06131d;
 
-    background:#06121a;
-
-    color:#eaffff;
+    color:white;
 
     outline:none;
+
 }
 
 input:focus,
 select:focus{
-    border-color:#00cfff;
+
+    border-color:#00d9ff;
+
+    box-shadow:0 0 8px rgba(0,217,255,.15);
+
 }
-
-/* =========================================================
-   TOOLS
-========================================================= */
-
-.tools{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:7px;
-}
-
-.tool{
-
-    min-height:70px;
-
-    border:1px solid #16485a;
-
-    border-radius:8px;
-
-    background:#071a24;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:5px;
-
-    transition:.2s;
-}
-
-.tool span{
-    font-size:23px;
-}
-
-.tool small{
-    font-size:10px;
-    color:#8fc7d5;
-}
-
-.tool:hover{
-    border-color:#00d8ff;
-    background:#0b2a39;
-    transform:translateY(-1px);
-}
-
-.danger{
-
-    width:100%;
-
-    margin-top:12px;
-
-    padding:9px;
-
-    border-radius:7px;
-
-    border:1px solid #743536;
-
-    background:#281013;
-
-    color:#ffb8b8;
-
-    cursor:pointer;
-}
-
-.danger:hover{
-    background:#43171b;
-}
-
-/* =========================================================
-   INFO
-========================================================= */
 
 .info{
 
@@ -319,58 +353,40 @@ select:focus{
 
     gap:10px;
 
-    padding:7px 0;
-
-    border-bottom:1px solid rgba(100,180,210,.08);
+    margin:8px 0;
 
     font-size:12px;
 
-    color:#9ab4bf;
-}
+    color:#9bbbc5;
 
-.info:last-child{
-    border-bottom:0;
 }
 
 .value{
+
     color:#e9fbff;
-    font-weight:600;
+
+    font-weight:700;
+
     text-align:right;
+
 }
 
 .status{
-    color:#57ef9a;
-    font-weight:600;
+
+    color:#48f59b;
+
+    font-weight:700;
+
 }
 
 .note{
 
-    margin-top:15px;
-
-    color:#6e929e;
-
-    font-size:10px;
-
-    line-height:1.7;
-}
-
-.object-list{
-    margin-top:12px;
-}
-
-.object-item{
-
-    padding:7px 9px;
-
-    margin-bottom:5px;
-
-    border-radius:6px;
-
-    background:#071b25;
-
-    border:1px solid #123b49;
+    color:#7696a1;
 
     font-size:11px;
+
+    line-height:1.7;
+
 }
 
 /* =========================================================
@@ -379,33 +395,26 @@ select:focus{
 
 .viewer{
 
+    position:relative;
+
     min-width:0;
 
     min-height:0;
 
-    position:relative;
-
     background:
 
         radial-gradient(
-            ellipse at 50% 40%,
-            rgba(0,104,150,.22),
-            transparent 55%
-        ),
-
-        radial-gradient(
-            ellipse at 50% 100%,
-            rgba(0,50,80,.22),
-            transparent 60%
+            ellipse at 50% 45%,
+            rgba(0,133,177,.18),
+            transparent 50%
         ),
 
         linear-gradient(
             180deg,
-            #06131d,
+            #03111b,
             #02070c
         );
 
-    overflow:hidden;
 }
 
 #canvas-container{
@@ -413,6 +422,7 @@ select:focus{
     position:absolute;
 
     inset:0;
+
 }
 
 .viewer-overlay{
@@ -423,75 +433,180 @@ select:focus{
 
     pointer-events:none;
 
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:18px;
 }
 
 .badge{
 
-    align-self:flex-start;
+    position:absolute;
 
-    padding:6px 10px;
+    top:18px;
 
-    border:1px solid #155a70;
+    left:18px;
 
-    border-radius:6px;
+    padding:7px 10px;
 
-    background:rgba(3,16,23,.7);
+    border:1px solid rgba(0,211,255,.35);
 
-    color:#67e5ff;
+    border-radius:5px;
+
+    background:rgba(2,15,23,.72);
+
+    color:#52e3ff;
 
     font-size:10px;
 
     letter-spacing:1.5px;
+
 }
 
 .help{
 
-    padding:7px 12px;
+    position:absolute;
 
-    border-radius:20px;
+    top:18px;
 
-    background:rgba(2,10,15,.65);
+    right:18px;
 
-    border:1px solid rgba(80,180,210,.2);
+    padding:8px 11px;
 
-    color:#8aaab4;
+    border-radius:5px;
 
-    font-size:10px;
+    background:rgba(2,15,23,.72);
+
+    color:#8eaab5;
+
+    font-size:11px;
+
 }
 
 .bottom-info{
 
-    align-self:center;
+    position:absolute;
 
-    color:#4f7785;
+    left:50%;
 
-    font-size:9px;
+    bottom:16px;
 
-    letter-spacing:2px;
+    transform:translateX(-50%);
+
+    padding:7px 12px;
+
+    border:1px solid rgba(0,200,255,.18);
+
+    border-radius:5px;
+
+    background:rgba(0,10,17,.65);
+
+    color:#6e9eac;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
 }
 
 /* =========================================================
-   RANGE / TECHNICAL
+   TECHNICAL SHEET
 ========================================================= */
 
-.range-value{
+pre{
 
-    display:block;
+    margin:0;
 
-    margin-top:4px;
+    padding:10px;
 
-    color:#63e4ff;
+    max-height:260px;
 
-    font-size:11px;
+    overflow:auto;
+
+    white-space:pre-wrap;
+
+    font-size:10px;
+
+    line-height:1.55;
+
+    color:#bdeefa;
+
+    background:#030b11;
+
+    border-radius:6px;
+
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .workspace{
+
+        grid-template-columns:220px minmax(350px,1fr) 240px;
+
+    }
+
+}
+
+@media(max-width:750px){
+
+    body{
+
+        overflow:auto;
+
+    }
+
+    header{
+
+        height:auto;
+
+        min-height:70px;
+
+        flex-wrap:wrap;
+
+        gap:10px;
+
+        padding:12px;
+
+    }
+
+    .workspace{
+
+        height:auto;
+
+        min-height:calc(100vh - 90px);
+
+        grid-template-columns:1fr;
+
+    }
+
+    .sidebar{
+
+        max-height:none;
+
+        border:0;
+
+        border-bottom:1px solid #12384a;
+
+    }
+
+    .right-panel{
+
+        border:0;
+
+        border-top:1px solid #12384a;
+
+    }
+
+    .viewer{
+
+        height:600px;
+
+        min-height:600px;
+
+    }
+
 }
 
 /* =========================================================
@@ -499,69 +614,30 @@ select:focus{
 ========================================================= */
 
 ::-webkit-scrollbar{
-    width:5px;
+
+    width:7px;
+
 }
 
 ::-webkit-scrollbar-track{
+
     background:#030a0f;
+
 }
 
 ::-webkit-scrollbar-thumb{
-    background:#16485b;
-    border-radius:5px;
-}
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+    background:#17475b;
 
-@media(max-width:1050px){
+    border-radius:10px;
 
-    .workspace{
-        grid-template-columns:
-            220px
-            minmax(400px,1fr)
-            250px;
-    }
-
-}
-
-@media(max-width:800px){
-
-    body{
-        overflow:auto;
-    }
-
-    header{
-        height:auto;
-        min-height:70px;
-        flex-wrap:wrap;
-        gap:10px;
-        padding:12px;
-    }
-
-    .workspace{
-        min-height:900px;
-        grid-template-columns:1fr;
-    }
-
-    .sidebar{
-        border:0;
-    }
-
-    .viewer{
-        height:600px;
-        min-height:600px;
-    }
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      HEADER
@@ -569,1267 +645,1603 @@ select:focus{
 
 <header>
 
-    <div class="logo">
+```
+<div class="logo">
 
-        🐠 ACUARIO DESIGNER STUDIO
+    🐠 ACUARIO DESIGNER STUDIO
 
-        <small>
-            REAL 3D AQUARIUM ENGINE • PROFESSIONAL
-        </small>
+    <small>
+        REAL WEBGL 3D AQUARIUM ENGINE • PROFESSIONAL
+    </small>
 
-    </div>
+</div>
 
 
-    <div class="actions">
+<div class="actions">
 
-        <button class="btn" id="nuevo">
-            🆕 Nuevo
-        </button>
+    <button class="btn" id="nuevo">
+        🆕 Nuevo
+    </button>
 
-        <button class="btn" id="guardar">
-            💾 Guardar
-        </button>
+    <button class="btn" id="guardar">
+        💾 Guardar
+    </button>
 
-        <button class="btn" id="cargar">
-            📂 Cargar
-        </button>
+    <button class="btn" id="cargar">
+        📂 Cargar
+    </button>
 
-        <button class="btn" id="fichaBtn">
-            📄 Ficha
-        </button>
+    <button class="btn" id="fichaBtn">
+        📄 Ficha
+    </button>
 
-    </div>
+</div>
+```
 
 </header>
-
-
 
 <!-- =====================================================
      WORKSPACE
 ====================================================== -->
 
-<div class="workspace">
-
+<main class="workspace">
 
 <!-- =====================================================
-     LEFT PANEL
+     PANEL IZQUIERDO
 ====================================================== -->
 
 <aside class="sidebar left-panel">
 
-    <h2>
-        🛠 Diseño
-    </h2>
+```
+<h2>
+    🛠 Diseño
+</h2>
 
 
-    <div class="tools">
+<div class="tools">
 
-        <button class="tool" data-type="rock">
-            <span>🪨</span>
-            <small>Roca</small>
-        </button>
-
-        <button class="tool" data-type="plant">
-            <span>🌿</span>
-            <small>Planta</small>
-        </button>
-
-        <button class="tool" data-type="fish">
-            <span>🐟</span>
-            <small>Pez</small>
-        </button>
-
-        <button class="tool" data-type="light">
-            <span>💡</span>
-            <small>Luz</small>
-        </button>
-
-    </div>
-
-
-    <button class="danger" id="eliminar">
-        🗑️ Eliminar seleccionado
+    <button class="tool" data-type="rock">
+        <span>🪨</span>
+        <small>Roca</small>
     </button>
 
-
-    <!-- DIMENSIONES -->
-
-    <div class="card">
-
-        <h3>
-            📐 Dimensiones reales
-        </h3>
-
-
-        <label>
-
-            Largo (cm)
-
-            <input
-                id="largo"
-                type="number"
-                min="1"
-                max="300"
-                step="0.1"
-                value="70"
-            >
-
-        </label>
-
-
-        <label>
-
-            Fondo (cm)
-
-            <input
-                id="ancho"
-                type="number"
-                min="1"
-                max="150"
-                step="0.1"
-                value="30"
-            >
-
-        </label>
-
-
-        <label>
-
-            Alto (cm)
-
-            <input
-                id="alto"
-                type="number"
-                min="1"
-                max="150"
-                step="0.1"
-                value="40"
-            >
-
-        </label>
-
-
-        <label>
-
-            Cristal
-
-            <select id="cristalManual">
-
-                <option value="auto">
-                    Automático
-                </option>
-
-                <option value="4">4 mm</option>
-                <option value="5">5 mm</option>
-                <option value="6">6 mm</option>
-                <option value="8">8 mm</option>
-                <option value="10">10 mm</option>
-                <option value="12">12 mm</option>
-                <option value="15">15 mm</option>
-                <option value="19">19 mm</option>
-
-            </select>
-
-        </label>
-
-    </div>
-
-
-    <!-- ESTRUCTURA -->
-
-    <div class="card">
-
-        <h3>
-            🪟 Estructura
-        </h3>
-
-
-        <div class="info">
-
-            Volumen
-
-            <span
-                class="value"
-                id="sideLitros"
-            >
-                84 L
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Cristal recomendado
-
-            <span
-                class="value"
-                id="sideCristal"
-            >
-                6 mm
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Refuerzo
-
-            <span
-                class="value"
-                id="sideRefuerzo"
-            >
-                No necesario
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div
-        id="objectList"
-        class="object-list"
-    ></div>
-
-
-    <p class="note">
-
-        🖱️ Arrastra para rotar.
-
-        <br>
-
-        🔍 Rueda para zoom.
-
-        <br>
-
-        🎯 Haz click sobre los objetos.
-
-        <br>
-
-        📐 X = largo · Z = fondo · Y = alto.
-
-    </p>
-
-</aside>
-
-
-
-<!-- =====================================================
-     3D VIEWER
-====================================================== -->
-
-<section class="viewer">
-
-    <div id="canvas-container"></div>
-
-
-    <div class="viewer-overlay">
-
-        <div class="badge">
-            WEBGL • TRUE 3D
-        </div>
-
-
-        <div class="help">
-            Arrastrar = rotar · Rueda = zoom · Click = seleccionar
-        </div>
-
-
-        <div class="bottom-info">
-            ACUARIO 3D REAL • GEOMETRÍA PROPORCIONAL
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     RIGHT PANEL
-====================================================== -->
-
-<aside class="sidebar right-panel">
-
-    <h2>
-        📊 Información
-    </h2>
-
-
-    <div class="card">
-
-        <h3>
-            🐠 Acuario
-        </h3>
-
-
-        <div class="info">
-
-            Volumen
-
-            <span
-                class="value"
-                id="infoLitros"
-            >
-                84 L
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Medidas
-
-            <span
-                class="value"
-                id="infoMedidas"
-            >
-                70 × 30 × 40 cm
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Volumen útil
-
-            <span
-                class="value"
-                id="volumenUtil"
-            >
-                71.4 L
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>
-            🪟 Seguridad estructural
-        </h3>
-
-
-        <div class="info">
-
-            Cristal
-
-            <span
-                class="value"
-                id="infoCristal"
-            >
-                6 mm
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Tipo
-
-            <span class="value">
-                Vidrio float recocido
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Estado
-
-            <span
-                class="status"
-                id="riesgo"
-            >
-                🟢 Diseño doméstico
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>
-            🔩 Refuerzos
-        </h3>
-
-
-        <div class="info">
-
-            Tirantes
-
-            <span
-                class="value"
-                id="infoTirantes"
-            >
-                No requiere
-            </span>
-
-        </div>
-
-
-        <div class="info">
-
-            Medida
-
-            <span
-                class="value"
-                id="infoMedidaTirante"
-            >
-                —
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>
-            📄 Ficha técnica
-        </h3>
-
-
-        <pre
-            id="ficha"
-            style="
-                white-space:pre-wrap;
-                font-size:10px;
-                line-height:1.5;
-                color:#9ec4cf;
-            "
-        >Pulsa «Ficha» para generar la ficha técnica.</pre>
-
-    </div>
-
-</aside>
+    <button class="tool" data-type="plant">
+        <span>🌿</span>
+        <small>Planta</small>
+    </button>
+
+    <button class="tool" data-type="fish">
+        <span>🐟</span>
+        <small>Pez</small>
+    </button>
+
+    <button class="tool" data-type="light">
+        <span>💡</span>
+        <small>Luz</small>
+    </button>
 
 </div>
 
 
+<button class="danger" id="eliminar">
+    🗑️ Eliminar seleccionado
+</button>
+
+
+<!-- DIMENSIONES -->
+
+<div class="card">
+
+    <h3>
+        📐 Dimensiones reales
+    </h3>
+
+
+    <label>
+
+        Largo (cm)
+
+        <input
+            id="largo"
+            type="number"
+            min="1"
+            step="0.1"
+            value="70"
+        >
+
+    </label>
+
+
+    <label>
+
+        Fondo (cm)
+
+        <input
+            id="ancho"
+            type="number"
+            min="1"
+            step="0.1"
+            value="30"
+        >
+
+    </label>
+
+
+    <label>
+
+        Alto (cm)
+
+        <input
+            id="alto"
+            type="number"
+            min="1"
+            step="0.1"
+            value="40"
+        >
+
+    </label>
+
+
+    <label>
+
+        Cristal
+
+        <select id="cristalManual">
+
+            <option value="auto">
+                Automático
+            </option>
+
+            <option value="4">4 mm</option>
+            <option value="5">5 mm</option>
+            <option value="6">6 mm</option>
+            <option value="8">8 mm</option>
+            <option value="10">10 mm</option>
+            <option value="12">12 mm</option>
+            <option value="15">15 mm</option>
+            <option value="19">19 mm</option>
+
+        </select>
+
+    </label>
+
+</div>
+
+
+<!-- ESTRUCTURA -->
+
+<div class="card">
+
+    <h3>
+        🪟 Estructura
+    </h3>
+
+
+    <div class="info">
+
+        Volumen
+
+        <span class="value" id="sideLitros">
+            84 L
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Cristal recomendado
+
+        <span class="value" id="sideCristal">
+            6 mm
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Refuerzo
+
+        <span class="value" id="sideRefuerzo">
+            No necesario
+        </span>
+
+    </div>
+
+</div>
+
+
+<p class="note">
+
+    🖱️ Arrastra para rotar.
+
+    <br>
+
+    🔍 Rueda para zoom.
+
+    <br>
+
+    🎯 Haz click en los objetos.
+
+    <br>
+
+    📐 Las proporciones corresponden
+    directamente a Largo × Fondo × Alto.
+
+</p>
+```
+
+</aside>
+
+<!-- =====================================================
+     VISOR 3D
+====================================================== -->
+
+<section class="viewer">
+
+```
+<div id="canvas-container"></div>
+
+
+<div class="viewer-overlay">
+
+    <div class="badge">
+        WEBGL • TRUE 3D
+    </div>
+
+
+    <div class="help">
+
+        Arrastrar = rotar ·
+        Rueda = zoom ·
+        Click = seleccionar
+
+    </div>
+
+
+    <div class="bottom-info">
+
+        ACUARIO 3D REAL • GEOMETRÍA PROPORCIONAL
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =====================================================
+     PANEL DERECHO
+====================================================== -->
+
+<aside class="sidebar right-panel">
+
+```
+<h2>
+    📊 Información
+</h2>
+
+
+<div class="card">
+
+    <h3>
+        🐠 Acuario
+    </h3>
+
+
+    <div class="info">
+
+        Volumen
+
+        <span class="value" id="infoLitros">
+            84 L
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Medidas
+
+        <span class="value" id="infoMedidas">
+            70 × 30 × 40 cm
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Volumen útil
+
+        <span class="value" id="volumenUtil">
+            71.4 L
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h3>
+        🪟 Seguridad estructural
+    </h3>
+
+
+    <div class="info">
+
+        Cristal
+
+        <span class="value" id="infoCristal">
+            6 mm
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Tipo
+
+        <span class="value">
+            Vidrio float recocido
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Estado
+
+        <span class="status" id="riesgo">
+            🟢 Diseño doméstico
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h3>
+        🔩 Refuerzos
+    </h3>
+
+
+    <div class="info">
+
+        Tirantes
+
+        <span class="value" id="infoTirantes">
+            No requiere
+        </span>
+
+    </div>
+
+
+    <div class="info">
+
+        Medida
+
+        <span class="value" id="infoMedidaTirante">
+            —
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h3>
+        📄 Ficha técnica
+    </h3>
+
+
+    <pre id="ficha">Pulsa «Ficha» para generar la ficha técnica.</pre>
+
+</div>
+```
+
+</aside>
+
+</main>
 
 <!-- =====================================================
      THREE.JS
+     
      UNA SOLA INSTANCIA
+     SIN THREE.MIN.JS
+     SIN ARCHIVOS EXTERNOS PROPIOS
 ====================================================== -->
+
+<script type="importmap">
+
+{
+
+    "imports":{
+
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+
+    }
+
+}
+
+</script>
 
 <script type="module">
 
-import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js";
+import * as THREE from "three";
 
-import {OrbitControls} from
-"https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/controls/OrbitControls.js";
+import {
+    OrbitControls
+}
+from "three/addons/controls/OrbitControls.js";
+
 
 
 /* =====================================================
    VARIABLES PRINCIPALES
-====================================================== */
+===================================================== */
 
-const container =
-document.getElementById("canvas-container");
+let scene;
+let camera;
+let renderer;
+let controls;
 
-const largoInput =
-document.getElementById("largo");
-
-const anchoInput =
-document.getElementById("ancho");
-
-const altoInput =
-document.getElementById("alto");
-
-const cristalInput =
-document.getElementById("cristalManual");
-
+let aquarium;
+let water;
+let glassGroup;
+let gravel;
 
 let selectedObject = null;
 
 let objects = [];
 
-let aquariumGroup;
+let aquariumDimensions = {
 
-let glassGroup;
+    largo:70,
+    ancho:30,
+    alto:40
 
-let waterGroup;
-
-let decorationGroup;
-
-let fishGroup;
-
-let bubbleGroup;
-
-let lightGroup;
+};
 
 
 
 /* =====================================================
-   ESCENA
-====================================================== */
+   INICIALIZACIÓN
+===================================================== */
 
-const scene =
-new THREE.Scene();
+function init(){
 
-scene.background =
-new THREE.Color(0x02070c);
+    const container =
+        document.getElementById("canvas-container");
 
 
+    /* SCENE */
 
-/* =====================================================
-   CÁMARA
-====================================================== */
+    scene = new THREE.Scene();
 
-const camera =
-new THREE.PerspectiveCamera(
-    42,
-    container.clientWidth /
-    container.clientHeight,
-    0.1,
-    2000
-);
+    scene.background =
+        new THREE.Color(0x02080d);
 
-camera.position.set(
-    9,
-    6,
-    11
-);
 
+    /* CAMERA */
 
+    camera =
+        new THREE.PerspectiveCamera(
 
-/* =====================================================
-   RENDERER
-====================================================== */
+            45,
 
-const renderer =
-new THREE.WebGLRenderer({
-    antialias:true,
-    alpha:false
-});
+            container.clientWidth /
+            container.clientHeight,
 
-renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio,
-        2
-    )
-);
+            0.01,
 
-renderer.setSize(
-    container.clientWidth,
-    container.clientHeight
-);
+            500
 
-renderer.shadowMap.enabled = true;
+        );
 
-renderer.shadowMap.type =
-THREE.PCFSoftShadowMap;
 
-renderer.outputColorSpace =
-THREE.SRGBColorSpace;
+    camera.position.set(
+        1.25,
+        0.85,
+        1.35
+    );
 
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
 
-renderer.toneMappingExposure =
-1.15;
+    /* RENDERER */
 
-container.appendChild(
-    renderer.domElement
-);
+    renderer =
+        new THREE.WebGLRenderer({
 
+            antialias:true,
+            alpha:false
 
+        });
 
-/* =====================================================
-   CONTROLES
-====================================================== */
 
-const controls =
-new OrbitControls(
-    camera,
-    renderer.domElement
-);
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio,2)
+    );
 
-controls.enableDamping = true;
 
-controls.dampingFactor = .06;
+    renderer.setSize(
 
-controls.enablePan = true;
+        container.clientWidth,
+        container.clientHeight
 
-controls.minDistance = 4;
+    );
 
-controls.maxDistance = 40;
 
-controls.maxPolarAngle =
-Math.PI * .88;
+    renderer.shadowMap.enabled = true;
 
-controls.target.set(
-    0,
-    0,
-    0
-);
+    renderer.shadowMap.type =
+        THREE.PCFSoftShadowMap;
 
 
+    renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
 
-/* =====================================================
-   LUCES DEL ENTORNO
-====================================================== */
 
-const ambient =
-new THREE.HemisphereLight(
-    0x8edcff,
-    0x02070b,
-    1.1
-);
+    container.appendChild(renderer.domElement);
 
-scene.add(ambient);
 
+    /* CONTROLES */
 
-const fill =
-new THREE.DirectionalLight(
-    0x9beaff,
-    2.0
-);
+    controls =
+        new OrbitControls(
 
-fill.position.set(
-    -5,
-    9,
-    7
-);
+            camera,
+            renderer.domElement
 
-fill.castShadow = true;
+        );
 
-scene.add(fill);
 
+    controls.enableDamping = true;
 
-const frontLight =
-new THREE.PointLight(
-    0x66ddff,
-    4,
-    25
-);
+    controls.dampingFactor = .06;
 
-frontLight.position.set(
-    0,
-    5,
-    7
-);
+    controls.enablePan = false;
 
-scene.add(frontLight);
+    controls.minDistance = .35;
 
+    controls.maxDistance = 6;
 
+    controls.target.set(
+        0,
+        0,
+        0
+    );
 
-/* =====================================================
-   SUELO DEL VISOR
-====================================================== */
 
-const floor =
-new THREE.Mesh(
+    /* LUCES */
 
-    new THREE.CircleGeometry(
-        18,
-        64
-    ),
+    createLights();
 
-    new THREE.MeshStandardMaterial({
-        color:0x031018,
-        roughness:.92,
-        metalness:.05
-    })
 
-);
+    /* SUELO */
 
-floor.rotation.x =
--Math.PI / 2;
+    createFloor();
 
-floor.position.y =
--3.2;
 
-floor.receiveShadow = true;
+    /* ACUARIO */
 
-scene.add(floor);
+    createAquarium();
 
 
+    /* EVENTOS */
 
-/* =====================================================
-   CREACIÓN DE GRUPOS
-====================================================== */
+    window.addEventListener(
+        "resize",
+        onResize
+    );
 
-aquariumGroup =
-new THREE.Group();
 
-scene.add(
-    aquariumGroup
-);
+    document
+        .getElementById("largo")
+        .addEventListener(
+            "input",
+            updateAquarium
+        );
 
-glassGroup =
-new THREE.Group();
 
-waterGroup =
-new THREE.Group();
+    document
+        .getElementById("ancho")
+        .addEventListener(
+            "input",
+            updateAquarium
+        );
 
-decorationGroup =
-new THREE.Group();
 
-fishGroup =
-new THREE.Group();
+    document
+        .getElementById("alto")
+        .addEventListener(
+            "input",
+            updateAquarium
+        );
 
-bubbleGroup =
-new THREE.Group();
 
-lightGroup =
-new THREE.Group();
+    document
+        .getElementById("cristalManual")
+        .addEventListener(
+            "change",
+            updateAquarium
+        );
 
-aquariumGroup.add(
-    glassGroup,
-    waterGroup,
-    decorationGroup,
-    fishGroup,
-    bubbleGroup,
-    lightGroup
-);
 
+    document
+        .getElementById("fichaBtn")
+        .addEventListener(
+            "click",
+            generateTechnicalSheet
+        );
 
 
-/* =====================================================
-   MATERIAL DEL CRISTAL
-====================================================== */
+    document
+        .getElementById("nuevo")
+        .addEventListener(
+            "click",
+            newAquarium
+        );
 
-function glassMaterial(){
 
-    return new THREE.MeshPhysicalMaterial({
+    document
+        .getElementById("guardar")
+        .addEventListener(
+            "click",
+            saveAquarium
+        );
 
-        color:0xb9f5ff,
 
-        transparent:true,
+    document
+        .getElementById("cargar")
+        .addEventListener(
+            "click",
+            loadAquarium
+        );
 
-        opacity:.18,
 
-        transmission:.12,
+    document
+        .getElementById("eliminar")
+        .addEventListener(
+            "click",
+            deleteSelected
+        );
 
-        roughness:.05,
 
-        metalness:.02,
+    document
+        .querySelectorAll(".tool")
+        .forEach(button=>{
 
-        thickness:.08,
+            button.addEventListener(
+                "click",
+                ()=>{
 
-        side:THREE.DoubleSide,
+                    addObject(
+                        button.dataset.type
+                    );
 
-        depthWrite:false
+                }
+            );
 
-    });
+        });
+
+
+    /* CLICK OBJETOS */
+
+    renderer.domElement.addEventListener(
+        "pointerdown",
+        selectObject
+    );
+
+
+    updateAquarium();
+
+    animate();
+
+
+    console.log(
+        "🐠 ACUARIO DESIGNER STUDIO PRO CARGADO"
+    );
+
+    console.log(
+        "THREE.JS / WEBGL 3D ENGINE ACTIVO"
+    );
+
+    console.log(
+        "GEOMETRÍA PROPORCIONAL ACTIVA"
+    );
 
 }
 
 
 
 /* =====================================================
-   MATERIAL AGUA
-====================================================== */
+   LUCES
+===================================================== */
 
-const waterMaterial =
-new THREE.MeshPhysicalMaterial({
+function createLights(){
 
-    color:0x087ea4,
+    const ambient =
+        new THREE.AmbientLight(
+            0x8bdfff,
+            1.8
+        );
 
-    transparent:true,
+    scene.add(ambient);
 
-    opacity:.48,
 
-    transmission:.15,
+    const key =
+        new THREE.DirectionalLight(
+            0xffffff,
+            3
+        );
 
-    roughness:.05,
 
-    metalness:0,
+    key.position.set(
+        2,
+        4,
+        3
+    );
 
-    side:THREE.DoubleSide
 
-});
+    key.castShadow = true;
+
+    scene.add(key);
+
+
+    const blue =
+        new THREE.PointLight(
+            0x008cff,
+            2.5,
+            5
+        );
+
+
+    blue.position.set(
+        0,
+        1,
+        2
+    );
+
+
+    scene.add(blue);
+
+
+    const cyan =
+        new THREE.PointLight(
+            0x00eaff,
+            1.5,
+            4
+        );
+
+
+    cyan.position.set(
+        -2,
+        0,
+        -1
+    );
+
+
+    scene.add(cyan);
+
+}
+
+
+
+/* =====================================================
+   SUELO
+===================================================== */
+
+function createFloor(){
+
+    const geometry =
+        new THREE.PlaneGeometry(
+            20,
+            20
+        );
+
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            color:0x02070b,
+
+            roughness:.8,
+
+            metalness:.05
+
+        });
+
+
+    const floor =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    floor.rotation.x =
+        -Math.PI / 2;
+
+
+    floor.position.y =
+        -0.48;
+
+
+    floor.receiveShadow = true;
+
+
+    scene.add(floor);
+
+}
 
 
 
 /* =====================================================
    CREAR ACUARIO
-====================================================== */
+===================================================== */
 
-function buildAquarium(){
+function createAquarium(){
 
-    /* eliminar geometría anterior */
-
-    while(
-        glassGroup.children.length
-    ){
-
-        const obj =
-        glassGroup.children.pop();
-
-        obj.geometry?.dispose();
-
-        obj.material?.dispose();
-
-    }
-
-    while(
-        waterGroup.children.length
-    ){
-
-        const obj =
-        waterGroup.children.pop();
-
-        obj.geometry?.dispose();
-
-        obj.material?.dispose();
-
-    }
-
-    while(
-        decorationGroup.children.length
-    ){
-
-        decorationGroup.children.pop();
-
-    }
-
-    while(
-        fishGroup.children.length
-    ){
-
-        fishGroup.children.pop();
-
-    }
-
-    while(
-        bubbleGroup.children.length
-    ){
-
-        bubbleGroup.children.pop();
-
-    }
-
-    while(
-        lightGroup.children.length
-    ){
-
-        lightGroup.children.pop();
-
-    }
+    aquarium =
+        new THREE.Group();
 
 
-    /* =================================================
-       MEDIDAS REALES
-    ================================================= */
+    scene.add(aquarium);
+
+
+    glassGroup =
+        new THREE.Group();
+
+
+    aquarium.add(glassGroup);
+
+
+    createGlass();
+
+    createWater();
+
+    createGravel();
+
+}
+
+
+
+/* =====================================================
+   CRISTAL REALISTA
+===================================================== */
+
+function createGlass(){
+
+    glassGroup.clear();
+
 
     const L =
-    Math.max(
-        1,
-        Number(largoInput.value) || 70
-    );
+        aquariumDimensions.largo / 100;
 
-    const D =
-    Math.max(
-        1,
-        Number(anchoInput.value) || 30
-    );
+    const A =
+        aquariumDimensions.ancho / 100;
 
     const H =
-    Math.max(
-        1,
-        Number(altoInput.value) || 40
-    );
+        aquariumDimensions.alto / 100;
 
 
     /*
-       ESCALA VISUAL
+       IMPORTANTE:
 
-       El factor NO se aplica individualmente.
+       Aquí no usamos una escala arbitraria
+       independiente para cada eje.
 
-       X = largo
-       Y = alto
-       Z = fondo
+       Las dimensiones físicas son:
+
+       X = LARGO
+       Y = ALTO
+       Z = FONDO
 
        Por tanto:
 
-       70 × 30 × 40
+       si Largo aumenta,
+       el acuario aumenta únicamente en X.
 
-       tendrá exactamente la relación:
+       si Fondo aumenta,
+       aumenta únicamente en Z.
 
-       X : Z : Y
-       70 : 30 : 40
+       si Alto aumenta,
+       aumenta únicamente en Y.
     */
 
-    const MAX =
-    Math.max(
-        L,
-        D,
-        H
-    );
-
-    const scale =
-    7 / MAX;
-
-
-    const W =
-    L * scale;
-
-    const DEPTH =
-    D * scale;
-
-    const HEIGHT =
-    H * scale;
-
-
-    /* =================================================
-       GRUPO BASE
-    ================================================= */
-
-    aquariumGroup.scale.set(
-        1,
-        1,
-        1
-    );
-
-
-    aquariumGroup.position.y =
-    HEIGHT / 2 - 3.0;
-
-
-    /* =================================================
-       CRISTAL
-    ================================================= */
 
     const thickness =
-    .045;
+        getGlassThickness() / 1000;
 
 
-    const glass =
-    glassMaterial();
+    const material =
+        new THREE.MeshPhysicalMaterial({
+
+            color:0xa8eaff,
+
+            transparent:true,
+
+            opacity:.18,
+
+            roughness:.05,
+
+            metalness:0,
+
+            transmission:.15,
+
+            side:THREE.DoubleSide
+
+        });
 
 
-    const front =
-    new THREE.Mesh(
-        new THREE.BoxGeometry(
-            W,
-            HEIGHT,
-            thickness
-        ),
-        glass
+    const edgeMaterial =
+        new THREE.MeshStandardMaterial({
+
+            color:0x9edff0,
+
+            transparent:true,
+
+            opacity:.7,
+
+            roughness:.2
+
+        });
+
+
+    /* FRENTE */
+
+    createGlassPanel(
+        L,
+        H,
+        thickness,
+        0,
+        0,
+        A/2,
+        0,
+        material
     );
 
-    front.position.z =
-    DEPTH / 2;
 
-    glassGroup.add(front);
+    /* PARTE TRASERA */
 
-
-    const back =
-    new THREE.Mesh(
-        new THREE.BoxGeometry(
-            W,
-            HEIGHT,
-            thickness
-        ),
-        glass
+    createGlassPanel(
+        L,
+        H,
+        thickness,
+        0,
+        0,
+        -A/2,
+        0,
+        material
     );
 
-    back.position.z =
-    -DEPTH / 2;
 
-    glassGroup.add(back);
+    /* IZQUIERDA */
+
+    createGlassPanel(
+        A,
+        H,
+        thickness,
+        -L/2,
+        0,
+        0,
+        Math.PI/2,
+        material
+    );
 
 
-    const left =
-    new THREE.Mesh(
+    /* DERECHA */
+
+    createGlassPanel(
+        A,
+        H,
+        thickness,
+        L/2,
+        0,
+        0,
+        Math.PI/2,
+        material
+    );
+
+
+    /* BASE */
+
+    const baseGeometry =
         new THREE.BoxGeometry(
+            L,
             thickness,
-            HEIGHT,
-            DEPTH
-        ),
-        glass
+            A
+        );
+
+
+    const base =
+        new THREE.Mesh(
+            baseGeometry,
+            material
+        );
+
+
+    base.position.y =
+        -H/2;
+
+
+    glassGroup.add(base);
+
+
+    /*
+       BORDES SUPERIORES
+
+       Dan apariencia de urna real
+       y hacen que deje de parecer
+       un simple cubo.
+    */
+
+    createEdge(
+        L,
+        thickness*2,
+        thickness*2,
+        0,
+        H/2,
+        A/2,
+        edgeMaterial
     );
 
-    left.position.x =
-    -W / 2;
 
-    glassGroup.add(left);
+    createEdge(
+        L,
+        thickness*2,
+        thickness*2,
+        0,
+        H/2,
+        -A/2,
+        edgeMaterial
+    );
 
 
-    const right =
-    new THREE.Mesh(
+    createEdge(
+        thickness*2,
+        thickness*2,
+        A,
+        -L/2,
+        H/2,
+        0,
+        edgeMaterial
+    );
+
+
+    createEdge(
+        thickness*2,
+        thickness*2,
+        A,
+        L/2,
+        H/2,
+        0,
+        edgeMaterial
+    );
+
+}
+
+
+
+/* =====================================================
+   PANEL DE CRISTAL
+===================================================== */
+
+function createGlassPanel(
+    width,
+    height,
+    depth,
+    x,
+    y,
+    z,
+    rotation,
+    material
+){
+
+    const geometry =
         new THREE.BoxGeometry(
-            thickness,
-            HEIGHT,
-            DEPTH
-        ),
-        glass
+            width,
+            height,
+            depth
+        );
+
+
+    const mesh =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    mesh.position.set(
+        x,
+        y,
+        z
     );
 
-    right.position.x =
-    W / 2;
 
-    glassGroup.add(right);
-
-
-    /* =================================================
-       BASE DE CRISTAL
-    ================================================= */
-
-    const bottomMaterial =
-    new THREE.MeshPhysicalMaterial({
-
-        color:0x7dd9e8,
-
-        transparent:true,
-
-        opacity:.28,
-
-        roughness:.08,
-
-        metalness:.05
-
-    });
+    mesh.rotation.y =
+        rotation;
 
 
-    const bottom =
-    new THREE.Mesh(
+    glassGroup.add(mesh);
 
+}
+
+
+
+/* =====================================================
+   BORDES
+===================================================== */
+
+function createEdge(
+    width,
+    height,
+    depth,
+    x,
+    y,
+    z,
+    material
+){
+
+    const geometry =
         new THREE.BoxGeometry(
-            W,
-            thickness,
-            DEPTH
-        ),
+            width,
+            height,
+            depth
+        );
 
-        bottomMaterial
 
+    const mesh =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    mesh.position.set(
+        x,
+        y,
+        z
     );
 
-    bottom.position.y =
-    -HEIGHT / 2;
 
-    glassGroup.add(bottom);
+    glassGroup.add(mesh);
+
+}
 
 
 
-    /* =================================================
-       AGUA
-    ================================================= */
+/* =====================================================
+   AGUA
+===================================================== */
+
+function createWater(){
+
+    if(water){
+
+        aquarium.remove(water);
+
+    }
+
+
+    const L =
+        aquariumDimensions.largo / 100;
+
+    const A =
+        aquariumDimensions.ancho / 100;
+
+    const H =
+        aquariumDimensions.alto / 100;
+
 
     const waterHeight =
-    HEIGHT * .78;
+        H * .88;
 
 
-    const water =
-    new THREE.Mesh(
-
+    const geometry =
         new THREE.BoxGeometry(
-            W - .10,
+
+            Math.max(
+                .01,
+                L - .012
+            ),
+
             waterHeight,
-            DEPTH - .10
-        ),
 
-        waterMaterial
+            Math.max(
+                .01,
+                A - .012
+            )
 
-    );
+        );
+
+
+    const material =
+        new THREE.MeshPhysicalMaterial({
+
+            color:0x009ed0,
+
+            transparent:true,
+
+            opacity:.34,
+
+            transmission:.08,
+
+            roughness:.08,
+
+            metalness:0,
+
+            side:THREE.DoubleSide
+
+        });
+
+
+    water =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
 
 
     water.position.y =
-    -HEIGHT / 2 +
-    waterHeight / 2 +
-    .04;
+        -H/2 +
+        waterHeight/2 +
+        .005;
 
 
-    waterGroup.add(water);
+    aquarium.add(water);
+
+}
 
 
 
-    /* =================================================
-       GRAVA
-    ================================================= */
+/* =====================================================
+   GRAVA
+===================================================== */
+
+function createGravel(){
+
+    if(gravel){
+
+        aquarium.remove(gravel);
+
+    }
+
+
+    const L =
+        aquariumDimensions.largo / 100;
+
+    const A =
+        aquariumDimensions.ancho / 100;
+
+    const H =
+        aquariumDimensions.alto / 100;
+
 
     const gravelHeight =
-    Math.max(
-        .25,
-        HEIGHT * .075
-    );
+        Math.max(
+            .015,
+            Math.min(
+                .045,
+                H*.08
+            )
+        );
 
 
-    const gravelMaterial =
-    new THREE.MeshStandardMaterial({
-
-        color:0x4b4035,
-
-        roughness:.95,
-
-        metalness:0
-
-    });
-
-
-    const gravel =
-    new THREE.Mesh(
-
+    const geometry =
         new THREE.BoxGeometry(
-            W - .14,
+
+            Math.max(
+                .01,
+                L-.018
+            ),
+
             gravelHeight,
-            DEPTH - .14
-        ),
 
-        gravelMaterial
+            Math.max(
+                .01,
+                A-.018
+            )
 
-    );
+        );
+
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            color:0x4c4032,
+
+            roughness:.95
+
+        });
+
+
+    gravel =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
 
 
     gravel.position.y =
-    -HEIGHT / 2 +
-    gravelHeight / 2 +
-    .08;
+        -H/2 +
+        gravelHeight/2 +
+        .012;
 
 
-    decorationGroup.add(
-        gravel
-    );
+    aquarium.add(gravel);
 
 
-    /* =================================================
-       PIEDRAS
-    ================================================= */
 
-    createRocks(
-        W,
-        DEPTH,
-        HEIGHT
-    );
+    /*
+       Pequeños granos decorativos
+       para romper el aspecto de cubo.
+    */
 
-
-    /* =================================================
-       PLANTAS
-    ================================================= */
-
-    createPlants(
-        W,
-        DEPTH,
-        HEIGHT
-    );
+    const count =
+        Math.min(
+            220,
+            Math.max(
+                60,
+                Math.floor(
+                    L*A*900
+                )
+            )
+        );
 
 
-    /* =================================================
-       PECES
-    ================================================= */
+    for(
+        let i=0;
+        i<count;
+        i++
+    ){
 
-    createFish(
-        W,
-        DEPTH,
-        HEIGHT
-    );
-
-
-    /* =================================================
-       BURBUJAS
-    ================================================= */
-
-    createBubbles(
-        W,
-        DEPTH,
-        HEIGHT
-    );
+        const r =
+            .004 +
+            Math.random()*.008;
 
 
-    /* =================================================
-       LÁMPARA SUPERIOR
-    ================================================= */
-
-    const lamp =
-    new THREE.Mesh(
-
-        new THREE.BoxGeometry(
-            W * .84,
-            .08,
-            DEPTH * .42
-        ),
-
-        new THREE.MeshStandardMaterial({
-            color:0x11171c,
-            roughness:.35,
-            metalness:.55
-        })
-
-    );
-
-    lamp.position.y =
-    HEIGHT / 2 + .10;
-
-    lightGroup.add(
-        lamp
-    );
+        const g =
+            new THREE.SphereGeometry(
+                r,
+                6,
+                5
+            );
 
 
-    const led =
-    new THREE.Mesh(
+        const m =
+            new THREE.MeshStandardMaterial({
 
-        new THREE.BoxGeometry(
-            W * .70,
-            .025,
-            .08
-        ),
+                color:
+                    new THREE.Color(
+                        .22 + Math.random()*.22,
+                        .18 + Math.random()*.18,
+                        .12 + Math.random()*.12
+                    ),
 
-        new THREE.MeshBasicMaterial({
-            color:0x8feeff
-        })
+                roughness:1
 
-    );
-
-    led.position.y =
-    HEIGHT / 2 + .035;
-
-    led.position.z =
-    DEPTH * .08;
-
-    lightGroup.add(
-        led
-    );
+            });
 
 
-    const aquariumLight =
-    new THREE.PointLight(
-        0x73ddff,
-        3.5,
-        12
-    );
-
-    aquariumLight.position.set(
-        0,
-        HEIGHT / 2 - .15,
-        0
-    );
-
-    lightGroup.add(
-        aquariumLight
-    );
+        const grain =
+            new THREE.Mesh(
+                g,
+                m
+            );
 
 
-    /* =================================================
-       AJUSTE AUTOMÁTICO DE CÁMARA
-    ================================================= */
+        grain.position.set(
+
+            (
+                Math.random()-.5
+            ) *
+            (L-.03),
+
+            -H/2 +
+            gravelHeight +
+            r*.4,
+
+            (
+                Math.random()-.5
+            ) *
+            (A-.03)
+
+        );
+
+
+        aquarium.add(grain);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ESPESOR DE CRISTAL
+===================================================== */
+
+function getGlassThickness(){
+
+    const manual =
+        document.getElementById(
+            "cristalManual"
+        ).value;
+
+
+    if(manual !== "auto"){
+
+        return Number(manual);
+
+    }
+
+
+    const L =
+        aquariumDimensions.largo;
+
+    const H =
+        aquariumDimensions.alto;
+
+
+    if(L <= 80 && H <= 45)
+        return 6;
+
+    if(L <= 120 && H <= 50)
+        return 8;
+
+    if(L <= 150 && H <= 60)
+        return 10;
+
+    if(L <= 200 && H <= 70)
+        return 12;
+
+    return 15;
+
+}
+
+
+
+/* =====================================================
+   ACTUALIZAR ACUARIO
+===================================================== */
+
+function updateAquarium(){
+
+    const L =
+        Math.max(
+            1,
+            Number(
+                document.getElementById(
+                    "largo"
+                ).value
+            ) || 1
+        );
+
+
+    const A =
+        Math.max(
+            1,
+            Number(
+                document.getElementById(
+                    "ancho"
+                ).value
+            ) || 1
+        );
+
+
+    const H =
+        Math.max(
+            1,
+            Number(
+                document.getElementById(
+                    "alto"
+                ).value
+            ) || 1
+        );
+
+
+    aquariumDimensions = {
+
+        largo:L,
+        ancho:A,
+        alto:H
+
+    };
+
+
+    /*
+       ELIMINAMOS LA GEOMETRÍA ANTERIOR
+       Y LA RECONSTRUIMOS CON LAS NUEVAS
+       DIMENSIONES FÍSICAS.
+
+       Esto evita que una dimensión
+       contamine la otra.
+    */
+
+    createGlass();
+
+    createWater();
+
+    createGravel();
+
+
+    updateInformation();
+
+    updateCameraFraming();
+
+}
+
+
+
+/* =====================================================
+   CÁMARA PROPORCIONAL
+===================================================== */
+
+function updateCameraFraming(){
+
+    const L =
+        aquariumDimensions.largo/100;
+
+    const A =
+        aquariumDimensions.ancho/100;
+
+    const H =
+        aquariumDimensions.alto/100;
+
+
+    /*
+       La cámara se adapta al tamaño total.
+
+       IMPORTANTE:
+
+       esto NO modifica el tamaño del acuario.
+
+       Solo modifica la distancia de la cámara
+       para que el modelo siga visible.
+
+       Por eso al alargar el acuario,
+       este NO se encoge físicamente.
+    */
 
     const maxDimension =
-    Math.max(
-        W,
-        DEPTH,
-        HEIGHT
-    );
+        Math.max(
+            L,
+            A,
+            H
+        );
+
+
+    const distance =
+        Math.max(
+            .85,
+            maxDimension * 1.9
+        );
 
 
     camera.position.set(
-        maxDimension * 1.65,
-        maxDimension * 1.15,
-        maxDimension * 1.95
+
+        distance * .95,
+
+        distance * .62,
+
+        distance * 1.05
+
     );
 
 
@@ -1840,6 +2252,20 @@ function buildAquarium(){
     );
 
 
+    controls.minDistance =
+        Math.max(
+            .25,
+            maxDimension*.65
+        );
+
+
+    controls.maxDistance =
+        Math.max(
+            4,
+            maxDimension*5
+        );
+
+
     controls.update();
 
 }
@@ -1847,694 +2273,156 @@ function buildAquarium(){
 
 
 /* =====================================================
-   ROCAS
-====================================================== */
+   INFORMACIÓN
+===================================================== */
 
-function createRocks(
-    W,
-    D,
-    H
-){
-
-    const rockMaterial =
-    new THREE.MeshStandardMaterial({
-
-        color:0x353b3b,
-
-        roughness:.94,
-
-        metalness:.02
-
-    });
-
-
-    const count =
-    Math.max(
-        3,
-        Math.min(
-            7,
-            Math.round(W)
-        )
-    );
-
-
-    for(
-        let i=0;
-        i<count;
-        i++
-    ){
-
-        const size =
-        .18 +
-        Math.random() * .35;
-
-
-        const rock =
-        new THREE.Mesh(
-
-            new THREE.DodecahedronGeometry(
-                size,
-                1
-            ),
-
-            rockMaterial
-        );
-
-
-        rock.scale.set(
-            1.25,
-            .75 +
-            Math.random()*.45,
-            .9
-        );
-
-
-        rock.position.set(
-
-            (
-                Math.random()-.5
-            ) * W * .78,
-
-            -H / 2 +
-            .25,
-
-            (
-                Math.random()-.5
-            ) * D * .70
-
-        );
-
-
-        rock.rotation.set(
-            Math.random(),
-            Math.random(),
-            Math.random()
-        );
-
-
-        decorationGroup.add(
-            rock
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   PLANTAS
-====================================================== */
-
-function createPlants(
-    W,
-    D,
-    H
-){
-
-    const greenMaterials = [
-
-        new THREE.MeshStandardMaterial({
-            color:0x166b36,
-            roughness:.75
-        }),
-
-        new THREE.MeshStandardMaterial({
-            color:0x24944a,
-            roughness:.72
-        }),
-
-        new THREE.MeshStandardMaterial({
-            color:0x0c542b,
-            roughness:.8
-        })
-
-    ];
-
-
-    const count =
-    Math.max(
-        4,
-        Math.round(W * .65)
-    );
-
-
-    for(
-        let i=0;
-        i<count;
-        i++
-    ){
-
-        const group =
-        new THREE.Group();
-
-
-        const height =
-        H * (
-            .28 +
-            Math.random() * .30
-        );
-
-
-        const blades =
-        4 +
-        Math.floor(
-            Math.random()*5
-        );
-
-
-        for(
-            let j=0;
-            j<blades;
-            j++
-        ){
-
-            const blade =
-            new THREE.Mesh(
-
-                new THREE.CapsuleGeometry(
-                    .035,
-                    height,
-                    3,
-                    5
-                ),
-
-                greenMaterials[
-                    j %
-                    greenMaterials.length
-                ]
-
-            );
-
-
-            blade.position.x =
-            (
-                Math.random()-.5
-            ) * .22;
-
-
-            blade.position.z =
-            (
-                Math.random()-.5
-            ) * .22;
-
-
-            blade.position.y =
-            height / 2;
-
-
-            blade.rotation.z =
-            (
-                Math.random()-.5
-            ) * .35;
-
-
-            group.add(
-                blade
-            );
-
-        }
-
-
-        group.position.set(
-
-            (
-                Math.random()-.5
-            ) * W * .82,
-
-            -H / 2 +
-            .18,
-
-            (
-                Math.random()-.5
-            ) * D * .72
-
-        );
-
-
-        decorationGroup.add(
-            group
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   PECES
-====================================================== */
-
-function createFish(
-    W,
-    D,
-    H
-){
-
-    const fishBody =
-    new THREE.MeshStandardMaterial({
-
-        color:0xf3a62e,
-
-        roughness:.4,
-
-        metalness:.05
-
-    });
-
-
-    const fishCount =
-    Math.max(
-        3,
-        Math.min(
-            8,
-            Math.round(W * .65)
-        )
-    );
-
-
-    for(
-        let i=0;
-        i<fishCount;
-        i++
-    ){
-
-        const fish =
-        new THREE.Group();
-
-
-        const body =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                .16,
-                16,
-                10
-            ),
-
-            fishBody
-        );
-
-
-        body.scale.set(
-            1.7,
-            .7,
-            .55
-        );
-
-
-        fish.add(
-            body
-        );
-
-
-        const tail =
-        new THREE.Mesh(
-
-            new THREE.ConeGeometry(
-                .14,
-                .32,
-                4
-            ),
-
-            fishBody
-        );
-
-
-        tail.rotation.z =
-        Math.PI / 2;
-
-
-        tail.position.x =
-        -.30;
-
-
-        fish.add(
-            tail
-        );
-
-
-        const eyeMaterial =
-        new THREE.MeshBasicMaterial({
-            color:0x000000
-        });
-
-
-        const eye =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                .025,
-                8,
-                8
-            ),
-
-            eyeMaterial
-
-        );
-
-
-        eye.position.set(
-            .22,
-            .06,
-            -.12
-        );
-
-
-        fish.add(
-            eye
-        );
-
-
-        fish.position.set(
-
-            (
-                Math.random()-.5
-            ) * W * .55,
-
-            -H * .10 +
-            (
-                Math.random()-.5
-            ) * H * .25,
-
-            (
-                Math.random()-.5
-            ) * D * .55
-
-        );
-
-
-        fish.userData={
-            speed:
-                .3 +
-                Math.random()*.4,
-
-            phase:
-                Math.random() *
-                Math.PI*2,
-
-            baseY:
-                fish.position.y
-
-        };
-
-
-        fishGroup.add(
-            fish
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   BURBUJAS
-====================================================== */
-
-function createBubbles(
-    W,
-    D,
-    H
-){
-
-    const bubbleMaterial =
-    new THREE.MeshPhysicalMaterial({
-
-        color:0xbdefff,
-
-        transparent:true,
-
-        opacity:.65,
-
-        roughness:.05,
-
-        metalness:0
-
-    });
-
-
-    for(
-        let i=0;
-        i<25;
-        i++
-    ){
-
-        const size =
-        .025 +
-        Math.random()*.055;
-
-
-        const bubble =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                size,
-                10,
-                10
-            ),
-
-            bubbleMaterial
-        );
-
-
-        bubble.position.set(
-
-            (
-                Math.random()-.5
-            ) * W * .75,
-
-            -H / 2 +
-            Math.random() * H * .75,
-
-            (
-                Math.random()-.5
-            ) * D * .70
-
-        );
-
-
-        bubble.userData={
-            speed:
-                .0015 +
-                Math.random()*.003,
-
-            phase:
-                Math.random()*10
-
-        };
-
-
-        bubbleGroup.add(
-            bubble
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   ACTUALIZAR MEDIDAS
-====================================================== */
-
-function updateMeasurements(){
+function updateInformation(){
 
     const L =
-    Math.max(
-        1,
-        Number(largoInput.value)||70
-    );
+        aquariumDimensions.largo;
 
-    const D =
-    Math.max(
-        1,
-        Number(anchoInput.value)||30
-    );
+    const A =
+        aquariumDimensions.ancho;
 
     const H =
-    Math.max(
-        1,
-        Number(altoInput.value)||40
-    );
+        aquariumDimensions.alto;
 
 
     const litros =
-    L * D * H / 1000;
+        L*A*H/1000;
 
 
-    const volumenUtil =
-    litros * .85;
+    const usable =
+        litros*.85;
 
 
-    let cristal;
-
-
-    if(
-        cristalInput.value !==
-        "auto"
-    ){
-
-        cristal =
-        Number(
-            cristalInput.value
-        );
-
-    }else{
-
-        if(
-            H <= 35 &&
-            L <= 80
-        ){
-
-            cristal = 6;
-
-        }else if(
-            H <= 45 &&
-            L <= 100
-        ){
-
-            cristal = 6;
-
-        }else if(
-            H <= 55 &&
-            L <= 120
-        ){
-
-            cristal = 8;
-
-        }else if(
-            H <= 65 &&
-            L <= 160
-        ){
-
-            cristal = 10;
-
-        }else{
-
-            cristal = 12;
-
-        }
-
-    }
+    const cristal =
+        getGlassThickness();
 
 
     let refuerzo =
-    "No necesario";
+        "No necesario";
 
 
-    if(
-        L > 120 &&
-        L <= 180
-    ){
+    if(L > 120 && L <= 180){
 
         refuerzo =
-        "1 tirante";
+            "1 tirante";
 
-    }else if(
-        L > 180 &&
-        L <= 250
-    ){
+    }
 
-        refuerzo =
-        "2 tirantes";
-
-    }else if(
-        L > 250
-    ){
+    else if(L > 180 && L <= 250){
 
         refuerzo =
-        "Refuerzo obligatorio";
+            "2 tirantes";
+
+    }
+
+    else if(L > 250){
+
+        refuerzo =
+            "Refuerzo obligatorio";
 
     }
 
 
-    document.getElementById(
-        "sideLitros"
-    ).textContent =
+    document
+        .getElementById(
+            "sideLitros"
+        )
+        .textContent =
         litros.toFixed(1)+" L";
 
 
-    document.getElementById(
-        "infoLitros"
-    ).textContent =
+    document
+        .getElementById(
+            "sideCristal"
+        )
+        .textContent =
+        cristal+" mm";
+
+
+    document
+        .getElementById(
+            "sideRefuerzo"
+        )
+        .textContent =
+        refuerzo;
+
+
+    document
+        .getElementById(
+            "infoLitros"
+        )
+        .textContent =
         litros.toFixed(1)+" L";
 
 
-    document.getElementById(
-        "volumenUtil"
-    ).textContent =
-        volumenUtil.toFixed(1)+" L";
+    document
+        .getElementById(
+            "infoMedidas"
+        )
+        .textContent =
+        `${L.toFixed(1)} × ${A.toFixed(1)} × ${H.toFixed(1)} cm`;
 
 
-    document.getElementById(
-        "infoMedidas"
-    ).textContent =
-        `${L} × ${D} × ${H} cm`;
+    document
+        .getElementById(
+            "volumenUtil"
+        )
+        .textContent =
+        usable.toFixed(1)+" L";
 
 
-    document.getElementById(
-        "sideCristal"
-    ).textContent =
+    document
+        .getElementById(
+            "infoCristal"
+        )
+        .textContent =
         cristal+" mm";
 
 
-    document.getElementById(
-        "infoCristal"
-    ).textContent =
-        cristal+" mm";
-
-
-    document.getElementById(
-        "sideRefuerzo"
-    ).textContent =
+    document
+        .getElementById(
+            "infoTirantes"
+        )
+        .textContent =
         refuerzo;
 
 
-    document.getElementById(
-        "infoTirantes"
-    ).textContent =
-        refuerzo;
+    document
+        .getElementById(
+            "infoMedidaTirante"
+        )
+        .textContent =
+        L > 120
+        ? `${A.toFixed(1)} cm`
+        : "—";
 
 
-    document.getElementById(
-        "infoMedidaTirante"
-    ).textContent =
-        refuerzo ===
-        "No necesario"
-        ?
-        "—"
-        :
-        `${D} cm de ancho`;
+    let riesgo =
+        document.getElementById(
+            "riesgo"
+        );
 
 
-    const riesgo =
-    document.getElementById(
-        "riesgo"
-    );
-
-
-    if(
-        cristal >= 12 ||
-        L > 250
-    ){
+    if(H > 70 || L > 200){
 
         riesgo.textContent =
-        "🟠 Diseño grande";
+            "🟠 Diseño grande — revisar estructura";
 
         riesgo.style.color =
-        "#ffbf55";
+            "#ffb74d";
 
-    }else{
+    }
+
+    else{
 
         riesgo.textContent =
-        "🟢 Diseño doméstico";
+            "🟢 Diseño doméstico";
 
         riesgo.style.color =
-        "#57ef9a";
+            "#48f59b";
 
     }
 
@@ -2543,80 +2431,18 @@ function updateMeasurements(){
 
 
 /* =====================================================
-   INPUTS
-====================================================== */
+   OBJETOS DECORATIVOS
+===================================================== */
 
-[
-    largoInput,
-    anchoInput,
-    altoInput,
-    cristalInput
-].forEach(
-    element=>{
+function addObject(type){
 
-        element.addEventListener(
-            "input",
-            updateAquarium
-        );
+    const group =
+        new THREE.Group();
 
-        element.addEventListener(
-            "change",
-            updateAquarium
-        );
-
-    }
-);
-
-
-
-/* =====================================================
-   ACTUALIZAR ACUARIO
-====================================================== */
-
-function updateAquarium(){
-
-    updateMeasurements();
-
-    buildAquarium();
-
-}
-
-
-
-/* =====================================================
-   OBJETOS / SELECCIÓN
-====================================================== */
-
-document
-.querySelectorAll(".tool")
-.forEach(
-    button=>{
-
-        button.addEventListener(
-            "click",
-            ()=>{
-
-                const type =
-                button.dataset.type;
-
-                createCustomObject(
-                    type
-                );
-
-            }
-        );
-
-    }
-);
-
-
-
-function createCustomObject(
-    type
-){
 
     let emoji =
-    "🪨";
+        "🪨";
+
 
     if(type==="plant")
         emoji="🌿";
@@ -2628,25 +2454,284 @@ function createCustomObject(
         emoji="💡";
 
 
-    const div =
-    document.createElement(
-        "div"
+    /*
+       Usamos Sprite para que los objetos
+       puedan seleccionarse fácilmente
+       sin complicar la geometría principal.
+    */
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width=256;
+    canvas.height=256;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    ctx.font =
+        "170px Arial";
+
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.textBaseline =
+        "middle";
+
+
+    ctx.fillText(
+        emoji,
+        128,
+        135
     );
 
 
-    div.className =
-    "object-item";
+    const texture =
+        new THREE.CanvasTexture(
+            canvas
+        );
 
 
-    div.textContent =
-    `${emoji} ${type}`;
+    texture.colorSpace =
+        THREE.SRGBColorSpace;
 
 
-    document.getElementById(
-        "objectList"
-    ).appendChild(
-        div
+    const material =
+        new THREE.SpriteMaterial({
+
+            map:texture,
+
+            transparent:true
+
+        });
+
+
+    const sprite =
+        new THREE.Sprite(
+            material
+        );
+
+
+    sprite.scale.set(
+        .22,
+        .22,
+        .22
     );
+
+
+    const L =
+        aquariumDimensions.largo/100;
+
+    const A =
+        aquariumDimensions.ancho/100;
+
+    const H =
+        aquariumDimensions.alto/100;
+
+
+    sprite.position.set(
+
+        (
+            Math.random()-.5
+        ) * L*.7,
+
+        -H/2 + H*.35,
+
+        (
+            Math.random()-.5
+        ) * A*.65
+
+    );
+
+
+    group.add(sprite);
+
+
+    group.userData.type =
+        type;
+
+
+    group.userData.selectable =
+        true;
+
+
+    aquarium.add(group);
+
+
+    objects.push(group);
+
+
+    selectedObject =
+        group;
+
+
+    refreshObjectList();
+
+}
+
+
+
+/* =====================================================
+   SELECCIÓN
+===================================================== */
+
+function selectObject(event){
+
+    const rect =
+        renderer.domElement
+        .getBoundingClientRect();
+
+
+    const mouse =
+        new THREE.Vector2();
+
+
+    mouse.x =
+        (
+            (event.clientX-rect.left) /
+            rect.width
+        )*2-1;
+
+
+    mouse.y =
+        -(
+            (event.clientY-rect.top) /
+            rect.height
+        )*2+1;
+
+
+    const raycaster =
+        new THREE.Raycaster();
+
+
+    raycaster.setFromCamera(
+        mouse,
+        camera
+    );
+
+
+    const targets=[];
+
+
+    objects.forEach(
+        object=>{
+
+            object.traverse(
+                child=>{
+
+                    if(
+                        child.isSprite ||
+                        child.isMesh
+                    ){
+
+                        targets.push(
+                            child
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    const hits =
+        raycaster.intersectObjects(
+            targets,
+            true
+        );
+
+
+    if(hits.length){
+
+        let object =
+            hits[0].object;
+
+
+        while(
+            object.parent &&
+            object.parent !== aquarium
+        ){
+
+            object =
+                object.parent;
+
+        }
+
+
+        selectedObject =
+            object;
+
+
+        refreshObjectList();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LISTA OBJETOS
+===================================================== */
+
+function refreshObjectList(){
+
+    const list =
+        document.getElementById(
+            "objectList"
+        );
+
+
+    if(!objects.length){
+
+        list.innerHTML="";
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        objects.map(
+            (object,index)=>{
+
+                const active =
+                    object === selectedObject
+                    ? " ✓"
+                    : "";
+
+
+                return `
+
+                <div
+                    style="
+                        padding:7px;
+                        margin-top:5px;
+                        border:1px solid #16465a;
+                        border-radius:5px;
+                        font-size:11px;
+                        color:#aeefff;
+                    "
+                >
+                    ${index+1}.
+                    ${object.userData.type}
+                    ${active}
+                </div>
+
+                `;
+
+            }
+        ).join("");
 
 }
 
@@ -2654,302 +2739,337 @@ function createCustomObject(
 
 /* =====================================================
    ELIMINAR
-====================================================== */
+===================================================== */
 
-document
-.getElementById("eliminar")
-.addEventListener(
-    "click",
-    ()=>{
+function deleteSelected(){
 
-        if(
-            selectedObject
-        ){
+    if(!selectedObject)
+        return;
 
-            selectedObject
-            .parent
-            ?.remove(
-                selectedObject
-            );
 
-            selectedObject =
-            null;
+    aquarium.remove(
+        selectedObject
+    );
 
-        }
 
-    }
-);
+    objects =
+        objects.filter(
+            object=>
+                object !== selectedObject
+        );
+
+
+    selectedObject=null;
+
+
+    refreshObjectList();
+
+}
 
 
 
 /* =====================================================
    NUEVO
-====================================================== */
+===================================================== */
 
-document
-.getElementById("nuevo")
-.addEventListener(
-    "click",
-    ()=>{
+function newAquarium(){
 
-        largoInput.value=70;
+    document
+        .getElementById("largo")
+        .value=70;
 
-        anchoInput.value=30;
 
-        altoInput.value=40;
+    document
+        .getElementById("ancho")
+        .value=30;
 
-        cristalInput.value="auto";
 
-        document.getElementById(
-            "objectList"
-        ).innerHTML="";
+    document
+        .getElementById("alto")
+        .value=40;
 
-        updateAquarium();
 
-    }
-);
+    document
+        .getElementById("cristalManual")
+        .value="auto";
+
+
+    objects.forEach(
+        object=>
+            aquarium.remove(object)
+    );
+
+
+    objects=[];
+
+    selectedObject=null;
+
+
+    updateAquarium();
+
+    refreshObjectList();
+
+}
 
 
 
 /* =====================================================
    GUARDAR
-====================================================== */
+===================================================== */
 
-document
-.getElementById("guardar")
-.addEventListener(
-    "click",
-    ()=>{
+function saveAquarium(){
 
-        const data={
+    const data={
 
-            largo:largoInput.value,
+        dimensiones:
+            aquariumDimensions,
 
-            ancho:anchoInput.value,
+        cristal:
+            document.getElementById(
+                "cristalManual"
+            ).value,
 
-            alto:altoInput.value,
+        objetos:
+            objects.map(
+                object=>({
 
-            cristal:cristalInput.value
+                    type:
+                        object.userData.type,
 
-        };
+                    position:{
+                        x:object.position.x,
+                        y:object.position.y,
+                        z:object.position.z
+                    }
+
+                })
+            )
+
+    };
 
 
-        localStorage.setItem(
-            "acuarioDesignerPro",
-            JSON.stringify(data)
-        );
+    localStorage.setItem(
+        "acuarioDesignerPro",
+        JSON.stringify(data)
+    );
 
 
-        alert(
-            "Acuario guardado correctamente."
-        );
+    alert(
+        "✅ Acuario guardado correctamente."
+    );
 
-    }
-);
+}
 
 
 
 /* =====================================================
    CARGAR
-====================================================== */
+===================================================== */
 
-document
-.getElementById("cargar")
-.addEventListener(
-    "click",
-    ()=>{
+function loadAquarium(){
 
-        const raw =
+    const raw =
         localStorage.getItem(
             "acuarioDesignerPro"
         );
 
 
-        if(!raw){
+    if(!raw){
 
-            alert(
-                "No hay ningún diseño guardado."
-            );
+        alert(
+            "No hay ningún acuario guardado."
+        );
 
-            return;
+        return;
 
-        }
+    }
 
 
-        const data =
+    const data =
         JSON.parse(raw);
 
 
-        largoInput.value =
-        data.largo ?? 70;
-
-        anchoInput.value =
-        data.ancho ?? 30;
-
-        altoInput.value =
-        data.alto ?? 40;
-
-        cristalInput.value =
-        data.cristal ?? "auto";
+    document
+        .getElementById("largo")
+        .value =
+        data.dimensiones.largo;
 
 
-        updateAquarium();
+    document
+        .getElementById("ancho")
+        .value =
+        data.dimensiones.ancho;
+
+
+    document
+        .getElementById("alto")
+        .value =
+        data.dimensiones.alto;
+
+
+    document
+        .getElementById("cristalManual")
+        .value =
+        data.cristal;
+
+
+    objects.forEach(
+        object=>
+            aquarium.remove(object)
+    );
+
+
+    objects=[];
+
+
+    updateAquarium();
+
+
+    if(
+        Array.isArray(
+            data.objetos
+        )
+    ){
+
+        data.objetos.forEach(
+            item=>{
+
+                addObject(
+                    item.type
+                );
+
+
+                const object =
+                    objects[
+                        objects.length-1
+                    ];
+
+
+                object.position.set(
+
+                    item.position.x,
+                    item.position.y,
+                    item.position.z
+
+                );
+
+            }
+        );
 
     }
-);
+
+
+    refreshObjectList();
+
+}
 
 
 
 /* =====================================================
    FICHA TÉCNICA
-====================================================== */
+===================================================== */
 
-document
-.getElementById("fichaBtn")
-.addEventListener(
-    "click",
-    ()=>{
+function generateTechnicalSheet(){
 
-        const L =
-        Number(largoInput.value)||70;
+    const L =
+        aquariumDimensions.largo;
 
-        const D =
-        Number(anchoInput.value)||30;
+    const A =
+        aquariumDimensions.ancho;
 
-        const H =
-        Number(altoInput.value)||40;
+    const H =
+        aquariumDimensions.alto;
 
 
-        const litros =
-        L*D*H/1000;
+    const litros =
+        L*A*H/1000;
 
 
-        const util =
-        litros*.85;
+    const cristal =
+        getGlassThickness();
 
 
-        const cristal =
-        document.getElementById(
-            "infoCristal"
-        ).textContent;
+    const text =
 
-
-        const refuerzo =
-        document.getElementById(
-            "infoTirantes"
-        ).textContent;
-
-
-        document.getElementById(
-            "ficha"
-        ).textContent =
-
-`ACUARIO DESIGNER STUDIO
-FICHA TÉCNICA
+`ACUARIO DESIGNER STUDIO PRO
+================================
 
 DIMENSIONES
-Largo: ${L} cm
-Fondo: ${D} cm
-Alto: ${H} cm
+Largo: ${L.toFixed(1)} cm
+Fondo: ${A.toFixed(1)} cm
+Alto: ${H.toFixed(1)} cm
 
 VOLUMEN
 Volumen bruto: ${litros.toFixed(1)} L
-Volumen útil estimado: ${util.toFixed(1)} L
+Volumen útil estimado: ${(litros*.85).toFixed(1)} L
 
 ESTRUCTURA
-Cristal recomendado: ${cristal}
+Cristal recomendado: ${cristal} mm
 Tipo: Vidrio float recocido
 
 REFUERZOS
-${refuerzo}
+${L>120 ? "Tirante transversal recomendado" : "No requiere tirantes"}
 
-GEOMETRÍA 3D
-X = Largo
-Z = Fondo
-Y = Alto
+MEDIDA DEL TIRANTE
+${L>120 ? A.toFixed(1)+" cm" : "No aplica"}
 
-Modelo proporcional 3D.`;
+================================
+MODELO 3D
+Geometría proporcional real
+Largo × Fondo × Alto
+================================`;
 
-    }
-);
+
+    document
+        .getElementById(
+            "ficha"
+        )
+        .textContent =
+        text;
+
+}
+
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+function onResize(){
+
+    const container =
+        document.getElementById(
+            "canvas-container"
+        );
+
+
+    camera.aspect =
+        container.clientWidth /
+        container.clientHeight;
+
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+
+        container.clientWidth,
+        container.clientHeight
+
+    );
+
+}
 
 
 
 /* =====================================================
    ANIMACIÓN
-====================================================== */
-
-const clock =
-new THREE.Clock();
-
+===================================================== */
 
 function animate(){
 
     requestAnimationFrame(
         animate
-    );
-
-
-    const elapsed =
-    clock.getElapsedTime();
-
-
-    /* PECES */
-
-    fishGroup.children
-    .forEach(
-        (fish,i)=>{
-
-            const data =
-            fish.userData;
-
-
-            fish.position.x +=
-            Math.sin(
-                elapsed *
-                data.speed +
-                data.phase
-            ) * .0015;
-
-
-            fish.position.y =
-            data.baseY +
-            Math.sin(
-                elapsed * 1.3 +
-                data.phase
-            ) * .08;
-
-
-            fish.rotation.y =
-            Math.sin(
-                elapsed * .5 +
-                data.phase
-            ) * .25;
-
-        }
-    );
-
-
-    /* BURBUJAS */
-
-    bubbleGroup.children
-    .forEach(
-        bubble=>{
-
-            bubble.position.y +=
-            bubble.userData.speed;
-
-
-            if(
-                bubble.position.y > 3
-            ){
-
-                bubble.position.y =
-                -3;
-
-            }
-
-        }
     );
 
 
@@ -2966,62 +3086,13 @@ function animate(){
 
 
 /* =====================================================
-   RESIZE
-====================================================== */
+   ARRANCAR
+===================================================== */
 
-window.addEventListener(
-    "resize",
-    ()=>{
-
-        const width =
-        container.clientWidth;
-
-        const height =
-        container.clientHeight;
-
-
-        camera.aspect =
-        width / height;
-
-        camera.updateProjectionMatrix();
-
-
-        renderer.setSize(
-            width,
-            height
-        );
-
-    }
-);
-
-
-
-/* =====================================================
-   INICIO
-====================================================== */
-
-updateAquarium();
-
-animate();
-
-
-console.log(
-    "🐠 ACUARIO DESIGNER STUDIO PRO"
-);
-
-console.log(
-    "THREE.JS / WEBGL 3D ENGINE ACTIVO"
-);
-
-console.log(
-    "GEOMETRÍA PROPORCIONAL X=LARGO Z=FONDO Y=ALTO"
-);
-
-console.log(
-    "MUEBLE Y SOPORTE DESACTIVADOS"
-);
+init();
 
 </script>
 
 </body>
+
 </html>
