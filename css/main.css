@@ -5,13 +5,16 @@
 }
 
 :root {
-    --bg-dark: #03141d;
-    --bg-blue: #062b3a;
-    --cyan: #35d9ff;
-    --cyan-dark: #087f8c;
-    --white: #ffffff;
+    --background: #03141d;
+    --background-light: #062b3a;
+
+    --primary: #35d9ff;
+    --primary-dark: #087f8c;
+
+    --text: #ffffff;
     --text-muted: #9fb7c0;
-    --card: rgba(255, 255, 255, 0.06);
+
+    --card-background: rgba(255, 255, 255, 0.06);
     --border: rgba(255, 255, 255, 0.12);
 }
 
@@ -21,16 +24,20 @@ html {
 
 body {
     min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
 
-    color: var(--white);
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--text);
 
     background:
         radial-gradient(
-            circle at 50% 20%,
+            circle at 50% 15%,
             #0b5268 0%,
-            #062b3a 35%,
-            #03141d 75%,
+            var(--background-light) 30%,
+            var(--background) 65%,
             #01090d 100%
         );
 
@@ -44,35 +51,46 @@ body {
 
 .site-header {
     position: sticky;
+
     top: 0;
-    z-index: 100;
+
+    z-index: 1000;
 
     width: 100%;
+
     padding: 20px 50px;
 
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
 
-    background: rgba(2, 16, 24, 0.75);
+    justify-content: space-between;
 
-    border-bottom: 1px solid var(--border);
+    background:
+        rgba(2, 16, 24, 0.82);
 
-    backdrop-filter: blur(15px);
+    border-bottom:
+        1px solid var(--border);
+
+    backdrop-filter:
+        blur(15px);
 }
 
 .logo {
-    color: var(--white);
+    color: var(--text);
+
     text-decoration: none;
 
     font-size: 24px;
-    font-weight: 700;
 
-    letter-spacing: 0.5px;
+    font-weight: 700;
 }
 
 .main-nav {
     display: flex;
+
+    align-items: center;
+
     gap: 30px;
 }
 
@@ -83,11 +101,12 @@ body {
 
     font-size: 15px;
 
-    transition: color 0.2s ease;
+    transition:
+        color 0.2s ease;
 }
 
 .main-nav a:hover {
-    color: var(--cyan);
+    color: var(--primary);
 }
 
 
@@ -99,15 +118,20 @@ body {
     min-height: 75vh;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
 
-    text-align: center;
+    justify-content: center;
 
-    padding: 100px 30px;
+    padding:
+        100px 30px;
+
+    text-align: center;
 }
 
 .hero-content {
+    width: 100%;
+
     max-width: 900px;
 }
 
@@ -116,32 +140,35 @@ body {
 
     margin-bottom: 25px;
 
-    color: var(--cyan);
+    color: var(--primary);
 
     font-size: 13px;
+
     font-weight: 700;
 
     letter-spacing: 4px;
 }
 
 .hero h1 {
-    font-size: clamp(48px, 7vw, 90px);
+    margin-bottom: 30px;
+
+    font-size:
+        clamp(48px, 7vw, 90px);
 
     line-height: 1.05;
-
-    margin-bottom: 30px;
 }
 
 .hero h1 span {
     display: block;
 
-    color: var(--cyan);
+    color: var(--primary);
 }
 
 .hero p {
     max-width: 700px;
 
-    margin: 0 auto 40px;
+    margin:
+        0 auto 40px;
 
     color: var(--text-muted);
 
@@ -157,7 +184,11 @@ body {
 
 .hero-actions {
     display: flex;
+
     justify-content: center;
+
+    align-items: center;
+
     gap: 15px;
 
     flex-wrap: wrap;
@@ -165,7 +196,10 @@ body {
 
 .hero-button,
 .hero-secondary {
-    padding: 15px 28px;
+    display: inline-block;
+
+    padding:
+        15px 28px;
 
     border-radius: 8px;
 
@@ -175,32 +209,39 @@ body {
 
     transition:
         transform 0.2s ease,
-        background 0.2s ease,
+        opacity 0.2s ease,
         border-color 0.2s ease;
 }
 
 .hero-button {
     color: #00141b;
 
-    background: var(--cyan);
+    background: var(--primary);
 }
 
 .hero-button:hover {
-    transform: translateY(-3px);
+    transform:
+        translateY(-3px);
+
+    opacity: 0.9;
 }
 
 .hero-secondary {
-    color: var(--white);
+    color: var(--text);
 
-    border: 1px solid var(--border);
+    background:
+        rgba(255, 255, 255, 0.04);
 
-    background: rgba(255, 255, 255, 0.04);
+    border:
+        1px solid var(--border);
 }
 
 .hero-secondary:hover {
-    transform: translateY(-3px);
+    transform:
+        translateY(-3px);
 
-    border-color: var(--cyan);
+    border-color:
+        var(--primary);
 }
 
 
@@ -209,11 +250,15 @@ body {
 ========================= */
 
 .features {
+    width: 100%;
+
     max-width: 1200px;
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
-    padding: 70px 30px 100px;
+    padding:
+        50px 30px 100px;
 
     display: grid;
 
@@ -226,13 +271,16 @@ body {
 .feature-card {
     padding: 30px;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 16px;
 
-    background: var(--card);
+    background:
+        var(--card-background);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 
     transition:
         transform 0.2s ease,
@@ -240,14 +288,14 @@ body {
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform:
+        translateY(-5px);
 
-    border-color: rgba(53, 217, 255, 0.5);
+    border-color:
+        rgba(53, 217, 255, 0.5);
 }
 
-.feature-card > span {
-    display: block;
-
+.feature-icon {
     margin-bottom: 20px;
 
     font-size: 36px;
@@ -277,22 +325,26 @@ body {
 
     color: var(--text-muted);
 
-    border-top: 1px solid var(--border);
+    border-top:
+        1px solid var(--border);
 
-    background: rgba(1, 9, 13, 0.7);
+    background:
+        rgba(1, 9, 13, 0.7);
 }
 
 
 /* =========================
-   MOBILE
+   TABLET
 ========================= */
 
 @media (max-width: 800px) {
 
     .site-header {
-        padding: 18px 20px;
+        padding:
+            18px 20px;
 
-        flex-direction: column;
+        flex-direction:
+            column;
 
         gap: 15px;
     }
@@ -306,27 +358,37 @@ body {
     }
 
     .features {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 500px) {
 
     .hero {
-        padding: 70px 20px;
+        padding:
+            70px 20px;
     }
 
     .hero h1 {
-        font-size: 45px;
+        font-size:
+            45px;
     }
 
     .hero p {
-        font-size: 17px;
+        font-size:
+            17px;
     }
 
     .features {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
 }
