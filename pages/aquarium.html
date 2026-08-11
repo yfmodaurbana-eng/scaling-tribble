@@ -12,7 +12,7 @@
 
     <meta
         name="description"
-        content="Editor de acuario 3D de Aquarium Studio."
+        content="Aquarium Studio - Editor de acuarios 3D"
     >
 
     <title>Acuario 3D — Aquarium Studio</title>
@@ -28,490 +28,556 @@
 <body>
 
 
-    <!-- HEADER -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <header class="site-header">
+<header class="site-header">
 
-        <div class="container header-inner">
-
-            <a
-                href="../index.html"
-                class="brand"
-            >
-
-                <span class="brand-icon">
-                    🐠
-                </span>
-
-                <span class="brand-text">
-                    Aquarium<span>Studio</span>
-                </span>
-
-            </a>
-
-
-            <nav
-                class="desktop-nav"
-                aria-label="Navegación principal"
-            >
-
-                <a
-                    href="../index.html"
-                    class="nav-link"
-                >
-                    Inicio
-                </a>
-
-                <a
-                    href="aquarium.html"
-                    class="nav-link active"
-                >
-                    Acuario 3D
-                </a>
-
-                <a
-                    href="gallery.html"
-                    class="nav-link"
-                >
-                    Galería
-                </a>
-
-                <a
-                    href="settings.html"
-                    class="nav-link"
-                >
-                    Configuración
-                </a>
-
-            </nav>
-
-
-            <a
-                href="../index.html"
-                class="header-button"
-            >
-                Salir
-            </a>
-
-        </div>
-
-    </header>
-
-
-    <!-- EDITOR -->
-
-    <main class="aquarium-editor">
-
-
-        <!-- TOOLBAR -->
-
-        <section class="editor-toolbar">
-
-            <div class="container editor-toolbar-inner">
-
-
-                <div>
-
-                    <span class="section-label">
-                        AQUARIUM STUDIO
-                    </span>
-
-                    <h1>
-                        Mi Acuario
-                    </h1>
-
-                </div>
-
-
-                <div class="editor-actions">
-
-                    <button
-                        type="button"
-                        class="editor-button"
-                    >
-                        ↶
-                        <span>Deshacer</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="editor-button"
-                    >
-                        ↷
-                        <span>Rehacer</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="editor-button editor-save"
-                    >
-                        💾
-                        <span>Guardar</span>
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- WORKSPACE -->
-
-        <section class="editor-workspace">
-
-            <div class="container workspace-grid">
-
-
-                <!-- LEFT PANEL -->
-
-                <aside class="editor-panel">
-
-                    <div class="panel-header">
-
-                        <h2>
-                            Elementos
-                        </h2>
-
-                        <span>
-                            0
-                        </span>
-
-                    </div>
-
-
-                    <div class="element-list">
-
-
-                        <button
-                            type="button"
-                            class="element-button"
-                        >
-
-                            <span class="element-icon">
-                                🐟
-                            </span>
-
-                            <span>
-                                <strong>Peces</strong>
-                                <small>Añadir peces</small>
-                            </span>
-
-                            <span class="element-arrow">
-                                →
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="element-button"
-                        >
-
-                            <span class="element-icon">
-                                🌿
-                            </span>
-
-                            <span>
-                                <strong>Plantas</strong>
-                                <small>Vegetación</small>
-                            </span>
-
-                            <span class="element-arrow">
-                                →
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="element-button"
-                        >
-
-                            <span class="element-icon">
-                                🪨
-                            </span>
-
-                            <span>
-                                <strong>Rocas</strong>
-                                <small>Piedras y cuevas</small>
-                            </span>
-
-                            <span class="element-arrow">
-                                →
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="element-button"
-                        >
-
-                            <span class="element-icon">
-                                🪵
-                            </span>
-
-                            <span>
-                                <strong>Decoración</strong>
-                                <small>Objetos</small>
-                            </span>
-
-                            <span class="element-arrow">
-                                →
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="element-button"
-                        >
-
-                            <span class="element-icon">
-                                💡
-                            </span>
-
-                            <span>
-                                <strong>Iluminación</strong>
-                                <small>Luces</small>
-                            </span>
-
-                            <span class="element-arrow">
-                                →
-                            </span>
-
-                        </button>
-
-
-                    </div>
-
-                </aside>
-
-
-                <!-- AQUARIUM VIEW -->
-
-                <section class="aquarium-stage">
-
-
-                    <div class="stage-topbar">
-
-                        <span>
-                            VISTA 3D
-                        </span>
-
-                        <span class="connection-status">
-                            <i></i>
-                            Sistema listo
-                        </span>
-
-                    </div>
-
-
-                    <div class="aquarium-preview">
-
-
-                        <div class="water-surface"></div>
-
-
-                        <div class="water-rays"></div>
-
-
-                        <div class="preview-bubbles bubble-one">
-                            •
-                        </div>
-
-                        <div class="preview-bubbles bubble-two">
-                            •
-                        </div>
-
-                        <div class="preview-bubbles bubble-three">
-                            •
-                        </div>
-
-
-                        <div class="aquarium-plant plant-left">
-                            🌿
-                        </div>
-
-
-                        <div class="aquarium-plant plant-center">
-                            🌿
-                        </div>
-
-
-                        <div class="aquarium-plant plant-right">
-                            🌿
-                        </div>
-
-
-                        <div class="aquarium-rock rock-left">
-                            🪨
-                        </div>
-
-
-                        <div class="aquarium-rock rock-right">
-                            🪨
-                        </div>
-
-
-                        <div class="aquarium-fish fish-left">
-                            🐠
-                        </div>
-
-
-                        <div class="aquarium-fish fish-center">
-                            🐟
-                        </div>
-
-
-                        <div class="aquarium-sand"></div>
-
-
-                        <div class="stage-message">
-
-                            <span>
-                                🐠
-                            </span>
-
-                            <strong>
-                                Tu acuario está vacío
-                            </strong>
-
-                            <small>
-                                Añade elementos desde el panel
-                                para comenzar a construirlo.
-                            </small>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="stage-controls">
-
-                        <button type="button">
-                            −
-                        </button>
-
-                        <span>
-                            100%
-                        </span>
-
-                        <button type="button">
-                            +
-                        </button>
-
-                        <span class="control-separator"></span>
-
-                        <button type="button">
-                            ⛶
-                        </button>
-
-                    </div>
-
-
-                </section>
-
-
-                <!-- RIGHT PANEL -->
-
-                <aside class="editor-panel properties-panel">
-
-                    <div class="panel-header">
-
-                        <h2>
-                            Propiedades
-                        </h2>
-
-                    </div>
-
-
-                    <div class="empty-properties">
-
-                        <div>
-                            ⚙
-                        </div>
-
-                        <strong>
-                            Ningún elemento seleccionado
-                        </strong>
-
-                        <p>
-                            Selecciona un elemento
-                            del acuario para editar
-                            sus propiedades.
-                        </p>
-
-                    </div>
-
-                </aside>
-
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-    <!-- MOBILE NAV -->
-
-    <nav
-        class="mobile-nav"
-        aria-label="Navegación móvil"
-    >
+    <div class="container header-inner">
 
         <a
             href="../index.html"
-            class="mobile-nav-item"
+            class="brand"
         >
-            <span>⌂</span>
-            <small>Inicio</small>
+
+            <span class="brand-icon">
+                🐠
+            </span>
+
+            <span class="brand-text">
+                Aquarium<span>Studio</span>
+            </span>
+
         </a>
+
+
+        <nav class="desktop-nav">
+
+            <a
+                href="../index.html"
+                class="nav-link"
+            >
+                Inicio
+            </a>
+
+            <a
+                href="./aquarium.html"
+                class="nav-link active"
+            >
+                Acuario 3D
+            </a>
+
+            <a
+                href="./gallery.html"
+                class="nav-link"
+            >
+                Galería
+            </a>
+
+            <a
+                href="./settings.html"
+                class="nav-link"
+            >
+                Configuración
+            </a>
+
+        </nav>
 
 
         <a
-            href="aquarium.html"
-            class="mobile-nav-item active"
+            href="../index.html"
+            class="header-button"
         >
-            <span>🐠</span>
-            <small>Acuario</small>
+            Salir
         </a>
 
+    </div>
 
-        <a
-            href="gallery.html"
-            class="mobile-nav-item"
-        >
-            <span>▣</span>
-            <small>Galería</small>
-        </a>
+</header>
 
 
-        <a
-            href="settings.html"
-            class="mobile-nav-item"
-        >
-            <span>⚙</span>
-            <small>Ajustes</small>
-        </a>
 
-    </nav>
+<!-- =====================================================
+     EDITOR
+===================================================== -->
+
+<main class="aquarium-editor">
 
 
-    <script
-        type="module"
-        src="../js/main.js"
-    ></script>
+    <!-- =================================================
+         TOOLBAR
+    ================================================= -->
+
+    <section class="editor-toolbar">
+
+        <div class="container editor-toolbar-inner">
+
+
+            <div>
+
+                <span class="section-label">
+                    AQUARIUM STUDIO
+                </span>
+
+                <h1>
+                    Mi Acuario
+                </h1>
+
+            </div>
+
+
+            <div class="editor-actions">
+
+                <button
+                    class="editor-button"
+                    id="undoButton"
+                    type="button"
+                >
+                    ↶
+                    <span>
+                        Deshacer
+                    </span>
+                </button>
+
+
+                <button
+                    class="editor-button"
+                    id="redoButton"
+                    type="button"
+                >
+                    ↷
+                    <span>
+                        Rehacer
+                    </span>
+                </button>
+
+
+                <button
+                    class="editor-button editor-save"
+                    id="saveButton"
+                    type="button"
+                >
+                    💾
+                    <span>
+                        Guardar
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         WORKSPACE
+    ================================================= -->
+
+    <section class="editor-workspace">
+
+        <div class="container workspace-grid">
+
+
+            <!-- =========================================
+                 PANEL ELEMENTOS
+            ========================================== -->
+
+            <aside class="editor-panel">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Elementos
+                    </h2>
+
+                    <span id="objectCount">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="element-list">
+
+
+                    <button
+                        class="element-button"
+                        type="button"
+                        data-add="fish"
+                    >
+
+                        <span class="element-icon">
+                            🐟
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Peces
+                            </strong>
+
+                            <small>
+                                Añadir peces
+                            </small>
+
+                        </span>
+
+                        <span class="element-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="element-button"
+                        type="button"
+                        data-add="plant"
+                    >
+
+                        <span class="element-icon">
+                            🌿
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Plantas
+                            </strong>
+
+                            <small>
+                                Vegetación
+                            </small>
+
+                        </span>
+
+                        <span class="element-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="element-button"
+                        type="button"
+                        data-add="rock"
+                    >
+
+                        <span class="element-icon">
+                            🪨
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Rocas
+                            </strong>
+
+                            <small>
+                                Piedras y cuevas
+                            </small>
+
+                        </span>
+
+                        <span class="element-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="element-button"
+                        type="button"
+                        data-add="decoration"
+                    >
+
+                        <span class="element-icon">
+                            🪵
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Decoración
+                            </strong>
+
+                            <small>
+                                Objetos
+                            </small>
+
+                        </span>
+
+                        <span class="element-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        class="element-button"
+                        type="button"
+                        data-add="light"
+                    >
+
+                        <span class="element-icon">
+                            💡
+                        </span>
+
+                        <span>
+
+                            <strong>
+                                Iluminación
+                            </strong>
+
+                            <small>
+                                Luces
+                            </small>
+
+                        </span>
+
+                        <span class="element-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- =========================================
+                 ACUARIO
+            ========================================== -->
+
+            <section class="aquarium-stage">
+
+
+                <div class="stage-topbar">
+
+                    <span>
+                        VISTA 3D
+                    </span>
+
+
+                    <span class="connection-status">
+
+                        <i></i>
+
+                        Sistema listo
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="aquarium-preview"
+                    id="aquariumContainer"
+                >
+
+                    <canvas
+                        id="aquariumCanvas"
+                        aria-label="Acuario 3D"
+                    ></canvas>
+
+
+                    <div class="stage-message">
+
+                        <span>
+                            🐠
+                        </span>
+
+                        <strong id="stageMessageTitle">
+                            Tu acuario está vacío
+                        </strong>
+
+                        <small id="stageMessageText">
+                            Añade elementos desde el
+                            panel para comenzar a
+                            construirlo.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stage-controls">
+
+
+                    <button
+                        id="zoomOut"
+                        type="button"
+                        aria-label="Alejar"
+                    >
+                        −
+                    </button>
+
+
+                    <span id="zoomValue">
+                        100%
+                    </span>
+
+
+                    <button
+                        id="zoomIn"
+                        type="button"
+                        aria-label="Acercar"
+                    >
+                        +
+                    </button>
+
+
+                    <span class="control-separator"></span>
+
+
+                    <button
+                        id="fullscreenButton"
+                        type="button"
+                        aria-label="Pantalla completa"
+                    >
+                        ⛶
+                    </button>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+                 PROPIEDADES
+            ========================================== -->
+
+            <aside
+                class="editor-panel properties-panel"
+            >
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Propiedades
+                    </h2>
+
+                    <span>
+                        ⚙
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="empty-properties"
+                    id="propertiesPanel"
+                >
+
+                    <div>
+                        ⚙
+                    </div>
+
+                    <strong>
+                        Ningún elemento seleccionado
+                    </strong>
+
+                    <p>
+                        Selecciona un elemento del
+                        acuario para editar sus
+                        propiedades.
+                    </p>
+
+                </div>
+
+            </aside>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     NAVEGACIÓN MÓVIL
+===================================================== -->
+
+<nav class="mobile-nav">
+
+    <a
+        href="../index.html"
+        class="mobile-nav-item"
+    >
+        🏠
+        <small>
+            Inicio
+        </small>
+    </a>
+
+
+    <a
+        href="./aquarium.html"
+        class="mobile-nav-item active"
+    >
+        🐠
+        <small>
+            Acuario
+        </small>
+    </a>
+
+
+    <a
+        href="./gallery.html"
+        class="mobile-nav-item"
+    >
+        🖼️
+        <small>
+            Galería
+        </small>
+    </a>
+
+
+    <a
+        href="./settings.html"
+        class="mobile-nav-item"
+    >
+        ⚙️
+        <small>
+            Ajustes
+        </small>
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script
+    src="../js/aquarium3d.js"
+></script>
+
+<script
+    src="../js/main.js"
+></script>
 
 
 </body>
