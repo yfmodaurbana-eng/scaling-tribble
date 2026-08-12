@@ -584,6 +584,23 @@ const Aquarium3D = (() => {
             }
         }
     }
+           else if (
+            object.type === "decoration"
+        ) {
+
+            drawDecoration(
+                object,
+                time
+            );
+
+        } else if (
+            object.type === "light"
+        ) {
+
+            drawLight(
+                object,
+                time
+            );
 function drawFish(fish, time) {
 
     if (!ctx || !fish) {
