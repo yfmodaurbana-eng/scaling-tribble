@@ -369,27 +369,41 @@ const Aquarium3D = (() => {
        PECES
     ===================================================== */
 
-    function updateFish(
-        fish,
-        time
-    ) {
+function updateFish(fish, time) {
 
-        const movement =
-            Math.sin(
-                time * 0.001 *
-                fish.speed
-            ) * 0.08;
+    const movement =
+        Math.sin(
+            time * 0.001 * fish.speed
+        ) * 0.06;
 
-        fish.renderX =
-            fish.x +
-            movement;
+    const animatedX =
+        fish.x + movement;
 
-        fish.renderY =
-            fish.y +
-            Math.sin(
-                time * 0.0012
-            ) * 0.015;
-    }
+    const animatedY =
+        fish.y +
+        Math.sin(
+            time * 0.0012
+        ) * 0.015;
+
+    // Mantener siempre el pez dentro del acuario
+    fish.renderX =
+        Math.max(
+            0.12,
+            Math.min(
+                0.88,
+                animatedX
+            )
+        );
+
+    fish.renderY =
+        Math.max(
+            0.18,
+            Math.min(
+                0.72,
+                animatedY
+            )
+        );
+}
 
 
     function drawFish(fish) {
