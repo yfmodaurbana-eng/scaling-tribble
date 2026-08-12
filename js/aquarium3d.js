@@ -364,11 +364,40 @@ function updateFish(fish, time) {
     const horizontal =
         Math.sin(t) * 0.12;
 
-    // Movimiento vertical MUCHO más pequeño
+    // Movimiento vertical pequeño
     const vertical =
         Math.sin(
             t * 1.4 + fish.x * 8
         ) * 0.018;
+
+    // Límites laterales
+    const marginX = 0.14;
+
+    const minX = marginX;
+    const maxX = 1 - marginX;
+
+    // Zona de nado
+    const minY = 0.22;
+    const maxY = aquarium.sandLevel - 0.18;
+
+    fish.renderX =
+        Math.max(
+            minX,
+            Math.min(
+                maxX,
+                fish.x + horizontal
+            )
+        );
+
+    fish.renderY =
+        Math.max(
+            minY,
+            Math.min(
+                maxY,
+                fish.y + vertical
+            )
+        );
+}
 
     // Márgenes laterales
     const marginX = 0.14;
