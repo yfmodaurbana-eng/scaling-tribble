@@ -2040,7 +2040,209 @@ function drawFish(fish, time) {
 
         ctx.restore();
     }
+function drawDecoration(object, time) {
 
+    const x = width * clamp(
+        Number.isFinite(object.x) ? object.x : 0.5,
+        0.05,
+        0.95
+    );
+
+    const y = height * clamp(
+        Number.isFinite(object.y) ? object.y : 0.72,
+        0.55,
+        0.88
+    );
+
+    const scale =
+        42 *
+        (
+            Number.isFinite(object.scale)
+                ? object.scale
+                : 1
+        );
+
+    ctx.save();
+
+    ctx.translate(x, y);
+
+    const sway =
+        Math.sin(time * 0.001) * 0.03;
+
+    ctx.rotate(sway);
+
+    ctx.fillStyle = "#5b3825";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -scale * 0.9,
+        scale * 0.35
+    );
+
+    ctx.quadraticCurveTo(
+        -scale * 0.55,
+        -scale * 0.15,
+        -scale * 0.15,
+        -scale * 0.55
+    );
+
+    ctx.quadraticCurveTo(
+        scale * 0.05,
+        -scale * 0.75,
+        scale * 0.18,
+        -scale * 0.45
+    );
+
+    ctx.quadraticCurveTo(
+        scale * 0.25,
+        -scale * 0.15,
+        scale * 0.75,
+        -scale * 0.05
+    );
+
+    ctx.lineTo(
+        scale * 0.85,
+        scale * 0.25
+    );
+
+    ctx.quadraticCurveTo(
+        scale * 0.35,
+        scale * 0.10,
+        scale * 0.05,
+        scale * 0.20
+    );
+
+    ctx.quadraticCurveTo(
+        -scale * 0.40,
+        scale * 0.35,
+        -scale * 0.9,
+        scale * 0.35
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+    ctx.strokeStyle =
+        "rgba(35,20,12,0.55)";
+
+    ctx.lineWidth = 3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -scale * 0.45,
+        scale * 0.18
+    );
+
+    ctx.lineTo(
+        scale * 0.45,
+        scale * 0.05
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+}
+              function drawLight(object, time) {
+
+    const x = width * clamp(
+        Number.isFinite(object.x) ? object.x : 0.5,
+        0.05,
+        0.95
+    );
+
+    const y = height * clamp(
+        Number.isFinite(object.y) ? object.y : 0.25,
+        0.08,
+        0.75
+    );
+
+    const scale =
+        38 *
+        (
+            Number.isFinite(object.scale)
+                ? object.scale
+                : 1
+        );
+
+    const pulse =
+        0.75 +
+        Math.sin(time * 0.002) * 0.12;
+
+    ctx.save();
+
+    const glow =
+        ctx.createRadialGradient(
+            x,
+            y,
+            2,
+            x,
+            y,
+            scale * 3
+        );
+
+    glow.addColorStop(
+        0,
+        `rgba(255,235,120,${0.28 * pulse})`
+    );
+
+    glow.addColorStop(
+        0.35,
+        `rgba(255,220,80,${0.12 * pulse})`
+    );
+
+    glow.addColorStop(
+        1,
+        "rgba(255,210,50,0)"
+    );
+
+    ctx.fillStyle = glow;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        scale * 3,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle = "#fff4a8";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        scale * 0.32,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.85)";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x - scale * 0.10,
+        y - scale * 0.10,
+        scale * 0.10,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+}
 
     /* =====================================================
        BURBUJAS
