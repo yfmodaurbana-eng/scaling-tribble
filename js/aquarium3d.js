@@ -357,166 +357,47 @@ const Aquarium3D = (() => {
 
 function updateFish(fish, time) {
 
-    // Movimiento suave y limitado dentro del cristal
-    const t = time * 0.00035 * (fish.speed || 0.35);
+    const t =
+        time * 0.00035 * (fish.speed || 0.35);
 
-    // Oscilación horizontal
+    // Movimiento horizontal suave
     const horizontal =
         Math.sin(t) * 0.12;
 
-    // Pequeño movimiento vertical
+    // Movimiento vertical MUCHO más pequeño
     const vertical =
-        Math.sin(t * 1.7 + fish.x * 8) * 0.025;
+        Math.sin(
+            t * 1.4 + fish.x * 8
+        ) * 0.018;
 
-    // Límites de seguridad.
-    // Dejamos margen para que el cuerpo y la cola
-    // nunca toquen los bordes.
-    const marginX = 0.12;
+    // Márgenes laterales
+    const marginX = 0.14;
+
     const minX = marginX;
     const maxX = 1 - marginX;
 
-    const marginY = 0.12;
-    const minY = marginY;
-    const maxY = aquarium.sandLevel - marginY;
+    // Zona donde pueden nadar los peces.
+    // No llegan a la superficie ni a la arena.
+    const minY = 0.22;
+    const maxY = aquarium.sandLevel - 0.18;
 
-    fish.renderX = Math.max(
-        minX,
-        Math.min(
-            maxX,
-            fish.x + horizontal
-        )
-    );
-
-    fish.renderY = Math.max(
-        minY,
-        Math.min(
-            maxY,
-            fish.y + vertical
-        )
-    );
-}
-
-
-function drawFish(fish) {
-
-    const x =
-        width * (fish.renderX ?? fish.x);
-
-    const y =
-        height * (fish.renderY ?? fish.y);
-
-    const scale =
-        45 * fish.scale;
-
-    ctx.save();
-
-    ctx.translate(x, y);
-
-    // Dirección del pez
-    ctx.scale(
-        fish.direction || 1,
-        1
-    );
-
-    const body =
-        ctx.createRadialGradient(
-            -5,
-            -5,
-            3,
-            0,
-            0,
-            scale
+    fish.renderX =
+        Math.max(
+            minX,
+            Math.min(
+                maxX,
+                fish.x + horizontal
+            )
         );
 
-    body.addColorStop(
-        0,
-        "#8ff4ff"
-    );
-
-    body.addColorStop(
-        0.45,
-        "#35d9ff"
-    );
-
-    body.addColorStop(
-        1,
-        "#087d9b"
-    );
-
-    ctx.fillStyle = body;
-
-    // CUERPO
-    ctx.beginPath();
-
-    ctx.ellipse(
-        0,
-        0,
-        scale,
-        scale * 0.55,
-        0,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-    // COLA
-    ctx.fillStyle =
-        "#20b8d7";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -scale * 0.65,
-        0
-    );
-
-    ctx.lineTo(
-        -scale * 1.2,
-        -scale * 0.55
-    );
-
-    ctx.lineTo(
-        -scale * 1.2,
-        scale * 0.55
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-    // OJO
-    ctx.fillStyle =
-        "#ffffff";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        scale * 0.55,
-        -scale * 0.18,
-        scale * 0.12,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-    ctx.fillStyle =
-        "#001017";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        scale * 0.58,
-        -scale * 0.18,
-        scale * 0.055,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-    ctx.restore();
+    fish.renderY =
+        Math.max(
+            minY,
+            Math.min(
+                maxY,
+                fish.y + vertical
+            )
+        );
 }
 
 
