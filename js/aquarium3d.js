@@ -584,7 +584,242 @@ const Aquarium3D = (() => {
             }
         }
     }
+function drawFish(fish, time) {
 
+    if (!ctx || !fish) {
+        return;
+    }
+
+    const style =
+        fishTypes[fish.variant] ||
+        fishTypes.clownfish;
+
+    const x =
+        width * clamp(
+            Number.isFinite(fish.x)
+                ? fish.x
+                : 0.5,
+            0.05,
+            0.95
+        );
+
+    const y =
+        height * clamp(
+            Number.isFinite(fish.y)
+                ? fish.y
+                : 0.45,
+            0.05,
+            0.80
+        );
+
+    const fishScale =
+        45 *
+        (
+            Number.isFinite(fish.scale)
+                ? fish.scale
+                : 1
+        );
+
+    const angle =
+        Number.isFinite(fish.angle)
+            ? fish.angle
+            : 0;
+
+    const sway =
+        Math.sin(
+            time * 0.0015 +
+            fish.id.length
+        ) * 0.04;
+
+    ctx.save();
+
+    ctx.translate(x, y);
+
+    ctx.rotate(
+        angle + sway
+    );
+
+
+    /* COLA */
+
+    ctx.fillStyle = style.fin;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -fishScale * 0.45,
+        0
+    );
+
+    ctx.lineTo(
+        -fishScale * 1.15,
+        -fishScale * 0.55
+    );
+
+    ctx.lineTo(
+        -fishScale * 1.05,
+        0
+    );
+
+    ctx.lineTo(
+        -fishScale * 1.15,
+        fishScale * 0.55
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* CUERPO */
+
+    const gradient =
+        ctx.createRadialGradient(
+            -fishScale * 0.25,
+            -fishScale * 0.20,
+            fishScale * 0.05,
+            0,
+            0,
+            fishScale
+        );
+
+    gradient.addColorStop(
+        0,
+        style.body1
+    );
+
+    gradient.addColorStop(
+        0.5,
+        style.body2
+    );
+
+    gradient.addColorStop(
+        1,
+        style.body3
+    );
+
+    ctx.fillStyle = gradient;
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        0,
+        0,
+        fishScale,
+        fishScale * 0.55,
+        0,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* PATRÓN */
+
+    drawFishPattern(
+        fish,
+        style,
+        fishScale
+    );
+
+
+    /* ALETA SUPERIOR */
+
+    ctx.fillStyle = style.fin;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -fishScale * 0.20,
+        -fishScale * 0.38
+    );
+
+    ctx.quadraticCurveTo(
+        fishScale * 0.05,
+        -fishScale * 0.85,
+        fishScale * 0.30,
+        -fishScale * 0.35
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* ALETA INFERIOR */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -fishScale * 0.05,
+        fishScale * 0.38
+    );
+
+    ctx.quadraticCurveTo(
+        fishScale * 0.15,
+        fishScale * 0.75,
+        fishScale * 0.35,
+        fishScale * 0.28
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* OJO */
+
+    ctx.fillStyle = "#ffffff";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        fishScale * 0.55,
+        -fishScale * 0.18,
+        fishScale * 0.12,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle = "#07151b";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        fishScale * 0.58,
+        -fishScale * 0.18,
+        fishScale * 0.055,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* BRILLO */
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.35)";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        -fishScale * 0.28,
+        -fishScale * 0.22,
+        fishScale * 0.25,
+        fishScale * 0.08,
+        -0.25,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+}
 
     /* =====================================================
        ACTUALIZAR PEZ
