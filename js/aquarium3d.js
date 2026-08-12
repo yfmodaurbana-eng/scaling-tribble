@@ -571,6 +571,287 @@ function drawObjects(time) {
     }
 }
 
+
+/* =====================================================
+   DIBUJAR PEZ
+===================================================== */
+
+function drawFish(fish, time) {
+
+    if (!ctx || !fish) {
+        return;
+    }
+
+    let variant = fish.variant;
+
+    if (!fishTypes[variant]) {
+
+        variant =
+            fishTypeNames[
+                Math.floor(
+                    Math.random() *
+                    fishTypeNames.length
+                )
+            ];
+
+        fish.variant = variant;
+    }
+
+    const style =
+        fishTypes[variant];
+
+    const x =
+        width *
+        clamp(
+            Number.isFinite(fish.renderX)
+                ? fish.renderX
+                : fish.x,
+            0.05,
+            0.95
+        );
+
+    const y =
+        height *
+        clamp(
+            Number.isFinite(fish.renderY)
+                ? fish.renderY
+                : fish.y,
+            0.05,
+            0.95
+        );
+
+    const fishScale =
+        45 *
+        (
+            Number.isFinite(fish.scale)
+                ? fish.scale
+                : 1
+        );
+
+    const angle =
+        Number.isFinite(fish.angle)
+            ? fish.angle
+            : 0;
+
+    const facingLeft =
+        Math.cos(angle) < 0;
+
+    const swimmingSway =
+        Math.sin(
+            time * 0.00125 +
+            String(fish.id).length * 2
+        ) * 0.035;
+
+    ctx.save();
+
+    ctx.translate(x, y);
+
+    ctx.rotate(swimmingSway);
+
+    ctx.scale(
+        facingLeft ? -1 : 1,
+        1
+    );
+
+
+    /* COLA */
+
+    const tailWave =
+        Math.sin(
+            time * 0.006 +
+            String(fish.id).length
+        ) *
+        fishScale *
+        0.07;
+
+    ctx.fillStyle =
+        style.fin;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -fishScale * 0.52,
+        0
+    );
+
+    ctx.quadraticCurveTo(
+        -fishScale * 0.88,
+        -fishScale * 0.12 + tailWave,
+        -fishScale * 1.20,
+        -fishScale * 0.58
+    );
+
+    ctx.quadraticCurveTo(
+        -fishScale * 1.30,
+        0,
+        -fishScale * 1.20,
+        fishScale * 0.58
+    );
+
+    ctx.quadraticCurveTo(
+        -fishScale * 0.88,
+        fishScale * 0.12 + tailWave,
+        -fishScale * 0.52,
+        0
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* CUERPO */
+
+    const body =
+        ctx.createRadialGradient(
+            -fishScale * 0.28,
+            -fishScale * 0.25,
+            fishScale * 0.08,
+            0,
+            0,
+            fishScale
+        );
+
+    body.addColorStop(
+        0,
+        style.body1
+    );
+
+    body.addColorStop(
+        0.42,
+        style.body2
+    );
+
+    body.addColorStop(
+        1,
+        style.body3
+    );
+
+    ctx.fillStyle = body;
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        0,
+        0,
+        fishScale,
+        fishScale * 0.55,
+        0,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* PATRÓN */
+
+    drawFishPattern(
+        fish,
+        style,
+        fishScale
+    );
+
+
+    /* ALETA SUPERIOR */
+
+    ctx.fillStyle =
+        style.fin;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -fishScale * 0.18,
+        -fishScale * 0.38
+    );
+
+    ctx.quadraticCurveTo(
+        fishScale * 0.02,
+        -fishScale * 0.90,
+        fishScale * 0.30,
+        -fishScale * 0.35
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* ALETA INFERIOR */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -fishScale * 0.08,
+        fishScale * 0.38
+    );
+
+    ctx.quadraticCurveTo(
+        fishScale * 0.15,
+        fishScale * 0.82,
+        fishScale * 0.36,
+        fishScale * 0.28
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* OJO */
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        fishScale * 0.55,
+        -fishScale * 0.18,
+        fishScale * 0.12,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle =
+        "#07151b";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        fishScale * 0.58,
+        -fishScale * 0.18,
+        fishScale * 0.055,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* BRILLO */
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.38)";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        -fishScale * 0.25,
+        -fishScale * 0.22,
+        fishScale * 0.28,
+        fishScale * 0.09,
+        -0.2,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+}
     /* =====================================================
        ACTUALIZAR PEZ
     ===================================================== */
