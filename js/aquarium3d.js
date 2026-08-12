@@ -899,15 +899,27 @@ function addObject(type, options = {}) {
     const object = {
 
         id:
-            `${type}-${Date.now()}`,
+            `${type}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
 
         type,
 
         x:
-            options.x ?? 0.5,
+            Math.max(
+                0.12,
+                Math.min(
+                    0.88,
+                    options.x ?? 0.5
+                )
+            ),
 
         y:
-            options.y ?? 0.5,
+            Math.max(
+                0.12,
+                Math.min(
+                    0.75,
+                    options.y ?? 0.5
+                )
+            ),
 
         scale:
             options.scale ?? 1,
@@ -915,16 +927,14 @@ function addObject(type, options = {}) {
         rotation:
             options.rotation ?? 0,
 
-        // Propiedades de los peces
+        // IMPORTANTE para los peces nuevos
         speed:
-            type === "fish"
-                ? (options.speed ?? 0.08)
-                : undefined,
+            options.speed ??
+            (0.15 + Math.random() * 0.15),
 
         direction:
-            type === "fish"
-                ? (options.direction ?? 1)
-                : undefined
+            options.direction ??
+            (Math.random() > 0.5 ? 1 : -1)
     };
 
     aquarium.objects.push(object);
