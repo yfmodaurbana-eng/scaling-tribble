@@ -1,6 +1,7 @@
 /* =========================================================
    AQUARIUM STUDIO
-   MOTOR 3D — BASE ESTABLE
+   MOTOR 3D — ACUARIO TROPICAL
+   PECES MULTICOLOR + MOVIMIENTO RELAJADO
 ========================================================= */
 
 const Aquarium3D = (() => {
@@ -28,26 +29,109 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
+       PALETA DE PECES
+    ===================================================== */
+
+    const fishTypes = {
+
+        clownfish: {
+            name: "Pez payaso",
+            body1: "#ffb347",
+            body2: "#ff7a18",
+            body3: "#d94b0b",
+            fin: "#ff8c24",
+            stripe: "#ffffff",
+            accent: "#151515"
+        },
+
+        blue: {
+            name: "Pez azul",
+            body1: "#78e9ff",
+            body2: "#169eea",
+            body3: "#07529c",
+            fin: "#0b8fd1",
+            stripe: "#b9f7ff",
+            accent: "#062c55"
+        },
+
+        yellow: {
+            name: "Pez amarillo",
+            body1: "#fff98a",
+            body2: "#ffd52e",
+            body3: "#d99c00",
+            fin: "#f4b900",
+            stripe: "#fff4a3",
+            accent: "#694900"
+        },
+
+        coral: {
+            name: "Pez coral",
+            body1: "#ffb0a0",
+            body2: "#f05d65",
+            body3: "#b72d46",
+            fin: "#df4d61",
+            stripe: "#ffd9d1",
+            accent: "#681b2a"
+        },
+
+        violet: {
+            name: "Pez violeta",
+            body1: "#e2b5ff",
+            body2: "#a75de8",
+            body3: "#5c259f",
+            fin: "#8d4bd0",
+            stripe: "#f3d9ff",
+            accent: "#32105d"
+        },
+
+        turquoise: {
+            name: "Pez turquesa",
+            body1: "#9afff4",
+            body2: "#27d7c7",
+            body3: "#087f91",
+            fin: "#18bdb7",
+            stripe: "#d5fffb",
+            accent: "#073c47"
+        }
+    };
+
+
+    const fishTypeNames = [
+        "clownfish",
+        "blue",
+        "yellow",
+        "coral",
+        "violet",
+        "turquoise"
+    ];
+
+
+    /* =====================================================
        INICIALIZAR
     ===================================================== */
 
     function init(canvasElement) {
 
         if (!canvasElement) {
+
             console.error(
                 "Aquarium3D: canvas no encontrado."
             );
+
             return;
         }
 
         canvas = canvasElement;
 
-        ctx = canvas.getContext("2d");
+        ctx =
+            canvas.getContext("2d");
 
         if (!ctx) {
+
             console.error(
                 "Aquarium3D: no se pudo obtener el contexto 2D."
             );
+
             return;
         }
 
@@ -117,7 +201,7 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       ACUARIO DE PRUEBA
+       ACUARIO DE DEMOSTRACIÓN
     ===================================================== */
 
     function createDemoAquarium() {
@@ -127,56 +211,124 @@ const Aquarium3D = (() => {
             {
                 id: "fish-1",
                 type: "fish",
-                x: 0.30,
-                y: 0.38,
-                scale: 1,
+                variant: "clownfish",
+                x: 0.25,
+                y: 0.34,
+                scale: 0.95,
                 rotation: 0,
-                speed: 0.35,
+                speed: 0.000055,
                 direction: 1
             },
 
             {
                 id: "fish-2",
                 type: "fish",
-                x: 0.67,
-                y: 0.52,
-                scale: 0.75,
+                variant: "blue",
+                x: 0.66,
+                y: 0.30,
+                scale: 0.82,
                 rotation: 0,
-                speed: 0.25,
+                speed: 0.000045,
+                direction: -1
+            },
+
+            {
+                id: "fish-3",
+                type: "fish",
+                variant: "yellow",
+                x: 0.46,
+                y: 0.47,
+                scale: 0.72,
+                rotation: 0,
+                speed: 0.000050,
+                direction: 1
+            },
+
+            {
+                id: "fish-4",
+                type: "fish",
+                variant: "coral",
+                x: 0.78,
+                y: 0.56,
+                scale: 0.68,
+                rotation: 0,
+                speed: 0.000042,
+                direction: -1
+            },
+
+            {
+                id: "fish-5",
+                type: "fish",
+                variant: "violet",
+                x: 0.20,
+                y: 0.58,
+                scale: 0.62,
+                rotation: 0,
+                speed: 0.000047,
+                direction: 1
+            },
+
+            {
+                id: "fish-6",
+                type: "fish",
+                variant: "turquoise",
+                x: 0.57,
+                y: 0.64,
+                scale: 0.88,
+                rotation: 0,
+                speed: 0.000040,
                 direction: -1
             },
 
             {
                 id: "plant-1",
                 type: "plant",
-                x: 0.18,
+                x: 0.12,
                 y: 0.82,
-                scale: 1,
+                scale: 1.1,
                 rotation: 0
             },
 
             {
                 id: "plant-2",
                 type: "plant",
-                x: 0.47,
+                x: 0.30,
                 y: 0.82,
-                scale: 1.2,
+                scale: 0.85,
                 rotation: 0
             },
 
             {
                 id: "plant-3",
                 type: "plant",
-                x: 0.78,
+                x: 0.48,
                 y: 0.82,
-                scale: 0.8,
+                scale: 1.25,
+                rotation: 0
+            },
+
+            {
+                id: "plant-4",
+                type: "plant",
+                x: 0.73,
+                y: 0.82,
+                scale: 0.95,
+                rotation: 0
+            },
+
+            {
+                id: "plant-5",
+                type: "plant",
+                x: 0.90,
+                y: 0.82,
+                scale: 0.75,
                 rotation: 0
             },
 
             {
                 id: "rock-1",
                 type: "rock",
-                x: 0.32,
+                x: 0.28,
                 y: 0.86,
                 scale: 1,
                 rotation: 0
@@ -271,7 +423,8 @@ const Aquarium3D = (() => {
             "#031923"
         );
 
-        ctx.fillStyle = gradient;
+        ctx.fillStyle =
+            gradient;
 
         ctx.fillRect(
             0,
@@ -310,7 +463,8 @@ const Aquarium3D = (() => {
             "rgba(30,150,190,0)"
         );
 
-        ctx.fillStyle = gradient;
+        ctx.fillStyle =
+            gradient;
 
         ctx.fillRect(
             0,
@@ -334,7 +488,8 @@ const Aquarium3D = (() => {
 
         ctx.save();
 
-        ctx.globalAlpha = 0.08;
+        ctx.globalAlpha =
+            0.08;
 
         ctx.fillStyle =
             "#b9f6ff";
@@ -342,12 +497,14 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.moveTo(
-            width * 0.28 + movement,
+            width * 0.28 +
+            movement,
             0
         );
 
         ctx.lineTo(
-            width * 0.45 + movement,
+            width * 0.45 +
+            movement,
             0
         );
 
@@ -375,19 +532,24 @@ const Aquarium3D = (() => {
 
     function drawObjects(time) {
 
-        if (!Array.isArray(aquarium.objects)) {
+        if (!Array.isArray(
+            aquarium.objects
+        )) {
             return;
         }
 
         for (
-            const object of aquarium.objects
+            const object
+            of aquarium.objects
         ) {
 
             if (!object) {
                 continue;
             }
 
-            if (object.type === "fish") {
+            if (
+                object.type === "fish"
+            ) {
 
                 updateFish(
                     object,
@@ -395,7 +557,8 @@ const Aquarium3D = (() => {
                 );
 
                 drawFish(
-                    object
+                    object,
+                    time
                 );
 
             } else if (
@@ -428,70 +591,356 @@ const Aquarium3D = (() => {
         time
     ) {
 
-        const speed =
-            Number.isFinite(
-                fish.speed
-            )
-                ? fish.speed
-                : 0.25;
+        /* -----------------------------------------------
+           VALORES SEGUROS
+        ----------------------------------------------- */
 
-        const direction =
-            fish.direction === -1
-                ? -1
-                : 1;
+        if (!Number.isFinite(fish.x)) {
+            fish.x = 0.5;
+        }
 
-        fish.speed = speed;
+        if (!Number.isFinite(fish.y)) {
+            fish.y = 0.45;
+        }
 
-        fish.direction = direction;
+        if (!Number.isFinite(fish.speed)) {
 
-        const movement =
+            fish.speed =
+                0.000045 +
+                Math.random() * 0.000025;
+        }
+
+        if (!Number.isFinite(fish.vx)) {
+
+            fish.vx =
+                fish.speed *
+                (
+                    fish.direction === -1
+                        ? -1
+                        : 1
+                );
+        }
+
+        if (!Number.isFinite(fish.vy)) {
+            fish.vy = 0;
+        }
+
+        if (!Number.isFinite(fish.angle)) {
+
+            fish.angle =
+                fish.direction === -1
+                    ? Math.PI
+                    : 0;
+        }
+
+        if (!Number.isFinite(
+            fish.targetAngle
+        )) {
+
+            fish.targetAngle =
+                fish.angle;
+        }
+
+        if (!Number.isFinite(
+            fish.targetX
+        )) {
+
+            fish.targetX =
+                clamp(
+                    fish.x +
+                    (
+                        Math.random() - 0.5
+                    ) * 0.30,
+                    0.15,
+                    0.85
+                );
+        }
+
+        if (!Number.isFinite(
+            fish.targetY
+        )) {
+
+            fish.targetY =
+                clamp(
+                    fish.y +
+                    (
+                        Math.random() - 0.5
+                    ) * 0.20,
+                    0.18,
+                    aquarium.sandLevel - 0.13
+                );
+        }
+
+        if (!Number.isFinite(
+            fish.nextDecision
+        )) {
+
+            fish.nextDecision =
+                time +
+                4500 +
+                Math.random() * 6500;
+        }
+
+
+        /* -----------------------------------------------
+           CAMBIO DE DESTINO
+        ----------------------------------------------- */
+
+        if (
+            time >
+            fish.nextDecision
+        ) {
+
+            fish.targetX =
+                clamp(
+                    fish.x +
+                    (
+                        Math.random() - 0.5
+                    ) * 0.45,
+                    0.13,
+                    0.87
+                );
+
+            fish.targetY =
+                clamp(
+                    fish.y +
+                    (
+                        Math.random() - 0.5
+                    ) * 0.24,
+                    0.18,
+                    aquarium.sandLevel - 0.13
+                );
+
+            fish.nextDecision =
+                time +
+                4500 +
+                Math.random() * 7500;
+        }
+
+
+        /* -----------------------------------------------
+           DIRECCIÓN
+        ----------------------------------------------- */
+
+        const dx =
+            fish.targetX -
+            fish.x;
+
+        const dy =
+            fish.targetY -
+            fish.y;
+
+        const distance =
+            Math.sqrt(
+                dx * dx +
+                dy * dy
+            );
+
+        if (
+            distance >
+            0.015
+        ) {
+
+            fish.targetAngle =
+                Math.atan2(
+                    dy,
+                    dx
+                );
+        }
+
+
+        /* -----------------------------------------------
+           GIRO SUAVE
+        ----------------------------------------------- */
+
+        let angleDifference =
+            fish.targetAngle -
+            fish.angle;
+
+        while (
+            angleDifference >
+            Math.PI
+        ) {
+
+            angleDifference -=
+                Math.PI * 2;
+        }
+
+        while (
+            angleDifference <
+            -Math.PI
+        ) {
+
+            angleDifference +=
+                Math.PI * 2;
+        }
+
+        fish.angle +=
+            angleDifference *
+            0.008;
+
+
+        /* -----------------------------------------------
+           VELOCIDAD
+        ----------------------------------------------- */
+
+        const baseSpeed =
+            fish.speed;
+
+        const desiredVX =
+            Math.cos(
+                fish.angle
+            ) *
+            baseSpeed;
+
+        const desiredVY =
             Math.sin(
-                time *
-                0.001 *
-                speed
-            ) * 0.08;
+                fish.angle
+            ) *
+            baseSpeed;
 
-        let renderX =
-            Number.isFinite(fish.x)
-                ? fish.x + movement
-                : 0.5;
+        fish.vx +=
+            (
+                desiredVX -
+                fish.vx
+            ) *
+            0.012;
 
-        let renderY =
-            Number.isFinite(fish.y)
-                ? fish.y +
-                  Math.sin(
-                      time *
-                      0.0012
-                  ) * 0.015
-                : 0.5;
+        fish.vy +=
+            (
+                desiredVY -
+                fish.vy
+            ) *
+            0.012;
 
-        const horizontalMargin =
-            0.12;
 
-        const verticalTop =
-            0.12;
+        /* -----------------------------------------------
+           PEQUEÑO BALANCEO
+        ----------------------------------------------- */
 
-        const verticalBottom =
+        const gentleWave =
+            Math.sin(
+                time * 0.0007 +
+                fish.id.length
+            );
+
+        fish.vy +=
+            gentleWave *
+            0.00000045;
+
+
+        /* -----------------------------------------------
+           POSICIÓN
+        ----------------------------------------------- */
+
+        fish.x +=
+            fish.vx;
+
+        fish.y +=
+            fish.vy;
+
+
+        /* -----------------------------------------------
+           LÍMITES
+        ----------------------------------------------- */
+
+        const left =
+            0.09;
+
+        const right =
+            0.91;
+
+        const top =
+            0.14;
+
+        const bottom =
             aquarium.sandLevel -
-            0.08;
+            0.10;
 
-        renderX =
-            clamp(
-                renderX,
-                horizontalMargin,
-                1 - horizontalMargin
-            );
 
-        renderY =
-            clamp(
-                renderY,
-                verticalTop,
-                verticalBottom
-            );
+        if (
+            fish.x <
+            left
+        ) {
 
-        fish.renderX = renderX;
+            fish.x =
+                left;
 
-        fish.renderY = renderY;
+            fish.targetX =
+                0.25 +
+                Math.random() *
+                0.45;
+
+            fish.targetAngle =
+                0;
+        }
+
+
+        if (
+            fish.x >
+            right
+        ) {
+
+            fish.x =
+                right;
+
+            fish.targetX =
+                0.25 +
+                Math.random() *
+                0.45;
+
+            fish.targetAngle =
+                Math.PI;
+        }
+
+
+        if (
+            fish.y <
+            top
+        ) {
+
+            fish.y =
+                top;
+
+            fish.targetY =
+                0.25 +
+                Math.random() *
+                0.30;
+        }
+
+
+        if (
+            fish.y >
+            bottom
+        ) {
+
+            fish.y =
+                bottom;
+
+            fish.targetY =
+                0.25 +
+                Math.random() *
+                0.30;
+        }
+
+
+        /* -----------------------------------------------
+           ORIENTACIÓN
+        ----------------------------------------------- */
+
+        fish.direction =
+            Math.cos(
+                fish.angle
+            ) >= 0
+                ? 1
+                : -1;
+
+
+        fish.renderX =
+            fish.x;
+
+        fish.renderY =
+            fish.y;
     }
 
 
@@ -499,319 +948,598 @@ const Aquarium3D = (() => {
        DIBUJAR PEZ
     ===================================================== */
 
-function updateFish(fish, time) {
+    function drawFish(
+        fish,
+        time
+    ) {
 
-    /* =================================================
-       VALORES INICIALES
-    ================================================= */
+        if (!ctx || !fish) {
+            return;
+        }
 
-    if (!Number.isFinite(fish.x)) {
-        fish.x = 0.5;
-    }
 
-    if (!Number.isFinite(fish.y)) {
-        fish.y = 0.45;
-    }
+        /* -----------------------------------------------
+           TIPO
+        ----------------------------------------------- */
 
-    if (!Number.isFinite(fish.speed)) {
-        fish.speed =
-            0.00012 +
-            Math.random() * 0.00008;
-    }
+        let variant =
+            fish.variant;
 
-    if (!Number.isFinite(fish.vx)) {
-        fish.vx =
-            fish.speed *
-            (fish.direction === -1 ? -1 : 1);
-    }
+        if (
+            !fishTypes[variant]
+        ) {
 
-    if (!Number.isFinite(fish.vy)) {
-        fish.vy = 0;
-    }
+            variant =
+                fishTypeNames[
+                    Math.floor(
+                        Math.random() *
+                        fishTypeNames.length
+                    )
+                ];
 
-    if (!Number.isFinite(fish.angle)) {
-        fish.angle =
-            fish.direction === -1
-                ? Math.PI
+            fish.variant =
+                variant;
+        }
+
+        const style =
+            fishTypes[
+                variant
+            ];
+
+
+        /* -----------------------------------------------
+           POSICIÓN
+        ----------------------------------------------- */
+
+        const x =
+            width *
+            clamp(
+                Number.isFinite(
+                    fish.renderX
+                )
+                    ? fish.renderX
+                    : fish.x,
+                0.05,
+                0.95
+            );
+
+        const y =
+            height *
+            clamp(
+                Number.isFinite(
+                    fish.renderY
+                )
+                    ? fish.renderY
+                    : fish.y,
+                0.05,
+                0.95
+            );
+
+
+        const fishScale =
+            45 *
+            (
+                Number.isFinite(
+                    fish.scale
+                )
+                    ? fish.scale
+                    : 1
+            );
+
+
+        /* -----------------------------------------------
+           DIRECCIÓN
+        ----------------------------------------------- */
+
+        const angle =
+            Number.isFinite(
+                fish.angle
+            )
+                ? fish.angle
                 : 0;
-    }
 
-    if (!Number.isFinite(fish.targetAngle)) {
-        fish.targetAngle =
-            fish.angle;
-    }
-
-    if (!Number.isFinite(fish.targetX)) {
-        fish.targetX =
-            clamp(
-                fish.x +
-                (
-                    Math.random() - 0.5
-                ) * 0.35,
-                0.14,
-                0.86
-            );
-    }
-
-    if (!Number.isFinite(fish.targetY)) {
-        fish.targetY =
-            clamp(
-                fish.y +
-                (
-                    Math.random() - 0.5
-                ) * 0.25,
-                0.18,
-                aquarium.sandLevel - 0.12
-            );
-    }
-
-    if (!Number.isFinite(fish.nextDecision)) {
-        fish.nextDecision =
-            time +
-            1500 +
-            Math.random() * 3500;
-    }
+        const facingLeft =
+            Math.cos(angle) < 0;
 
 
-    /* =================================================
-       CAMBIAR OBJETIVO DE VEZ EN CUANDO
-    ================================================= */
+        /*
+         * Pequeño balanceo del cuerpo.
+         */
 
-    if (time > fish.nextDecision) {
-
-        fish.targetX =
-            clamp(
-                fish.x +
-                (
-                    Math.random() - 0.5
-                ) * 0.45,
-                0.14,
-                0.86
-            );
-
-        fish.targetY =
-            clamp(
-                fish.y +
-                (
-                    Math.random() - 0.5
-                ) * 0.30,
-                0.18,
-                aquarium.sandLevel - 0.12
-            );
-
-        fish.nextDecision =
-            time +
-            1800 +
-            Math.random() * 4500;
-    }
+        const swimmingSway =
+            Math.sin(
+                time *
+                0.0014 +
+                fish.id.length
+            ) *
+            0.025;
 
 
-    /* =================================================
-       DIRECCIÓN HACIA EL OBJETIVO
-    ================================================= */
+        const visualAngle =
+            Math.sin(angle) *
+            0.22 +
+            swimmingSway;
 
-    const dx =
-        fish.targetX - fish.x;
 
-    const dy =
-        fish.targetY - fish.y;
+        ctx.save();
 
-    const distance =
-        Math.sqrt(
-            dx * dx +
-            dy * dy
+        ctx.translate(
+            x,
+            y
         );
 
-    if (distance > 0.01) {
-
-        const desiredAngle =
-            Math.atan2(
-                dy,
-                dx
-            );
-
-        fish.targetAngle =
-            desiredAngle;
-    }
-
-
-    /* =================================================
-       GIRO SUAVE
-    ================================================= */
-
-    let angleDifference =
-        fish.targetAngle -
-        fish.angle;
-
-    while (
-        angleDifference > Math.PI
-    ) {
-        angleDifference -=
-            Math.PI * 2;
-    }
-
-    while (
-        angleDifference < -Math.PI
-    ) {
-        angleDifference +=
-            Math.PI * 2;
-    }
-
-    fish.angle +=
-        angleDifference *
-        0.025;
-
-
-    /* =================================================
-       VELOCIDAD NATURAL
-    ================================================= */
-
-    const baseSpeed =
-        Number.isFinite(fish.speed)
-            ? fish.speed
-            : 0.00015;
-
-    const desiredVX =
-        Math.cos(fish.angle) *
-        baseSpeed;
-
-    const desiredVY =
-        Math.sin(fish.angle) *
-        baseSpeed;
-
-    fish.vx +=
-        (
-            desiredVX -
-            fish.vx
-        ) * 0.035;
-
-    fish.vy +=
-        (
-            desiredVY -
-            fish.vy
-        ) * 0.035;
-
-
-    /* =================================================
-       PEQUEÑO MOVIMIENTO NATURAL
-    ================================================= */
-
-    const wave =
-        Math.sin(
-            time * 0.0015 +
-            fish.id.length
+        ctx.rotate(
+            visualAngle
         );
 
-    fish.vy +=
-        wave *
-        0.0000015;
+        ctx.scale(
+            facingLeft
+                ? -1
+                : 1,
+            1
+        );
 
 
-    /* =================================================
-       ACTUALIZAR POSICIÓN
-    ================================================= */
+        /* =================================================
+           CUERPO
+        ================================================= */
 
-    fish.x += fish.vx;
+        const body =
+            ctx.createRadialGradient(
+                -fishScale * 0.25,
+                -fishScale * 0.25,
+                fishScale * 0.08,
+                0,
+                0,
+                fishScale
+            );
 
-    fish.y += fish.vy;
+        body.addColorStop(
+            0,
+            style.body1
+        );
+
+        body.addColorStop(
+            0.45,
+            style.body2
+        );
+
+        body.addColorStop(
+            1,
+            style.body3
+        );
+
+        ctx.fillStyle =
+            body;
+
+        ctx.beginPath();
+
+        ctx.ellipse(
+            0,
+            0,
+            fishScale,
+            fishScale * 0.55,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
 
 
-    /* =================================================
-       LÍMITES DEL ACUARIO
-    ================================================= */
+        /* =================================================
+           PATRÓN ESPECÍFICO
+        ================================================= */
 
-    const left =
-        0.10;
-
-    const right =
-        0.90;
-
-    const top =
-        0.14;
-
-    const bottom =
-        aquarium.sandLevel -
-        0.10;
+        drawFishPattern(
+            fish,
+            style,
+            fishScale
+        );
 
 
-    /* -------------------------------------------------
-       PARED IZQUIERDA
-    ------------------------------------------------- */
+        /* =================================================
+           COLA
+        ================================================= */
 
-    if (fish.x < left) {
+        ctx.fillStyle =
+            style.fin;
 
-        fish.x = left;
+        ctx.beginPath();
 
-        fish.targetX =
-            0.25 +
-            Math.random() * 0.5;
+        ctx.moveTo(
+            -fishScale * 0.58,
+            0
+        );
 
-        fish.targetAngle =
-            0;
+        ctx.quadraticCurveTo(
+            -fishScale * 0.95,
+            -fishScale * 0.15,
+            -fishScale * 1.18,
+            -fishScale * 0.58
+        );
+
+        ctx.quadraticCurveTo(
+            -fishScale * 1.28,
+            0,
+            -fishScale * 1.18,
+            fishScale * 0.58
+        );
+
+        ctx.quadraticCurveTo(
+            -fishScale * 0.95,
+            fishScale * 0.15,
+            -fishScale * 0.58,
+            0
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        /* =================================================
+           ALETA SUPERIOR
+        ================================================= */
+
+        ctx.fillStyle =
+            style.fin;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -fishScale * 0.20,
+            -fishScale * 0.40
+        );
+
+        ctx.quadraticCurveTo(
+            0,
+            -fishScale * 0.92,
+            fishScale * 0.28,
+            -fishScale * 0.35
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        /* =================================================
+           ALETA INFERIOR
+        ================================================= */
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -fishScale * 0.08,
+            fishScale * 0.38
+        );
+
+        ctx.quadraticCurveTo(
+            fishScale * 0.15,
+            fishScale * 0.85,
+            fishScale * 0.36,
+            fishScale * 0.28
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        /* =================================================
+           OJO
+        ================================================= */
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            fishScale * 0.55,
+            -fishScale * 0.18,
+            fishScale * 0.12,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.fillStyle =
+            "#07151b";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            fishScale * 0.58,
+            -fishScale * 0.18,
+            fishScale * 0.055,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+
+        /* =================================================
+           BRILLO
+        ================================================= */
+
+        ctx.fillStyle =
+            "rgba(255,255,255,0.38)";
+
+        ctx.beginPath();
+
+        ctx.ellipse(
+            -fishScale * 0.25,
+            -fishScale * 0.22,
+            fishScale * 0.28,
+            fishScale * 0.09,
+            -0.2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.restore();
     }
 
 
-    /* -------------------------------------------------
-       PARED DERECHA
-    ------------------------------------------------- */
+    /* =====================================================
+       PATRONES DE LOS PECES
+    ===================================================== */
 
-    if (fish.x > right) {
+    function drawFishPattern(
+        fish,
+        style,
+        fishScale
+    ) {
 
-        fish.x = right;
+        /* =================================================
+           PAYASO
+        ================================================= */
 
-        fish.targetX =
-            0.25 +
-            Math.random() * 0.5;
+        if (
+            fish.variant ===
+            "clownfish"
+        ) {
 
-        fish.targetAngle =
-            Math.PI;
+            ctx.fillStyle =
+                style.stripe;
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                -fishScale * 0.35,
+                0,
+                fishScale * 0.12,
+                fishScale * 0.57,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                fishScale * 0.12,
+                0,
+                fishScale * 0.10,
+                fishScale * 0.55,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            return;
+        }
+
+
+        /* =================================================
+           AZUL
+        ================================================= */
+
+        if (
+            fish.variant ===
+            "blue"
+        ) {
+
+            ctx.fillStyle =
+                "rgba(255,255,255,0.25)";
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                -fishScale * 0.65,
+                -fishScale * 0.25
+            );
+
+            ctx.quadraticCurveTo(
+                -fishScale * 0.10,
+                -fishScale * 0.50,
+                fishScale * 0.55,
+                -fishScale * 0.18
+            );
+
+            ctx.lineTo(
+                fishScale * 0.45,
+                fishScale * 0.02
+            );
+
+            ctx.quadraticCurveTo(
+                -fishScale * 0.15,
+                -fishScale * 0.18,
+                -fishScale * 0.65,
+                -fishScale * 0.25
+            );
+
+            ctx.fill();
+
+            return;
+        }
+
+
+        /* =================================================
+           AMARILLO
+        ================================================= */
+
+        if (
+            fish.variant ===
+            "yellow"
+        ) {
+
+            ctx.fillStyle =
+                style.stripe;
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                -fishScale * 0.32,
+                0,
+                fishScale * 0.08,
+                fishScale * 0.48,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            return;
+        }
+
+
+        /* =================================================
+           CORAL
+        ================================================= */
+
+        if (
+            fish.variant ===
+            "coral"
+        ) {
+
+            ctx.fillStyle =
+                style.stripe;
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                -fishScale * 0.25,
+                -fishScale * 0.02,
+                fishScale * 0.12,
+                fishScale * 0.48,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                fishScale * 0.15,
+                0,
+                fishScale * 0.08,
+                fishScale * 0.42,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            return;
+        }
+
+
+        /* =================================================
+           VIOLETA
+        ================================================= */
+
+        if (
+            fish.variant ===
+            "violet"
+        ) {
+
+            ctx.fillStyle =
+                "rgba(255,255,255,0.25)";
+
+            ctx.beginPath();
+
+            ctx.arc(
+                -fishScale * 0.35,
+                -fishScale * 0.16,
+                fishScale * 0.13,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            ctx.beginPath();
+
+            ctx.arc(
+                -fishScale * 0.05,
+                fishScale * 0.18,
+                fishScale * 0.08,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            ctx.beginPath();
+
+            ctx.arc(
+                fishScale * 0.25,
+                -fishScale * 0.08,
+                fishScale * 0.06,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            return;
+        }
+
+
+        /* =================================================
+           TURQUESA
+        ================================================= */
+
+        if (
+            fish.variant ===
+            "turquoise"
+        ) {
+
+            ctx.fillStyle =
+                style.stripe;
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                -fishScale * 0.38,
+                -fishScale * 0.02,
+                fishScale * 0.08,
+                fishScale * 0.40,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+        }
     }
 
-
-    /* -------------------------------------------------
-       PARTE SUPERIOR
-    ------------------------------------------------- */
-
-    if (fish.y < top) {
-
-        fish.y = top;
-
-        fish.targetY =
-            0.25 +
-            Math.random() * 0.35;
-    }
-
-
-    /* -------------------------------------------------
-       PARTE INFERIOR
-    ------------------------------------------------- */
-
-    if (fish.y > bottom) {
-
-        fish.y = bottom;
-
-        fish.targetY =
-            0.25 +
-            Math.random() * 0.35;
-    }
-
-
-    /* =================================================
-       ORIENTACIÓN DEL PEZ
-    ================================================= */
-
-    fish.direction =
-        Math.cos(fish.angle) >= 0
-            ? 1
-            : -1;
-
-
-    fish.renderX =
-        fish.x;
-
-    fish.renderY =
-        fish.y;
-}
 
     /* =====================================================
        PLANTAS
@@ -826,12 +1554,24 @@ function updateFish(fish, time) {
             return;
         }
 
+        const plantX =
+            Number.isFinite(
+                plant.x
+            )
+                ? plant.x
+                : 0.5;
+
+        const plantY =
+            Number.isFinite(
+                plant.y
+            )
+                ? plant.y
+                : aquarium.sandLevel;
+
         const x =
             width *
             clamp(
-                Number.isFinite(plant.x)
-                    ? plant.x
-                    : 0.5,
+                plantX,
                 0.05,
                 0.95
             );
@@ -839,9 +1579,7 @@ function updateFish(fish, time) {
         const baseY =
             height *
             clamp(
-                Number.isFinite(plant.y)
-                    ? plant.y
-                    : aquarium.sandLevel,
+                plantY,
                 0.72,
                 aquarium.sandLevel
             );
@@ -860,11 +1598,7 @@ function updateFish(fish, time) {
             Math.sin(
                 time *
                 0.0015 +
-                (
-                    Number.isFinite(plant.x)
-                        ? plant.x
-                        : 0.5
-                ) * 10
+                plantX * 10
             ) * 5;
 
         ctx.save();
@@ -937,7 +1671,9 @@ function updateFish(fish, time) {
         const x =
             width *
             clamp(
-                Number.isFinite(rock.x)
+                Number.isFinite(
+                    rock.x
+                )
                     ? rock.x
                     : 0.5,
                 0.05,
@@ -947,7 +1683,9 @@ function updateFish(fish, time) {
         const y =
             height *
             clamp(
-                Number.isFinite(rock.y)
+                Number.isFinite(
+                    rock.y
+                )
                     ? rock.y
                     : aquarium.sandLevel,
                 aquarium.sandLevel,
@@ -976,6 +1714,7 @@ function updateFish(fish, time) {
                 rock.rotation
             )
         ) {
+
             ctx.rotate(
                 rock.rotation
             );
@@ -1052,18 +1791,22 @@ function updateFish(fish, time) {
     function drawBubbles(time) {
 
         const bubbles = [
+
             {
                 x: 0.25,
                 offset: 0
             },
+
             {
                 x: 0.42,
                 offset: 1.7
             },
+
             {
                 x: 0.68,
                 offset: 3
             },
+
             {
                 x: 0.82,
                 offset: 4
@@ -1073,23 +1816,27 @@ function updateFish(fish, time) {
         ctx.save();
 
         for (
-            const bubble of bubbles
+            const bubble
+            of bubbles
         ) {
 
             const progress =
                 (
-                    time * 0.00008 +
+                    time *
+                    0.00008 +
                     bubble.offset
                 ) % 1;
 
             const x =
-                width * bubble.x;
+                width *
+                bubble.x;
 
             const y =
                 height *
                 (
                     0.85 -
-                    progress * 0.65
+                    progress *
+                    0.65
                 );
 
             const radius =
@@ -1109,7 +1856,8 @@ function updateFish(fish, time) {
             ctx.strokeStyle =
                 "rgba(190,245,255,0.5)";
 
-            ctx.lineWidth = 1;
+            ctx.lineWidth =
+                1;
 
             ctx.stroke();
         }
@@ -1197,7 +1945,8 @@ function updateFish(fish, time) {
         ctx.strokeStyle =
             "rgba(190,245,255,0.16)";
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth =
+            2;
 
         ctx.strokeRect(
             1,
@@ -1259,8 +2008,10 @@ function updateFish(fish, time) {
     ) {
 
         if (!Number.isFinite(value)) {
+
             return (
-                min + max
+                min +
+                max
             ) / 2;
         }
 
@@ -1351,25 +2102,39 @@ function updateFish(fish, time) {
                 )
                     ? options.speed
                     : (
-                        0.20 +
+                        0.00004 +
                         Math.random() *
-                        0.20
+                        0.000025
                     );
 
             object.direction =
                 options.direction === -1
                     ? -1
                     : (
-                        Math.random() > 0.5
+                        Math.random() >
+                        0.5
                             ? 1
                             : -1
                     );
+
+            object.variant =
+                fishTypes[
+                    options.variant
+                ]
+                    ? options.variant
+                    : fishTypeNames[
+                        Math.floor(
+                            Math.random() *
+                            fishTypeNames.length
+                        )
+                    ];
 
             object.y =
                 clamp(
                     object.y,
                     0.15,
-                    aquarium.sandLevel - 0.12
+                    aquarium.sandLevel -
+                    0.12
                 );
         }
 
@@ -1483,4 +2248,5 @@ function updateFish(fish, time) {
    EXPORTAR
 ========================================================= */
 
-window.Aquarium3D = Aquarium3D;
+window.Aquarium3D =
+    Aquarium3D;
