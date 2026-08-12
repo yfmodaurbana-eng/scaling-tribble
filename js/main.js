@@ -6,10 +6,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /*
-     * Solo ejecutamos el código del editor
-     * si existe el canvas.
-     */
+    /* =====================================================
+       CANVAS
+    ===================================================== */
+
     const canvas =
         document.getElementById("aquariumCanvas");
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       ELEMENTOS
+       ELEMENTOS DE LA INTERFAZ
     ===================================================== */
 
     const objectCount =
@@ -54,24 +54,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       INICIAR MOTOR 3D
+       COMPROBAR MOTOR 3D
     ===================================================== */
 
     if (
-        window.Aquarium3D &&
-        typeof window.Aquarium3D.init === "function"
+        !window.Aquarium3D ||
+        typeof window.Aquarium3D.init !== "function"
     ) {
 
-        window.Aquarium3D.init(canvas);
-
-    } else {
-
         console.error(
-            "Aquarium3D no está disponible."
+            "Aquarium3D no está disponible. " +
+            "Comprueba que aquarium3d.js se carga antes que main.js."
         );
 
         return;
     }
+
+
+    /* =====================================================
+       INICIAR MOTOR 3D
+    ===================================================== */
+
+    window.Aquarium3D.init(canvas);
 
 
     /* =====================================================
@@ -96,13 +100,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const state =
             getCurrentState();
 
+
         /*
-         * Si estamos en medio del historial
-         * eliminamos los estados posteriores.
+         * Eliminamos los estados posteriores
+         * cuando hacemos una nueva acción.
          */
+
         history.splice(
             historyIndex + 1
         );
+
+
+        /*
+         * Evitamos duplicados.
+         */
+
+        if (
+            history.length > 0 &&
+            history[history.length - 1] === state
+        ) {
+
+            return;
+        }
+
 
         history.push(state);
 
@@ -111,29 +131,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    /*
+     * Restaurar un estado.
+     *
+     * Necesitamos que aquarium3d.js tenga
+     * una función setObjects().
+     */
+
     function restoreState(state) {
 
         if (!state) {
             return;
         }
 
+
         try {
 
             const objects =
                 JSON.parse(state);
 
-            /*
-             * Recargamos la página de forma controlada
-             * si necesitamos restaurar un estado.
-             *
-             * Esta primera versión deja preparado
-             * el historial para la siguiente etapa.
-             */
 
-            console.log(
-                "Estado restaurado:",
-                objects
-            );
+            if (
+                typeof window.Aquarium3D.setObjects ===
+                "function"
+            ) {
+
+                window.Aquarium3D.setObjects(
+                    objects
+                );
+
+                updateObjectCount();
+
+            } else {
+
+                console.warn(
+                    "Aquarium3D.setObjects() todavía no existe."
+                );
+            }
 
         } catch (error) {
 
@@ -154,11 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const objects =
             window.Aquarium3D.getObjects();
 
+
         if (objectCount) {
 
             objectCount.textContent =
                 objects.length;
         }
+
 
         updateEmptyMessage(
             objects.length
@@ -167,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       MENSAJE DEL ACUARIO
+       MENSAJE DE ACUARIO VACÍO
     ===================================================== */
 
     function updateEmptyMessage(count) {
@@ -176,11 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        /*
-         * Tenemos elementos de demostración
-         * en el motor, por lo que ocultamos
-         * el mensaje cuando hay objetos.
-         */
+
         if (count > 0) {
 
             stageMessage.style.opacity =
@@ -238,20 +270,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-         * Las plantas y rocas aparecen
-         * cerca del fondo.
+         * PLANTAS
          */
 
         if (type === "plant") {
 
             y = 0.82;
-
         }
+
+
+        /*
+         * ROCAS
+         */
 
         if (type === "rock") {
 
             y = 0.86;
+        }
 
+
+        /*
+         * DECORACIÓN
+         */
+
+        if (type === "decoration") {
+
+            y =
+                0.68 +
+                Math.random() * 0.12;
+        }
+
+
+        /*
+         * ILUMINACIÓN
+         */
+
+        if (type === "light") {
+
+            y =
+                0.15 +
+                Math.random() * 0.25;
+
+            scale =
+                0.8 +
+                Math.random() * 0.4;
         }
 
 
@@ -272,16 +334,30 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+        /*
+         * Guardamos el estado.
+         */
+
         saveHistory();
 
+
+        /*
+         * Actualizamos contador.
+         */
+
         updateObjectCount();
+
+
+        /*
+         * Mostramos mensaje.
+         */
 
         showAddFeedback(type);
     }
 
 
     /* =====================================================
-       FEEDBACK AL AÑADIR
+       FEEDBACK
     ===================================================== */
 
     function showAddFeedback(type) {
@@ -289,36 +365,34 @@ document.addEventListener("DOMContentLoaded", () => {
         const names = {
 
             fish:
-                "Pez añadido",
+                "🐟 Pez añadido",
 
             plant:
-                "Planta añadida",
+                "🌿 Planta añadida",
 
             rock:
-                "Roca añadida",
+                "🪨 Roca añadida",
 
             decoration:
-                "Decoración añadida",
+                "🪵 Decoración añadida",
 
             light:
-                "Iluminación añadida"
-
+                "💡 Iluminación añadida"
         };
+
 
         const message =
             names[type] ||
             "Elemento añadido";
 
 
-        /*
-         * Pequeña notificación temporal.
-         */
-
         const notification =
             document.createElement("div");
 
+
         notification.textContent =
             message;
+
 
         notification.style.position =
             "fixed";
@@ -375,7 +449,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             notification.style.opacity =
                 "1";
-
         });
 
 
@@ -383,6 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             notification.style.opacity =
                 "0";
+
 
             setTimeout(() => {
 
@@ -409,11 +483,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 zoom * 100
             );
 
+
         if (zoomValue) {
 
             zoomValue.textContent =
                 `${percentage}%`;
         }
+
 
         window.Aquarium3D.setZoom(
             zoom
@@ -436,7 +512,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateZoom();
             }
         );
-
     }
 
 
@@ -455,7 +530,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateZoom();
             }
         );
-
     }
 
 
@@ -474,15 +548,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 try {
 
-                    if (!document.fullscreenElement) {
+                    if (
+                        !document.fullscreenElement
+                    ) {
 
-                        await aquariumContainer
-                            .requestFullscreen();
+                        if (
+                            aquariumContainer &&
+                            aquariumContainer.requestFullscreen
+                        ) {
+
+                            await aquariumContainer
+                                .requestFullscreen();
+                        }
 
                     } else {
 
                         await document.exitFullscreen();
-
                     }
 
                 } catch (error) {
@@ -492,7 +573,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         error
                     );
                 }
-
             }
         );
     }
@@ -510,6 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const objects =
                     window.Aquarium3D.getObjects();
+
 
                 localStorage.setItem(
                     "aquariumStudio",
@@ -553,19 +634,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 "aquariumStudio"
             );
 
+
         if (!saved) {
             return;
         }
+
 
         try {
 
             const objects =
                 JSON.parse(saved);
 
-            console.log(
-                "Acuario guardado encontrado:",
-                objects
-            );
+
+            if (
+                Array.isArray(objects) &&
+                typeof window.Aquarium3D.setObjects ===
+                "function"
+            ) {
+
+                window.Aquarium3D.setObjects(
+                    objects
+                );
+
+                console.log(
+                    "Acuario guardado cargado."
+                );
+            }
+
 
         } catch (error) {
 
@@ -604,14 +699,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 historyIndex--;
 
+
                 restoreState(
                     history[historyIndex]
                 );
 
+
                 console.log(
                     "Deshacer"
                 );
-
             }
         );
     }
@@ -642,33 +738,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 historyIndex++;
 
+
                 restoreState(
                     history[historyIndex]
                 );
 
+
                 console.log(
                     "Rehacer"
                 );
-
             }
         );
     }
 
 
-/* =====================================================
-   ESTADO INICIAL
-===================================================== */
-
-updateObjectCount();
-
-saveHistory();
-
-/*
- * Comprobamos de nuevo el estado
- * después de iniciar el acuario.
- */
-setTimeout(() => {
+    /* =====================================================
+       ESTADO INICIAL
+    ===================================================== */
 
     updateObjectCount();
 
-}, 100);
+    saveHistory();
+
+
+    console.log(
+        "Aquarium Studio iniciado correctamente."
+    );
+
+});
