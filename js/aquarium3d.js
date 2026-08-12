@@ -960,111 +960,58 @@ const Aquarium3D = (() => {
        AÑADIR OBJETO
     ===================================================== */
 
-    function addObject(type, options = {}) {
+function addObject(
+    type,
+    options = {}
+) {
 
-        const object = {
+    const object = {
 
-            id:
-                `${type}-${Date.now()}-${Math.random()
-                    .toString(36)
-                    .slice(2, 7)}`,
+        id:
+            `${type}-${Date.now()}`,
 
-            type,
+        type,
 
-            x:
-                typeof options.x === "number"
-                    ? options.x
-                    : 0.5,
-
-            y:
-                typeof options.y === "number"
-                    ? options.y
-                    : 0.5,
-
-            scale:
-                typeof options.scale === "number"
-                    ? options.scale
-                    : 1,
-
-            rotation:
-                typeof options.rotation === "number"
-                    ? options.rotation
-                    : 0,
-
-            /*
-             * Los peces NUEVOS necesitan estos valores.
-             */
-
-            speed:
-                typeof options.speed === "number"
-                    ? options.speed
-                    : 0.25,
-
-            direction:
-                options.direction === -1
-                    ? -1
-                    : 1
-        };
-
-
-        /*
-         * Limitar posiciones para que ningún objeto
-         * pueda nacer fuera del acuario.
-         */
-
-        object.x =
+        x:
             Math.max(
-                0.08,
+                0.12,
                 Math.min(
-                    0.92,
-                    object.x
+                    0.88,
+                    options.x ?? 0.5
                 )
-            );
+            ),
 
-        if (type === "fish") {
+        y:
+            Math.max(
+                0.12,
+                Math.min(
+                    aquarium.sandLevel - 0.12,
+                    options.y ?? 0.5
+                )
+            ),
 
-            object.y =
-                Math.max(
-                    0.12,
-                    Math.min(
-                        0.72,
-                        object.y
-                    )
-                );
+        scale:
+            options.scale ?? 1,
 
-        } else if (type === "plant") {
+        rotation:
+            options.rotation ?? 0,
 
-            object.y =
-                Math.max(
-                    0.72,
-                    Math.min(
-                        0.90,
-                        object.y
-                    )
-                );
+        // Propiedades específicas de peces
+        speed:
+            type === "fish"
+                ? (options.speed ?? 0.35)
+                : undefined,
 
-        } else if (type === "rock") {
+        direction:
+            type === "fish"
+                ? (options.direction ?? 1)
+                : undefined
+    };
 
-            object.y =
-                Math.max(
-                    0.76,
-                    Math.min(
-                        0.92,
-                        object.y
-                    )
-                );
-        }
+    aquarium.objects.push(object);
 
-
-        aquarium.objects.push(object);
-
-        console.log(
-            "Elemento añadido:",
-            object
-        );
-
-        return object;
-    }
+    return object;
+}
 
 
     /* =====================================================
