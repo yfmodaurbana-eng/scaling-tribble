@@ -1,12 +1,12 @@
 /* =========================================================
    AQUARIUM STUDIO
-   MOTOR 3D — BASE
-   ========================================================= */
+   MOTOR 3D — BASE ESTABLE
+========================================================= */
 
 const Aquarium3D = (() => {
 
-    let canvas;
-    let ctx;
+    let canvas = null;
+    let ctx = null;
 
     let width = 0;
     let height = 0;
@@ -41,6 +41,7 @@ const Aquarium3D = (() => {
         }
 
         canvas = canvasElement;
+
         ctx = canvas.getContext("2d");
 
         if (!ctx) {
@@ -270,8 +271,7 @@ const Aquarium3D = (() => {
             "#031923"
         );
 
-        ctx.fillStyle =
-            gradient;
+        ctx.fillStyle = gradient;
 
         ctx.fillRect(
             0,
@@ -310,8 +310,7 @@ const Aquarium3D = (() => {
             "rgba(30,150,190,0)"
         );
 
-        ctx.fillStyle =
-            gradient;
+        ctx.fillStyle = gradient;
 
         ctx.fillRect(
             0,
@@ -335,8 +334,7 @@ const Aquarium3D = (() => {
 
         ctx.save();
 
-        ctx.globalAlpha =
-            0.08;
+        ctx.globalAlpha = 0.08;
 
         ctx.fillStyle =
             "#b9f6ff";
@@ -344,14 +342,12 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.moveTo(
-            width * 0.28 +
-            movement,
+            width * 0.28 + movement,
             0
         );
 
         ctx.lineTo(
-            width * 0.45 +
-            movement,
+            width * 0.45 + movement,
             0
         );
 
@@ -379,14 +375,19 @@ const Aquarium3D = (() => {
 
     function drawObjects(time) {
 
+        if (!Array.isArray(aquarium.objects)) {
+            return;
+        }
+
         for (
-            const object
-            of aquarium.objects
+            const object of aquarium.objects
         ) {
 
-            if (
-                object.type === "fish"
-            ) {
+            if (!object) {
+                continue;
+            }
+
+            if (object.type === "fish") {
 
                 updateFish(
                     object,
@@ -419,22 +420,13 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       PECES
+       ACTUALIZAR PEZ
     ===================================================== */
 
     function updateFish(
         fish,
         time
     ) {
-
-        /*
-         * IMPORTANTE:
-         * Los peces creados desde main.js
-         * no tenían speed ni direction.
-         *
-         * Aquí ponemos valores por defecto
-         * para evitar NaN.
-         */
 
         const speed =
             Number.isFinite(
@@ -448,16 +440,9 @@ const Aquarium3D = (() => {
                 ? -1
                 : 1;
 
-        fish.speed =
-            speed;
+        fish.speed = speed;
 
-        fish.direction =
-            direction;
-
-
-        /*
-         * Movimiento horizontal.
-         */
+        fish.direction = direction;
 
         const movement =
             Math.sin(
@@ -466,20 +451,10 @@ const Aquarium3D = (() => {
                 speed
             ) * 0.08;
 
-
-        /*
-         * Posición X.
-         */
-
         let renderX =
             Number.isFinite(fish.x)
                 ? fish.x + movement
                 : 0.5;
-
-
-        /*
-         * Posición Y.
-         */
 
         let renderY =
             Number.isFinite(fish.y)
@@ -490,16 +465,6 @@ const Aquarium3D = (() => {
                   ) * 0.015
                 : 0.5;
 
-
-        /*
-         * Mantener el pez dentro
-         * de los límites visibles.
-         *
-         * Dejamos margen para que
-         * el cuerpo y la cola no
-         * salgan del acuario.
-         */
-
         const horizontalMargin =
             0.12;
 
@@ -509,7 +474,6 @@ const Aquarium3D = (() => {
         const verticalBottom =
             aquarium.sandLevel -
             0.08;
-
 
         renderX =
             clamp(
@@ -525,16 +489,9 @@ const Aquarium3D = (() => {
                 verticalBottom
             );
 
+        fish.renderX = renderX;
 
-        /*
-         * Guardamos valores válidos.
-         */
-
-        fish.renderX =
-            renderX;
-
-        fish.renderY =
-            renderY;
+        fish.renderY = renderY;
     }
 
 
@@ -544,27 +501,39 @@ const Aquarium3D = (() => {
 
     function drawFish(fish) {
 
+        if (!ctx || !fish) {
+            return;
+        }
+
+        const safeX =
+            Number.isFinite(
+                fish.renderX
+            )
+                ? fish.renderX
+                : (
+                    Number.isFinite(fish.x)
+                        ? fish.x
+                        : 0.5
+                );
+
+        const safeY =
+            Number.isFinite(
+                fish.renderY
+            )
+                ? fish.renderY
+                : (
+                    Number.isFinite(fish.y)
+                        ? fish.y
+                        : 0.5
+                );
+
         const x =
-            width *
-            (
-                Number.isFinite(
-                    fish.renderX
-                )
-                    ? fish.renderX
-                    : fish.x
-            );
+            width * safeX;
 
         const y =
-            height *
-            (
-                Number.isFinite(
-                    fish.renderY
-                )
-                    ? fish.renderY
-                    : fish.y
-            );
+            height * safeY;
 
-        const scale =
+        const fishScale =
             45 *
             (
                 Number.isFinite(
@@ -574,13 +543,22 @@ const Aquarium3D = (() => {
                     : 1
             );
 
-
         ctx.save();
 
         ctx.translate(
             x,
             y
         );
+
+        if (
+            Number.isFinite(
+                fish.rotation
+            )
+        ) {
+            ctx.rotate(
+                fish.rotation
+            );
+        }
 
         ctx.scale(
             fish.direction === -1
@@ -596,12 +574,12 @@ const Aquarium3D = (() => {
 
         const body =
             ctx.createRadialGradient(
-                -5,
-                -5,
-                3,
+                -fishScale * 0.2,
+                -fishScale * 0.2,
+                fishScale * 0.08,
                 0,
                 0,
-                scale
+                fishScale
             );
 
         body.addColorStop(
@@ -619,16 +597,15 @@ const Aquarium3D = (() => {
             "#087d9b"
         );
 
-        ctx.fillStyle =
-            body;
+        ctx.fillStyle = body;
 
         ctx.beginPath();
 
         ctx.ellipse(
             0,
             0,
-            scale,
-            scale * 0.55,
+            fishScale,
+            fishScale * 0.55,
             0,
             0,
             Math.PI * 2
@@ -647,18 +624,67 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.moveTo(
-            -scale * 0.65,
+            -fishScale * 0.65,
             0
         );
 
         ctx.lineTo(
-            -scale * 1.2,
-            -scale * 0.55
+            -fishScale * 1.2,
+            -fishScale * 0.55
         );
 
         ctx.lineTo(
-            -scale * 1.2,
-            scale * 0.55
+            -fishScale * 1.2,
+            fishScale * 0.55
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        /* =================================================
+           ALETA SUPERIOR
+        ================================================= */
+
+        ctx.fillStyle =
+            "rgba(55,210,240,0.8)";
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -fishScale * 0.15,
+            -fishScale * 0.42
+        );
+
+        ctx.quadraticCurveTo(
+            0,
+            -fishScale * 0.95,
+            fishScale * 0.28,
+            -fishScale * 0.35
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        /* =================================================
+           ALETA INFERIOR
+        ================================================= */
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -fishScale * 0.05,
+            fishScale * 0.38
+        );
+
+        ctx.quadraticCurveTo(
+            fishScale * 0.15,
+            fishScale * 0.85,
+            fishScale * 0.35,
+            fishScale * 0.28
         );
 
         ctx.closePath();
@@ -676,9 +702,9 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.arc(
-            scale * 0.55,
-            -scale * 0.18,
-            scale * 0.12,
+            fishScale * 0.55,
+            -fishScale * 0.18,
+            fishScale * 0.12,
             0,
             Math.PI * 2
         );
@@ -691,15 +717,36 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.arc(
-            scale * 0.58,
-            -scale * 0.18,
-            scale * 0.055,
+            fishScale * 0.58,
+            -fishScale * 0.18,
+            fishScale * 0.055,
             0,
             Math.PI * 2
         );
 
         ctx.fill();
 
+
+        /* =================================================
+           BRILLO
+        ================================================= */
+
+        ctx.fillStyle =
+            "rgba(255,255,255,0.35)";
+
+        ctx.beginPath();
+
+        ctx.ellipse(
+            -fishScale * 0.25,
+            -fishScale * 0.22,
+            fishScale * 0.28,
+            fishScale * 0.09,
+            -0.2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
 
         ctx.restore();
     }
@@ -714,10 +761,16 @@ const Aquarium3D = (() => {
         time
     ) {
 
+        if (!plant) {
+            return;
+        }
+
         const x =
             width *
             clamp(
-                plant.x,
+                Number.isFinite(plant.x)
+                    ? plant.x
+                    : 0.5,
                 0.05,
                 0.95
             );
@@ -725,12 +778,14 @@ const Aquarium3D = (() => {
         const baseY =
             height *
             clamp(
-                plant.y,
+                Number.isFinite(plant.y)
+                    ? plant.y
+                    : aquarium.sandLevel,
                 0.72,
                 aquarium.sandLevel
             );
 
-        const scale =
+        const plantScale =
             70 *
             (
                 Number.isFinite(
@@ -744,7 +799,11 @@ const Aquarium3D = (() => {
             Math.sin(
                 time *
                 0.0015 +
-                plant.x * 10
+                (
+                    Number.isFinite(plant.x)
+                        ? plant.x
+                        : 0.5
+                ) * 10
             ) * 5;
 
         ctx.save();
@@ -780,21 +839,21 @@ const Aquarium3D = (() => {
 
             ctx.moveTo(
                 i *
-                    scale *
-                    0.16,
+                plantScale *
+                0.16,
                 5
             );
 
             ctx.quadraticCurveTo(
                 i *
-                    scale *
-                    0.08,
-                -scale * 0.45,
+                plantScale *
+                0.08,
+                -plantScale * 0.45,
                 i *
-                    scale *
-                    0.25 +
-                    movement,
-                -scale
+                plantScale *
+                0.25 +
+                movement,
+                -plantScale
             );
 
             ctx.stroke();
@@ -810,10 +869,16 @@ const Aquarium3D = (() => {
 
     function drawRock(rock) {
 
+        if (!rock) {
+            return;
+        }
+
         const x =
             width *
             clamp(
-                rock.x,
+                Number.isFinite(rock.x)
+                    ? rock.x
+                    : 0.5,
                 0.05,
                 0.95
             );
@@ -821,12 +886,14 @@ const Aquarium3D = (() => {
         const y =
             height *
             clamp(
-                rock.y,
+                Number.isFinite(rock.y)
+                    ? rock.y
+                    : aquarium.sandLevel,
                 aquarium.sandLevel,
                 0.95
             );
 
-        const scale =
+        const rockScale =
             45 *
             (
                 Number.isFinite(
@@ -843,12 +910,22 @@ const Aquarium3D = (() => {
             y
         );
 
+        if (
+            Number.isFinite(
+                rock.rotation
+            )
+        ) {
+            ctx.rotate(
+                rock.rotation
+            );
+        }
+
         const gradient =
             ctx.createLinearGradient(
                 0,
-                -scale,
+                -rockScale,
                 0,
-                scale
+                rockScale
             );
 
         gradient.addColorStop(
@@ -867,35 +944,35 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.moveTo(
-            -scale,
+            -rockScale,
             0
         );
 
         ctx.quadraticCurveTo(
-            -scale * 0.8,
-            -scale * 0.9,
+            -rockScale * 0.8,
+            -rockScale * 0.9,
             0,
-            -scale
+            -rockScale
         );
 
         ctx.quadraticCurveTo(
-            scale * 0.9,
-            -scale * 0.7,
-            scale,
+            rockScale * 0.9,
+            -rockScale * 0.7,
+            rockScale,
             0
         );
 
         ctx.quadraticCurveTo(
-            scale * 0.6,
-            scale * 0.55,
+            rockScale * 0.6,
+            rockScale * 0.55,
             0,
-            scale * 0.45
+            rockScale * 0.45
         );
 
         ctx.quadraticCurveTo(
-            -scale * 0.7,
-            scale * 0.6,
-            -scale,
+            -rockScale * 0.7,
+            rockScale * 0.6,
+            -rockScale,
             0
         );
 
@@ -935,8 +1012,7 @@ const Aquarium3D = (() => {
         ctx.save();
 
         for (
-            const bubble
-            of bubbles
+            const bubble of bubbles
         ) {
 
             const progress =
@@ -946,8 +1022,7 @@ const Aquarium3D = (() => {
                 ) % 1;
 
             const x =
-                width *
-                bubble.x;
+                width * bubble.x;
 
             const y =
                 height *
@@ -973,8 +1048,7 @@ const Aquarium3D = (() => {
             ctx.strokeStyle =
                 "rgba(190,245,255,0.5)";
 
-            ctx.lineWidth =
-                1;
+            ctx.lineWidth = 1;
 
             ctx.stroke();
         }
@@ -984,7 +1058,7 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       ARENA DE ARENA
+       ARENA
     ===================================================== */
 
     function drawSand() {
@@ -1052,7 +1126,7 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       CRISTAL DEL ACUARIO
+       CRISTAL
     ===================================================== */
 
     function drawGlass() {
@@ -1062,8 +1136,7 @@ const Aquarium3D = (() => {
         ctx.strokeStyle =
             "rgba(190,245,255,0.16)";
 
-        ctx.lineWidth =
-            2;
+        ctx.lineWidth = 2;
 
         ctx.strokeRect(
             1,
@@ -1115,7 +1188,7 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       UTILIDAD CLAMP
+       CLAMP
     ===================================================== */
 
     function clamp(
@@ -1150,12 +1223,10 @@ const Aquarium3D = (() => {
     ) {
 
         const safeType =
-            String(type || "decoration");
-
-
-        /*
-         * Valores base.
-         */
+            String(
+                type ||
+                "decoration"
+            );
 
         const object = {
 
@@ -1205,10 +1276,9 @@ const Aquarium3D = (() => {
         };
 
 
-        /*
-         * Configuración especial
-         * para peces.
-         */
+        /* =================================================
+           PECES
+        ================================================= */
 
         if (
             safeType === "fish"
@@ -1238,15 +1308,14 @@ const Aquarium3D = (() => {
                 clamp(
                     object.y,
                     0.15,
-                    aquarium.sandLevel -
-                    0.12
+                    aquarium.sandLevel - 0.12
                 );
         }
 
 
-        /*
-         * Plantas.
-         */
+        /* =================================================
+           PLANTAS
+        ================================================= */
 
         if (
             safeType === "plant"
@@ -1257,9 +1326,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /*
-         * Rocas.
-         */
+        /* =================================================
+           ROCAS
+        ================================================= */
 
         if (
             safeType === "rock"
@@ -1274,7 +1343,6 @@ const Aquarium3D = (() => {
         aquarium.objects.push(
             object
         );
-
 
         return object;
     }
@@ -1352,7 +1420,6 @@ const Aquarium3D = (() => {
 
 /* =========================================================
    EXPORTAR
-   ========================================================= */
+========================================================= */
 
-window.Aquarium3D =
-    Aquarium3D;
+window.Aquarium3D = Aquarium3D;
