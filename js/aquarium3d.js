@@ -906,41 +906,43 @@ function updateFish(fish, time) {
        API PÚBLICA
     ===================================================== */
 
-    function addObject(
+function addObject(type, options = {}) {
+
+    const object = {
+
+        id:
+            `${type}-${Date.now()}`,
+
         type,
-        options = {}
-    ) {
 
-        const object = {
+        x:
+            options.x ?? 0.5,
 
-            id:
-                `${type}-${Date.now()}`,
+        y:
+            options.y ?? 0.5,
 
-            type,
+        scale:
+            options.scale ?? 1,
 
-            x:
-                options.x ??
-                0.5,
+        rotation:
+            options.rotation ?? 0,
 
-            y:
-                options.y ??
-                0.5,
+        // Propiedades de los peces
+        speed:
+            type === "fish"
+                ? (options.speed ?? 0.08)
+                : undefined,
 
-            scale:
-                options.scale ??
-                1,
+        direction:
+            type === "fish"
+                ? (options.direction ?? 1)
+                : undefined
+    };
 
-            rotation:
-                options.rotation ??
-                0
-        };
+    aquarium.objects.push(object);
 
-        aquarium.objects.push(
-            object
-        );
-
-        return object;
-    }
+    return object;
+}
 
 
     function removeObject(id) {
