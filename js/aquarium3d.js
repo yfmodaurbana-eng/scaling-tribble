@@ -1,12 +1,12 @@
 /* =========================================================
    AQUARIUM STUDIO
-   MOTOR 3D/2D — BASE ESTABLE
-========================================================= */
+   MOTOR 3D — BASE
+   ========================================================= */
 
 const Aquarium3D = (() => {
 
-    let canvas = null;
-    let ctx = null;
+    let canvas;
+    let ctx;
 
     let width = 0;
     let height = 0;
@@ -34,22 +34,30 @@ const Aquarium3D = (() => {
     function init(canvasElement) {
 
         if (!canvasElement) {
-            console.error("Aquarium3D: canvas no encontrado.");
+            console.error(
+                "Aquarium3D: canvas no encontrado."
+            );
             return;
         }
 
         canvas = canvasElement;
         ctx = canvas.getContext("2d");
 
+        if (!ctx) {
+            console.error(
+                "Aquarium3D: no se pudo obtener el contexto 2D."
+            );
+            return;
+        }
+
         resize();
 
-        window.addEventListener("resize", resize);
+        window.addEventListener(
+            "resize",
+            resize
+        );
 
         createDemoAquarium();
-
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-        }
 
         animate();
     }
@@ -61,21 +69,40 @@ const Aquarium3D = (() => {
 
     function resize() {
 
-        if (!canvas || !ctx) return;
+        if (!canvas || !ctx) {
+            return;
+        }
 
-        const rect = canvas.getBoundingClientRect();
+        const rect =
+            canvas.getBoundingClientRect();
 
-        width = Math.max(1, rect.width);
-        height = Math.max(1, rect.height);
+        width =
+            Math.max(
+                1,
+                rect.width
+            );
+
+        height =
+            Math.max(
+                1,
+                rect.height
+            );
 
         const pixelRatio =
-            Math.min(window.devicePixelRatio || 1, 2);
+            Math.min(
+                window.devicePixelRatio || 1,
+                2
+            );
 
         canvas.width =
-            Math.floor(width * pixelRatio);
+            Math.floor(
+                width * pixelRatio
+            );
 
         canvas.height =
-            Math.floor(height * pixelRatio);
+            Math.floor(
+                height * pixelRatio
+            );
 
         ctx.setTransform(
             pixelRatio,
@@ -175,7 +202,9 @@ const Aquarium3D = (() => {
         draw(time);
 
         animationFrame =
-            requestAnimationFrame(animate);
+            requestAnimationFrame(
+                animate
+            );
     }
 
 
@@ -185,7 +214,9 @@ const Aquarium3D = (() => {
 
     function draw(time) {
 
-        if (!ctx) return;
+        if (!ctx) {
+            return;
+        }
 
         ctx.clearRect(
             0,
@@ -195,11 +226,17 @@ const Aquarium3D = (() => {
         );
 
         drawBackground();
+
         drawWater();
+
         drawRays(time);
+
         drawObjects(time);
+
         drawBubbles(time);
+
         drawSand();
+
         drawGlass();
     }
 
@@ -233,7 +270,8 @@ const Aquarium3D = (() => {
             "#031923"
         );
 
-        ctx.fillStyle = gradient;
+        ctx.fillStyle =
+            gradient;
 
         ctx.fillRect(
             0,
@@ -251,7 +289,8 @@ const Aquarium3D = (() => {
     function drawWater() {
 
         const waterHeight =
-            height * aquarium.waterLevel;
+            height *
+            aquarium.waterLevel;
 
         const gradient =
             ctx.createLinearGradient(
@@ -271,7 +310,8 @@ const Aquarium3D = (() => {
             "rgba(30,150,190,0)"
         );
 
-        ctx.fillStyle = gradient;
+        ctx.fillStyle =
+            gradient;
 
         ctx.fillRect(
             0,
@@ -283,28 +323,35 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       RAYOS
+       RAYOS DE LUZ
     ===================================================== */
 
     function drawRays(time) {
 
         const movement =
-            Math.sin(time * 0.00025) * 25;
+            Math.sin(
+                time * 0.00025
+            ) * 25;
 
         ctx.save();
 
-        ctx.globalAlpha = 0.08;
-        ctx.fillStyle = "#b9f6ff";
+        ctx.globalAlpha =
+            0.08;
+
+        ctx.fillStyle =
+            "#b9f6ff";
 
         ctx.beginPath();
 
         ctx.moveTo(
-            width * 0.28 + movement,
+            width * 0.28 +
+            movement,
             0
         );
 
         ctx.lineTo(
-            width * 0.45 + movement,
+            width * 0.45 +
+            movement,
             0
         );
 
@@ -332,319 +379,372 @@ const Aquarium3D = (() => {
 
     function drawObjects(time) {
 
-        for (const object of aquarium.objects) {
+        for (
+            const object
+            of aquarium.objects
+        ) {
 
-            if (object.type === "fish") {
+            if (
+                object.type === "fish"
+            ) {
 
-                updateFish(object, time);
-                drawFish(object);
+                updateFish(
+                    object,
+                    time
+                );
 
-            } else if (object.type === "plant") {
+                drawFish(
+                    object
+                );
 
-                drawPlant(object, time);
+            } else if (
+                object.type === "plant"
+            ) {
 
-            } else if (object.type === "rock") {
+                drawPlant(
+                    object,
+                    time
+                );
 
-                drawRock(object);
+            } else if (
+                object.type === "rock"
+            ) {
+
+                drawRock(
+                    object
+                );
             }
         }
     }
 
 
-   /* =====================================================
-   PECES
-===================================================== */
+    /* =====================================================
+       PECES
+    ===================================================== */
 
-function updateFish(fish, time) {
+    function updateFish(
+        fish,
+        time
+    ) {
 
-    /*
-     * Velocidad individual del pez.
-     * Si el pez fue creado desde el editor y no tiene
-     * speed, usamos una velocidad suave por defecto.
-     */
-    const speed =
-        fish.speed || 0.35;
+        /*
+         * IMPORTANTE:
+         * Los peces creados desde main.js
+         * no tenían speed ni direction.
+         *
+         * Aquí ponemos valores por defecto
+         * para evitar NaN.
+         */
 
-    /*
-     * Movimiento continuo y suave.
-     */
-    const t =
-        time * 0.00035 * speed;
-
-    /*
-     * Movimiento horizontal.
-     */
-    const horizontal =
-        Math.sin(t) * 0.12;
-
-    /*
-     * Movimiento vertical muy pequeño.
-     * Esto evita que parezca que el pez está saltando.
-     */
-    const vertical =
-        Math.sin(
-            t * 1.4 +
-            fish.x * 8
-        ) * 0.018;
-
-    /*
-     * =================================================
-     * LÍMITES DEL CRISTAL
-     * =================================================
-     */
-
-    /*
-     * Dejamos espacio suficiente para el cuerpo
-     * y la cola del pez.
-     */
-    const marginX = 0.14;
-
-    const minX = marginX;
-    const maxX = 1 - marginX;
-
-    /*
-     * Altura mínima:
-     * evita que los peces se peguen a la superficie.
-     */
-    const minY = 0.22;
-
-    /*
-     * Altura máxima:
-     * mantiene los peces por encima de la arena.
-     */
-    const maxY =
-        aquarium.sandLevel - 0.18;
-
-    /*
-     * =================================================
-     * POSICIÓN FINAL
-     * =================================================
-     */
-
-    fish.renderX =
-        Math.max(
-            minX,
-            Math.min(
-                maxX,
-                fish.x + horizontal
+        const speed =
+            Number.isFinite(
+                fish.speed
             )
+                ? fish.speed
+                : 0.25;
+
+        const direction =
+            fish.direction === -1
+                ? -1
+                : 1;
+
+        fish.speed =
+            speed;
+
+        fish.direction =
+            direction;
+
+
+        /*
+         * Movimiento horizontal.
+         */
+
+        const movement =
+            Math.sin(
+                time *
+                0.001 *
+                speed
+            ) * 0.08;
+
+
+        /*
+         * Posición X.
+         */
+
+        let renderX =
+            Number.isFinite(fish.x)
+                ? fish.x + movement
+                : 0.5;
+
+
+        /*
+         * Posición Y.
+         */
+
+        let renderY =
+            Number.isFinite(fish.y)
+                ? fish.y +
+                  Math.sin(
+                      time *
+                      0.0012
+                  ) * 0.015
+                : 0.5;
+
+
+        /*
+         * Mantener el pez dentro
+         * de los límites visibles.
+         *
+         * Dejamos margen para que
+         * el cuerpo y la cola no
+         * salgan del acuario.
+         */
+
+        const horizontalMargin =
+            0.12;
+
+        const verticalTop =
+            0.12;
+
+        const verticalBottom =
+            aquarium.sandLevel -
+            0.08;
+
+
+        renderX =
+            clamp(
+                renderX,
+                horizontalMargin,
+                1 - horizontalMargin
+            );
+
+        renderY =
+            clamp(
+                renderY,
+                verticalTop,
+                verticalBottom
+            );
+
+
+        /*
+         * Guardamos valores válidos.
+         */
+
+        fish.renderX =
+            renderX;
+
+        fish.renderY =
+            renderY;
+    }
+
+
+    /* =====================================================
+       DIBUJAR PEZ
+    ===================================================== */
+
+    function drawFish(fish) {
+
+        const x =
+            width *
+            (
+                Number.isFinite(
+                    fish.renderX
+                )
+                    ? fish.renderX
+                    : fish.x
+            );
+
+        const y =
+            height *
+            (
+                Number.isFinite(
+                    fish.renderY
+                )
+                    ? fish.renderY
+                    : fish.y
+            );
+
+        const scale =
+            45 *
+            (
+                Number.isFinite(
+                    fish.scale
+                )
+                    ? fish.scale
+                    : 1
+            );
+
+
+        ctx.save();
+
+        ctx.translate(
+            x,
+            y
         );
 
-    fish.renderY =
-        Math.max(
-            minY,
-            Math.min(
-                maxY,
-                fish.y + vertical
-            )
+        ctx.scale(
+            fish.direction === -1
+                ? -1
+                : 1,
+            1
         );
-}
 
 
-function drawFish(fish) {
+        /* =================================================
+           CUERPO
+        ================================================= */
 
-    /*
-     * Posición del pez dentro del canvas.
-     */
-    const x =
-        width *
-        (fish.renderX ?? fish.x);
+        const body =
+            ctx.createRadialGradient(
+                -5,
+                -5,
+                3,
+                0,
+                0,
+                scale
+            );
 
-    const y =
-        height *
-        (fish.renderY ?? fish.y);
+        body.addColorStop(
+            0,
+            "#8ff4ff"
+        );
 
-    /*
-     * Tamaño del pez.
-     */
-    const scale =
-        45 *
-        (fish.scale || 1);
+        body.addColorStop(
+            0.45,
+            "#35d9ff"
+        );
 
-    ctx.save();
+        body.addColorStop(
+            1,
+            "#087d9b"
+        );
 
-    /*
-     * Colocamos el origen en el pez.
-     */
-    ctx.translate(
-        x,
-        y
-    );
+        ctx.fillStyle =
+            body;
 
-    /*
-     * Dirección.
-     *
-     * 1  = derecha
-     * -1 = izquierda
-     */
-    ctx.scale(
-        fish.direction || 1,
-        1
-    );
+        ctx.beginPath();
 
-    /*
-     * =================================================
-     * CUERPO
-     * =================================================
-     */
-
-    const body =
-        ctx.createRadialGradient(
-            -5,
-            -5,
-            3,
+        ctx.ellipse(
             0,
             0,
-            scale
+            scale,
+            scale * 0.55,
+            0,
+            0,
+            Math.PI * 2
         );
 
-    body.addColorStop(
-        0,
-        "#8ff4ff"
-    );
-
-    body.addColorStop(
-        0.45,
-        "#35d9ff"
-    );
-
-    body.addColorStop(
-        1,
-        "#087d9b"
-    );
-
-    ctx.fillStyle =
-        body;
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        0,
-        0,
-        scale,
-        scale * 0.55,
-        0,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
+        ctx.fill();
 
 
-    /*
-     * =================================================
-     * COLA
-     * =================================================
-     */
+        /* =================================================
+           COLA
+        ================================================= */
 
-    ctx.fillStyle =
-        "#20b8d7";
+        ctx.fillStyle =
+            "#20b8d7";
 
-    ctx.beginPath();
+        ctx.beginPath();
 
-    ctx.moveTo(
-        -scale * 0.65,
-        0
-    );
+        ctx.moveTo(
+            -scale * 0.65,
+            0
+        );
 
-    ctx.lineTo(
-        -scale * 1.2,
-        -scale * 0.55
-    );
+        ctx.lineTo(
+            -scale * 1.2,
+            -scale * 0.55
+        );
 
-    ctx.lineTo(
-        -scale * 1.2,
-        scale * 0.55
-    );
+        ctx.lineTo(
+            -scale * 1.2,
+            scale * 0.55
+        );
 
-    ctx.closePath();
+        ctx.closePath();
 
-    ctx.fill();
+        ctx.fill();
 
 
-    /*
-     * =================================================
-     * OJO
-     * =================================================
-     */
+        /* =================================================
+           OJO
+        ================================================= */
 
-    ctx.fillStyle =
-        "#ffffff";
+        ctx.fillStyle =
+            "#ffffff";
 
-    ctx.beginPath();
+        ctx.beginPath();
 
-    ctx.arc(
-        scale * 0.55,
-        -scale * 0.18,
-        scale * 0.12,
-        0,
-        Math.PI * 2
-    );
+        ctx.arc(
+            scale * 0.55,
+            -scale * 0.18,
+            scale * 0.12,
+            0,
+            Math.PI * 2
+        );
 
-    ctx.fill();
+        ctx.fill();
 
-    /*
-     * Pupila
-     */
-    ctx.fillStyle =
-        "#001017";
+        ctx.fillStyle =
+            "#001017";
 
-    ctx.beginPath();
+        ctx.beginPath();
 
-    ctx.arc(
-        scale * 0.58,
-        -scale * 0.18,
-        scale * 0.055,
-        0,
-        Math.PI * 2
-    );
+        ctx.arc(
+            scale * 0.58,
+            -scale * 0.18,
+            scale * 0.055,
+            0,
+            Math.PI * 2
+        );
 
-    ctx.fill();
+        ctx.fill();
 
 
-    /*
-     * =================================================
-     * FINAL
-     * =================================================
-     */
+        ctx.restore();
+    }
 
-    ctx.restore();
-}
 
     /* =====================================================
        PLANTAS
     ===================================================== */
 
-    function drawPlant(plant, time) {
+    function drawPlant(
+        plant,
+        time
+    ) {
 
         const x =
             width *
-            Math.max(
+            clamp(
+                plant.x,
                 0.05,
-                Math.min(
-                    0.95,
-                    plant.x ?? 0.5
-                )
+                0.95
             );
 
         const baseY =
             height *
-            Math.max(
+            clamp(
+                plant.y,
                 0.72,
-                Math.min(
-                    0.90,
-                    plant.y ?? 0.82
-                )
+                aquarium.sandLevel
             );
 
         const scale =
             70 *
-            (plant.scale ?? 1);
+            (
+                Number.isFinite(
+                    plant.scale
+                )
+                    ? plant.scale
+                    : 1
+            );
 
         const movement =
             Math.sin(
-                time * 0.0015 +
-                (plant.x ?? 0.5) * 10
+                time *
+                0.0015 +
+                plant.x * 10
             ) * 5;
 
         ctx.save();
@@ -659,7 +759,13 @@ function drawFish(fish) {
 
         ctx.lineWidth =
             7 *
-            (plant.scale ?? 1);
+            (
+                Number.isFinite(
+                    plant.scale
+                )
+                    ? plant.scale
+                    : 1
+            );
 
         ctx.lineCap =
             "round";
@@ -673,15 +779,21 @@ function drawFish(fish) {
             ctx.beginPath();
 
             ctx.moveTo(
-                i * scale * 0.16,
+                i *
+                    scale *
+                    0.16,
                 5
             );
 
             ctx.quadraticCurveTo(
-                i * scale * 0.08,
+                i *
+                    scale *
+                    0.08,
                 -scale * 0.45,
-                i * scale * 0.25 +
-                movement,
+                i *
+                    scale *
+                    0.25 +
+                    movement,
                 -scale
             );
 
@@ -700,27 +812,29 @@ function drawFish(fish) {
 
         const x =
             width *
-            Math.max(
+            clamp(
+                rock.x,
                 0.05,
-                Math.min(
-                    0.95,
-                    rock.x ?? 0.5
-                )
+                0.95
             );
 
         const y =
             height *
-            Math.max(
-                0.76,
-                Math.min(
-                    0.92,
-                    rock.y ?? 0.86
-                )
+            clamp(
+                rock.y,
+                aquarium.sandLevel,
+                0.95
             );
 
         const scale =
             45 *
-            (rock.scale ?? 1);
+            (
+                Number.isFinite(
+                    rock.scale
+                )
+                    ? rock.scale
+                    : 1
+            );
 
         ctx.save();
 
@@ -820,7 +934,10 @@ function drawFish(fish) {
 
         ctx.save();
 
-        for (const bubble of bubbles) {
+        for (
+            const bubble
+            of bubbles
+        ) {
 
             const progress =
                 (
@@ -829,7 +946,8 @@ function drawFish(fish) {
                 ) % 1;
 
             const x =
-                width * bubble.x;
+                width *
+                bubble.x;
 
             const y =
                 height *
@@ -855,7 +973,8 @@ function drawFish(fish) {
             ctx.strokeStyle =
                 "rgba(190,245,255,0.5)";
 
-            ctx.lineWidth = 1;
+            ctx.lineWidth =
+                1;
 
             ctx.stroke();
         }
@@ -871,7 +990,8 @@ function drawFish(fish) {
     function drawSand() {
 
         const sandY =
-            height * aquarium.sandLevel;
+            height *
+            aquarium.sandLevel;
 
         const gradient =
             ctx.createLinearGradient(
@@ -932,7 +1052,7 @@ function drawFish(fish) {
 
 
     /* =====================================================
-       CRISTAL
+       CRISTAL DEL ACUARIO
     ===================================================== */
 
     function drawGlass() {
@@ -942,7 +1062,8 @@ function drawFish(fish) {
         ctx.strokeStyle =
             "rgba(190,245,255,0.16)";
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth =
+            2;
 
         ctx.strokeRect(
             1,
@@ -994,65 +1115,173 @@ function drawFish(fish) {
 
 
     /* =====================================================
-       AÑADIR OBJETO
+       UTILIDAD CLAMP
     ===================================================== */
 
-function addObject(
-    type,
-    options = {}
-) {
+    function clamp(
+        value,
+        min,
+        max
+    ) {
 
-    const object = {
+        if (!Number.isFinite(value)) {
+            return (
+                min + max
+            ) / 2;
+        }
 
-        id:
-            `${type}-${Date.now()}`,
-
-        type,
-
-        x:
-            Math.max(
-                0.12,
-                Math.min(
-                    0.88,
-                    options.x ?? 0.5
-                )
-            ),
-
-        y:
-            Math.max(
-                0.12,
-                Math.min(
-                    aquarium.sandLevel - 0.12,
-                    options.y ?? 0.5
-                )
-            ),
-
-        scale:
-            options.scale ?? 1,
-
-        rotation:
-            options.rotation ?? 0,
-
-        // Propiedades específicas de peces
-        speed:
-            type === "fish"
-                ? (options.speed ?? 0.35)
-                : undefined,
-
-        direction:
-            type === "fish"
-                ? (options.direction ?? 1)
-                : undefined
-    };
-
-    aquarium.objects.push(object);
-
-    return object;
-}
+        return Math.max(
+            min,
+            Math.min(
+                max,
+                value
+            )
+        );
+    }
 
 
     /* =====================================================
-       ELIMINAR
+       AÑADIR OBJETO
+    ===================================================== */
+
+    function addObject(
+        type,
+        options = {}
+    ) {
+
+        const safeType =
+            String(type || "decoration");
+
+
+        /*
+         * Valores base.
+         */
+
+        const object = {
+
+            id:
+                `${safeType}-${Date.now()}-${Math.random()
+                    .toString(36)
+                    .slice(2, 7)}`,
+
+            type:
+                safeType,
+
+            x:
+                Number.isFinite(
+                    options.x
+                )
+                    ? clamp(
+                        options.x,
+                        0.12,
+                        0.88
+                    )
+                    : 0.5,
+
+            y:
+                Number.isFinite(
+                    options.y
+                )
+                    ? options.y
+                    : 0.5,
+
+            scale:
+                Number.isFinite(
+                    options.scale
+                )
+                    ? clamp(
+                        options.scale,
+                        0.4,
+                        1.5
+                    )
+                    : 1,
+
+            rotation:
+                Number.isFinite(
+                    options.rotation
+                )
+                    ? options.rotation
+                    : 0
+        };
+
+
+        /*
+         * Configuración especial
+         * para peces.
+         */
+
+        if (
+            safeType === "fish"
+        ) {
+
+            object.speed =
+                Number.isFinite(
+                    options.speed
+                )
+                    ? options.speed
+                    : (
+                        0.20 +
+                        Math.random() *
+                        0.20
+                    );
+
+            object.direction =
+                options.direction === -1
+                    ? -1
+                    : (
+                        Math.random() > 0.5
+                            ? 1
+                            : -1
+                    );
+
+            object.y =
+                clamp(
+                    object.y,
+                    0.15,
+                    aquarium.sandLevel -
+                    0.12
+                );
+        }
+
+
+        /*
+         * Plantas.
+         */
+
+        if (
+            safeType === "plant"
+        ) {
+
+            object.y =
+                aquarium.sandLevel;
+        }
+
+
+        /*
+         * Rocas.
+         */
+
+        if (
+            safeType === "rock"
+        ) {
+
+            object.y =
+                aquarium.sandLevel +
+                0.04;
+        }
+
+
+        aquarium.objects.push(
+            object
+        );
+
+
+        return object;
+    }
+
+
+    /* =====================================================
+       ELIMINAR OBJETO
     ===================================================== */
 
     function removeObject(id) {
@@ -1084,12 +1313,10 @@ function addObject(
     function setZoom(value) {
 
         camera.zoom =
-            Math.max(
+            clamp(
+                Number(value),
                 0.5,
-                Math.min(
-                    2,
-                    value
-                )
+                2
             );
     }
 
@@ -1105,12 +1332,19 @@ function addObject(
     ===================================================== */
 
     return {
+
         init,
+
         addObject,
+
         removeObject,
+
         getObjects,
+
         setZoom,
+
         getZoom
+
     };
 
 })();
@@ -1118,6 +1352,7 @@ function addObject(
 
 /* =========================================================
    EXPORTAR
-========================================================= */
+   ========================================================= */
 
-window.Aquarium3D = Aquarium3D;
+window.Aquarium3D =
+    Aquarium3D;
