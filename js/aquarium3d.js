@@ -3,7 +3,11 @@
    MOTOR 3D — ACUARIO TROPICAL
    Peces multicolor + plantas + rocas +
    decoración + iluminación + burbujas
-========================================================= */
+
+   CONTROLES:
+   - Click/touch + arrastrar = mover objeto
+   - Los peces se detienen mientras se arrastran
+   ========================================================= */
 
 const Aquarium3D = (() => {
 
@@ -24,6 +28,22 @@ const Aquarium3D = (() => {
     const camera = {
         zoom: 1
     };
+
+
+    /* =====================================================
+       SISTEMA DE ARRASTRE
+    ===================================================== */
+
+    const drag = {
+        active: false,
+        object: null,
+        pointerId: null,
+        offsetX: 0,
+        offsetY: 0
+    };
+
+
+    let selectedObjectId = null;
 
 
     /* =====================================================
@@ -128,6 +148,8 @@ const Aquarium3D = (() => {
             resize
         );
 
+        setupPointerEvents();
+
         createDemoAquarium();
 
         if (animationFrame) {
@@ -190,6 +212,476 @@ const Aquarium3D = (() => {
             0,
             0
         );
+    }
+
+
+    /* =====================================================
+       EVENTOS DE RATÓN / TOUCH / PEN
+    ===================================================== */
+
+    function setupPointerEvents() {
+
+        if (!canvas) {
+            return;
+        }
+
+        canvas.style.touchAction =
+            "none";
+
+        canvas.addEventListener(
+            "pointerdown",
+            handlePointerDown
+        );
+
+        canvas.addEventListener(
+            "pointermove",
+            handlePointerMove
+        );
+
+        canvas.addEventListener(
+            "pointerup",
+            handlePointerUp
+        );
+
+        canvas.addEventListener(
+            "pointercancel",
+            handlePointerUp
+        );
+
+        canvas.addEventListener(
+            "pointerleave",
+            handlePointerLeave
+        );
+    }
+
+
+    /* =====================================================
+       POINTER DOWN
+    ===================================================== */
+
+    function handlePointerDown(event) {
+
+        if (!canvas) {
+            return;
+        }
+
+        const point =
+            getPointerPosition(event);
+
+        const object =
+            findObjectAt(
+                point.x,
+                point.y
+            );
+
+        if (!object) {
+            selectedObjectId = null;
+            return;
+        }
+
+        drag.active = true;
+
+        drag.object =
+            object;
+
+        drag.pointerId =
+            event.pointerId;
+
+        drag.offsetX =
+            object.x -
+            point.x;
+
+        drag.offsetY =
+            object.y -
+            point.y;
+
+        selectedObjectId =
+            object.id;
+
+        object.dragging =
+            true;
+
+        /*
+         * Guardamos el movimiento actual
+         * del pez para que pueda continuar
+         * después de soltarlo.
+         */
+        if (
+            object.type === "fish"
+        ) {
+
+            object.dragOldVx =
+                object.vx || 0;
+
+            object.dragOldVy =
+                object.vy || 0;
+
+            object.vx = 0;
+            object.vy = 0;
+        }
+
+        try {
+
+            canvas.setPointerCapture(
+                event.pointerId
+            );
+
+        } catch (error) {
+            /* Algunos navegadores pueden no soportarlo */
+        }
+
+        event.preventDefault();
+    }
+
+
+    /* =====================================================
+       POINTER MOVE
+    ===================================================== */
+
+    function handlePointerMove(event) {
+
+        if (
+            !drag.active ||
+            !drag.object
+        ) {
+            return;
+        }
+
+        if (
+            event.pointerId !==
+            drag.pointerId
+        ) {
+            return;
+        }
+
+        const point =
+            getPointerPosition(event);
+
+        const object =
+            drag.object;
+
+        object.x =
+            clamp(
+                point.x +
+                drag.offsetX,
+                0.04,
+                0.96
+            );
+
+        object.y =
+            clamp(
+                point.y +
+                drag.offsetY,
+                0.04,
+                0.96
+            );
+
+        /*
+         * Al mover un pez actualizamos
+         * también su destino para evitar
+         * que salte al lugar anterior.
+         */
+        if (
+            object.type === "fish"
+        ) {
+
+            object.targetX =
+                object.x;
+
+            object.targetY =
+                object.y;
+
+            object.renderX =
+                object.x;
+
+            object.renderY =
+                object.y;
+        }
+
+        event.preventDefault();
+    }
+
+
+    /* =====================================================
+       POINTER UP
+    ===================================================== */
+
+    function handlePointerUp(event) {
+
+        if (
+            !drag.active ||
+            !drag.object
+        ) {
+            return;
+        }
+
+        if (
+            drag.pointerId !== null &&
+            event.pointerId !== drag.pointerId
+        ) {
+            return;
+        }
+
+        const object =
+            drag.object;
+
+        object.dragging =
+            false;
+
+        /*
+         * El pez vuelve a nadar después
+         * de soltarlo.
+         */
+        if (
+            object.type === "fish"
+        ) {
+
+            object.vx =
+                Number.isFinite(
+                    drag.object.dragOldVx
+                )
+                    ? drag.object.dragOldVx
+                    : 0;
+
+            object.vy =
+                Number.isFinite(
+                    drag.object.dragOldVy
+                )
+                    ? drag.object.dragOldVy
+                    : 0;
+
+            object.targetX =
+                object.x +
+                (
+                    Math.random() -
+                    0.5
+                ) *
+                0.30;
+
+            object.targetY =
+                object.y +
+                (
+                    Math.random() -
+                    0.5
+                ) *
+                0.20;
+
+            object.targetX =
+                clamp(
+                    object.targetX,
+                    0.08,
+                    0.92
+                );
+
+            object.targetY =
+                clamp(
+                    object.targetY,
+                    0.08,
+                    0.90
+                );
+
+            object.nextDecision =
+                performance.now() +
+                2500 +
+                Math.random() * 5000;
+        }
+
+        drag.active =
+            false;
+
+        drag.object =
+            null;
+
+        drag.pointerId =
+            null;
+
+        try {
+
+            canvas.releasePointerCapture(
+                event.pointerId
+            );
+
+        } catch (error) {
+            /* Nada */
+        }
+
+        event.preventDefault();
+    }
+
+
+    /* =====================================================
+       POINTER LEAVE
+    ===================================================== */
+
+    function handlePointerLeave(event) {
+
+        if (
+            !drag.active
+        ) {
+            return;
+        }
+
+        /*
+         * No cancelamos el drag inmediatamente
+         * porque Pointer Capture permite continuar
+         * arrastrando fuera del canvas.
+         */
+    }
+
+
+    /* =====================================================
+       POSICIÓN DEL POINTER
+    ===================================================== */
+
+    function getPointerPosition(event) {
+
+        const rect =
+            canvas.getBoundingClientRect();
+
+        return {
+
+            x:
+                clamp(
+                    (
+                        event.clientX -
+                        rect.left
+                    ) /
+                    rect.width,
+
+                    0,
+                    1
+                ),
+
+            y:
+                clamp(
+                    (
+                        event.clientY -
+                        rect.top
+                    ) /
+                    rect.height,
+
+                    0,
+                    1
+                )
+        };
+    }
+
+
+    /* =====================================================
+       BUSCAR OBJETO BAJO EL RATÓN
+    ===================================================== */
+
+    function findObjectAt(
+        normalizedX,
+        normalizedY
+    ) {
+
+        if (
+            !Array.isArray(
+                aquarium.objects
+            )
+        ) {
+            return null;
+        }
+
+        /*
+         * Recorremos al revés para que el objeto
+         * añadido más recientemente tenga prioridad.
+         */
+        for (
+            let i =
+                aquarium.objects.length - 1;
+            i >= 0;
+            i--
+        ) {
+
+            const object =
+                aquarium.objects[i];
+
+            if (!object) {
+                continue;
+            }
+
+            const distanceX =
+                (
+                    normalizedX -
+                    object.x
+                ) *
+                width;
+
+            const distanceY =
+                (
+                    normalizedY -
+                    object.y
+                ) *
+                height;
+
+            const radius =
+                getObjectHitRadius(
+                    object
+                );
+
+            const distance =
+                Math.sqrt(
+                    distanceX *
+                    distanceX +
+                    distanceY *
+                    distanceY
+                );
+
+            if (
+                distance <= radius
+            ) {
+
+                return object;
+            }
+        }
+
+        return null;
+    }
+
+
+    /* =====================================================
+       ÁREA DE SELECCIÓN
+    ===================================================== */
+
+    function getObjectHitRadius(
+        object
+    ) {
+
+        if (!object) {
+            return 30;
+        }
+
+        const scale =
+            Number.isFinite(
+                object.scale
+            )
+                ? object.scale
+                : 1;
+
+        switch (
+            object.type
+        ) {
+
+            case "fish":
+                return 65 * scale;
+
+            case "plant":
+                return 55 * scale;
+
+            case "rock":
+                return 55 * scale;
+
+            case "decoration":
+                return 60 * scale;
+
+            case "light":
+                return 55 * scale;
+
+            default:
+                return 50 * scale;
+        }
     }
 
 
@@ -336,7 +828,9 @@ const Aquarium3D = (() => {
        ANIMACIÓN
     ===================================================== */
 
-    function animate(time = 0) {
+    function animate(
+        time = 0
+    ) {
 
         draw(time);
 
@@ -465,7 +959,9 @@ const Aquarium3D = (() => {
        RAYOS DE LUZ
     ===================================================== */
 
-    function drawRays(time) {
+    function drawRays(
+        time
+    ) {
 
         const movement =
             Math.sin(
@@ -483,12 +979,14 @@ const Aquarium3D = (() => {
         ctx.beginPath();
 
         ctx.moveTo(
-            width * 0.28 + movement,
+            width * 0.28 +
+            movement,
             0
         );
 
         ctx.lineTo(
-            width * 0.45 + movement,
+            width * 0.45 +
+            movement,
             0
         );
 
@@ -514,9 +1012,15 @@ const Aquarium3D = (() => {
        OBJETOS
     ===================================================== */
 
-    function drawObjects(time) {
+    function drawObjects(
+        time
+    ) {
 
-        if (!Array.isArray(aquarium.objects)) {
+        if (
+            !Array.isArray(
+                aquarium.objects
+            )
+        ) {
             return;
         }
 
@@ -590,6 +1094,25 @@ const Aquarium3D = (() => {
         time
     ) {
 
+        /*
+         * MUY IMPORTANTE:
+         * mientras el usuario arrastra el pez,
+         * no dejamos que la IA lo mueva.
+         */
+
+        if (
+            fish.dragging
+        ) {
+
+            fish.renderX =
+                fish.x;
+
+            fish.renderY =
+                fish.y;
+
+            return;
+        }
+
         if (!Number.isFinite(fish.x)) {
             fish.x = 0.5;
         }
@@ -602,7 +1125,8 @@ const Aquarium3D = (() => {
 
             fish.speed =
                 0.000035 +
-                Math.random() * 0.000015;
+                Math.random() *
+                0.000015;
         }
 
         if (
@@ -627,7 +1151,9 @@ const Aquarium3D = (() => {
         if (!Number.isFinite(fish.vx)) {
 
             fish.vx =
-                Math.cos(fish.angle) *
+                Math.cos(
+                    fish.angle
+                ) *
                 fish.speed;
         }
 
@@ -640,7 +1166,12 @@ const Aquarium3D = (() => {
             fish.targetX =
                 clamp(
                     fish.x +
-                    (Math.random() - 0.5) * 0.35,
+                    (
+                        Math.random() -
+                        0.5
+                    ) *
+                    0.35,
+
                     0.12,
                     0.88
                 );
@@ -651,9 +1182,14 @@ const Aquarium3D = (() => {
             fish.targetY =
                 clamp(
                     fish.y +
-                    (Math.random() - 0.5) * 0.22,
+                    (
+                        Math.random() -
+                        0.5
+                    ) *
+                    0.22,
+
                     0.16,
-                    aquarium.sandLevel - 0.13
+                    0.88
                 );
         }
 
@@ -674,7 +1210,12 @@ const Aquarium3D = (() => {
             fish.targetX =
                 clamp(
                     fish.x +
-                    (Math.random() - 0.5) * 0.45,
+                    (
+                        Math.random() -
+                        0.5
+                    ) *
+                    0.45,
+
                     0.12,
                     0.88
                 );
@@ -682,9 +1223,14 @@ const Aquarium3D = (() => {
             fish.targetY =
                 clamp(
                     fish.y +
-                    (Math.random() - 0.5) * 0.24,
-                    0.16,
-                    aquarium.sandLevel - 0.13
+                    (
+                        Math.random() -
+                        0.5
+                    ) *
+                    0.24,
+
+                    0.12,
+                    0.88
                 );
 
             fish.nextDecision =
@@ -724,7 +1270,8 @@ const Aquarium3D = (() => {
                 fish.angle;
 
             while (
-                difference > Math.PI
+                difference >
+                Math.PI
             ) {
 
                 difference -=
@@ -732,7 +1279,8 @@ const Aquarium3D = (() => {
             }
 
             while (
-                difference < -Math.PI
+                difference <
+                -Math.PI
             ) {
 
                 difference +=
@@ -740,7 +1288,8 @@ const Aquarium3D = (() => {
             }
 
             fish.angle +=
-                difference * 0.006;
+                difference *
+                0.006;
         }
 
 
@@ -774,7 +1323,10 @@ const Aquarium3D = (() => {
         const wave =
             Math.sin(
                 time * 0.00065 +
-                String(fish.id).length * 1.7
+                String(
+                    fish.id
+                ).length *
+                1.7
             );
 
         fish.vy +=
@@ -796,14 +1348,15 @@ const Aquarium3D = (() => {
             0.91;
 
         const top =
-            0.14;
+            0.10;
 
         const bottom =
-            aquarium.sandLevel - 0.10;
+            0.90;
 
 
         if (
-            fish.x < left
+            fish.x <
+            left
         ) {
 
             fish.x =
@@ -811,7 +1364,8 @@ const Aquarium3D = (() => {
 
             fish.targetX =
                 0.35 +
-                Math.random() * 0.35;
+                Math.random() *
+                0.35;
 
             fish.angle =
                 0;
@@ -819,7 +1373,8 @@ const Aquarium3D = (() => {
 
 
         if (
-            fish.x > right
+            fish.x >
+            right
         ) {
 
             fish.x =
@@ -827,7 +1382,8 @@ const Aquarium3D = (() => {
 
             fish.targetX =
                 0.30 +
-                Math.random() * 0.35;
+                Math.random() *
+                0.35;
 
             fish.angle =
                 Math.PI;
@@ -835,7 +1391,8 @@ const Aquarium3D = (() => {
 
 
         if (
-            fish.y < top
+            fish.y <
+            top
         ) {
 
             fish.y =
@@ -843,12 +1400,14 @@ const Aquarium3D = (() => {
 
             fish.targetY =
                 0.25 +
-                Math.random() * 0.25;
+                Math.random() *
+                0.25;
         }
 
 
         if (
-            fish.y > bottom
+            fish.y >
+            bottom
         ) {
 
             fish.y =
@@ -856,7 +1415,8 @@ const Aquarium3D = (() => {
 
             fish.targetY =
                 0.25 +
-                Math.random() * 0.25;
+                Math.random() *
+                0.25;
         }
 
         fish.renderX =
@@ -889,34 +1449,44 @@ const Aquarium3D = (() => {
         const x =
             width *
             clamp(
-                fish.renderX ?? fish.x,
-                0.05,
-                0.95
+                fish.renderX ??
+                fish.x,
+
+                0.03,
+                0.97
             );
 
         const y =
             height *
             clamp(
-                fish.renderY ?? fish.y,
-                0.05,
-                0.80
+                fish.renderY ??
+                fish.y,
+
+                0.03,
+                0.97
             );
 
         const fishScale =
             45 *
             (
-                Number.isFinite(fish.scale)
+                Number.isFinite(
+                    fish.scale
+                )
                     ? fish.scale
                     : 1
             );
 
         const angle =
-            Number.isFinite(fish.angle)
+            Number.isFinite(
+                fish.angle
+            )
                 ? fish.angle
                 : 0;
 
         const facingLeft =
-            Math.cos(angle) < 0;
+            Math.cos(
+                angle
+            ) < 0;
 
         ctx.save();
 
@@ -928,11 +1498,15 @@ const Aquarium3D = (() => {
         ctx.rotate(
             Math.sin(
                 time * 0.0015
-            ) * 0.035
+            ) *
+            0.035
         );
 
         ctx.scale(
-            facingLeft ? -1 : 1,
+            facingLeft
+                ? -1
+                : 1,
+
             1
         );
 
@@ -942,7 +1516,9 @@ const Aquarium3D = (() => {
         const tailWave =
             Math.sin(
                 time * 0.006 +
-                String(fish.id).length
+                String(
+                    fish.id
+                ).length
             ) *
             fishScale *
             0.07;
@@ -959,7 +1535,9 @@ const Aquarium3D = (() => {
 
         ctx.quadraticCurveTo(
             -fishScale * 0.88,
-            -fishScale * 0.12 + tailWave,
+            -fishScale * 0.12 +
+            tailWave,
+
             -fishScale * 1.20,
             -fishScale * 0.58
         );
@@ -967,13 +1545,16 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             -fishScale * 1.30,
             0,
+
             -fishScale * 1.20,
             fishScale * 0.58
         );
 
         ctx.quadraticCurveTo(
             -fishScale * 0.88,
-            fishScale * 0.12 + tailWave,
+            fishScale * 0.12 +
+            tailWave,
+
             -fishScale * 0.52,
             0
         );
@@ -990,6 +1571,7 @@ const Aquarium3D = (() => {
                 -fishScale * 0.28,
                 -fishScale * 0.25,
                 fishScale * 0.08,
+
                 0,
                 0,
                 fishScale
@@ -1050,6 +1632,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             fishScale * 0.02,
             -fishScale * 0.90,
+
             fishScale * 0.30,
             -fishScale * 0.35
         );
@@ -1071,6 +1654,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             fishScale * 0.15,
             fishScale * 0.82,
+
             fishScale * 0.36,
             fishScale * 0.28
         );
@@ -1133,6 +1717,44 @@ const Aquarium3D = (() => {
         ctx.fill();
 
         ctx.restore();
+
+
+        /*
+         * MARCADOR DE SELECCIÓN
+         */
+
+        if (
+            selectedObjectId ===
+            fish.id
+        ) {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,0.8)";
+
+            ctx.lineWidth =
+                2;
+
+            ctx.setLineDash([
+                5,
+                4
+            ]);
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                fishScale * 1.35,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 
 
@@ -1149,7 +1771,8 @@ const Aquarium3D = (() => {
         ctx.save();
 
         if (
-            fish.variant === "clownfish"
+            fish.variant ===
+            "clownfish"
         ) {
 
             ctx.fillStyle =
@@ -1184,7 +1807,8 @@ const Aquarium3D = (() => {
             ctx.fill();
 
         } else if (
-            fish.variant === "blue"
+            fish.variant ===
+            "blue"
         ) {
 
             ctx.fillStyle =
@@ -1205,7 +1829,8 @@ const Aquarium3D = (() => {
             ctx.fill();
 
         } else if (
-            fish.variant === "yellow"
+            fish.variant ===
+            "yellow"
         ) {
 
             ctx.fillStyle =
@@ -1226,7 +1851,8 @@ const Aquarium3D = (() => {
             ctx.fill();
 
         } else if (
-            fish.variant === "coral"
+            fish.variant ===
+            "coral"
         ) {
 
             ctx.fillStyle =
@@ -1261,7 +1887,8 @@ const Aquarium3D = (() => {
             ctx.fill();
 
         } else if (
-            fish.variant === "violet"
+            fish.variant ===
+            "violet"
         ) {
 
             ctx.fillStyle =
@@ -1292,7 +1919,8 @@ const Aquarium3D = (() => {
             ctx.fill();
 
         } else if (
-            fish.variant === "turquoise"
+            fish.variant ===
+            "turquoise"
         ) {
 
             ctx.fillStyle =
@@ -1334,18 +1962,30 @@ const Aquarium3D = (() => {
             width *
             clamp(
                 plant.x ?? 0.5,
+                0.03,
+                0.97
+            );
+
+        /*
+         * CAMBIO IMPORTANTE:
+         * La planta usa ahora plant.y.
+         * Antes siempre estaba obligada
+         * a estar en la arena.
+         */
+        const baseY =
+            height *
+            clamp(
+                plant.y ?? aquarium.sandLevel,
                 0.05,
                 0.95
             );
 
-        const baseY =
-            height *
-            aquarium.sandLevel;
-
         const scale =
             70 *
             (
-                Number.isFinite(plant.scale)
+                Number.isFinite(
+                    plant.scale
+                )
                     ? plant.scale
                     : 1
             );
@@ -1354,7 +1994,8 @@ const Aquarium3D = (() => {
             Math.sin(
                 time * 0.0015 +
                 plant.x * 10
-            ) * 5;
+            ) *
+            5;
 
         ctx.save();
 
@@ -1369,7 +2010,9 @@ const Aquarium3D = (() => {
         ctx.lineWidth =
             7 *
             (
-                Number.isFinite(plant.scale)
+                Number.isFinite(
+                    plant.scale
+                )
                     ? plant.scale
                     : 1
             );
@@ -1386,14 +2029,26 @@ const Aquarium3D = (() => {
             ctx.beginPath();
 
             ctx.moveTo(
-                i * scale * 0.16,
+                i *
+                scale *
+                0.16,
+
                 5
             );
 
             ctx.quadraticCurveTo(
-                i * scale * 0.08,
-                -scale * 0.45,
-                i * scale * 0.25 + movement,
+                i *
+                scale *
+                0.08,
+
+                -scale *
+                0.45,
+
+                i *
+                scale *
+                0.25 +
+                movement,
+
                 -scale
             );
 
@@ -1401,6 +2056,47 @@ const Aquarium3D = (() => {
         }
 
         ctx.restore();
+
+
+        /*
+         * MARCADOR
+         */
+
+        if (
+            selectedObjectId ===
+            plant.id
+        ) {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,0.8)";
+
+            ctx.lineWidth =
+                2;
+
+            ctx.setLineDash([
+                5,
+                4
+            ]);
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                baseY -
+                scale * 0.45,
+
+                scale * 0.75,
+
+                0,
+                Math.PI * 2
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 
 
@@ -1420,22 +2116,28 @@ const Aquarium3D = (() => {
             width *
             clamp(
                 rock.x ?? 0.5,
-                0.05,
-                0.95
+                0.03,
+                0.97
             );
 
+        /*
+         * CAMBIO IMPORTANTE:
+         * La roca ahora usa rock.y.
+         */
         const y =
             height *
             clamp(
                 rock.y ?? 0.86,
-                aquarium.sandLevel,
+                0.05,
                 0.95
             );
 
         const scale =
             45 *
             (
-                Number.isFinite(rock.scale)
+                Number.isFinite(
+                    rock.scale
+                )
                     ? rock.scale
                     : 1
             );
@@ -1478,6 +2180,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             -scale * 0.8,
             -scale * 0.9,
+
             0,
             -scale
         );
@@ -1485,6 +2188,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             scale * 0.9,
             -scale * 0.7,
+
             scale,
             0
         );
@@ -1492,6 +2196,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             scale * 0.6,
             scale * 0.55,
+
             0,
             scale * 0.45
         );
@@ -1499,6 +2204,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             -scale * 0.7,
             scale * 0.6,
+
             -scale,
             0
         );
@@ -1508,6 +2214,44 @@ const Aquarium3D = (() => {
         ctx.fill();
 
         ctx.restore();
+
+
+        /*
+         * MARCADOR
+         */
+
+        if (
+            selectedObjectId ===
+            rock.id
+        ) {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,0.8)";
+
+            ctx.lineWidth =
+                2;
+
+            ctx.setLineDash([
+                5,
+                4
+            ]);
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                scale * 1.25,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 
 
@@ -1528,22 +2272,24 @@ const Aquarium3D = (() => {
             width *
             clamp(
                 object.x ?? 0.5,
-                0.05,
-                0.95
+                0.03,
+                0.97
             );
 
         const y =
             height *
             clamp(
                 object.y ?? 0.72,
-                0.55,
-                0.88
+                0.05,
+                0.95
             );
 
         const scale =
             42 *
             (
-                Number.isFinite(object.scale)
+                Number.isFinite(
+                    object.scale
+                )
                     ? object.scale
                     : 1
             );
@@ -1556,9 +2302,17 @@ const Aquarium3D = (() => {
         );
 
         ctx.rotate(
+            (
+                Number.isFinite(
+                    object.rotation
+                )
+                    ? object.rotation
+                    : 0
+            ) +
             Math.sin(
                 time * 0.001
-            ) * 0.03
+            ) *
+            0.03
         );
 
         /* pequeño barco / decoración */
@@ -1617,6 +2371,40 @@ const Aquarium3D = (() => {
         ctx.fill();
 
         ctx.restore();
+
+
+        if (
+            selectedObjectId ===
+            object.id
+        ) {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,0.8)";
+
+            ctx.lineWidth =
+                2;
+
+            ctx.setLineDash([
+                5,
+                4
+            ]);
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                scale * 1.35,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 
 
@@ -1637,22 +2425,24 @@ const Aquarium3D = (() => {
             width *
             clamp(
                 object.x ?? 0.5,
-                0.05,
-                0.95
+                0.03,
+                0.97
             );
 
         const y =
             height *
             clamp(
                 object.y ?? 0.25,
-                0.08,
-                0.75
+                0.05,
+                0.95
             );
 
         const scale =
             38 *
             (
-                Number.isFinite(object.scale)
+                Number.isFinite(
+                    object.scale
+                )
                     ? object.scale
                     : 1
             );
@@ -1661,7 +2451,8 @@ const Aquarium3D = (() => {
             0.75 +
             Math.sin(
                 time * 0.002
-            ) * 0.12;
+            ) *
+            0.12;
 
         ctx.save();
 
@@ -1670,6 +2461,7 @@ const Aquarium3D = (() => {
                 x,
                 y,
                 2,
+
                 x,
                 y,
                 scale * 3
@@ -1721,6 +2513,40 @@ const Aquarium3D = (() => {
         ctx.fill();
 
         ctx.restore();
+
+
+        if (
+            selectedObjectId ===
+            object.id
+        ) {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,0.8)";
+
+            ctx.lineWidth =
+                2;
+
+            ctx.setLineDash([
+                5,
+                4
+            ]);
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                scale * 1.1,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 
 
@@ -1733,10 +2559,22 @@ const Aquarium3D = (() => {
     ) {
 
         const bubbles = [
-            { x: 0.25, offset: 0 },
-            { x: 0.42, offset: 1.7 },
-            { x: 0.68, offset: 3 },
-            { x: 0.82, offset: 4 }
+            {
+                x: 0.25,
+                offset: 0
+            },
+            {
+                x: 0.42,
+                offset: 1.7
+            },
+            {
+                x: 0.68,
+                offset: 3
+            },
+            {
+                x: 0.82,
+                offset: 4
+            }
         ];
 
         ctx.save();
@@ -1749,7 +2587,8 @@ const Aquarium3D = (() => {
                 (
                     time * 0.00008 +
                     bubble.offset
-                ) % 1;
+                ) %
+                1;
 
             const x =
                 width *
@@ -1790,7 +2629,7 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       ARENA / ARENA DE ARENA
+       ARENA DE ARENA
     ===================================================== */
 
     function drawSand() {
@@ -1830,6 +2669,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             width * 0.25,
             sandY - 12,
+
             width * 0.5,
             sandY
         );
@@ -1837,6 +2677,7 @@ const Aquarium3D = (() => {
         ctx.quadraticCurveTo(
             width * 0.75,
             sandY + 12,
+
             width,
             sandY
         );
@@ -1930,7 +2771,11 @@ const Aquarium3D = (() => {
         max
     ) {
 
-        if (!Number.isFinite(value)) {
+        if (
+            !Number.isFinite(
+                value
+            )
+        ) {
 
             return (
                 min +
@@ -1974,21 +2819,31 @@ const Aquarium3D = (() => {
                 safeType,
 
             x:
-                Number.isFinite(options.x)
+                Number.isFinite(
+                    options.x
+                )
                     ? clamp(
                         options.x,
-                        0.05,
-                        0.95
+                        0.04,
+                        0.96
                     )
                     : 0.5,
 
             y:
-                Number.isFinite(options.y)
-                    ? options.y
+                Number.isFinite(
+                    options.y
+                )
+                    ? clamp(
+                        options.y,
+                        0.04,
+                        0.96
+                    )
                     : 0.5,
 
             scale:
-                Number.isFinite(options.scale)
+                Number.isFinite(
+                    options.scale
+                )
                     ? clamp(
                         options.scale,
                         0.4,
@@ -1997,22 +2852,31 @@ const Aquarium3D = (() => {
                     : 1,
 
             rotation:
-                Number.isFinite(options.rotation)
+                Number.isFinite(
+                    options.rotation
+                )
                     ? options.rotation
                     : 0
         };
 
+
+        /* =================================================
+           PEZ
+        ================================================= */
 
         if (
             safeType === "fish"
         ) {
 
             object.speed =
-                Number.isFinite(options.speed)
+                Number.isFinite(
+                    options.speed
+                )
                     ? options.speed
                     : (
                         0.000035 +
-                        Math.random() * 0.000015
+                        Math.random() *
+                        0.000015
                     );
 
             object.direction =
@@ -2037,31 +2901,69 @@ const Aquarium3D = (() => {
                         )
                     ];
 
-            object.y =
-                clamp(
-                    object.y,
-                    0.15,
-                    aquarium.sandLevel - 0.12
-                );
+            object.targetX =
+                object.x;
+
+            object.targetY =
+                object.y;
+
+            object.vx =
+                Math.cos(
+                    object.angle
+                ) *
+                object.speed;
+
+            object.vy =
+                0;
+
+            object.nextDecision =
+                performance.now() +
+                3000 +
+                Math.random() * 5000;
         }
 
+
+        /* =================================================
+           PLANTA
+        ================================================= */
 
         if (
             safeType === "plant"
         ) {
 
+            /*
+             * IMPORTANTE:
+             * ya NO obligamos a la planta a
+             * volver al fondo.
+             */
             object.y =
-                aquarium.sandLevel;
+                clamp(
+                    object.y,
+                    0.04,
+                    0.96
+                );
         }
 
+
+        /* =================================================
+           ROCA
+        ================================================= */
 
         if (
             safeType === "rock"
         ) {
 
+            /*
+             * IMPORTANTE:
+             * ya NO obligamos a la roca a
+             * volver a la arena.
+             */
             object.y =
-                aquarium.sandLevel +
-                0.04;
+                clamp(
+                    object.y,
+                    0.04,
+                    0.96
+                );
         }
 
 
@@ -2081,6 +2983,29 @@ const Aquarium3D = (() => {
         id
     ) {
 
+        if (
+            drag.object &&
+            drag.object.id === id
+        ) {
+
+            drag.active =
+                false;
+
+            drag.object =
+                null;
+
+            drag.pointerId =
+                null;
+        }
+
+        if (
+            selectedObjectId === id
+        ) {
+
+            selectedObjectId =
+                null;
+        }
+
         aquarium.objects =
             aquarium.objects.filter(
                 object =>
@@ -2098,6 +3023,123 @@ const Aquarium3D = (() => {
         return [
             ...aquarium.objects
         ];
+    }
+
+
+    /* =====================================================
+       OBTENER OBJETO SELECCIONADO
+    ===================================================== */
+
+    function getSelectedObject() {
+
+        if (
+            !selectedObjectId
+        ) {
+            return null;
+        }
+
+        return (
+            aquarium.objects.find(
+                object =>
+                    object.id ===
+                    selectedObjectId
+            ) ||
+            null
+        );
+    }
+
+
+    /* =====================================================
+       SELECCIONAR OBJETO
+    ===================================================== */
+
+    function selectObject(
+        id
+    ) {
+
+        const object =
+            aquarium.objects.find(
+                item =>
+                    item.id === id
+            );
+
+        if (!object) {
+
+            selectedObjectId =
+                null;
+
+            return null;
+        }
+
+        selectedObjectId =
+            id;
+
+        return object;
+    }
+
+
+    /* =====================================================
+       MOVER OBJETO POR API
+    ===================================================== */
+
+    function moveObject(
+        id,
+        x,
+        y
+    ) {
+
+        const object =
+            aquarium.objects.find(
+                item =>
+                    item.id === id
+            );
+
+        if (!object) {
+            return null;
+        }
+
+        if (
+            Number.isFinite(x)
+        ) {
+
+            object.x =
+                clamp(
+                    x,
+                    0.04,
+                    0.96
+                );
+        }
+
+        if (
+            Number.isFinite(y)
+        ) {
+
+            object.y =
+                clamp(
+                    y,
+                    0.04,
+                    0.96
+                );
+        }
+
+        if (
+            object.type === "fish"
+        ) {
+
+            object.targetX =
+                object.x;
+
+            object.targetY =
+                object.y;
+
+            object.renderX =
+                object.x;
+
+            object.renderY =
+                object.y;
+        }
+
+        return object;
     }
 
 
@@ -2138,10 +3180,15 @@ const Aquarium3D = (() => {
 
         getObjects,
 
+        getSelectedObject,
+
+        selectObject,
+
+        moveObject,
+
         setZoom,
 
         getZoom
-
     };
 
 })();
@@ -2149,7 +3196,7 @@ const Aquarium3D = (() => {
 
 /* =========================================================
    EXPORTAR
-========================================================= */
+   ========================================================= */
 
 window.Aquarium3D =
     Aquarium3D;
