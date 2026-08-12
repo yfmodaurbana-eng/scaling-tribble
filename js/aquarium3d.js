@@ -1,7 +1,7 @@
 /* =========================================================
    AQUARIUM STUDIO
    MOTOR 3D — ACUARIO TROPICAL
-   PECES MULTICOLOR + MOVIMIENTO RELAJADO
+   6 PECES MULTICOLOR + MOVIMIENTO RELAJADO
 ========================================================= */
 
 const Aquarium3D = (() => {
@@ -29,70 +29,71 @@ const Aquarium3D = (() => {
 
 
     /* =====================================================
-       PALETA DE PECES
+       TIPOS DE PECES
     ===================================================== */
 
     const fishTypes = {
 
         clownfish: {
             name: "Pez payaso",
-            body1: "#ffb347",
-            body2: "#ff7a18",
-            body3: "#d94b0b",
-            fin: "#ff8c24",
+            body1: "#ffd27a",
+            body2: "#ff8a22",
+            body3: "#d94a0b",
+            fin: "#ff9d32",
             stripe: "#ffffff",
-            accent: "#151515"
+            accent: "#111111"
         },
 
         blue: {
             name: "Pez azul",
-            body1: "#78e9ff",
-            body2: "#169eea",
-            body3: "#07529c",
+            body1: "#8cecff",
+            body2: "#159fe8",
+            body3: "#07549c",
             fin: "#0b8fd1",
-            stripe: "#b9f7ff",
-            accent: "#062c55"
+            stripe: "#d5fbff",
+            accent: "#052c55"
         },
 
         yellow: {
             name: "Pez amarillo",
-            body1: "#fff98a",
+            body1: "#fffca0",
             body2: "#ffd52e",
-            body3: "#d99c00",
-            fin: "#f4b900",
-            stripe: "#fff4a3",
-            accent: "#694900"
+            body3: "#d99800",
+            fin: "#f5bd00",
+            stripe: "#fff5a8",
+            accent: "#634600"
         },
 
         coral: {
             name: "Pez coral",
-            body1: "#ffb0a0",
-            body2: "#f05d65",
-            body3: "#b72d46",
-            fin: "#df4d61",
-            stripe: "#ffd9d1",
-            accent: "#681b2a"
+            body1: "#ffc1b5",
+            body2: "#f0606b",
+            body3: "#b72e48",
+            fin: "#df4e61",
+            stripe: "#ffdcd6",
+            accent: "#651c2c"
         },
 
         violet: {
             name: "Pez violeta",
-            body1: "#e2b5ff",
-            body2: "#a75de8",
-            body3: "#5c259f",
+            body1: "#edc8ff",
+            body2: "#a65ce6",
+            body3: "#59269b",
             fin: "#8d4bd0",
-            stripe: "#f3d9ff",
+            stripe: "#f5dcff",
             accent: "#32105d"
         },
 
         turquoise: {
             name: "Pez turquesa",
-            body1: "#9afff4",
+            body1: "#a7fff7",
             body2: "#27d7c7",
             body3: "#087f91",
             fin: "#18bdb7",
-            stripe: "#d5fffb",
+            stripe: "#dcfffb",
             accent: "#073c47"
         }
+
     };
 
 
@@ -123,8 +124,7 @@ const Aquarium3D = (() => {
 
         canvas = canvasElement;
 
-        ctx =
-            canvas.getContext("2d");
+        ctx = canvas.getContext("2d");
 
         if (!ctx) {
 
@@ -143,6 +143,10 @@ const Aquarium3D = (() => {
         );
 
         createDemoAquarium();
+
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+        }
 
         animate();
     }
@@ -212,11 +216,11 @@ const Aquarium3D = (() => {
                 id: "fish-1",
                 type: "fish",
                 variant: "clownfish",
-                x: 0.25,
-                y: 0.34,
+                x: 0.23,
+                y: 0.32,
                 scale: 0.95,
                 rotation: 0,
-                speed: 0.000055,
+                speed: 0.000045,
                 direction: 1
             },
 
@@ -224,11 +228,11 @@ const Aquarium3D = (() => {
                 id: "fish-2",
                 type: "fish",
                 variant: "blue",
-                x: 0.66,
-                y: 0.30,
+                x: 0.68,
+                y: 0.28,
                 scale: 0.82,
                 rotation: 0,
-                speed: 0.000045,
+                speed: 0.000038,
                 direction: -1
             },
 
@@ -236,11 +240,11 @@ const Aquarium3D = (() => {
                 id: "fish-3",
                 type: "fish",
                 variant: "yellow",
-                x: 0.46,
-                y: 0.47,
+                x: 0.45,
+                y: 0.45,
                 scale: 0.72,
                 rotation: 0,
-                speed: 0.000050,
+                speed: 0.000042,
                 direction: 1
             },
 
@@ -248,11 +252,11 @@ const Aquarium3D = (() => {
                 id: "fish-4",
                 type: "fish",
                 variant: "coral",
-                x: 0.78,
-                y: 0.56,
+                x: 0.79,
+                y: 0.53,
                 scale: 0.68,
                 rotation: 0,
-                speed: 0.000042,
+                speed: 0.000035,
                 direction: -1
             },
 
@@ -260,11 +264,11 @@ const Aquarium3D = (() => {
                 id: "fish-5",
                 type: "fish",
                 variant: "violet",
-                x: 0.20,
-                y: 0.58,
+                x: 0.18,
+                y: 0.56,
                 scale: 0.62,
                 rotation: 0,
-                speed: 0.000047,
+                speed: 0.000040,
                 direction: 1
             },
 
@@ -273,17 +277,17 @@ const Aquarium3D = (() => {
                 type: "fish",
                 variant: "turquoise",
                 x: 0.57,
-                y: 0.64,
+                y: 0.63,
                 scale: 0.88,
                 rotation: 0,
-                speed: 0.000040,
+                speed: 0.000034,
                 direction: -1
             },
 
             {
                 id: "plant-1",
                 type: "plant",
-                x: 0.12,
+                x: 0.10,
                 y: 0.82,
                 scale: 1.1,
                 rotation: 0
@@ -292,7 +296,7 @@ const Aquarium3D = (() => {
             {
                 id: "plant-2",
                 type: "plant",
-                x: 0.30,
+                x: 0.28,
                 y: 0.82,
                 scale: 0.85,
                 rotation: 0
@@ -319,7 +323,7 @@ const Aquarium3D = (() => {
             {
                 id: "plant-5",
                 type: "plant",
-                x: 0.90,
+                x: 0.91,
                 y: 0.82,
                 scale: 0.75,
                 rotation: 0
@@ -591,10 +595,6 @@ const Aquarium3D = (() => {
         time
     ) {
 
-        /* -----------------------------------------------
-           VALORES SEGUROS
-        ----------------------------------------------- */
-
         if (!Number.isFinite(fish.x)) {
             fish.x = 0.5;
         }
@@ -606,19 +606,26 @@ const Aquarium3D = (() => {
         if (!Number.isFinite(fish.speed)) {
 
             fish.speed =
-                0.000045 +
-                Math.random() * 0.000025;
+                0.000035 +
+                Math.random() * 0.000015;
+        }
+
+        if (
+            fish.direction !== 1 &&
+            fish.direction !== -1
+        ) {
+
+            fish.direction =
+                Math.random() > 0.5
+                    ? 1
+                    : -1;
         }
 
         if (!Number.isFinite(fish.vx)) {
 
             fish.vx =
                 fish.speed *
-                (
-                    fish.direction === -1
-                        ? -1
-                        : 1
-                );
+                fish.direction;
         }
 
         if (!Number.isFinite(fish.vy)) {
@@ -650,9 +657,9 @@ const Aquarium3D = (() => {
                     fish.x +
                     (
                         Math.random() - 0.5
-                    ) * 0.30,
-                    0.15,
-                    0.85
+                    ) * 0.35,
+                    0.12,
+                    0.88
                 );
         }
 
@@ -665,8 +672,8 @@ const Aquarium3D = (() => {
                     fish.y +
                     (
                         Math.random() - 0.5
-                    ) * 0.20,
-                    0.18,
+                    ) * 0.22,
+                    0.16,
                     aquarium.sandLevel - 0.13
                 );
         }
@@ -677,14 +684,14 @@ const Aquarium3D = (() => {
 
             fish.nextDecision =
                 time +
-                4500 +
-                Math.random() * 6500;
+                5000 +
+                Math.random() * 7000;
         }
 
 
-        /* -----------------------------------------------
-           CAMBIO DE DESTINO
-        ----------------------------------------------- */
+        /* ---------------------------------------------
+           NUEVO DESTINO
+        --------------------------------------------- */
 
         if (
             time >
@@ -697,8 +704,8 @@ const Aquarium3D = (() => {
                     (
                         Math.random() - 0.5
                     ) * 0.45,
-                    0.13,
-                    0.87
+                    0.12,
+                    0.88
                 );
 
             fish.targetY =
@@ -707,20 +714,20 @@ const Aquarium3D = (() => {
                     (
                         Math.random() - 0.5
                     ) * 0.24,
-                    0.18,
+                    0.16,
                     aquarium.sandLevel - 0.13
                 );
 
             fish.nextDecision =
                 time +
-                4500 +
-                Math.random() * 7500;
+                5000 +
+                Math.random() * 8000;
         }
 
 
-        /* -----------------------------------------------
-           DIRECCIÓN
-        ----------------------------------------------- */
+        /* ---------------------------------------------
+           DIRECCIÓN HACIA EL DESTINO
+        --------------------------------------------- */
 
         const dx =
             fish.targetX -
@@ -738,7 +745,7 @@ const Aquarium3D = (() => {
 
         if (
             distance >
-            0.015
+            0.018
         ) {
 
             fish.targetAngle =
@@ -749,9 +756,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* -----------------------------------------------
-           GIRO SUAVE
-        ----------------------------------------------- */
+        /* ---------------------------------------------
+           GIRO MUY SUAVE
+        --------------------------------------------- */
 
         let angleDifference =
             fish.targetAngle -
@@ -777,61 +784,58 @@ const Aquarium3D = (() => {
 
         fish.angle +=
             angleDifference *
-            0.008;
+            0.006;
 
 
-        /* -----------------------------------------------
-           VELOCIDAD
-        ----------------------------------------------- */
-
-        const baseSpeed =
-            fish.speed;
+        /* ---------------------------------------------
+           VELOCIDAD SUAVE
+        --------------------------------------------- */
 
         const desiredVX =
             Math.cos(
                 fish.angle
             ) *
-            baseSpeed;
+            fish.speed;
 
         const desiredVY =
             Math.sin(
                 fish.angle
             ) *
-            baseSpeed;
+            fish.speed;
 
         fish.vx +=
             (
                 desiredVX -
                 fish.vx
             ) *
-            0.012;
+            0.008;
 
         fish.vy +=
             (
                 desiredVY -
                 fish.vy
             ) *
-            0.012;
+            0.008;
 
 
-        /* -----------------------------------------------
-           PEQUEÑO BALANCEO
-        ----------------------------------------------- */
+        /* ---------------------------------------------
+           MOVIMIENTO VERTICAL NATURAL
+        --------------------------------------------- */
 
-        const gentleWave =
+        const wave =
             Math.sin(
-                time * 0.0007 +
-                fish.id.length
+                time * 0.00065 +
+                fish.id.length * 1.7
             );
 
         fish.vy +=
-            gentleWave *
-            0.00000045;
+            wave *
+            0.00000032;
 
 
-        /* -----------------------------------------------
-           POSICIÓN
-        ----------------------------------------------- */
+        /* ---------------------------------------------
+           MOVIMIENTO
+        --------------------------------------------- */
 
         fish.x +=
             fish.vx;
@@ -840,9 +844,9 @@ const Aquarium3D = (() => {
             fish.vy;
 
 
-        /* -----------------------------------------------
+        /* ---------------------------------------------
            LÍMITES
-        ----------------------------------------------- */
+        --------------------------------------------- */
 
         const left =
             0.09;
@@ -867,9 +871,8 @@ const Aquarium3D = (() => {
                 left;
 
             fish.targetX =
-                0.25 +
-                Math.random() *
-                0.45;
+                0.35 +
+                Math.random() * 0.35;
 
             fish.targetAngle =
                 0;
@@ -885,9 +888,8 @@ const Aquarium3D = (() => {
                 right;
 
             fish.targetX =
-                0.25 +
-                Math.random() *
-                0.45;
+                0.30 +
+                Math.random() * 0.35;
 
             fish.targetAngle =
                 Math.PI;
@@ -904,8 +906,7 @@ const Aquarium3D = (() => {
 
             fish.targetY =
                 0.25 +
-                Math.random() *
-                0.30;
+                Math.random() * 0.25;
         }
 
 
@@ -919,14 +920,13 @@ const Aquarium3D = (() => {
 
             fish.targetY =
                 0.25 +
-                Math.random() *
-                0.30;
+                Math.random() * 0.25;
         }
 
 
-        /* -----------------------------------------------
+        /* ---------------------------------------------
            ORIENTACIÓN
-        ----------------------------------------------- */
+        --------------------------------------------- */
 
         fish.direction =
             Math.cos(
@@ -934,7 +934,6 @@ const Aquarium3D = (() => {
             ) >= 0
                 ? 1
                 : -1;
-
 
         fish.renderX =
             fish.x;
@@ -956,11 +955,6 @@ const Aquarium3D = (() => {
         if (!ctx || !fish) {
             return;
         }
-
-
-        /* -----------------------------------------------
-           TIPO
-        ----------------------------------------------- */
 
         let variant =
             fish.variant;
@@ -986,10 +980,6 @@ const Aquarium3D = (() => {
                 variant
             ];
 
-
-        /* -----------------------------------------------
-           POSICIÓN
-        ----------------------------------------------- */
 
         const x =
             width *
@@ -1027,10 +1017,6 @@ const Aquarium3D = (() => {
             );
 
 
-        /* -----------------------------------------------
-           DIRECCIÓN
-        ----------------------------------------------- */
-
         const angle =
             Number.isFinite(
                 fish.angle
@@ -1038,27 +1024,26 @@ const Aquarium3D = (() => {
                 ? fish.angle
                 : 0;
 
+
         const facingLeft =
             Math.cos(angle) < 0;
 
 
-        /*
-         * Pequeño balanceo del cuerpo.
-         */
+        /* ---------------------------------------------
+           BALANCEO
+        --------------------------------------------- */
 
         const swimmingSway =
             Math.sin(
-                time *
-                0.0014 +
-                fish.id.length
+                time * 0.00125 +
+                fish.id.length * 2
             ) *
-            0.025;
+            0.035;
 
 
         const visualAngle =
-            Math.sin(angle) *
-            0.22 +
-            swimmingSway;
+            swimmingSway +
+            Math.sin(angle) * 0.12;
 
 
         ctx.save();
@@ -1081,12 +1066,62 @@ const Aquarium3D = (() => {
 
 
         /* =================================================
+           COLA
+        ================================================= */
+
+        const tailWave =
+            Math.sin(
+                time * 0.006 +
+                fish.id.length
+            ) *
+            fishScale *
+            0.07;
+
+        ctx.fillStyle =
+            style.fin;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -fishScale * 0.52,
+            0
+        );
+
+        ctx.quadraticCurveTo(
+            -fishScale * 0.88,
+            -fishScale * 0.12 +
+            tailWave,
+            -fishScale * 1.20,
+            -fishScale * 0.58
+        );
+
+        ctx.quadraticCurveTo(
+            -fishScale * 1.30,
+            0,
+            -fishScale * 1.20,
+            fishScale * 0.58
+        );
+
+        ctx.quadraticCurveTo(
+            -fishScale * 0.88,
+            fishScale * 0.12 +
+            tailWave,
+            -fishScale * 0.52,
+            0
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        /* =================================================
            CUERPO
         ================================================= */
 
         const body =
             ctx.createRadialGradient(
-                -fishScale * 0.25,
+                -fishScale * 0.28,
                 -fishScale * 0.25,
                 fishScale * 0.08,
                 0,
@@ -1100,7 +1135,7 @@ const Aquarium3D = (() => {
         );
 
         body.addColorStop(
-            0.45,
+            0.42,
             style.body2
         );
 
@@ -1128,7 +1163,7 @@ const Aquarium3D = (() => {
 
 
         /* =================================================
-           PATRÓN ESPECÍFICO
+           PATRÓN
         ================================================= */
 
         drawFishPattern(
@@ -1139,63 +1174,32 @@ const Aquarium3D = (() => {
 
 
         /* =================================================
-           COLA
-        ================================================= */
-
-        ctx.fillStyle =
-            style.fin;
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            -fishScale * 0.58,
-            0
-        );
-
-        ctx.quadraticCurveTo(
-            -fishScale * 0.95,
-            -fishScale * 0.15,
-            -fishScale * 1.18,
-            -fishScale * 0.58
-        );
-
-        ctx.quadraticCurveTo(
-            -fishScale * 1.28,
-            0,
-            -fishScale * 1.18,
-            fishScale * 0.58
-        );
-
-        ctx.quadraticCurveTo(
-            -fishScale * 0.95,
-            fishScale * 0.15,
-            -fishScale * 0.58,
-            0
-        );
-
-        ctx.closePath();
-
-        ctx.fill();
-
-
-        /* =================================================
            ALETA SUPERIOR
         ================================================= */
 
+        const finWave =
+            Math.sin(
+                time * 0.004 +
+                fish.id.length
+            ) *
+            fishScale *
+            0.05;
+
         ctx.fillStyle =
             style.fin;
 
         ctx.beginPath();
 
         ctx.moveTo(
-            -fishScale * 0.20,
-            -fishScale * 0.40
+            -fishScale * 0.18,
+            -fishScale * 0.38
         );
 
         ctx.quadraticCurveTo(
-            0,
-            -fishScale * 0.92,
-            fishScale * 0.28,
+            fishScale * 0.02,
+            -fishScale * 0.90 +
+            finWave,
+            fishScale * 0.30,
             -fishScale * 0.35
         );
 
@@ -1217,7 +1221,8 @@ const Aquarium3D = (() => {
 
         ctx.quadraticCurveTo(
             fishScale * 0.15,
-            fishScale * 0.85,
+            fishScale * 0.82 +
+            finWave,
             fishScale * 0.36,
             fishScale * 0.28
         );
@@ -1283,6 +1288,7 @@ const Aquarium3D = (() => {
 
         ctx.fill();
 
+
         ctx.restore();
     }
 
@@ -1297,9 +1303,9 @@ const Aquarium3D = (() => {
         fishScale
     ) {
 
-        /* =================================================
+        /* -----------------------------------------------
            PAYASO
-        ================================================= */
+        ----------------------------------------------- */
 
         if (
             fish.variant ===
@@ -1312,7 +1318,7 @@ const Aquarium3D = (() => {
             ctx.beginPath();
 
             ctx.ellipse(
-                -fishScale * 0.35,
+                -fishScale * 0.36,
                 0,
                 fishScale * 0.12,
                 fishScale * 0.57,
@@ -1323,11 +1329,10 @@ const Aquarium3D = (() => {
 
             ctx.fill();
 
-
             ctx.beginPath();
 
             ctx.ellipse(
-                fishScale * 0.12,
+                fishScale * 0.10,
                 0,
                 fishScale * 0.10,
                 fishScale * 0.55,
@@ -1342,9 +1347,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* =================================================
+        /* -----------------------------------------------
            AZUL
-        ================================================= */
+        ----------------------------------------------- */
 
         if (
             fish.variant ===
@@ -1358,26 +1363,26 @@ const Aquarium3D = (() => {
 
             ctx.moveTo(
                 -fishScale * 0.65,
-                -fishScale * 0.25
+                -fishScale * 0.28
             );
 
             ctx.quadraticCurveTo(
                 -fishScale * 0.10,
                 -fishScale * 0.50,
-                fishScale * 0.55,
-                -fishScale * 0.18
+                fishScale * 0.58,
+                -fishScale * 0.15
             );
 
             ctx.lineTo(
-                fishScale * 0.45,
-                fishScale * 0.02
+                fishScale * 0.42,
+                fishScale * 0.04
             );
 
             ctx.quadraticCurveTo(
-                -fishScale * 0.15,
                 -fishScale * 0.18,
+                -fishScale * 0.15,
                 -fishScale * 0.65,
-                -fishScale * 0.25
+                -fishScale * 0.28
             );
 
             ctx.fill();
@@ -1386,9 +1391,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* =================================================
+        /* -----------------------------------------------
            AMARILLO
-        ================================================= */
+        ----------------------------------------------- */
 
         if (
             fish.variant ===
@@ -1416,9 +1421,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* =================================================
+        /* -----------------------------------------------
            CORAL
-        ================================================= */
+        ----------------------------------------------- */
 
         if (
             fish.variant ===
@@ -1431,8 +1436,8 @@ const Aquarium3D = (() => {
             ctx.beginPath();
 
             ctx.ellipse(
-                -fishScale * 0.25,
-                -fishScale * 0.02,
+                -fishScale * 0.27,
+                -fishScale * 0.01,
                 fishScale * 0.12,
                 fishScale * 0.48,
                 0,
@@ -1445,7 +1450,7 @@ const Aquarium3D = (() => {
             ctx.beginPath();
 
             ctx.ellipse(
-                fishScale * 0.15,
+                fishScale * 0.14,
                 0,
                 fishScale * 0.08,
                 fishScale * 0.42,
@@ -1460,9 +1465,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* =================================================
+        /* -----------------------------------------------
            VIOLETA
-        ================================================= */
+        ----------------------------------------------- */
 
         if (
             fish.variant ===
@@ -1470,7 +1475,7 @@ const Aquarium3D = (() => {
         ) {
 
             ctx.fillStyle =
-                "rgba(255,255,255,0.25)";
+                "rgba(255,255,255,0.28)";
 
             ctx.beginPath();
 
@@ -1512,9 +1517,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* =================================================
+        /* -----------------------------------------------
            TURQUESA
-        ================================================= */
+        ----------------------------------------------- */
 
         if (
             fish.variant ===
@@ -1596,8 +1601,7 @@ const Aquarium3D = (() => {
 
         const movement =
             Math.sin(
-                time *
-                0.0015 +
+                time * 0.0015 +
                 plantX * 10
             ) * 5;
 
@@ -1662,7 +1666,9 @@ const Aquarium3D = (() => {
        ROCAS
     ===================================================== */
 
-    function drawRock(rock) {
+    function drawRock(
+        rock
+    ) {
 
         if (!rock) {
             return;
@@ -1788,7 +1794,9 @@ const Aquarium3D = (() => {
        BURBUJAS
     ===================================================== */
 
-    function drawBubbles(time) {
+    function drawBubbles(
+        time
+    ) {
 
         const bubbles = [
 
@@ -1822,8 +1830,7 @@ const Aquarium3D = (() => {
 
             const progress =
                 (
-                    time *
-                    0.00008 +
+                    time * 0.00008 +
                     bubble.offset
                 ) % 1;
 
@@ -1835,8 +1842,7 @@ const Aquarium3D = (() => {
                 height *
                 (
                     0.85 -
-                    progress *
-                    0.65
+                    progress * 0.65
                 );
 
             const radius =
@@ -1974,7 +1980,7 @@ const Aquarium3D = (() => {
         );
 
         reflection.addColorStop(
-            0.9,
+            0.90,
             "rgba(255,255,255,0)"
         );
 
@@ -2088,9 +2094,9 @@ const Aquarium3D = (() => {
         };
 
 
-        /* =================================================
+        /* ---------------------------------------------
            PECES
-        ================================================= */
+        --------------------------------------------- */
 
         if (
             safeType === "fish"
@@ -2102,17 +2108,16 @@ const Aquarium3D = (() => {
                 )
                     ? options.speed
                     : (
-                        0.00004 +
+                        0.000035 +
                         Math.random() *
-                        0.000025
+                        0.000015
                     );
 
             object.direction =
                 options.direction === -1
                     ? -1
                     : (
-                        Math.random() >
-                        0.5
+                        Math.random() > 0.5
                             ? 1
                             : -1
                     );
@@ -2133,15 +2138,14 @@ const Aquarium3D = (() => {
                 clamp(
                     object.y,
                     0.15,
-                    aquarium.sandLevel -
-                    0.12
+                    aquarium.sandLevel - 0.12
                 );
         }
 
 
-        /* =================================================
+        /* ---------------------------------------------
            PLANTAS
-        ================================================= */
+        --------------------------------------------- */
 
         if (
             safeType === "plant"
@@ -2152,9 +2156,9 @@ const Aquarium3D = (() => {
         }
 
 
-        /* =================================================
+        /* ---------------------------------------------
            ROCAS
-        ================================================= */
+        --------------------------------------------- */
 
         if (
             safeType === "rock"
@@ -2178,7 +2182,9 @@ const Aquarium3D = (() => {
        ELIMINAR OBJETO
     ===================================================== */
 
-    function removeObject(id) {
+    function removeObject(
+        id
+    ) {
 
         aquarium.objects =
             aquarium.objects.filter(
@@ -2204,7 +2210,9 @@ const Aquarium3D = (() => {
        ZOOM
     ===================================================== */
 
-    function setZoom(value) {
+    function setZoom(
+        value
+    ) {
 
         camera.zoom =
             clamp(
