@@ -336,35 +336,37 @@ const Aquarium3D = (() => {
 
    function drawObjects(time) {
 
-    for (const object of aquarium.objects) {
+const object = {
 
-        // Mantener los objetos dentro de los límites
-        object.x = Math.max(0.08, Math.min(0.92, object.x));
-        object.y = Math.max(0.12, Math.min(0.78, object.y));
+    id:
+        `${type}-${Date.now()}`,
 
-        if (object.type === "fish") {
+    type,
 
-            updateFish(object, time);
+    x:
+        options.x ??
+        0.5,
 
-            drawFish(object);
+    y:
+        options.y ??
+        0.5,
 
-        } else if (object.type === "plant") {
+    scale:
+        options.scale ??
+        1,
 
-            // Las plantas se apoyan en la arena
-            object.y = aquarium.sandLevel;
+    rotation:
+        options.rotation ??
+        0,
 
-            drawPlant(object, time);
+    speed:
+        options.speed ??
+        0.08,
 
-        } else if (object.type === "rock") {
-
-            // Las rocas también se apoyan en la arena
-            object.y = aquarium.sandLevel - 0.01;
-
-            drawRock(object);
-        }
-    }
-}
-
+    direction:
+        options.direction ??
+        (Math.random() > 0.5 ? 1 : -1)
+};
     /* =====================================================
        PECES
     ===================================================== */
