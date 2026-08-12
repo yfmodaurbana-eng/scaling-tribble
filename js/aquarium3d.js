@@ -371,41 +371,27 @@ const Aquarium3D = (() => {
 
 function updateFish(fish, time) {
 
-    const speed =
-        fish.speed ?? 0.35;
-
-    const direction =
-        fish.direction ?? 1;
-
     const movement =
         Math.sin(
-            time * 0.001 * speed
-        ) * 0.06;
-
-    const animatedX =
-        fish.x + movement * direction;
-
-    const animatedY =
-        fish.y +
-        Math.sin(
-            time * 0.0012
-        ) * 0.015;
+            time * 0.001 * fish.speed
+        ) * 0.08;
 
     fish.renderX =
         Math.max(
-            0.12,
+            0.08,
             Math.min(
-                0.88,
-                animatedX
+                0.92,
+                fish.x + movement
             )
         );
 
     fish.renderY =
         Math.max(
-            0.18,
+            0.12,
             Math.min(
-                0.72,
-                animatedY
+                0.70,
+                fish.y +
+                Math.sin(time * 0.0012) * 0.015
             )
         );
 }
