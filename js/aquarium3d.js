@@ -355,223 +355,169 @@ const Aquarium3D = (() => {
        PECES
     ===================================================== */
 
-    function updateFish(fish, time) {
+function updateFish(fish, time) {
 
-        /*
-         * MUY IMPORTANTE:
-         * Los objetos nuevos también reciben speed/direction
-         * desde addObject().
-         */
+    // Movimiento suave y limitado dentro del cristal
+    const t = time * 0.00035 * (fish.speed || 0.35);
 
-        const speed =
-            typeof fish.speed === "number"
-                ? fish.speed
-                : 0.25;
+    // Oscilación horizontal
+    const horizontal =
+        Math.sin(t) * 0.12;
 
-        const direction =
-            fish.direction === -1
-                ? -1
-                : 1;
+    // Pequeño movimiento vertical
+    const vertical =
+        Math.sin(t * 1.7 + fish.x * 8) * 0.025;
 
-        const movement =
-            Math.sin(
-                time * 0.001 * speed
-            ) * 0.035;
+    // Límites de seguridad.
+    // Dejamos margen para que el cuerpo y la cola
+    // nunca toquen los bordes.
+    const marginX = 0.12;
+    const minX = marginX;
+    const maxX = 1 - marginX;
 
-        /*
-         * Limitamos el movimiento para que el pez
-         * jamás pueda salir del canvas.
-         */
+    const marginY = 0.12;
+    const minY = marginY;
+    const maxY = aquarium.sandLevel - marginY;
 
-        const baseX =
-            typeof fish.x === "number"
-                ? fish.x
-                : 0.5;
+    fish.renderX = Math.max(
+        minX,
+        Math.min(
+            maxX,
+            fish.x + horizontal
+        )
+    );
 
-        const baseY =
-            typeof fish.y === "number"
-                ? fish.y
-                : 0.5;
-
-        fish.renderX =
-            Math.max(
-                0.08,
-                Math.min(
-                    0.92,
-                    baseX + movement
-                )
-            );
-
-        fish.renderY =
-            Math.max(
-                0.12,
-                Math.min(
-                    0.72,
-                    baseY +
-                    Math.sin(
-                        time * 0.0012
-                    ) * 0.015
-                )
-            );
-
-        fish.direction = direction;
-    }
+    fish.renderY = Math.max(
+        minY,
+        Math.min(
+            maxY,
+            fish.y + vertical
+        )
+    );
+}
 
 
-    function drawFish(fish) {
+function drawFish(fish) {
 
-        const x =
-            width *
-            (fish.renderX ?? fish.x ?? 0.5);
+    const x =
+        width * (fish.renderX ?? fish.x);
 
-        const y =
-            height *
-            (fish.renderY ?? fish.y ?? 0.5);
+    const y =
+        height * (fish.renderY ?? fish.y);
 
-        const scale =
-            45 *
-            (fish.scale ?? 1);
+    const scale =
+        45 * fish.scale;
 
-        ctx.save();
+    ctx.save();
 
-        /*
-         * Protección adicional:
-         * el pez se dibuja dentro de los límites.
-         */
+    ctx.translate(x, y);
 
-        const safeX =
-            Math.max(
-                scale * 1.3,
-                Math.min(
-                    width - scale * 1.3,
-                    x
-                )
-            );
+    // Dirección del pez
+    ctx.scale(
+        fish.direction || 1,
+        1
+    );
 
-        const safeY =
-            Math.max(
-                scale,
-                Math.min(
-                    height * 0.78,
-                    y
-                )
-            );
-
-        ctx.translate(
-            safeX,
-            safeY
-        );
-
-        ctx.scale(
-            fish.direction === -1 ? -1 : 1,
-            1
-        );
-
-        /* CUERPO */
-
-        const body =
-            ctx.createRadialGradient(
-                -5,
-                -5,
-                3,
-                0,
-                0,
-                scale
-            );
-
-        body.addColorStop(
-            0,
-            "#8ff4ff"
-        );
-
-        body.addColorStop(
-            0.45,
-            "#35d9ff"
-        );
-
-        body.addColorStop(
-            1,
-            "#087d9b"
-        );
-
-        ctx.fillStyle = body;
-
-        ctx.beginPath();
-
-        ctx.ellipse(
+    const body =
+        ctx.createRadialGradient(
+            -5,
+            -5,
+            3,
             0,
             0,
-            scale,
-            scale * 0.55,
-            0,
-            0,
-            Math.PI * 2
+            scale
         );
 
-        ctx.fill();
+    body.addColorStop(
+        0,
+        "#8ff4ff"
+    );
 
+    body.addColorStop(
+        0.45,
+        "#35d9ff"
+    );
 
-        /* COLA */
+    body.addColorStop(
+        1,
+        "#087d9b"
+    );
 
-        ctx.fillStyle =
-            "#20b8d7";
+    ctx.fillStyle = body;
 
-        ctx.beginPath();
+    // CUERPO
+    ctx.beginPath();
 
-        ctx.moveTo(
-            -scale * 0.65,
-            0
-        );
+    ctx.ellipse(
+        0,
+        0,
+        scale,
+        scale * 0.55,
+        0,
+        0,
+        Math.PI * 2
+    );
 
-        ctx.lineTo(
-            -scale * 1.2,
-            -scale * 0.55
-        );
+    ctx.fill();
 
-        ctx.lineTo(
-            -scale * 1.2,
-            scale * 0.55
-        );
+    // COLA
+    ctx.fillStyle =
+        "#20b8d7";
 
-        ctx.closePath();
+    ctx.beginPath();
 
-        ctx.fill();
+    ctx.moveTo(
+        -scale * 0.65,
+        0
+    );
 
+    ctx.lineTo(
+        -scale * 1.2,
+        -scale * 0.55
+    );
 
-        /* OJO */
+    ctx.lineTo(
+        -scale * 1.2,
+        scale * 0.55
+    );
 
-        ctx.fillStyle =
-            "#ffffff";
+    ctx.closePath();
 
-        ctx.beginPath();
+    ctx.fill();
 
-        ctx.arc(
-            scale * 0.55,
-            -scale * 0.18,
-            scale * 0.12,
-            0,
-            Math.PI * 2
-        );
+    // OJO
+    ctx.fillStyle =
+        "#ffffff";
 
-        ctx.fill();
+    ctx.beginPath();
 
-        ctx.fillStyle =
-            "#001017";
+    ctx.arc(
+        scale * 0.55,
+        -scale * 0.18,
+        scale * 0.12,
+        0,
+        Math.PI * 2
+    );
 
-        ctx.beginPath();
+    ctx.fill();
 
-        ctx.arc(
-            scale * 0.58,
-            -scale * 0.18,
-            scale * 0.055,
-            0,
-            Math.PI * 2
-        );
+    ctx.fillStyle =
+        "#001017";
 
-        ctx.fill();
+    ctx.beginPath();
 
-        ctx.restore();
-    }
+    ctx.arc(
+        scale * 0.58,
+        -scale * 0.18,
+        scale * 0.055,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+}
 
 
     /* =====================================================
