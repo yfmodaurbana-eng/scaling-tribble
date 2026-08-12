@@ -655,17 +655,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =====================================================
-       ESTADO INICIAL
-    ===================================================== */
+/* =====================================================
+   ESTADO INICIAL
+===================================================== */
+
+updateObjectCount();
+
+saveHistory();
+
+/*
+ * Comprobamos de nuevo el estado
+ * después de iniciar el acuario.
+ */
+setTimeout(() => {
 
     updateObjectCount();
 
-    saveHistory();
-
-
-    console.log(
-        "Aquarium Studio iniciado correctamente."
-    );
-
-});
+}, 100);
