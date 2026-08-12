@@ -597,121 +597,17 @@ const Aquarium3D = (() => {
        ACUARIO DEMO
     ===================================================== */
 
-    function createDemoAquarium() {
+function createDemoAquarium() {
 
-        aquarium.objects = [
+    /*
+     * ACUARIO VACÍO POR DEFECTO
+     *
+     * No se añade ningún objeto automáticamente.
+     * Solo aparecerán los elementos que el usuario añada.
+     */
 
-            createFishObject(
-                "fish-1",
-                "clownfish",
-                0.23,
-                0.32,
-                0.95,
-                1
-            ),
-
-            createFishObject(
-                "fish-2",
-                "blue",
-                0.68,
-                0.28,
-                0.82,
-                -1
-            ),
-
-            createFishObject(
-                "fish-3",
-                "yellow",
-                0.45,
-                0.45,
-                0.72,
-                1
-            ),
-
-            createFishObject(
-                "fish-4",
-                "coral",
-                0.79,
-                0.53,
-                0.68,
-                -1
-            ),
-
-            createFishObject(
-                "fish-5",
-                "violet",
-                0.18,
-                0.56,
-                0.62,
-                1
-            ),
-
-            createFishObject(
-                "fish-6",
-                "turquoise",
-                0.57,
-                0.63,
-                0.88,
-                -1
-            ),
-
-            {
-                id: "plant-1",
-                type: "plant",
-                x: 0.10,
-                y: 0.82,
-                scale: 1.1
-            },
-
-            {
-                id: "plant-2",
-                type: "plant",
-                x: 0.28,
-                y: 0.82,
-                scale: 0.85
-            },
-
-            {
-                id: "plant-3",
-                type: "plant",
-                x: 0.48,
-                y: 0.82,
-                scale: 1.25
-            },
-
-            {
-                id: "plant-4",
-                type: "plant",
-                x: 0.73,
-                y: 0.82,
-                scale: 0.95
-            },
-
-            {
-                id: "plant-5",
-                type: "plant",
-                x: 0.91,
-                y: 0.82,
-                scale: 0.75
-            },
-
-            {
-                id: "rock-1",
-                type: "rock",
-                x: 0.28,
-                y: 0.86,
-                scale: 1
-            },
-
-            {
-                id: "rock-2",
-                type: "rock",
-                x: 0.66,
-                y: 0.86,
-                scale: 0.8
-            }
-        ];
-    }
+    aquarium.objects = [];
+}
 
     /* =====================================================
        CREAR PEZ
