@@ -351,34 +351,75 @@ const Aquarium3D = (() => {
     }
 
 
-    /* =====================================================
-       PECES
-    ===================================================== */
+   /* =====================================================
+   PECES
+===================================================== */
 
 function updateFish(fish, time) {
 
-    const t =
-        time * 0.00035 * (fish.speed || 0.35);
+    /*
+     * Velocidad individual del pez.
+     * Si el pez fue creado desde el editor y no tiene
+     * speed, usamos una velocidad suave por defecto.
+     */
+    const speed =
+        fish.speed || 0.35;
 
-    // Movimiento horizontal suave
+    /*
+     * Movimiento continuo y suave.
+     */
+    const t =
+        time * 0.00035 * speed;
+
+    /*
+     * Movimiento horizontal.
+     */
     const horizontal =
         Math.sin(t) * 0.12;
 
-    // Movimiento vertical pequeño
+    /*
+     * Movimiento vertical muy pequeño.
+     * Esto evita que parezca que el pez está saltando.
+     */
     const vertical =
         Math.sin(
-            t * 1.4 + fish.x * 8
+            t * 1.4 +
+            fish.x * 8
         ) * 0.018;
 
-    // Límites laterales
+    /*
+     * =================================================
+     * LÍMITES DEL CRISTAL
+     * =================================================
+     */
+
+    /*
+     * Dejamos espacio suficiente para el cuerpo
+     * y la cola del pez.
+     */
     const marginX = 0.14;
 
     const minX = marginX;
     const maxX = 1 - marginX;
 
-    // Zona de nado
+    /*
+     * Altura mínima:
+     * evita que los peces se peguen a la superficie.
+     */
     const minY = 0.22;
-    const maxY = aquarium.sandLevel - 0.18;
+
+    /*
+     * Altura máxima:
+     * mantiene los peces por encima de la arena.
+     */
+    const maxY =
+        aquarium.sandLevel - 0.18;
+
+    /*
+     * =================================================
+     * POSICIÓN FINAL
+     * =================================================
+     */
 
     fish.renderX =
         Math.max(
@@ -399,36 +440,176 @@ function updateFish(fish, time) {
         );
 }
 
-    // Márgenes laterales
-    const marginX = 0.14;
 
-    const minX = marginX;
-    const maxX = 1 - marginX;
+function drawFish(fish) {
 
-    // Zona donde pueden nadar los peces.
-    // No llegan a la superficie ni a la arena.
-    const minY = 0.22;
-    const maxY = aquarium.sandLevel - 0.18;
+    /*
+     * Posición del pez dentro del canvas.
+     */
+    const x =
+        width *
+        (fish.renderX ?? fish.x);
 
-    fish.renderX =
-        Math.max(
-            minX,
-            Math.min(
-                maxX,
-                fish.x + horizontal
-            )
+    const y =
+        height *
+        (fish.renderY ?? fish.y);
+
+    /*
+     * Tamaño del pez.
+     */
+    const scale =
+        45 *
+        (fish.scale || 1);
+
+    ctx.save();
+
+    /*
+     * Colocamos el origen en el pez.
+     */
+    ctx.translate(
+        x,
+        y
+    );
+
+    /*
+     * Dirección.
+     *
+     * 1  = derecha
+     * -1 = izquierda
+     */
+    ctx.scale(
+        fish.direction || 1,
+        1
+    );
+
+    /*
+     * =================================================
+     * CUERPO
+     * =================================================
+     */
+
+    const body =
+        ctx.createRadialGradient(
+            -5,
+            -5,
+            3,
+            0,
+            0,
+            scale
         );
 
-    fish.renderY =
-        Math.max(
-            minY,
-            Math.min(
-                maxY,
-                fish.y + vertical
-            )
-        );
+    body.addColorStop(
+        0,
+        "#8ff4ff"
+    );
+
+    body.addColorStop(
+        0.45,
+        "#35d9ff"
+    );
+
+    body.addColorStop(
+        1,
+        "#087d9b"
+    );
+
+    ctx.fillStyle =
+        body;
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        0,
+        0,
+        scale,
+        scale * 0.55,
+        0,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /*
+     * =================================================
+     * COLA
+     * =================================================
+     */
+
+    ctx.fillStyle =
+        "#20b8d7";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -scale * 0.65,
+        0
+    );
+
+    ctx.lineTo(
+        -scale * 1.2,
+        -scale * 0.55
+    );
+
+    ctx.lineTo(
+        -scale * 1.2,
+        scale * 0.55
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /*
+     * =================================================
+     * OJO
+     * =================================================
+     */
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        scale * 0.55,
+        -scale * 0.18,
+        scale * 0.12,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    /*
+     * Pupila
+     */
+    ctx.fillStyle =
+        "#001017";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        scale * 0.58,
+        -scale * 0.18,
+        scale * 0.055,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /*
+     * =================================================
+     * FINAL
+     * =================================================
+     */
+
+    ctx.restore();
 }
-
 
     /* =====================================================
        PLANTAS
