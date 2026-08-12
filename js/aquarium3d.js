@@ -499,258 +499,319 @@ const Aquarium3D = (() => {
        DIBUJAR PEZ
     ===================================================== */
 
-    function drawFish(fish) {
+function updateFish(fish, time) {
 
-        if (!ctx || !fish) {
-            return;
-        }
+    /* =================================================
+       VALORES INICIALES
+    ================================================= */
 
-        const safeX =
-            Number.isFinite(
-                fish.renderX
-            )
-                ? fish.renderX
-                : (
-                    Number.isFinite(fish.x)
-                        ? fish.x
-                        : 0.5
-                );
-
-        const safeY =
-            Number.isFinite(
-                fish.renderY
-            )
-                ? fish.renderY
-                : (
-                    Number.isFinite(fish.y)
-                        ? fish.y
-                        : 0.5
-                );
-
-        const x =
-            width * safeX;
-
-        const y =
-            height * safeY;
-
-        const fishScale =
-            45 *
-            (
-                Number.isFinite(
-                    fish.scale
-                )
-                    ? fish.scale
-                    : 1
-            );
-
-        ctx.save();
-
-        ctx.translate(
-            x,
-            y
-        );
-
-        if (
-            Number.isFinite(
-                fish.rotation
-            )
-        ) {
-            ctx.rotate(
-                fish.rotation
-            );
-        }
-
-        ctx.scale(
-            fish.direction === -1
-                ? -1
-                : 1,
-            1
-        );
-
-
-        /* =================================================
-           CUERPO
-        ================================================= */
-
-        const body =
-            ctx.createRadialGradient(
-                -fishScale * 0.2,
-                -fishScale * 0.2,
-                fishScale * 0.08,
-                0,
-                0,
-                fishScale
-            );
-
-        body.addColorStop(
-            0,
-            "#8ff4ff"
-        );
-
-        body.addColorStop(
-            0.45,
-            "#35d9ff"
-        );
-
-        body.addColorStop(
-            1,
-            "#087d9b"
-        );
-
-        ctx.fillStyle = body;
-
-        ctx.beginPath();
-
-        ctx.ellipse(
-            0,
-            0,
-            fishScale,
-            fishScale * 0.55,
-            0,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-
-        /* =================================================
-           COLA
-        ================================================= */
-
-        ctx.fillStyle =
-            "#20b8d7";
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            -fishScale * 0.65,
-            0
-        );
-
-        ctx.lineTo(
-            -fishScale * 1.2,
-            -fishScale * 0.55
-        );
-
-        ctx.lineTo(
-            -fishScale * 1.2,
-            fishScale * 0.55
-        );
-
-        ctx.closePath();
-
-        ctx.fill();
-
-
-        /* =================================================
-           ALETA SUPERIOR
-        ================================================= */
-
-        ctx.fillStyle =
-            "rgba(55,210,240,0.8)";
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            -fishScale * 0.15,
-            -fishScale * 0.42
-        );
-
-        ctx.quadraticCurveTo(
-            0,
-            -fishScale * 0.95,
-            fishScale * 0.28,
-            -fishScale * 0.35
-        );
-
-        ctx.closePath();
-
-        ctx.fill();
-
-
-        /* =================================================
-           ALETA INFERIOR
-        ================================================= */
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            -fishScale * 0.05,
-            fishScale * 0.38
-        );
-
-        ctx.quadraticCurveTo(
-            fishScale * 0.15,
-            fishScale * 0.85,
-            fishScale * 0.35,
-            fishScale * 0.28
-        );
-
-        ctx.closePath();
-
-        ctx.fill();
-
-
-        /* =================================================
-           OJO
-        ================================================= */
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            fishScale * 0.55,
-            -fishScale * 0.18,
-            fishScale * 0.12,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-        ctx.fillStyle =
-            "#001017";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            fishScale * 0.58,
-            -fishScale * 0.18,
-            fishScale * 0.055,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-
-        /* =================================================
-           BRILLO
-        ================================================= */
-
-        ctx.fillStyle =
-            "rgba(255,255,255,0.35)";
-
-        ctx.beginPath();
-
-        ctx.ellipse(
-            -fishScale * 0.25,
-            -fishScale * 0.22,
-            fishScale * 0.28,
-            fishScale * 0.09,
-            -0.2,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-        ctx.restore();
+    if (!Number.isFinite(fish.x)) {
+        fish.x = 0.5;
     }
 
+    if (!Number.isFinite(fish.y)) {
+        fish.y = 0.45;
+    }
+
+    if (!Number.isFinite(fish.speed)) {
+        fish.speed =
+            0.00012 +
+            Math.random() * 0.00008;
+    }
+
+    if (!Number.isFinite(fish.vx)) {
+        fish.vx =
+            fish.speed *
+            (fish.direction === -1 ? -1 : 1);
+    }
+
+    if (!Number.isFinite(fish.vy)) {
+        fish.vy = 0;
+    }
+
+    if (!Number.isFinite(fish.angle)) {
+        fish.angle =
+            fish.direction === -1
+                ? Math.PI
+                : 0;
+    }
+
+    if (!Number.isFinite(fish.targetAngle)) {
+        fish.targetAngle =
+            fish.angle;
+    }
+
+    if (!Number.isFinite(fish.targetX)) {
+        fish.targetX =
+            clamp(
+                fish.x +
+                (
+                    Math.random() - 0.5
+                ) * 0.35,
+                0.14,
+                0.86
+            );
+    }
+
+    if (!Number.isFinite(fish.targetY)) {
+        fish.targetY =
+            clamp(
+                fish.y +
+                (
+                    Math.random() - 0.5
+                ) * 0.25,
+                0.18,
+                aquarium.sandLevel - 0.12
+            );
+    }
+
+    if (!Number.isFinite(fish.nextDecision)) {
+        fish.nextDecision =
+            time +
+            1500 +
+            Math.random() * 3500;
+    }
+
+
+    /* =================================================
+       CAMBIAR OBJETIVO DE VEZ EN CUANDO
+    ================================================= */
+
+    if (time > fish.nextDecision) {
+
+        fish.targetX =
+            clamp(
+                fish.x +
+                (
+                    Math.random() - 0.5
+                ) * 0.45,
+                0.14,
+                0.86
+            );
+
+        fish.targetY =
+            clamp(
+                fish.y +
+                (
+                    Math.random() - 0.5
+                ) * 0.30,
+                0.18,
+                aquarium.sandLevel - 0.12
+            );
+
+        fish.nextDecision =
+            time +
+            1800 +
+            Math.random() * 4500;
+    }
+
+
+    /* =================================================
+       DIRECCIÓN HACIA EL OBJETIVO
+    ================================================= */
+
+    const dx =
+        fish.targetX - fish.x;
+
+    const dy =
+        fish.targetY - fish.y;
+
+    const distance =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
+        );
+
+    if (distance > 0.01) {
+
+        const desiredAngle =
+            Math.atan2(
+                dy,
+                dx
+            );
+
+        fish.targetAngle =
+            desiredAngle;
+    }
+
+
+    /* =================================================
+       GIRO SUAVE
+    ================================================= */
+
+    let angleDifference =
+        fish.targetAngle -
+        fish.angle;
+
+    while (
+        angleDifference > Math.PI
+    ) {
+        angleDifference -=
+            Math.PI * 2;
+    }
+
+    while (
+        angleDifference < -Math.PI
+    ) {
+        angleDifference +=
+            Math.PI * 2;
+    }
+
+    fish.angle +=
+        angleDifference *
+        0.025;
+
+
+    /* =================================================
+       VELOCIDAD NATURAL
+    ================================================= */
+
+    const baseSpeed =
+        Number.isFinite(fish.speed)
+            ? fish.speed
+            : 0.00015;
+
+    const desiredVX =
+        Math.cos(fish.angle) *
+        baseSpeed;
+
+    const desiredVY =
+        Math.sin(fish.angle) *
+        baseSpeed;
+
+    fish.vx +=
+        (
+            desiredVX -
+            fish.vx
+        ) * 0.035;
+
+    fish.vy +=
+        (
+            desiredVY -
+            fish.vy
+        ) * 0.035;
+
+
+    /* =================================================
+       PEQUEÑO MOVIMIENTO NATURAL
+    ================================================= */
+
+    const wave =
+        Math.sin(
+            time * 0.0015 +
+            fish.id.length
+        );
+
+    fish.vy +=
+        wave *
+        0.0000015;
+
+
+    /* =================================================
+       ACTUALIZAR POSICIÓN
+    ================================================= */
+
+    fish.x += fish.vx;
+
+    fish.y += fish.vy;
+
+
+    /* =================================================
+       LÍMITES DEL ACUARIO
+    ================================================= */
+
+    const left =
+        0.10;
+
+    const right =
+        0.90;
+
+    const top =
+        0.14;
+
+    const bottom =
+        aquarium.sandLevel -
+        0.10;
+
+
+    /* -------------------------------------------------
+       PARED IZQUIERDA
+    ------------------------------------------------- */
+
+    if (fish.x < left) {
+
+        fish.x = left;
+
+        fish.targetX =
+            0.25 +
+            Math.random() * 0.5;
+
+        fish.targetAngle =
+            0;
+    }
+
+
+    /* -------------------------------------------------
+       PARED DERECHA
+    ------------------------------------------------- */
+
+    if (fish.x > right) {
+
+        fish.x = right;
+
+        fish.targetX =
+            0.25 +
+            Math.random() * 0.5;
+
+        fish.targetAngle =
+            Math.PI;
+    }
+
+
+    /* -------------------------------------------------
+       PARTE SUPERIOR
+    ------------------------------------------------- */
+
+    if (fish.y < top) {
+
+        fish.y = top;
+
+        fish.targetY =
+            0.25 +
+            Math.random() * 0.35;
+    }
+
+
+    /* -------------------------------------------------
+       PARTE INFERIOR
+    ------------------------------------------------- */
+
+    if (fish.y > bottom) {
+
+        fish.y = bottom;
+
+        fish.targetY =
+            0.25 +
+            Math.random() * 0.35;
+    }
+
+
+    /* =================================================
+       ORIENTACIÓN DEL PEZ
+    ================================================= */
+
+    fish.direction =
+        Math.cos(fish.angle) >= 0
+            ? 1
+            : -1;
+
+
+    fish.renderX =
+        fish.x;
+
+    fish.renderY =
+        fish.y;
+}
 
     /* =====================================================
        PLANTAS
