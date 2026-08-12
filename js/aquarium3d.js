@@ -530,312 +530,45 @@ const Aquarium3D = (() => {
     }
 
 
-    /* =====================================================
-       OBJETOS
-    ===================================================== */
+/* =====================================================
+   OBJETOS
+===================================================== */
 
-    function drawObjects(time) {
+function drawObjects(time) {
 
-        if (!Array.isArray(
-            aquarium.objects
-        )) {
-            return;
-        }
-
-        for (
-            const object
-            of aquarium.objects
-        ) {
-
-            if (!object) {
-                continue;
-            }
-
-            if (
-                object.type === "fish"
-            ) {
-
-                updateFish(
-                    object,
-                    time
-                );
-
-                drawFish(
-                    object,
-                    time
-                );
-
-            } else if (
-                object.type === "plant"
-            ) {
-
-                drawPlant(
-                    object,
-                    time
-                );
-
-            } else if (
-                object.type === "rock"
-            ) {
-
-                drawRock(
-                    object
-                );
-            }
-        }
-    }
-           else if (
-            object.type === "decoration"
-        ) {
-
-            drawDecoration(
-                object,
-                time
-            );
-
-        } else if (
-            object.type === "light"
-        ) {
-
-            drawLight(
-                object,
-                time
-            );
-function drawFish(fish, time) {
-
-    if (!ctx || !fish) {
+    if (!Array.isArray(aquarium.objects)) {
         return;
     }
 
-    const style =
-        fishTypes[fish.variant] ||
-        fishTypes.clownfish;
+    for (const object of aquarium.objects) {
 
-    const x =
-        width * clamp(
-            Number.isFinite(fish.x)
-                ? fish.x
-                : 0.5,
-            0.05,
-            0.95
-        );
+        if (!object) {
+            continue;
+        }
 
-    const y =
-        height * clamp(
-            Number.isFinite(fish.y)
-                ? fish.y
-                : 0.45,
-            0.05,
-            0.80
-        );
+        if (object.type === "fish") {
 
-    const fishScale =
-        45 *
-        (
-            Number.isFinite(fish.scale)
-                ? fish.scale
-                : 1
-        );
+            updateFish(object, time);
 
-    const angle =
-        Number.isFinite(fish.angle)
-            ? fish.angle
-            : 0;
+            drawFish(object, time);
 
-    const sway =
-        Math.sin(
-            time * 0.0015 +
-            fish.id.length
-        ) * 0.04;
+        } else if (object.type === "plant") {
 
-    ctx.save();
+            drawPlant(object, time);
 
-    ctx.translate(x, y);
+        } else if (object.type === "rock") {
 
-    ctx.rotate(
-        angle + sway
-    );
+            drawRock(object);
 
+        } else if (object.type === "decoration") {
 
-    /* COLA */
+            drawDecoration(object, time);
 
-    ctx.fillStyle = style.fin;
+        } else if (object.type === "light") {
 
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -fishScale * 0.45,
-        0
-    );
-
-    ctx.lineTo(
-        -fishScale * 1.15,
-        -fishScale * 0.55
-    );
-
-    ctx.lineTo(
-        -fishScale * 1.05,
-        0
-    );
-
-    ctx.lineTo(
-        -fishScale * 1.15,
-        fishScale * 0.55
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-    /* CUERPO */
-
-    const gradient =
-        ctx.createRadialGradient(
-            -fishScale * 0.25,
-            -fishScale * 0.20,
-            fishScale * 0.05,
-            0,
-            0,
-            fishScale
-        );
-
-    gradient.addColorStop(
-        0,
-        style.body1
-    );
-
-    gradient.addColorStop(
-        0.5,
-        style.body2
-    );
-
-    gradient.addColorStop(
-        1,
-        style.body3
-    );
-
-    ctx.fillStyle = gradient;
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        0,
-        0,
-        fishScale,
-        fishScale * 0.55,
-        0,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /* PATRÓN */
-
-    drawFishPattern(
-        fish,
-        style,
-        fishScale
-    );
-
-
-    /* ALETA SUPERIOR */
-
-    ctx.fillStyle = style.fin;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -fishScale * 0.20,
-        -fishScale * 0.38
-    );
-
-    ctx.quadraticCurveTo(
-        fishScale * 0.05,
-        -fishScale * 0.85,
-        fishScale * 0.30,
-        -fishScale * 0.35
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-    /* ALETA INFERIOR */
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -fishScale * 0.05,
-        fishScale * 0.38
-    );
-
-    ctx.quadraticCurveTo(
-        fishScale * 0.15,
-        fishScale * 0.75,
-        fishScale * 0.35,
-        fishScale * 0.28
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-    /* OJO */
-
-    ctx.fillStyle = "#ffffff";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        fishScale * 0.55,
-        -fishScale * 0.18,
-        fishScale * 0.12,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-    ctx.fillStyle = "#07151b";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        fishScale * 0.58,
-        -fishScale * 0.18,
-        fishScale * 0.055,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /* BRILLO */
-
-    ctx.fillStyle =
-        "rgba(255,255,255,0.35)";
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        -fishScale * 0.28,
-        -fishScale * 0.22,
-        fishScale * 0.25,
-        fishScale * 0.08,
-        -0.25,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-    ctx.restore();
+            drawLight(object, time);
+        }
+    }
 }
 
     /* =====================================================
