@@ -3,44 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>AQUARIO ONLINE - Diseñador 3D</title>
+<title>AQUARIO ONLINE - Urna 3D</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:#030a14;color:white;overflow-x:hidden}
 header{display:flex;justify-content:space-between;padding:12px;background:#071223;align-items:center}
 .logo{font-size:20px;font-weight:900;line-height:1}.logo span{color:#29a7ff}
 header button{background:#1e90ff;color:white;border:0;padding:9px 12px;border-radius:10px;font-weight:bold}
-/* BARRA ACCESORIOS ARRIBA DEL ACUARIO */
-#toolbar{display:flex;gap:6px;padding:10px 12px;background:#0d1c31;margin:12px 12px 0;border-radius:14px 14px 0 0;overflow-x:auto;white-space:nowrap}
-#toolbar button{background:#132a44;border:1px solid #2a4a6b;color:white;padding:10px 12px;border-radius:12px;font-size:14px;cursor:pointer;flex-shrink:0}
-#toolbar button:active{background:#1e90ff;transform:scale(.95)}
-#toolbar small{display:block;font-size:10px;opacity:.7}
-/* ACUARIO 3D REALISTA */
-#escena{margin:0 12px 12px;padding:18px 14px 14px;background:linear-gradient(#1a1a1a,#000);border-radius:0 0 18px 18px;box-shadow:0 20px 40px rgba(0,0,0,.6)}
-#visor{position:relative;height:400px;border-radius:10px;overflow:hidden;background:#062a44;perspective:800px;border:4px solid #111;box-shadow:inset 0 0 0 2px rgba(255,255,255,.2), inset 0 0 60px rgba(0,0,0,.5);touch-action:none}
-#visor img.fondo{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.2) contrast(1.05)}
-#luz{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 0%, rgba(255,255,255,.35), transparent 55%), linear-gradient(rgba(0,150,255,.08), rgba(0,20,60,.45));pointer-events:none;z-index:4}
-#arena{position:absolute;bottom:0;left:0;right:0;height:52px;background:linear-gradient(#e8d5a8,#c9a86a);z-index:2;clip-path:polygon(0 25%,15% 10%,30% 30%,50% 5%,70% 28%,85% 12%,100% 30%,100% 100%,0 100%)}
-#tirante{position:absolute;top:0;left:0;right:0;height:16px;background:#ff4444;display:none;z-index:8;text-align:center;font-size:11px;font-weight:900;line-height:16px}
-#cristal{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.05) 18%,transparent 30%,transparent 78%,rgba(255,255,255,.18) 100%);pointer-events:none;z-index:9}
-#medidas{position:absolute;bottom:8px;left:10px;background:rgba(0,0,0,.7);padding:6px 10px;border-radius:10px;z-index:10;font-size:12px;font-weight:bold}
-#ayuda{position:absolute;top:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);padding:6px 10px;border-radius:20px;font-size:11px;z-index:10;white-space:nowrap}
-#papelera{position:absolute;top:22px;right:10px;background:rgba(255,0,0,.85);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:11;opacity:0;transition:.2s}
-#papelera.show{opacity:1;transform:scale(1.15)}
-/* ITEMS ARRASTRABLES */
-.item{position:absolute;z-index:5;cursor:grab;user-select:none;touch-action:none;font-size:38px;line-height:1;filter:drop-shadow(0 4px 4px rgba(0,0,0,.5));transition:transform .1s}
-.item.drag{cursor:grabbing;transform:scale(1.25);z-index:20}
-.item.pez{animation:nadar 5s ease-in-out infinite alternate}
-@keyframes nadar{0%{transform:translateX(0) rotate(0deg)}100%{transform:translateX(18px) rotate(3deg)}}
-.burbuja{position:absolute;background:rgba(255,255,255,.75);border-radius:50%;animation:subir 4s linear infinite;z-index:3;pointer-events:none}
-@keyframes subir{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-320px);opacity:0}}
-.vista-btns{position:absolute;bottom:8px;right:8px;display:flex;gap:5px;z-index:10}
-.vista-btns button{background:rgba(0,0,0,.7);color:white;border:1px solid #555;padding:6px 8px;border-radius:8px;font-size:12px}
+/* MENU DESPLEGABLE SUPERIOR */
+#menu{display:flex;gap:6px;padding:10px 12px;background:#0d1c31;margin:12px 12px 0;border-radius:14px 14px 0 0;overflow-x:auto}
+#menu button{background:#132a44;border:1px solid #2a4a6b;color:white;padding:10px 12px;border-radius:12px;cursor:pointer;white-space:nowrap;font-size:14px}
+#menu button.active{background:#1e90ff}
+#panel{margin:0 12px;background:#132a44;padding:12px;border-radius:0 0 14px 14px;display:none}
+#panel.show{display:block}
+#panel h3{margin:0 0 8px;font-size:14px;color:#29a7ff}
+.opciones{display:flex;gap:8px;flex-wrap:wrap}
+.opciones button{background:#0d1c31;border:1px solid #2a4a6b;color:white;padding:10px 10px;border-radius:10px;cursor:pointer;font-size:13px}
+.opciones button:active{background:#1e90ff}
+.opciones small{display:block;font-size:10px;opacity:.7}
+input[type=range]{width:100%;accent-color:#29a7ff}
+#escena{margin:12px;padding:10px;background:#111;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+#visor{position:relative;height:430px;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 20%,#1a3a5a,#050d1a);touch-action:none;cursor:grab}
+#visor:active{cursor:grabbing}
+#visor canvas{width:100%!important;height:100%!important;display:block}
+#hint{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);padding:6px 12px;border-radius:20px;font-size:11px;z-index:5;white-space:nowrap}
+#medidas{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.7);padding:6px 10px;border-radius:10px;font-size:12px;font-weight:bold;z-index:5}
+#tirante{position:absolute;top:10px;left:10px;right:10px;background:#ff4444;text-align:center;font-size:11px;font-weight:900;padding:4px;border-radius:8px;display:none;z-index:5}
+#contador{position:absolute;top:38px;right:10px;background:rgba(0,0,0,.6);padding:5px 8px;border-radius:10px;font-size:11px;z-index:5}
 main{padding:0 12px 12px}
 .panel{background:#0d1c31;padding:14px;border-radius:15px;margin-bottom:12px}
 .panel h2{margin:0 0 10px;color:#29a7ff}
 .panel label{display:block;margin-top:10px;font-size:14px}
-.panel input{width:100%;accent-color:#29a7ff}
+.panel input{width:100%}
 .grosores{display:flex;gap:6px;margin-top:6px}
 .grosores button{flex:1;background:#132a44;color:white;border:1px solid #2a4a6b;padding:8px;border-radius:8px}
 .grosores button.active{background:#1e90ff}
@@ -48,124 +43,226 @@ main{padding:0 12px 12px}
 .litros small{display:block;font-size:12px;font-weight:400}
 #avisos div{padding:10px;border-radius:8px;margin-bottom:8px;font-size:13px}
 .ok{background:#123b24}.warn{background:#4a3800}.bad{background:#5a1111}
+#lista{font-size:12px;opacity:.9}
 </style>
 </head>
 <body>
 <header><div class="logo">🐠 AQUARIO<br><span>ONLINE</span></div><button onclick="window.print()">⬇ Ficha PDF</button></header>
 
-<!-- BOTONES ARRIBA DEL ACUARIO -->
-<div id="toolbar">
-<button onclick="addItem('pez')">🐟<small>Pez</small></button>
-<button onclick="addItem('pez2')">🐠<small>Tropical</small></button>
-<button onclick="addItem('planta')">🌿<small>Planta</small></button>
-<button onclick="addItem('planta2')">🌱<small>Musgo</small></button>
-<button onclick="addItem('roca')">🪨<small>Roca</small></button>
-<button onclick="addItem('tronco')">🪵<small>Tronco</small></button>
-<button onclick="addItem('casa')">🏠<small>Casa</small></button>
-<button onclick="addItem('equipo')">⚙️<small>Filtro</small></button>
-<button onclick="addItem('luz')">💡<small>Luz</small></button>
-<button onclick="addItem('caracol')">🐌<small>Caracol</small></button>
-<button onclick="limpiar()" style="background:#5a1111">🗑️<small>Limpiar</small></button>
+<!-- MENU DESPLEGABLE -->
+<div id="menu">
+<button onclick="abrir('agua',this)" class="active">💧 Agua</button>
+<button onclick="abrir('arena',this)">🏖️ Arena / Sustrato</button>
+<button onclick="abrir('rocas',this)">🪨 Rocas</button>
+<button onclick="abrir('plantas',this)">🌿 Plantas</button>
+<button onclick="abrir('peces',this)">🐟 Peces</button>
+<button onclick="abrir('equipo',this)">⚙️ Equipo</button>
+<button onclick="limpiarTodo()" style="background:#5a1111">🗑️ Vaciar</button>
 </div>
+<div id="panel" class="show"></div>
 
 <div id="escena">
-<div id="visor">
-<img class="fondo" src="https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=1200&q=80" alt="Acuario plantado">
-<div id="arena"></div>
-<div id="items"></div>
-<div id="luz"></div>
-<div id="tirante">⚠ TIRANTE OBLIGATORIO</div>
-<div id="cristal"></div>
-<div id="ayuda">👆 Arrastra para mover • Saca fuera para borrar</div>
-<div id="papelera">🗑️</div>
-<div id="medidas">100cm x 40cm x 40cm - 160L</div>
-<div class="vista-btns"><button onclick="cambiarVista('montaje')">Montaje</button><button onclick="cambiarVista('real')">Llenar agua</button></div>
-<div class="burbuja" style="left:20%;bottom:20px;width:8px;height:8px"></div>
-<div class="burbuja" style="left:50%;bottom:10px;width:12px;height:12px;animation-delay:1s"></div>
-<div class="burbuja" style="left:75%;bottom:30px;width:6px;height:6px;animation-delay:2s"></div>
-</div>
+<div id="visor"><div id="hint">👆 Arrastra para girar • Pellizca para zoom • Toca un pez para borrarlo</div><div id="tirante">⚠ TIRANTE OBLIGATORIO</div><div id="contador">0 objetos</div><div id="medidas">100 x 40 x 40 cm - 160L</div></div>
 </div>
 
 <main>
-<div class="panel"><h2>PARAMETROS</h2>
+<div class="panel"><h2>PARAMETROS URNA</h2>
 <label>Largo: <b id="v-largo">100 cm</b></label><input type="range" id="largo" min="30" max="200" value="100">
 <label>Ancho: <b id="v-ancho">40 cm</b></label><input type="range" id="ancho" min="25" max="80" value="40">
 <label>Alto: <b id="v-alto">40 cm</b></label><input type="range" id="alto" min="25" max="80" value="40">
-<label>Grosor cristal:</label><div class="grosores"><button onclick="setGrosor(6,this)">6mm</button><button onclick="setGrosor(8,this)" class="active">8mm</button><button onclick="setGrosor(10,this)">10mm</button><button onclick="setGrosor(12,this)">12mm</button></div>
-<div class="litros">💧 <span id="litros">160 L</span><small id="peso"></small></div></div>
+<label>Grosor:</label><div class="grosores"><button onclick="setGrosor(6,this)">6mm</button><button onclick="setGrosor(8,this)" class="active">8mm</button><button onclick="setGrosor(10,this)">10mm</button><button onclick="setGrosor(12,this)">12mm</button></div>
+<div class="litros">💧 <span id="litros">160 L</span><small id="peso"></small></div>
+<div id="lista"></div></div>
 <div class="panel"><h2>DIAGNOSTICO</h2><div id="avisos"></div><h3>Ficha de cortes:</h3><ul id="ficha"></ul></div>
 </main>
+
 <script>
-let largo=100,ancho=40,alto=40,grosor=8,conAgua=true;
-let visor=document.getElementById('visor'),itemsEl=document.getElementById('items'),papelera=document.getElementById('papelera');
-let MAP={pez:'🐟',pez2:'🐠',planta:'🌿',planta2:'🌱',roca:'🪨',tronco:'🪵',casa:'🏠',equipo:'⚙️',luz:'💡',caracol:'🐌'};
-let SIZES={pez:42,pez2:42,planta:56,planta2:44,roca:52,tronco:68,casa:62,equipo:48,luz:38,caracol:36};
-function addItem(tipo){
-  let el=document.createElement('div');el.className='item'+(tipo.includes('pez')?' pez':'');el.textContent=MAP[tipo];
-  el.style.fontSize=SIZES[tipo]+'px';
-  // planta y roca van al suelo, peces en medio
-  let top = (tipo.includes('planta')||tipo==='roca'||tipo==='tronco'||tipo==='casa') ? 68+Math.random()*15 : 30+Math.random()*35;
-  el.style.left=(15+Math.random()*60)+'%';el.style.top=top+'%';
-  itemsEl.appendChild(el);makeDraggable(el);actualizar();
+let largo=100,ancho=40,alto=40,grosor=8,nivelAgua=85,arenaTipo='Arena Clara',sustratoTipo='Sin sustrato';
+let scene,camera,renderer,urna,grupoAgua,grupoArena,grupoSustrato,grupoRocas,grupoPlantas,grupoPeces,grupoEquipo;
+let rotY=0.6,rotX=0.15,targetRotY=0.6,targetRotX=0.15,zoom=230;
+let dragging=false,lastX,lastY;
+let objetos=[]; // para contador
+let panel=document.getElementById('panel');
+
+const PANELES={
+agua:`<h3>💧 NIVEL DE AGUA</h3><label>Nivel: <b id="v-agua">${nivelAgua}%</b></label><input type="range" min="0" max="100" value="${nivelAgua}" oninput="setAgua(this.value)"><div class="opciones" style="margin-top:10px"><button onclick="setAgua(0)">Vacía</button><button onclick="setAgua(50)">Mitad 50%</button><button onclick="setAgua(85)">Llena 85%</button><button onclick="setAgua(98)">Al borde 98%</button></div><p style="font-size:12px;opacity:.8">El agua se ve dentro de la urna y sube/baja en 3D.</p>`,
+arena:`<h3>🏖️ ARENA / SUSTRATO</h3><p style="font-size:12px">Arena (base):</p><div class="opciones"><button onclick="setArena('Arena Clara','0xe8d096')">🏖️ Arena Clara</button><button onclick="setArena('Arena Negra','0x222222')">⬛ Arena Negra</button><button onclick="setArena('Arena Blanca','0xffffff')">⬜ Arena Blanca</button><button onclick="setArena('Grava Marrón','0x8b6a3a')">🟤 Grava Marrón</button><button onclick="setArena('Sin arena','0x000000')">🚫 Sin arena</button></div><p style="font-size:12px;margin-top:10px">Sustrato nutritivo (para plantas):</p><div class="opciones"><button onclick="setSustrato('Sin sustrato')">🚫 Sin sustrato</button><button onclick="setSustrato('Sustrato Nutritivo')">🌱 Sustrato Nutritivo</button><button onclick="setSustrato('Tierra Volcánica')">🌋 Tierra Volcánica</button></div><label style="margin-top:10px">Grosor arena: <b id="v-arena">4 cm</b></label><input type="range" min="0" max="12" value="4" oninput="setGrosorArena(this.value)">`,
+rocas:`<h3>🪨 ROCAS - Elige clase</h3><div class="opciones">
+<button onclick="addRoca('Dragon','0x777777')">🐉 Dragon<br><small>gris, agujeros</small></button>
+<button onclick="addRoca('Seiryu','0x8a8a8a')">⛰️ Seiryu<br><small>gris azulada</small></button>
+<button onclick="addRoca('Lava Negra','0x1a1a1a')">🌋 Lava Negra<br><small>porosa</small></button>
+<button onclick="addRoca('Lava Roja','0x8b2a1a')">🔴 Lava Roja</button>
+<button onclick="addRoca('Roca Blanca','0xdddddd')">⚪ Roca Blanca</button>
+<button onclick="addRoca('Madera Fósil','0x6b4a2a')">🪵 Madera Fósil</button>
+<button onclick="addRoca('Cuarzo','0xeeeeee')">💎 Cuarzo</button>
+<button onclick="addRoca('Pizarra','0x333333')">⬛ Pizarra</button>
+</div>`,
+plantas:`<h3>🌿 PLANTAS - Las más típicas</h3><div class="opciones">
+<button onclick="addPlanta('Anubia','0x1a7a2a')">🌿 Anubia<br><small>fácil, poca luz</small></button>
+<button onclick="addPlanta('Vallisneria','0x2ecc71')">🌱 Vallisneria<br><small>alta, fondo</small></button>
+<button onclick="addPlanta('Echinodorus','0x27ae60')">🍃 Echinodorus<br><small>hoja ancha</small></button>
+<button onclick="addPlanta('Musgo Java','0x2a9a4a')">🟢 Musgo Java<br><small>tapizante</small></button>
+<button onclick="addPlanta('Cryptocoryne','0x1e6a2a')">🌿 Cryptocoryne<br><small>media</small></button>
+<button onclick="addPlanta('Hygrophila','0x3ac76a')">🌿 Hygrophila<br><small>crece rápido</small></button>
+<button onclick="addPlanta('Cabomba','0x4ae08a')">🌿 Cabomba<br><small>fina</small></button>
+<button onclick="addPlanta('Helecho Java','0x1a5a2a')">🌿 Helecho Java</button>
+</div>`,
+peces:`<h3>🐟 PECES - Clases típicas</h3><div class="opciones">
+<button onclick="addPez('Guppy','0xff7b00')">🐟 Guppy<br><small>naranja</small></button>
+<button onclick="addPez('Neón Tetra','0x00ccff')">🐟 Neón Tetra<br><small>azul</small></button>
+<button onclick="addPez('Betta','0xff2222')">🐠 Betta<br><small>rojo</small></button>
+<button onclick="addPez('Goldfish','0xffa500')">🐡 Goldfish<br><small>naranja grande</small></button>
+<button onclick="addPez('Escalar','0xdddddd')">🐟 Escalar<br><small>blanco</small></button>
+<button onclick="addPez('Corydora','0xaaaaaa')">🐟 Corydora<br><small>fondo</small></button>
+<button onclick="addPez('Molly','0x222222')">🐟 Molly<br><small>negro</small></button>
+<button onclick="addPez('Platy','0xff5555')">🐟 Platy<br><small>rojo</small></button>
+<button onclick="addPez('Tetra Cardenal','0x00ffff')">🐟 Cardenal</button>
+<button onclick="addPez('Disco','0xff9999')">🐟 Disco<br><small>rosa</small></button>
+</div>`,
+equipo:`<h3>⚙️ EQUIPO</h3><div class="opciones"><button onclick="addEquipo('Filtro')">🔲 Filtro Interno</button><button onclick="addEquipo('Calentador')">🌡️ Calentador</button><button onclick="addEquipo('Luz LED')">💡 Luz LED</button><button onclick="addEquipo('Termómetro')">🌡️ Termómetro</button><button onclick="addEquipo('Tronco')">🪵 Tronco</button><button onclick="addEquipo('Casa')">🏠 Casa / Cueva</button></div>`
+};
+function abrir(tipo,btn){
+  document.querySelectorAll('#menu button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  panel.innerHTML=PANELES[tipo];panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function makeDraggable(el){
-  let startX,startY,origX,origY,dragging=false;
-  el.addEventListener('pointerdown',e=>{
-    dragging=true;el.classList.add('drag');el.setPointerCapture(e.pointerId);
-    startX=e.clientX;startY=e.clientY;
-    origX=el.offsetLeft;origY=el.offsetTop;papelera.classList.add('show');
+function init(){
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(45,1,0.1,2000);camera.position.set(0,80,zoom);
+  renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(1);
+  let visor=document.getElementById('visor');visor.appendChild(renderer.domElement);
+  function resize(){let w=visor.clientWidth,h=visor.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  window.addEventListener('resize',resize);resize();
+  scene.add(new THREE.AmbientLight(0xffffff,0.9));
+  let dir=new THREE.DirectionalLight(0xffffff,0.9);dir.position.set(100,200,100);scene.add(dir);
+  let dir2=new THREE.DirectionalLight(0x66aaff,0.5);dir2.position.set(-100,50,-100);scene.add(dir2);
+  urna=new THREE.Group();scene.add(urna);
+  grupoAgua=new THREE.Group();grupoArena=new THREE.Group();grupoSustrato=new THREE.Group();grupoRocas=new THREE.Group();grupoPlantas=new THREE.Group();grupoPeces=new THREE.Group();grupoEquipo=new THREE.Group();
+  urna.add(grupoAgua,grupoArena,grupoSustrato,grupoRocas,grupoPlantas,grupoPeces,grupoEquipo);
+  dibujarUrna();dibujarArena();dibujarAgua();
+  // ROTAR CON EL DEDO - PRECISO
+  visor.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;visor.setPointerCapture(e.pointerId);});
+  visor.addEventListener('pointermove',e=>{if(!dragging)return;targetRotY+=(e.clientX-lastX)*0.008;targetRotX+= (e.clientY-lastY)*0.005;targetRotX=Math.max(-0.6,Math.min(0.6,targetRotX));lastX=e.clientX;lastY=e.clientY;});
+  visor.addEventListener('pointerup',()=>dragging=false);
+  visor.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(120,Math.min(400,zoom+e.deltaY*0.4));camera.position.z=zoom;},{passive:false});
+  // tocar para borrar
+  renderer.domElement.addEventListener('click',e=>{
+    if(Math.abs(e.movementX)>5)return; // si arrastró, no borrar
   });
-  el.addEventListener('pointermove',e=>{
-    if(!dragging)return;
-    let dx=e.clientX-startX,dy=e.clientY-startY;
-    el.style.left=(origX+dx)+'px';el.style.top=(origY+dy)+'px';
-    // si está cerca del borde, vibra la papelera
-    let r=visor.getBoundingClientRect();
-    if(e.clientY<r.top||e.clientY>r.bottom||e.clientX<r.left||e.clientX>r.right){papelera.style.background='#ff0000';papelera.style.transform='scale(1.4)';}
-    else{papelera.style.background='rgba(255,0,0,.85)';papelera.style.transform='scale(1.15)';}
-  });
-  el.addEventListener('pointerup',e=>{
-    if(!dragging)return;dragging=false;el.classList.remove('drag');papelera.classList.remove('show');
-    let r=visor.getBoundingClientRect();
-    // SI LO SUELTAS FUERA DEL ACUARIO -> SE BORRA
-    if(e.clientX<r.left-20||e.clientX>r.right+20||e.clientY<r.top-20||e.clientY>r.bottom+20){
-      el.remove(); if(navigator.vibrate) navigator.vibrate(60);
-    } else {
-      // mantener dentro
-      el.style.left=Math.max(0,Math.min(visor.clientWidth-40,el.offsetLeft))+'px';
-      el.style.top=Math.max(0,Math.min(visor.clientHeight-50,el.offsetTop))+'px';
-    }
-    actualizar();
-  });
+  animar();
 }
-function limpiar(){itemsEl.innerHTML='';actualizar();}
-function cambiarVista(v){
-  conAgua=(v==='real');
-  document.querySelector('#visor img.fondo').style.filter=conAgua?'saturate(1.2)':'brightness(.65) sepia(.3)';
+function dibujarUrna(){
+  // limpiar urna vieja excepto grupos
+  urna.children.filter(c=>c.userData.esCristal).forEach(c=>urna.remove(c));
+  // cristales transparentes
+  let mat=new THREE.MeshPhysicalMaterial({color:0x9fd8ff,transparent:true,opacity:0.16,roughness:0.05,side:THREE.DoubleSide});
+  let frontal=new THREE.Mesh(new THREE.BoxGeometry(largo,alto,0.6),mat);frontal.position.set(0,alto/2,ancho/2);frontal.userData.esCristal=true;urna.add(frontal);
+  let trasero=frontal.clone();trasero.position.z=-ancho/2;urna.add(trasero);
+  let lat=new THREE.Mesh(new THREE.BoxGeometry(0.6,alto,ancho),mat);lat.position.set(-largo/2,alto/2,0);lat.userData.esCristal=true;urna.add(lat);
+  let lat2=lat.clone();lat2.position.x=largo/2;urna.add(lat2);
+  let base=new THREE.Mesh(new THREE.BoxGeometry(largo+4,4,ancho+4),new THREE.MeshStandardMaterial({color:0x111111,roughness:0.6}));base.position.y=-2;base.userData.esCristal=true;urna.add(base);
+  // marco superior negro
+  let marco=new THREE.Mesh(new THREE.BoxGeometry(largo+4,3,ancho+4),new THREE.MeshStandardMaterial({color:0x0a0a0a}));marco.position.y=alto+1;marco.userData.esCristal=true;urna.add(marco);
+  // tirante rojo si hace falta
+  if(largo>90||alto>45){
+    let t=new THREE.Mesh(new THREE.BoxGeometry(8,2,ancho),new THREE.MeshStandardMaterial({color:0xff2222}));t.position.set(0,alto,0);t.userData.esCristal=true;urna.add(t);
+    document.getElementById('tirante').style.display='block';
+  } else document.getElementById('tirante').style.display='none';
+}
+let grosorArena=4, colorArena=0xe8d096;
+function dibujarArena(){
+  grupoArena.clear();grupoSustrato.clear();
+  if(colorArena!==0x000000){
+    let a=new THREE.Mesh(new THREE.BoxGeometry(largo-1,grosorArena,ancho-1),new THREE.MeshStandardMaterial({color:colorArena,roughness:1}));a.position.y=grosorArena/2;grupoArena.add(a);
+    // textura arena: puntitos
+    for(let i=0;i<40;i++){let p=new THREE.Mesh(new THREE.SphereGeometry(0.8,4,4),new THREE.MeshStandardMaterial({color:0xffffff}));p.position.set((Math.random()-0.5)*(largo-4),grosorArena+0.3,(Math.random()-0.5)*(ancho-4));grupoArena.add(p);}
+  }
+  if(sustratoTipo!=='Sin sustrato'){
+    let s=new THREE.Mesh(new THREE.BoxGeometry(largo-1,2,ancho-1),new THREE.MeshStandardMaterial({color:0x4a2a0a}));s.position.y=1;grupoSustrato.add(s);
+  }
+}
+function dibujarAgua(){
+  grupoAgua.clear();
+  if(nivelAgua<=0)return;
+  let h=alto*nivelAgua/100;
+  let agua=new THREE.Mesh(new THREE.BoxGeometry(largo-1.5,h,ancho-1.5),new THREE.MeshPhysicalMaterial({color:0x1e90ff,transparent:true,opacity:0.28,roughness:0.1}));
+  agua.position.y=h/2+grosorArena;grupoAgua.add(agua);
+  // superficie
+  let sup=new THREE.Mesh(new THREE.PlaneGeometry(largo-1.5,ancho-1.5),new THREE.MeshStandardMaterial({color:0x7ec8ff,transparent:true,opacity:0.45}));sup.rotation.x=-Math.PI/2;sup.position.y=h+grosorArena;grupoAgua.add(sup);
+}
+function setAgua(v){nivelAgua=+v;document.getElementById('v-agua').textContent=nivelAgua+'%';dibujarAgua();actualizar();}
+function setArena(nombre,color){arenaTipo=nombre;colorArena=color;dibujarArena();actualizar();}
+function setSustrato(n){sustratoTipo=n;dibujarArena();actualizar();}
+function setGrosorArena(v){grosorArena=+v;document.getElementById('v-arena').textContent=v+' cm';dibujarArena();dibujarAgua();}
+function addRoca(nombre,color){
+  let geo=[new THREE.DodecahedronGeometry(10),new THREE.IcosahedronGeometry(12),new THREE.BoxGeometry(16,10,12)][Math.floor(Math.random()*3)];
+  let m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color,flatShading:true,roughness:1}));
+  m.position.set((Math.random()-0.5)*(largo-30),grosorArena+5,(Math.random()-0.5)*(ancho-20));m.rotation.set(Math.random(),Math.random(),Math.random());
+  m.userData={tipo:'Roca '+nombre};grupoRocas.add(m);objetos.push(m);actualizar();
+}
+function addPlanta(nombre,color){
+  let g=new THREE.Group();
+  let tallo=new THREE.Mesh(new THREE.CylinderGeometry(0.8,1,28,6),new THREE.MeshStandardMaterial({color}));tallo.position.y=14;g.add(tallo);
+  for(let i=0;i<6;i++){let hoja=new THREE.Mesh(new THREE.ConeGeometry(3,14,5),new THREE.MeshStandardMaterial({color}));hoja.position.set((Math.random()-0.5)*8,20+Math.random()*8,(Math.random()-0.5)*8);hoja.rotation.z=(Math.random()-0.5)*0.8;g.add(hoja);}
+  if(nombre.includes('Musgo')){g.scale.set(1.4,0.4,1.4);}
+  if(nombre.includes('Vallisneria')){g.scale.set(0.8,1.6,0.8);}
+  g.position.set((Math.random()-0.5)*(largo-20),grosorArena,(Math.random()-0.5)*(ancho-14));
+  g.userData={tipo:'Planta '+nombre};grupoPlantas.add(g);objetos.push(g);actualizar();
+}
+function addPez(nombre,color){
+  let g=new THREE.Group();
+  let cuerpo=new THREE.Mesh(new THREE.ConeGeometry(3,10,8),new THREE.MeshStandardMaterial({color}));cuerpo.rotation.z=-Math.PI/2;g.add(cuerpo);
+  let cola=new THREE.Mesh(new THREE.ConeGeometry(2.5,5,6),new THREE.MeshStandardMaterial({color}));cola.rotation.z=Math.PI/2;cola.position.x=-7;g.add(cola);
+  let ojo=new THREE.Mesh(new THREE.SphereGeometry(0.8,6,6),new THREE.MeshStandardMaterial({color:0x000000}));ojo.position.set(3,1,2);g.add(ojo);
+  let ojo2=ojo.clone();ojo2.position.z=-2;g.add(ojo2);
+  if(nombre==='Goldfish'||nombre==='Disco')g.scale.set(1.6,1.6,1.6);
+  let h=alto*0.5;
+  g.position.set((Math.random()-0.5)*(largo-20),grosorArena+10+Math.random()*h*0.5,(Math.random()-0.5)*(ancho-16));
+  g.userData={tipo:'Pez '+nombre,vel:0.4+Math.random()*0.4,dir:1};
+  grupoPeces.add(g);objetos.push(g);actualizar();
+}
+function addEquipo(tipo){
+  let m;
+  if(tipo==='Filtro')m=new THREE.Mesh(new THREE.BoxGeometry(10,14,6),new THREE.MeshStandardMaterial({color:0x111111}));
+  else if(tipo==='Calentador')m=new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,20,8),new THREE.MeshStandardMaterial({color:0xcccccc}));
+  else if(tipo==='Luz LED')m=new THREE.Mesh(new THREE.BoxGeometry(largo-10,2,6),new THREE.MeshStandardMaterial({color:0xffffaa,emissive:0xffffaa,emissiveIntensity:0.8}));
+  else if(tipo==='Tronco')m=new THREE.Mesh(new THREE.CylinderGeometry(2,3,28,6),new THREE.MeshStandardMaterial({color:0x8b5a2b}));
+  else m=new THREE.Mesh(new THREE.BoxGeometry(10,8,10),new THREE.MeshStandardMaterial({color:0x8b5a2b}));
+  if(tipo==='Luz LED'){m.position.set(0,alto+4,0);} else m.position.set(largo/2-12,grosorArena+8,0);
+  m.userData={tipo};grupoEquipo.add(m);objetos.push(m);actualizar();
+}
+function limpiarTodo(){grupoRocas.clear();grupoPlantas.clear();grupoPeces.clear();grupoEquipo.clear();objetos=[];actualizar();}
+function animar(){
+  requestAnimationFrame(animar);
+  rotY+=(targetRotY-rotY)*0.08;rotX+=(targetRotX-rotX)*0.08;
+  urna.rotation.y=rotY;urna.rotation.x=rotX;
+  // peces nadan
+  grupoPeces.children.forEach(p=>{p.position.x+=p.userData.vel*p.userData.dir;if(Math.abs(p.position.x)>largo/2-12){p.userData.dir*=-1;p.rotation.y+=Math.PI;} p.position.y+=Math.sin(Date.now()*0.001+p.position.x)*0.05;});
+  grupoPlantas.children.forEach((pl,i)=>{pl.rotation.z=Math.sin(Date.now()*0.001+i)*0.05;});
+  renderer.render(scene,camera);
 }
 function setGrosor(g,btn){grosor=g;document.querySelectorAll('.grosores button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');actualizar();}
 function actualizar(){
   document.getElementById('v-largo').textContent=largo+' cm';document.getElementById('v-ancho').textContent=ancho+' cm';document.getElementById('v-alto').textContent=alto+' cm';
   let litros=Math.round(largo*ancho*alto/1000);document.getElementById('litros').textContent=litros+' L';
-  document.getElementById('peso').textContent='Peso total ~'+Math.round(litros*1.15+15)+' kg - Cristal '+grosor+'mm';
-  document.getElementById('medidas').textContent=`${largo}cm x ${ancho}cm x ${alto}cm - ${litros}L`;
-  document.getElementById('tirante').style.display=(largo>90||alto>45)?'block':'none';
-  // el acuario cambia de altura según el slider
-  document.getElementById('visor').style.height=(300+(alto-25)/55*140)+'px';
+  document.getElementById('peso').textContent='Peso total ~'+Math.round(litros*1.15+15)+' kg - Cristal '+grosor+'mm | Agua '+nivelAgua+'% | Arena '+arenaTipo+' | Sustrato '+sustratoTipo;
+  document.getElementById('medidas').textContent=`${largo}cm x ${ancho}cm x ${alto}cm - ${litros}L - Agua ${nivelAgua}%`;
+  document.getElementById('contador').textContent=objetos.length+' objetos';
+  let counts={};objetos.forEach(o=>{counts[o.userData.tipo]=(counts[o.userData.tipo]||0)+1;});
+  document.getElementById('lista').innerHTML='<b>En tu urna:</b><br>'+(Object.entries(counts).map(([k,v])=>`${k} x${v}`).join(' • ')||'Vacía - añade algo del menú de arriba');
   let rec=alto<=30?6:alto<=40?8:alto<=50?10:12;let a='';
-  if(grosor>=rec)a+=`<div class="ok">✅ CORRECTO: ${grosor}mm es seguro para ${alto}cm.</div>`;
-  else a+=`<div class="bad">🚨 PELIGRO: Con ${alto}cm necesitas ${rec}mm mínimo.</div>`;
+  if(grosor>=rec)a+=`<div class="ok">✅ CORRECTO: ${grosor}mm es seguro para ${alto}cm.</div>`;else a+=`<div class="bad">🚨 PELIGRO: Con ${alto}cm necesitas ${rec}mm mínimo.</div>`;
   if(largo>90)a+=`<div class="warn">⚠️ TIRANTE OBLIGATORIO: Largo ${largo}cm > 90cm.</div>`;
-  if(largo>130)a+=`<div class="warn">⚠️ PON 2 TIRANTES.</div>`;
   document.getElementById('avisos').innerHTML=a||`<div class="ok">✅ Montaje seguro</div>`;
   document.getElementById('ficha').innerHTML=`<li>Frontal/Trasero: 2x ${largo} x ${alto} cm</li><li>Laterales: 2x ${(ancho-grosor*2/10).toFixed(1)} x ${alto} cm</li><li>Base: 1x ${largo} x ${ancho} cm</li><li>Silicona: ${litros<=100?1:litros<=250?2:3} tubo(s)</li><li>Tirantes: ${largo>90?'1x '+(ancho-2)+' x 8cm':'No necesita'}</li>`;
+  if(urna){dibujarUrna();}
 }
-document.getElementById('largo').addEventListener('input',e=>{largo=+e.target.value;actualizar();});
-document.getElementById('ancho').addEventListener('input',e=>{ancho=+e.target.value;actualizar();});
-document.getElementById('alto').addEventListener('input',e=>{alto=+e.target.value;actualizar();});
-// decor inicial
-['pez','pez2','planta','planta','roca','tronco'].forEach(addItem);
-actualizar();
+document.getElementById('largo').addEventListener('input',e=>{largo=+e.target.value;dibujarUrna();dibujarArena();dibujarAgua();actualizar();});
+document.getElementById('ancho').addEventListener('input',e=>{ancho=+e.target.value;dibujarUrna();dibujarArena();dibujarAgua();actualizar();});
+document.getElementById('alto').addEventListener('input',e=>{alto=+e.target.value;dibujarUrna();dibujarAgua();actualizar();});
+abrir('agua',document.querySelector('#menu button'));
+init();actualizar();
+addRoca('Dragon',0x777777);addPlanta('Anubia',0x1a7a2a);addPez('Guppy',0xff7b00);
 </script>
 </body>
 </html>
