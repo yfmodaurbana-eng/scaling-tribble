@@ -22,11 +22,10 @@ header button{background:#1e90ff;color:white;border:0;padding:9px 12px;border-ra
 .opciones button:active{background:#1e90ff}
 .opciones small{display:block;font-size:10px;opacity:.7}
 input[type=range]{width:100%;accent-color:#29a7ff}
-/* MODO GIRAR / MOVER */
 #modos{display:flex;gap:8px;margin:12px 12px 0}
 #modos button{flex:1;padding:12px;border-radius:12px;border:1px solid #2a4a6b;background:#132a44;color:white;font-weight:bold;font-size:14px;cursor:pointer}
-#modos button.active{background:#1e90ff;border-color:#1e90ff}
-#escena{margin:12px;padding:10px;background:#111;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+#modos button.active{background:#1e90ff}
+#escena{margin:12px;padding:10px;background:#111;border-radius:16px}
 #visor{position:relative;height:440px;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 35%,#2a6a9a 0%,#0a3a5e 55%,#030a14 100%);touch-action:none;cursor:grab}
 #visor.mover{cursor:crosshair}
 #visor canvas{width:100%!important;height:100%!important;display:block}
@@ -56,7 +55,6 @@ main{padding:0 12px 12px}
 </head>
 <body>
 <header><div class="logo">🐠 AQUARIO<br><span>ONLINE</span></div><button onclick="window.print()">⬇ Ficha PDF</button></header>
-
 <div id="menu">
 <button onclick="abrir('agua',this)" class="active">💧 Agua</button>
 <button onclick="abrir('arena',this)">🏖️ Arena / Sustrato</button>
@@ -67,34 +65,18 @@ main{padding:0 12px 12px}
 <button onclick="limpiarTodo()" style="background:#5a1111">🗑️ Vaciar</button>
 </div>
 <div id="panel" class="show"></div>
-
-<div id="modos">
-<button id="btn-girar" class="active" onclick="setModo('girar')">🔄 GIRAR URNA</button>
-<button id="btn-mover" onclick="setModo('mover')">✋ MOVER COSAS</button>
-</div>
-
-<div id="escena">
-<div id="visor"><div id="hint">🔄 Arrastra para girar</div><div id="tirante">⚠ TIRANTE OBLIGATORIO</div><div id="contador">0 objetos</div><div id="seleccionado"></div><div id="medidas">100 x 40 x 40 cm - 160L</div></div>
-</div>
-<div id="controles-mover">
-<button onclick="moverSeleccionado('izq')">⬅️</button>
-<button onclick="moverSeleccionado('der')">➡️</button>
-<button onclick="moverSeleccionado('arriba')">⬆️ Subir</button>
-<button onclick="moverSeleccionado('abajo')">⬇️ Bajar</button>
-<button onclick="borrarSeleccionado()" style="background:#a00">🗑️ Borrar</button>
-</div>
-
+<div id="modos"><button id="btn-girar" class="active" onclick="setModo('girar')">🔄 GIRAR URNA</button><button id="btn-mover" onclick="setModo('mover')">✋ MOVER COSAS</button></div>
+<div id="escena"><div id="visor"><div id="hint">🔄 Arrastra para girar</div><div id="tirante">⚠ TIRANTE OBLIGATORIO</div><div id="contador">0 objetos</div><div id="seleccionado"></div><div id="medidas">100 x 40 x 40 cm - 160L</div></div></div>
+<div id="controles-mover"><button onclick="moverSeleccionado('izq')">⬅️</button><button onclick="moverSeleccionado('der')">➡️</button><button onclick="moverSeleccionado('arriba')">⬆️ Subir</button><button onclick="moverSeleccionado('abajo')">⬇️ Bajar</button><button onclick="borrarSeleccionado()" style="background:#a00">🗑️ Borrar</button></div>
 <main>
 <div class="panel"><h2>PARAMETROS URNA</h2>
 <label>Largo: <b id="v-largo">100 cm</b></label><input type="range" id="largo" min="30" max="200" value="100">
 <label>Ancho: <b id="v-ancho">40 cm</b></label><input type="range" id="ancho" min="25" max="80" value="40">
 <label>Alto: <b id="v-alto">40 cm</b></label><input type="range" id="alto" min="25" max="80" value="40">
 <label>Grosor:</label><div class="grosores"><button onclick="setGrosor(6,this)">6mm</button><button onclick="setGrosor(8,this)" class="active">8mm</button><button onclick="setGrosor(10,this)">10mm</button><button onclick="setGrosor(12,this)">12mm</button></div>
-<div class="litros">💧 <span id="litros">160 L</span><small id="peso"></small></div>
-<div id="lista"></div></div>
+<div class="litros">💧 <span id="litros">160 L</span><small id="peso"></small></div><div id="lista"></div></div>
 <div class="panel"><h2>DIAGNOSTICO</h2><div id="avisos"></div><h3>Ficha de cortes:</h3><ul id="ficha"></ul></div>
 </main>
-
 <script>
 let largo=100,ancho=40,alto=40,grosor=8,nivelAgua=85,arenaTipo='Arena Clara',sustratoTipo='Sin sustrato';
 let scene,camera,renderer,urna,grupoAgua,grupoArena,grupoSustrato,grupoRocas,grupoPlantas,grupoPeces,grupoEquipo,grupoBurbujas;
@@ -102,36 +84,20 @@ let rotY=0.6,rotX=0.12,targetRotY=0.6,targetRotX=0.12,zoom=210;
 let dragging=false,lastX,lastY,modo='girar',seleccionado=null,arrastrandoObjeto=false;
 let objetos=[];let panel=document.getElementById('panel');
 let raycaster=new THREE.Raycaster(),mouse=new THREE.Vector2();
-
 const PANELES={
 agua:`<h3>💧 NIVEL DE AGUA</h3><label>Nivel: <b id="v-agua">${nivelAgua}%</b></label><input type="range" min="0" max="100" value="${nivelAgua}" oninput="setAgua(this.value)"><div class="opciones" style="margin-top:10px"><button onclick="setAgua(0)">Vacía</button><button onclick="setAgua(50)">Mitad 50%</button><button onclick="setAgua(85)">Llena 85%</button><button onclick="setAgua(98)">Al borde 98%</button></div>`,
-arena:`<h3>🏖️ ARENA / SUSTRATO</h3><p style="font-size:12px">Arena:</p><div class="opciones"><button onclick="setArena('Arena Clara','0xe8d096')">🏖️ Clara</button><button onclick="setArena('Arena Negra','0x1a1a1a')">⬛ Negra</button><button onclick="setArena('Arena Blanca','0xffffff')">⬜ Blanca</button><button onclick="setArena('Grava','0x8b6a3a')">🟤 Grava</button><button onclick="setArena('Sin arena','0x000000')">🚫 Sin arena</button></div><p style="font-size:12px;margin-top:10px">Sustrato:</p><div class="opciones"><button onclick="setSustrato('Sin sustrato')">🚫 Sin sustrato</button><button onclick="setSustrato('Nutritivo')">🌱 Nutritivo</button><button onclick="setSustrato('Volcánica')">🌋 Volcánica</button></div><label style="margin-top:10px">Grosor arena: <b id="v-arena">4 cm</b></label><input type="range" min="0" max="12" value="4" oninput="setGrosorArena(this.value)">`,
-rocas:`<h3>🪨 ROCAS</h3><div class="opciones"><button onclick="addRoca('Dragon','0x777777')">🐉 Dragon</button><button onclick="addRoca('Seiryu','0x8a8a8a')">⛰️ Seiryu</button><button onclick="addRoca('Lava Negra','0x1a1a1a')">🌋 Lava Negra</button><button onclick="addRoca('Lava Roja','0x8b2a1a')">🔴 Lava Roja</button><button onclick="addRoca('Roca Blanca','0xdddddd')">⚪ Blanca</button><button onclick="addRoca('Madera Fósil','0x6b4a2a')">🪵 Madera Fósil</button><button onclick="addRoca('Cuarzo','0xeeeeee')">💎 Cuarzo</button><button onclick="addRoca('Pizarra','0x333333')">⬛ Pizarra</button></div>`,
-plantas:`<h3>🌿 PLANTAS TÍPICAS</h3><div class="opciones"><button onclick="addPlanta('Anubia','0x1a7a2a')">🌿 Anubia</button><button onclick="addPlanta('Vallisneria','0x2ecc71')">🌱 Vallisneria</button><button onclick="addPlanta('Echinodorus','0x27ae60')">🍃 Echinodorus</button><button onclick="addPlanta('Musgo Java','0x2a9a4a')">🟢 Musgo Java</button><button onclick="addPlanta('Cryptocoryne','0x1e6a2a')">🌿 Crypto</button><button onclick="addPlanta('Hygrophila','0x3ac76a')">🌿 Hygrophila</button><button onclick="addPlanta('Cabomba','0x4ae08a')">🌿 Cabomba</button><button onclick="addPlanta('Helecho Java','0x1a5a2a')">🌿 Helecho</button></div>`,
-peces:`<h3>🐟 PECES</h3><div class="opciones"><button onclick="addPez('Guppy','0xff7b00')">🐟 Guppy</button><button onclick="addPez('Neón Tetra','0x00ccff')">🐟 Neón</button><button onclick="addPez('Betta','0xff2222')">🐠 Betta</button><button onclick="addPez('Goldfish','0xffa500')">🐡 Goldfish</button><button onclick="addPez('Escalar','0xdddddd')">🐟 Escalar</button><button onclick="addPez('Corydora','0xaaaaaa')">🐟 Corydora</button><button onclick="addPez('Molly','0x222222')">🐟 Molly</button><button onclick="addPez('Platy','0xff5555')">🐟 Platy</button><button onclick="addPez('Cardenal','0x00ffff')">🐟 Cardenal</button><button onclick="addPez('Disco','0xff9999')">🐟 Disco</button></div>`,
+arena:`<h3>🏖️ ARENA / SUSTRATO</h3><div class="opciones"><button onclick="setArena('Arena Clara','0xe8d096')">🏖️ Clara</button><button onclick="setArena('Arena Negra','0x1a1a1a')">⬛ Negra</button><button onclick="setArena('Arena Blanca','0xffffff')">⬜ Blanca</button><button onclick="setArena('Grava','0x8b6a3a')">🟤 Grava</button><button onclick="setArena('Sin arena','0x000000')">🚫 Sin arena</button></div><p style="font-size:12px;margin-top:10px">Sustrato:</p><div class="opciones"><button onclick="setSustrato('Sin sustrato')">🚫 Sin sustrato</button><button onclick="setSustrato('Nutritivo')">🌱 Nutritivo</button><button onclick="setSustrato('Volcánica')">🌋 Volcánica</button></div><label style="margin-top:10px">Grosor arena: <b id="v-arena">4 cm</b></label><input type="range" min="0" max="12" value="4" oninput="setGrosorArena(this.value)">`,
+rocas:`<h3>🪨 ROCAS - Cada una con su forma</h3><div class="opciones"><button onclick="addRoca('Dragon','0x777777')">🐉 Dragon<br><small>picos grises</small></button><button onclick="addRoca('Seiryu','0x8a8a8a')">⛰️ Seiryu<br><small>vetas blancas</small></button><button onclick="addRoca('Lava Negra','0x1a1a1a')">🌋 Lava Negra<br><small>agujeros</small></button><button onclick="addRoca('Lava Roja','0x8b2a1a')">🔴 Lava Roja</button><button onclick="addRoca('Roca Blanca','0xdddddd')">⚪ Blanca<br><small>redonda</small></button><button onclick="addRoca('Madera Fósil','0x6b4a2a')">🪵 Madera Fósil</button><button onclick="addRoca('Cuarzo','0xeeeeee')">💎 Cuarzo<br><small>brilla</small></button><button onclick="addRoca('Pizarra','0x333333')">⬛ Pizarra<br><small>plana</small></button></div>`,
+plantas:`<h3>🌿 PLANTAS - Cada una su forma</h3><div class="opciones"><button onclick="addPlanta('Anubia','0x1a7a2a')">🌿 Anubia<br><small>hoja ancha</small></button><button onclick="addPlanta('Vallisneria','0x2ecc71')">🌱 Vallisneria<br><small>cintas largas</small></button><button onclick="addPlanta('Echinodorus','0x27ae60')">🍃 Echinodorus<br><small>roseta grande</small></button><button onclick="addPlanta('Musgo Java','0x2a9a4a')">🟢 Musgo Java<br><small>bola peluda</small></button><button onclick="addPlanta('Cryptocoryne','0x1e6a2a')">🌿 Crypto<br><small>rizada</small></button><button onclick="addPlanta('Hygrophila','0x3ac76a')">🌿 Hygrophila<br><small>tallo alto</small></button><button onclick="addPlanta('Cabomba','0x4ae08a')">🌿 Cabomba<br><small>pluma fina</small></button><button onclick="addPlanta('Helecho Java','0x1a5a2a')">🌿 Helecho<br><small>hoja larga</small></button></div>`,
+peces:`<h3>🐟 PECES - Colores y formas reales</h3><div class="opciones"><button onclick="addPez('Guppy')">🐟 Guppy<br><small>cola abanico</small></button><button onclick="addPez('Neón Tetra')">🐟 Neón Tetra<br><small>azul + rojo</small></button><button onclick="addPez('Betta')">🐠 Betta<br><small>aletas largas</small></button><button onclick="addPez('Goldfish')">🐡 Goldfish<br><small>gordo</small></button><button onclick="addPez('Escalar')">🐟 Escalar<br><small>triangular</small></button><button onclick="addPez('Corydora')">🐟 Corydora<br><small>fondo + bigotes</small></button><button onclick="addPez('Molly')">🐟 Molly<br><small>negro</small></button><button onclick="addPez('Platy')">🐟 Platy<br><small>rojo</small></button><button onclick="addPez('Cardenal')">🐟 Cardenal<br><small>rojo entero</small></button><button onclick="addPez('Disco')">🐟 Disco<br><small>redondo rosa</small></button></div>`,
 equipo:`<h3>⚙️ EQUIPO</h3><div class="opciones"><button onclick="addEquipo('Filtro')">🔲 Filtro</button><button onclick="addEquipo('Calentador')">🌡️ Calentador</button><button onclick="addEquipo('Luz LED')">💡 Luz LED</button><button onclick="addEquipo('Tronco')">🪵 Tronco</button><button onclick="addEquipo('Casa')">🏠 Casa / Cueva</button></div>`
 };
 function abrir(tipo,btn){document.querySelectorAll('#menu button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');panel.innerHTML=PANELES[tipo];panel.classList.add('show');}
-function setModo(m){
-  modo=m;seleccionado=null;document.getElementById('seleccionado').style.display='none';
-  document.getElementById('btn-girar').classList.toggle('active',m==='girar');
-  document.getElementById('btn-mover').classList.toggle('active',m==='mover');
-  document.getElementById('visor').classList.toggle('mover',m==='mover');
-  document.getElementById('controles-mover').classList.toggle('show',m==='mover');
-  document.getElementById('hint').textContent=m==='girar'?'🔄 Arrastra para girar':'✋ Toca un objeto y arrástralo para moverlo';
-}
+function setModo(m){modo=m;desel2();document.getElementById('btn-girar').classList.toggle('active',m==='girar');document.getElementById('btn-mover').classList.toggle('active',m==='mover');document.getElementById('visor').classList.toggle('mover',m==='mover');document.getElementById('controles-mover').classList.toggle('show',m==='mover');document.getElementById('hint').textContent=m==='girar'?'🔄 Arrastra para girar':'✋ Toca un objeto y arrástralo';}
 function centrarUrna(){urna.position.y=-alto/2;urna.position.x=0;urna.position.z=0;let mayor=Math.max(largo,ancho,alto);zoom=mayor*2.05;camera.position.set(0,0,zoom);camera.lookAt(0,0,0);}
-// TEXTURA ARENA REALISTA - canvas con granos
-function texturaArena(colorHex){
-  let c=document.createElement('canvas');c.width=256;c.height=256;let ctx=c.getContext('2d');
-  ctx.fillStyle='#'+new THREE.Color(colorHex).getHexString();ctx.fillRect(0,0,256,256);
-  for(let i=0;i<3500;i++){let x=Math.random()*256,y=Math.random()*256,s=Math.random()*2.5+0.5;ctx.fillStyle=Math.random()>0.5?'rgba(255,255,255,0.35)':'rgba(0,0,0,0.25)';ctx.beginPath();ctx.arc(x,y,s,0,Math.PI*2);ctx.fill();}
-  for(let i=0;i<40;i++){ctx.fillStyle='rgba(0,0,0,0.08)';ctx.beginPath();ctx.ellipse(Math.random()*256,Math.random()*256,20+Math.random()*30,6+Math.random()*8,Math.random(),0,Math.PI*2);ctx.fill();}
-  let t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,1);return t;
-}
+function texturaArena(colorHex){let c=document.createElement('canvas');c.width=256;c.height=256;let ctx=c.getContext('2d');ctx.fillStyle='#'+new THREE.Color(colorHex).getHexString();ctx.fillRect(0,0,256,256);for(let i=0;i<3500;i++){let x=Math.random()*256,y=Math.random()*256,s=Math.random()*2.5+0.5;ctx.fillStyle=Math.random()>0.5?'rgba(255,255,255,0.35)':'rgba(0,0,0,0.25)';ctx.beginPath();ctx.arc(x,y,s,0,Math.PI*2);ctx.fill();}let t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,1);return t;}
 function init(){
-  scene=new THREE.Scene();
-  camera=new THREE.PerspectiveCamera(45,1,0.1,2000);camera.position.set(0,0,zoom);camera.lookAt(0,0,0);
+  scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(45,1,0.1,2000);camera.position.set(0,0,zoom);camera.lookAt(0,0,0);
   renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(1.5);
   let visor=document.getElementById('visor');visor.appendChild(renderer.domElement);
   function resize(){let w=visor.clientWidth,h=visor.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();}
@@ -143,132 +109,153 @@ function init(){
   grupoAgua=new THREE.Group();grupoArena=new THREE.Group();grupoSustrato=new THREE.Group();grupoRocas=new THREE.Group();grupoPlantas=new THREE.Group();grupoPeces=new THREE.Group();grupoEquipo=new THREE.Group();grupoBurbujas=new THREE.Group();
   urna.add(grupoAgua,grupoArena,grupoSustrato,grupoRocas,grupoPlantas,grupoPeces,grupoEquipo,grupoBurbujas);
   dibujarUrna();dibujarArena();dibujarAgua();crearBurbujas();
-  // EVENTOS: GIRAR O MOVER
-  visor.addEventListener('pointerdown',e=>{
-    lastX=e.clientX;lastY=e.clientY;
-    if(modo==='mover'){
-      let hit=raycastObjeto(e);
-      if(hit){seleccionar(hit);arrastrandoObjeto=true;visor.setPointerCapture(e.pointerId);}
-      else{deseleccionar();}
-    } else {dragging=true;visor.setPointerCapture(e.pointerId);}
-  });
-  visor.addEventListener('pointermove',e=>{
-    if(modo==='mover' && arrastrandoObjeto && seleccionado){
-      // mover en plano XZ según arrastre
-      seleccionado.position.x += (e.clientX-lastX)*0.35;
-      seleccionado.position.z += (e.clientY-lastY)*0.35;
-      seleccionado.position.x=Math.max(-largo/2+8,Math.min(largo/2-8,seleccionado.position.x));
-      seleccionado.position.z=Math.max(-ancho/2+6,Math.min(ancho/2-6,seleccionado.position.z));
-      lastX=e.clientX;lastY=e.clientY;
-    } else if(dragging){
-      targetRotY+=(e.clientX-lastX)*0.008;targetRotX+=(e.clientY-lastY)*0.005;targetRotX=Math.max(-0.6,Math.min(0.6,targetRotX));lastX=e.clientX;lastY=e.clientY;
-    }
-  });
+  visor.addEventListener('pointerdown',e=>{lastX=e.clientX;lastY=e.clientY;if(modo==='mover'){let hit=raycastObjeto(e);if(hit){seleccionar(hit);arrastrandoObjeto=true;visor.setPointerCapture(e.pointerId);}else desel2();}else{dragging=true;visor.setPointerCapture(e.pointerId);}});
+  visor.addEventListener('pointermove',e=>{if(modo==='mover'&&arrastrandoObjeto&&seleccionado){seleccionado.position.x+=(e.clientX-lastX)*0.35;seleccionado.position.z+=(e.clientY-lastY)*0.35;seleccionado.position.x=Math.max(-largo/2+8,Math.min(largo/2-8,seleccionado.position.x));seleccionado.position.z=Math.max(-ancho/2+6,Math.min(ancho/2-6,seleccionado.position.z));lastX=e.clientX;lastY=e.clientY;}else if(dragging){targetRotY+=(e.clientX-lastX)*0.008;targetRotX+=(e.clientY-lastY)*0.005;targetRotX=Math.max(-0.6,Math.min(0.6,targetRotX));lastX=e.clientX;lastY=e.clientY;}});
   visor.addEventListener('pointerup',()=>{dragging=false;arrastrandoObjeto=false;});
   visor.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(120,Math.min(420,zoom+e.deltaY*0.4));camera.position.z=zoom;},{passive:false});
   animar();
 }
-function raycastObjeto(e){
-  let visor=document.getElementById('visor');let r=visor.getBoundingClientRect();
-  mouse.x=((e.clientX-r.left)/r.width)*2-1;mouse.y=-((e.clientY-r.top)/r.height)*2+1;
-  raycaster.setFromCamera(mouse,camera);
-  let todos=[...grupoRocas.children,...grupoPlantas.children,...grupoPeces.children,...grupoEquipo.children];
-  let hits=raycaster.intersectObjects(todos,true);
-  if(!hits.length) return null;
-  let o=hits[0].object;while(o.parent && !todos.includes(o)) o=o.parent;return o;
-}
-function seleccionar(obj){
-  if(seleccionado) seleccionado.traverse(c=>{if(c.material && c.material.emissive) c.material.emissive.setHex(0x000000);});
-  seleccionado=obj;
-  obj.traverse(c=>{if(c.material && c.material.emissive) c.material.emissive.setHex(0x1e90ff);});
-  let box=document.getElementById('seleccionado');box.style.display='block';box.innerHTML=`✋ ${obj.userData.tipo||'Objeto'} <button onclick="borrarSeleccionado()">🗑️ Borrar</button> <button onclick="duplicarSeleccionado()">⧉ Duplicar</button>`;
-  if(navigator.vibrate) navigator.vibrate(20);
-}
-function deseleccionar(){if(seleccionado) seleccionado.traverse(c=>{if(c.material && c.material.emissive) c.material.emissive.setHex(0x000000);});seleccionado=null;document.getElementById('seleccionado').style.display='none';}
-function borrarSeleccionado(){if(!seleccionado)return;let p=seleccionado.parent;if(p)p.remove(seleccionado);objetos=objetos.filter(o=>o!==seleccionado);desel();actualizar();}
-function desel(){desleccionar();}
-function desleccionar(){desleccionar2();}
-function desleccionar2(){if(seleccionado) seleccionado.traverse(c=>{if(c.material&&c.material.emissive)c.material.emissive.setHex(0x000000);});seleccionado=null;document.getElementById('seleccionado').style.display='none';}
+function raycastObjeto(e){let visor=document.getElementById('visor');let r=visor.getBoundingClientRect();mouse.x=((e.clientX-r.left)/r.width)*2-1;mouse.y=-((e.clientY-r.top)/r.height)*2+1;raycaster.setFromCamera(mouse,camera);let todos=[...grupoRocas.children,...grupoPlantas.children,...grupoPeces.children,...grupoEquipo.children];let hits=raycaster.intersectObjects(todos,true);if(!hits.length)return null;let o=hits[0].object;while(o.parent&&!todos.includes(o))o=o.parent;return o;}
+function seleccionar(obj){if(seleccionado)seleccionado.traverse(c=>{if(c.material&&c.material.emissive)c.material.emissive.setHex(0x000000);});seleccionado=obj;obj.traverse(c=>{if(c.material&&c.material.emissive)c.material.emissive.setHex(0x1e90ff);});let box=document.getElementById('seleccionado');box.style.display='block';box.innerHTML=`✋ ${obj.userData.tipo} <button onclick="borrarSeleccionado()">🗑️ Borrar</button> <button onclick="duplicarSeleccionado()">⧉ Duplicar</button>`;if(navigator.vibrate)navigator.vibrate(20);}
+function desel2(){if(seleccionado)seleccionado.traverse(c=>{if(c.material&&c.material.emissive)c.material.emissive.setHex(0x000000);});seleccionado=null;document.getElementById('seleccionado').style.display='none';}
+function borrarSeleccionado(){if(!seleccionado)return;let p=seleccionado.parent;if(p)p.remove(seleccionado);objetos=objetos.filter(o=>o!==seleccionado);desel2();actualizar();}
 function duplicarSeleccionado(){if(!seleccionado)return;let c=seleccionado.clone();c.position.x+=12;c.userData={...seleccionado.userData};seleccionado.parent.add(c);objetos.push(c);seleccionar(c);actualizar();}
 function moverSeleccionado(dir){if(!seleccionado)return;if(dir==='izq')seleccionado.position.x-=6;if(dir==='der')seleccionado.position.x+=6;if(dir==='arriba')seleccionado.position.y+=5;if(dir==='abajo')seleccionado.position.y=Math.max(grosorArena,seleccionado.position.y-5);}
 function dibujarUrna(){
   urna.children.filter(c=>c.userData.esCristal).forEach(c=>urna.remove(c));
-  let mat=new THREE.MeshPhysicalMaterial({color:0xbfe8ff,transparent:true,opacity:0.13,roughness:0.05,metalness:0,side:THREE.DoubleSide});
+  let mat=new THREE.MeshPhysicalMaterial({color:0xbfe8ff,transparent:true,opacity:0.13,roughness:0.05,side:THREE.DoubleSide});
   let frontal=new THREE.Mesh(new THREE.BoxGeometry(largo,alto,0.5),mat);frontal.position.set(0,alto/2,ancho/2);frontal.userData.esCristal=true;urna.add(frontal);
   let trasero=frontal.clone();trasero.position.z=-ancho/2;urna.add(trasero);
   let lat=new THREE.Mesh(new THREE.BoxGeometry(0.5,alto,ancho),mat);lat.position.set(-largo/2,alto/2,0);lat.userData.esCristal=true;urna.add(lat);
   let lat2=lat.clone();lat2.position.x=largo/2;urna.add(lat2);
   let base=new THREE.Mesh(new THREE.BoxGeometry(largo+5,5,ancho+5),new THREE.MeshStandardMaterial({color:0x0a0a0a,roughness:0.5}));base.position.y=-2.5;base.userData.esCristal=true;urna.add(base);
-  let marco=new THREE.Mesh(new THREE.BoxGeometry(largo+5,3.5,ancho+5),new THREE.MeshStandardMaterial({color:0x111111,roughness:0.3}));marco.position.y=alto+1.5;marco.userData.esCristal=true;urna.add(marco);
-  // silicona esquinas
-  for(let sx of [-1,1]){for(let sz of [-1,1]){let sil=new THREE.Mesh(new THREE.BoxGeometry(1,alto,1),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.35}));sil.position.set(sx*largo/2,alto/2,sz*ancho/2);sil.userData.esCristal=true;urna.add(sil);}}
-  if(largo>90||alto>45){let t=new THREE.Mesh(new THREE.BoxGeometry(8,2,ancho),new THREE.MeshStandardMaterial({color:0xff2222}));t.position.set(0,alto,0);t.userData.esCristal=true;urna.add(t);document.getElementById('tirante').style.display='block';} else document.getElementById('tirante').style.display='none';
+  let marco=new THREE.Mesh(new THREE.BoxGeometry(largo+5,3.5,ancho+5),new THREE.MeshStandardMaterial({color:0x111111}));marco.position.y=alto+1.5;marco.userData.esCristal=true;urna.add(marco);
+  if(largo>90||alto>45){let t=new THREE.Mesh(new THREE.BoxGeometry(8,2,ancho),new THREE.MeshStandardMaterial({color:0xff2222}));t.position.set(0,alto,0);t.userData.esCristal=true;urna.add(t);document.getElementById('tirante').style.display='block';}else document.getElementById('tirante').style.display='none';
   centrarUrna();
 }
-let grosorArena=4, colorArena=0xe8d096;
+let grosorArena=4,colorArena=0xe8d096;
 function dibujarArena(){
   grupoArena.clear();grupoSustrato.clear();
   if(colorArena!==0x000000){
-    let tex=texturaArena(colorArena);
-    let geo=new THREE.BoxGeometry(largo-1,grosorArena,ancho-1);
-    // ondular la parte superior
-    let pos=geo.attributes.position;for(let i=0;i<pos.count;i++){if(pos.getY(i)>0) pos.setY(i,pos.getY(i)+Math.sin(pos.getX(i)*0.15)*0.6+Math.cos(pos.getZ(i)*0.2)*0.5);}
-    geo.computeVertexNormals();
+    let tex=texturaArena(colorArena);let geo=new THREE.BoxGeometry(largo-1,grosorArena,ancho-1);let pos=geo.attributes.position;for(let i=0;i<pos.count;i++){if(pos.getY(i)>0)pos.setY(i,pos.getY(i)+Math.sin(pos.getX(i)*0.15)*0.6+Math.cos(pos.getZ(i)*0.2)*0.5);}geo.computeVertexNormals();
     let a=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex,roughness:1}));a.position.y=grosorArena/2;grupoArena.add(a);
-    // piedritas sueltas
     for(let i=0;i<70;i++){let p=new THREE.Mesh(new THREE.SphereGeometry(0.6+Math.random()*0.7,5,5),new THREE.MeshStandardMaterial({color:Math.random()>0.5?0xffffff:0x8a6a3a}));p.position.set((Math.random()-0.5)*(largo-4),grosorArena+0.4,(Math.random()-0.5)*(ancho-4));grupoArena.add(p);}
   }
-  if(sustratoTipo!=='Sin sustrato'){let s=new THREE.Mesh(new THREE.BoxGeometry(largo-1,2,ancho-1),new THREE.MeshStandardMaterial({color:0x3a1e08,roughness:1}));s.position.y=1;grupoSustrato.add(s);}
+  if(sustratoTipo!=='Sin sustrato'){let s=new THREE.Mesh(new THREE.BoxGeometry(largo-1,2,ancho-1),new THREE.MeshStandardMaterial({color:0x3a1e08}));s.position.y=1;grupoSustrato.add(s);}
 }
 function dibujarAgua(){
-  grupoAgua.clear();
-  if(nivelAgua<=0)return;
-  let h=alto*nivelAgua/100;
-  let agua=new THREE.Mesh(new THREE.BoxGeometry(largo-1.5,h,ancho-1.5),new THREE.MeshPhysicalMaterial({color:0x2aa8e8,transparent:true,opacity:0.22,roughness:0.05,transmission:0.2}));
-  agua.position.y=h/2+grosorArena;grupoAgua.add(agua);
-  let sup=new THREE.Mesh(new THREE.PlaneGeometry(largo-1.5,ancho-1.5),new THREE.MeshStandardMaterial({color:0xaee6ff,transparent:true,opacity:0.5,roughness:0.1,metalness:0.3}));sup.rotation.x=-Math.PI/2;sup.position.y=h+grosorArena+0.1;grupoAgua.add(sup);
-  // rayos de luz
+  grupoAgua.clear();if(nivelAgua<=0)return;let h=alto*nivelAgua/100;
+  let agua=new THREE.Mesh(new THREE.BoxGeometry(largo-1.5,h,ancho-1.5),new THREE.MeshPhysicalMaterial({color:0x2aa8e8,transparent:true,opacity:0.22,roughness:0.05}));agua.position.y=h/2+grosorArena;grupoAgua.add(agua);
+  let sup=new THREE.Mesh(new THREE.PlaneGeometry(largo-1.5,ancho-1.5),new THREE.MeshStandardMaterial({color:0xaee6ff,transparent:true,opacity:0.5,roughness:0.1}));sup.rotation.x=-Math.PI/2;sup.position.y=h+grosorArena+0.1;grupoAgua.add(sup);
   for(let i=0;i<3;i++){let ray=new THREE.Mesh(new THREE.PlaneGeometry(12,h),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.07,side:THREE.DoubleSide,depthWrite:false}));ray.position.set(-largo/3+i*largo/3,h/2+grosorArena,0);ray.rotation.z=0.4;grupoAgua.add(ray);}
 }
-function crearBurbujas(){
-  grupoBurbujas.clear();
-  for(let i=0;i<18;i++){let b=new THREE.Mesh(new THREE.SphereGeometry(0.6+Math.random()*1,6,6),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.6}));b.position.set((Math.random()-0.5)*largo,grosorArena+Math.random()*alto,(Math.random()-0.5)*ancho);b.userData={vel:0.4+Math.random()*0.6};grupoBurbujas.add(b);}
-}
+function crearBurbujas(){grupoBurbujas.clear();for(let i=0;i<18;i++){let b=new THREE.Mesh(new THREE.SphereGeometry(0.6+Math.random()*1,6,6),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.6}));b.position.set((Math.random()-0.5)*largo,grosorArena+Math.random()*alto,(Math.random()-0.5)*ancho);b.userData={vel:0.4+Math.random()*0.6};grupoBurbujas.add(b);}}
 function setAgua(v){nivelAgua=+v;document.getElementById('v-agua').textContent=nivelAgua+'%';dibujarAgua();actualizar();}
 function setArena(nombre,color){arenaTipo=nombre;colorArena=color;dibujarArena();actualizar();}
 function setSustrato(n){sustratoTipo=n;dibujarArena();actualizar();}
 function setGrosorArena(v){grosorArena=+v;document.getElementById('v-arena').textContent=v+' cm';dibujarArena();dibujarAgua();}
+
+// ===== ROCAS CON FORMA PROPIA =====
 function addRoca(nombre,color){
-  let geo=new THREE.DodecahedronGeometry(9+Math.random()*5,1);
-  let pos=geo.attributes.position;for(let i=0;i<pos.count;i++){let s=1+(Math.random()-0.5)*0.5;pos.setXYZ(i,pos.getX(i)*s,pos.getY(i)*0.7,pos.getZ(i)*s);}geo.computeVertexNormals();
-  let m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color,flatShading:true,roughness:0.95}));
-  m.position.set((Math.random()-0.5)*(largo-30),grosorArena+4,(Math.random()-0.5)*(ancho-20));m.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);
-  m.userData={tipo:'Roca '+nombre};grupoRocas.add(m);objetos.push(m);seleccionar(m);actualizar();
+  let g=new THREE.Group();
+  let geo,mat=new THREE.MeshStandardMaterial({color,flatShading:true,roughness:0.95});
+  if(nombre==='Dragon'){geo=new THREE.DodecahedronGeometry(11,0);let p=geo.attributes.position;for(let i=0;i<p.count;i++){p.setXYZ(i,p.getX(i)*(1+(Math.random()-0.5)*0.7),p.getY(i)*0.8,p.getZ(i)*(1+(Math.random()-0.5)*0.7));}geo.computeVertexNormals();let m=new THREE.Mesh(geo,mat);g.add(m);for(let i=0;i<4;i++){let pico=new THREE.Mesh(new THREE.ConeGeometry(2,7,5),mat);pico.position.set((Math.random()-0.5)*10,8,(Math.random()-0.5)*10);g.add(pico);}}
+  else if(nombre==='Seiryu'){geo=new THREE.IcosahedronGeometry(10,0);let m=new THREE.Mesh(geo,mat);g.add(m);for(let i=0;i<5;i++){let veta=new THREE.Mesh(new THREE.BoxGeometry(0.5,9,1.5),new THREE.MeshStandardMaterial({color:0xffffff}));veta.position.set((Math.random()-0.5)*10,(Math.random()-0.5)*6,(Math.random()-0.5)*8);veta.rotation.z=0.5;g.add(veta);}}
+  else if(nombre==='Lava Negra'||nombre==='Lava Roja'){geo=new THREE.DodecahedronGeometry(9,1);let p=geo.attributes.position;for(let i=0;i<p.count;i++){if(Math.random()>0.7)p.setXYZ(i,p.getX(i)*0.6,p.getY(i)*0.6,p.getZ(i)*0.6);}geo.computeVertexNormals();let m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color,roughness:1,flatShading:true}));g.add(m);for(let i=0;i<6;i++){let agujero=new THREE.Mesh(new THREE.SphereGeometry(1.2,6,6),new THREE.MeshStandardMaterial({color:0x000000}));agujero.position.set((Math.random()-0.5)*12,(Math.random()-0.5)*8,(Math.random()-0.5)*10);g.add(agujero);}}
+  else if(nombre==='Pizarra'){let m=new THREE.Mesh(new THREE.BoxGeometry(20,3,14),mat);m.rotation.y=0.4;g.add(m);let m2=new THREE.Mesh(new THREE.BoxGeometry(16,2.5,12),mat);m2.position.set(3,2.5,2);m2.rotation.y=-0.3;g.add(m2);}
+  else if(nombre==='Cuarzo'){let m=new THREE.Mesh(new THREE.IcosahedronGeometry(9,0),new THREE.MeshStandardMaterial({color,roughness:0.1,metalness:0.4,flatShading:true}));g.add(m);for(let i=0;i<3;i++){let cristal=new THREE.Mesh(new THREE.ConeGeometry(1.5,6,6),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.8}));cristal.position.set((Math.random()-0.5)*8,6,(Math.random()-0.5)*8);g.add(cristal);}}
+  else{geo=new THREE.DodecahedronGeometry(10,0);let m=new THREE.Mesh(geo,mat);g.add(m);}
+  g.position.set((Math.random()-0.5)*(largo-30),grosorArena+4,(Math.random()-0.5)*(ancho-20));g.rotation.y=Math.random()*3;
+  g.userData={tipo:'Roca '+nombre};grupoRocas.add(g);objetos.push(g);seleccionar(g);actualizar();
 }
+
+// ===== PLANTAS CON FORMA PROPIA =====
 function addPlanta(nombre,color){
-  let g=new THREE.Group();
-  let tallo=new THREE.Mesh(new THREE.CylinderGeometry(0.7,1,30,6),new THREE.MeshStandardMaterial({color:0x1a5a1a}));tallo.position.y=15;g.add(tallo);
-  for(let i=0;i<9;i++){
-    let hoja=new THREE.Mesh(new THREE.ConeGeometry(2.8,16,5),new THREE.MeshStandardMaterial({color,roughness:0.6}));
-    hoja.position.set((Math.random()-0.5)*10,18+Math.random()*14,(Math.random()-0.5)*10);hoja.rotation.set((Math.random()-0.5)*0.9,Math.random()*3,(Math.random()-0.5)*0.9);g.add(hoja);
-    let hoja2=new THREE.Mesh(new THREE.PlaneGeometry(5,10),new THREE.MeshStandardMaterial({color,side:THREE.DoubleSide}));hoja2.position.set((Math.random()-0.5)*8,20+Math.random()*8,(Math.random()-0.5)*8);hoja2.rotation.y=Math.random()*3;g.add(hoja2);
+  let g=new THREE.Group();let verde=new THREE.MeshStandardMaterial({color,roughness:0.6,side:THREE.DoubleSide});
+  if(nombre==='Anubia'){
+    for(let i=0;i<5;i++){let hoja=new THREE.Mesh(new THREE.SphereGeometry(4,8,6),verde);hoja.scale.set(1.2,0.25,0.9);hoja.position.set((Math.random()-0.5)*8,12+Math.random()*6,(Math.random()-0.5)*8);hoja.rotation.z=(Math.random()-0.5)*0.5;g.add(hoja);let tallo=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.8,10,5),new THREE.MeshStandardMaterial({color:0x1a5a1a}));tallo.position.set(hoja.position.x,5,hoja.position.z);g.add(tallo);}
+  } else if(nombre==='Vallisneria'){
+    for(let i=0;i<8;i++){let cinta=new THREE.Mesh(new THREE.PlaneGeometry(2.2,42),verde);cinta.position.set((Math.random()-0.5)*10,21,(Math.random()-0.5)*6);cinta.rotation.y=Math.random()*3;cinta.userData.esCinta=true;g.add(cinta);}
+  } else if(nombre==='Musgo Java'){
+    let bola=new THREE.Mesh(new THREE.SphereGeometry(9,10,8),new THREE.MeshStandardMaterial({color,roughness:1}));bola.scale.y=0.6;bola.position.y=5;g.add(bola);for(let i=0;i<20;i++){let pelo=new THREE.Mesh(new THREE.ConeGeometry(0.6,4,4),verde);pelo.position.set((Math.random()-0.5)*14,8+Math.random()*3,(Math.random()-0.5)*14);pelo.rotation.z=Math.random();g.add(pelo);}
+  } else if(nombre==='Cabomba'){
+    for(let i=0;i<4;i++){let tallo=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.5,34,5),verde);tallo.position.set(i*4-6,17,0);g.add(tallo);for(let j=0;j<7;j++){let pluma=new THREE.Mesh(new THREE.SphereGeometry(2.2,6,5),verde);pluma.scale.set(1,0.3,1);pluma.position.set(i*4-6,6+j*4.5,(Math.random()-0.5)*2);g.add(pluma);}}
+  } else if(nombre==='Echinodorus'){
+    for(let i=0;i<8;i++){let hoja=new THREE.Mesh(new THREE.SphereGeometry(4.5,8,6),verde);hoja.scale.set(1,0.25,1.4);hoja.position.set(Math.cos(i*0.78)*6,14+Math.random()*4,Math.sin(i*0.78)*6);hoja.rotation.y=-i*0.78;g.add(hoja);}
+  } else if(nombre==='Helecho Java'){
+    for(let i=0;i<6;i++){let hoja=new THREE.Mesh(new THREE.PlaneGeometry(4,22),verde);hoja.position.set((i-2.5)*3,14,0);hoja.rotation.z=(i-2.5)*0.18;hoja.rotation.y=i;g.add(hoja);}
+  } else {
+    for(let i=0;i<8;i++){let hoja=new THREE.Mesh(new THREE.ConeGeometry(2.5,16,5),verde);hoja.position.set((Math.random()-0.5)*10,14+Math.random()*10,(Math.random()-0.5)*10);hoja.rotation.z=(Math.random()-0.5)*0.8;g.add(hoja);}
   }
-  if(nombre.includes('Musgo'))g.scale.set(1.5,0.35,1.5);
-  if(nombre.includes('Vallisneria'))g.scale.set(0.7,1.7,0.7);
+  if(nombre==='Cryptocoryne') g.scale.set(1,0.7,1);
   g.position.set((Math.random()-0.5)*(largo-20),grosorArena,(Math.random()-0.5)*(ancho-14));
-  g.userData={tipo:'Planta '+nombre};grupoPlantas.add(g);objetos.push(g);seleccionar(g);actualizar();
+  g.userData={tipo:'Planta '+nombre,esPlanta:true,nombre};grupoPlantas.add(g);objetos.push(g);seleccionar(g);actualizar();
 }
-function addPez(nombre,color){
-  let g=new THREE.Group();
-  let cuerpo=new THREE.Mesh(new THREE.SphereGeometry(4,12,10),new THREE.MeshStandardMaterial({color,roughness:0.4,metalness:0.2}));cuerpo.scale.set(1.8,1,0.7);g.add(cuerpo);
-  let cola=new THREE.Mesh(new THREE.ConeGeometry(3,6,6),new THREE.MeshStandardMaterial({color,side:THREE.DoubleSide}));cola.rotation.z=Math.PI/2;cola.position.x=-8;cola.scale.set(1,1,0.3);g.add(cola);cola.userData.esCola=true;g.userData.cola=cola;
-  let aleta=new THREE.Mesh(new THREE.ConeGeometry(2,4,4),new THREE.MeshStandardMaterial({color}));aleta.position.set(0,3.5,0);aleta.rotation.x=Math.PI;g.add(aleta);
-  let ojo=new THREE.Mesh(new THREE.SphereGeometry(0.9,8,8),new THREE.MeshStandardMaterial({color:0x000000}));ojo.position.set(5,1,2.2);g.add(ojo);
-  let ojo2=ojo.clone();ojo2.position.z=-2.2;g.add(ojo2);
-  let brillo=new THREE.Mesh(new THREE.SphereGeometry(0.3,6,6),new THREE.MeshBasicMaterial({color:0xffffff}));brillo.position.set(5.5,1.5,2.2);g.add(brillo);
-  if(nombre==='Goldfish'||nombre==='Disco')g.scale.set(1.5,1.5,1.5);
-  g.position.set((Math.random()-0.5)*(largo-20),grosorArena+12+Math.random()*alto*0.4,(Math.random()-0.5)*(ancho-16));
-  g.userData={tipo:'Pez '+nombre,vel:0.35+Math.random()*0.35,dir:1,cola};
+
+// ===== PECES CON COLOR Y FORMA REAL =====
+function addPez(nombre){
+  let g=new THREE.Group();let cola,aletaLarga=null;
+  function ojo(x,y,z){let o=new THREE.Mesh(new THREE.SphereGeometry(0.9,8,8),new THREE.MeshStandardMaterial({color:0x000000}));o.position.set(x,y,z);g.add(o);let b=new THREE.Mesh(new THREE.SphereGeometry(0.3,6,6),new THREE.MeshBasicMaterial({color:0xffffff}));b.position.set(x+0.5,y+0.4,z);g.add(b);}
+  function cuerpoBase(color,escala){let c=new THREE.Mesh(new THREE.SphereGeometry(4,12,10),new THREE.MeshStandardMaterial({color,roughness:0.35,metalness:0.25}));c.scale.set(1.8*escala,1*escala,0.7*escala);g.add(c);return c;}
+  function colaNormal(color){let t=new THREE.Mesh(new THREE.ConeGeometry(3,6,6),new THREE.MeshStandardMaterial({color,side:THREE.DoubleSide}));t.rotation.z=Math.PI/2;t.position.x=-8;t.scale.set(1,1,0.3);g.add(t);return t;}
+
+  if(nombre==='Neón Tetra'){
+    cuerpoBase(0xdddddd,0.6);
+    let franjaAzul=new THREE.Mesh(new THREE.BoxGeometry(9,0.7,1.2),new THREE.MeshBasicMaterial({color:0x00ccff}));franjaAzul.position.set(0,1.2,0);g.add(franjaAzul);
+    let franjaRoja=new THREE.Mesh(new THREE.BoxGeometry(5,0.9,1.1),new THREE.MeshBasicMaterial({color:0xff2222}));franjaRoja.position.set(-2.5,-1,0);g.add(franjaRoja);
+    cola=colaNormal(0x88aacc);cola.scale.set(0.7,0.7,0.2);
+    g.userData.vel=0.8;g.userData.nado='rapido';
+  } else if(nombre==='Cardenal'){
+    cuerpoBase(0xff5555,0.6);
+    let franjaAzul=new THREE.Mesh(new THREE.BoxGeometry(9,0.8,1.2),new THREE.MeshBasicMaterial({color:0x00ccff}));franjaAzul.position.set(0,1.4,0);g.add(franjaAzul);
+    cola=colaNormal(0xff7777);cola.scale.set(0.7,0.7,0.2);g.userData.vel=0.8;g.userData.nado='rapido';
+  } else if(nombre==='Corydora'){
+    // fondo, plano, beige con manchas, bigotes
+    let c=new THREE.Mesh(new THREE.SphereGeometry(4,10,8),new THREE.MeshStandardMaterial({color:0xc9b896,roughness:0.8}));c.scale.set(1.6,0.7,0.8);c.position.y=-0.8;g.add(c);
+    for(let i=0;i<3;i++){let mancha=new THREE.Mesh(new THREE.SphereGeometry(1,6,5),new THREE.MeshStandardMaterial({color:0x333333}));mancha.position.set((Math.random()-0.5)*6,1.5,(Math.random()-0.5)*2);g.add(mancha);}
+    // bigotes
+    for(let s of [1,-1]){for(let j=0;j<3;j++){let big=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.05,4,4),new THREE.MeshStandardMaterial({color:0xffffff}));big.position.set(6.5, -0.5, s*(0.5+j*0.6));big.rotation.z=1.2;big.rotation.y=s*0.4;g.add(big);}}
+    cola=colaNormal(0xa89878);g.userData.vel=0.25;g.userData.nado='fondo';
+  } else if(nombre==='Betta'){
+    cuerpoBase(0xff2222,0.9);
+    // aletas largas ondeantes
+    let aleta=new THREE.Mesh(new THREE.PlaneGeometry(8,10),new THREE.MeshStandardMaterial({color:0xff4444,side:THREE.DoubleSide,transparent:true,opacity:0.9}));aleta.position.set(-6,0,0);aleta.rotation.y=Math.PI/2;g.add(aleta);aletaLarga=aleta;
+    let dorsal=new THREE.Mesh(new THREE.PlaneGeometry(6,5),new THREE.MeshStandardMaterial({color:0xaa1111,side:THREE.DoubleSide}));dorsal.position.set(-1,4,0);dorsal.rotation.x=-Math.PI/2;g.add(dorsal);
+    cola=colaNormal(0xff2222);cola.scale.set(1.4,1.4,0.2);g.userData.vel=0.3;g.userData.nado='lento';
+  } else if(nombre==='Escalar'){
+    // alto triangular, plateado con rayas negras
+    let c=new THREE.Mesh(new THREE.SphereGeometry(4,10,8),new THREE.MeshStandardMaterial({color:0xdddddd,roughness:0.4}));c.scale.set(1.2,1.8,0.35);g.add(c);
+    for(let i=0;i<3;i++){let raya=new THREE.Mesh(new THREE.BoxGeometry(0.6,8,1),new THREE.MeshBasicMaterial({color:0x111111}));raya.position.set(-2+i*2.5,0,0);raya.rotation.z=0.2;g.add(raya);}
+    let aletaSup=new THREE.Mesh(new THREE.ConeGeometry(2,7,4),new THREE.MeshStandardMaterial({color:0xcccccc}));aletaSup.position.set(0,7,0);aletaSup.rotation.x=Math.PI;g.add(aletaSup);
+    cola=colaNormal(0xbbbbbb);g.userData.vel=0.4;g.userData.nado='medio';
+  } else if(nombre==='Disco'){
+    let c=new THREE.Mesh(new THREE.SphereGeometry(5,12,10),new THREE.MeshStandardMaterial({color:0xff9999,roughness:0.3}));c.scale.set(1,1.3,0.35);g.add(c);
+    for(let i=0;i<4;i++){let raya=new THREE.Mesh(new THREE.BoxGeometry(0.4,9,0.8),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.6}));raya.position.set(-2+i*1.3,0,0);g.add(raya);}
+    cola=colaNormal(0xffaaaa);cola.scale.set(0.7,0.7,0.2);g.userData.vel=0.35;g.userData.nado='lento';
+  } else if(nombre==='Goldfish'){
+    let c=new THREE.Mesh(new THREE.SphereGeometry(5,12,10),new THREE.MeshStandardMaterial({color:0xffa500,roughness:0.4}));c.scale.set(1.5,1.2,1);g.add(c);
+    let cola1=new THREE.Mesh(new THREE.PlaneGeometry(4,6),new THREE.MeshStandardMaterial({color:0xff8800,side:THREE.DoubleSide}));cola1.position.set(-8,1,1);cola1.rotation.y=0.5;g.add(cola1);
+    let cola2=cola1.clone();cola2.position.z=-1;cola2.rotation.y=-0.5;g.add(cola2);cola=cola1;
+    let ojoG=new THREE.Mesh(new THREE.SphereGeometry(1.2,8,8),new THREE.MeshStandardMaterial({color:0x000000}));ojoG.position.set(5,1,3);g.add(ojoG);let ojoG2=ojoG.clone();ojoG2.position.z=-3;g.add(ojoG2);
+    g.userData.vel=0.3;g.userData.nado='lento';g.scale.set(1.3,1.3,1.3);
+  } else if(nombre==='Guppy'){
+    cuerpoBase(0xff7b00,0.7);
+    let colaAbanico=new THREE.Mesh(new THREE.PlaneGeometry(7,7),new THREE.MeshStandardMaterial({color:0xff5500,side:THREE.DoubleSide,transparent:true,opacity:0.95}));colaAbanico.position.set(-7,0,0);colaAbanico.rotation.y=Math.PI/2;g.add(colaAbanico);cola=colaAbanico;
+    let punto=new THREE.Mesh(new THREE.SphereGeometry(1,6,6),new THREE.MeshBasicMaterial({color:0x0000ff}));punto.position.set(-1,1,2);g.add(punto);
+    g.userData.vel=0.7;g.userData.nado='rapido';
+  } else if(nombre==='Molly'){
+    cuerpoBase(0x111111,0.8);cola=colaNormal(0x111111);g.userData.vel=0.45;g.userData.nado='medio';
+  } else { // Platy
+    cuerpoBase(0xff5555,0.8);cola=colaNormal(0xff3333);g.userData.vel=0.5;g.userData.nado='medio';
+  }
+  ojo(4.5,1,2);ojo(4.5,1,-2);
+  if(nombre==='Corydora'){
+    g.position.set((Math.random()-0.5)*(largo-20),grosorArena+2,(Math.random()-0.5)*(ancho-16));
+  } else {
+    g.position.set((Math.random()-0.5)*(largo-20),grosorArena+12+Math.random()*alto*0.4,(Math.random()-0.5)*(ancho-16));
+  }
+  g.userData.tipo='Pez '+nombre;g.userData.cola=cola;g.userData.aletaLarga=aletaLarga;g.userData.dir=1;
+  if(!g.userData.vel) g.userData.vel=0.4;
   grupoPeces.add(g);objetos.push(g);seleccionar(g);actualizar();
 }
 function addEquipo(tipo){
@@ -281,12 +268,27 @@ function addEquipo(tipo){
   if(tipo==='Luz LED')m.position.set(0,alto+4,0);else m.position.set(largo/2-12,grosorArena+8,0);
   m.userData={tipo};grupoEquipo.add(m);objetos.push(m);seleccionar(m);actualizar();
 }
-function limpiarTodo(){grupoRocas.clear();grupoPlantas.clear();grupoPeces.clear();grupoEquipo.clear();objetos=[];desleccionar2();actualizar();}
+function limpiarTodo(){grupoRocas.clear();grupoPlantas.clear();grupoPeces.clear();grupoEquipo.clear();objetos=[];desel2();actualizar();}
 function animar(){
   requestAnimationFrame(animar);
   rotY+=(targetRotY-rotY)*0.08;rotX+=(targetRotX-rotX)*0.08;urna.rotation.y=rotY;urna.rotation.x=rotX;
-  grupoPeces.children.forEach(p=>{if(p!==seleccionado){p.position.x+=p.userData.vel*p.userData.dir;if(Math.abs(p.position.x)>largo/2-12){p.userData.dir*=-1;p.rotation.y+=Math.PI;}}p.position.y+=Math.sin(Date.now()*0.001+p.position.x)*0.04;if(p.userData.cola)p.userData.cola.rotation.y=Math.sin(Date.now()*0.01)*0.4;});
-  grupoPlantas.children.forEach((pl,i)=>{pl.rotation.z=Math.sin(Date.now()*0.001+i)*0.04;});
+  grupoPeces.children.forEach(p=>{
+    if(p!==seleccionado){
+      p.position.x+=p.userData.vel*p.userData.dir;
+      if(Math.abs(p.position.x)>largo/2-12){p.userData.dir*=-1;p.rotation.y+=Math.PI;}
+    }
+    if(p.userData.nado==='fondo'){p.position.y=grosorArena+2+Math.sin(Date.now()*0.001+p.position.x)*0.6; p.position.z+=Math.sin(Date.now()*0.0005+p.position.x)*0.08;}
+    else if(p.userData.nado==='rapido'){p.position.y+=Math.sin(Date.now()*0.004+p.position.x)*0.18;}
+    else if(p.userData.nado==='lento'){p.position.y+=Math.sin(Date.now()*0.0008+p.position.x)*0.08;}
+    else p.position.y+=Math.sin(Date.now()*0.001+p.position.x)*0.05;
+    if(p.userData.cola) p.userData.cola.rotation.y=Math.sin(Date.now()*0.012)*0.5;
+    if(p.userData.aletaLarga) p.userData.aletaLarga.rotation.y=Math.PI/2+Math.sin(Date.now()*0.003)*0.35;
+  });
+  grupoPlantas.children.forEach((pl,i)=>{
+    if(pl.userData.nombre==='Vallisneria') pl.rotation.z=Math.sin(Date.now()*0.001+i)*0.08;
+    else if(pl.userData.nombre==='Cabomba') pl.rotation.y+=0.002;
+    else pl.rotation.z=Math.sin(Date.now()*0.001+i)*0.03;
+  });
   grupoBurbujas.children.forEach(b=>{b.position.y+=b.userData.vel;if(b.position.y>grosorArena+alto)b.position.y=grosorArena+2;});
   renderer.render(scene,camera);
 }
@@ -311,7 +313,7 @@ document.getElementById('ancho').addEventListener('input',e=>{ancho=+e.target.va
 document.getElementById('alto').addEventListener('input',e=>{alto=+e.target.value;dibujarUrna();dibujarAgua();actualizar();});
 abrir('agua',document.querySelector('#menu button'));
 init();actualizar();
-addRoca('Dragon',0x777777);addPlanta('Anubia',0x1a7a2a);addPez('Guppy',0xff7b00);
+addRoca('Dragon',0x777777);addPlanta('Anubia',0x1a7a2a);addPez('Neón Tetra');addPez('Corydora');
 </script>
 </body>
 </html>
