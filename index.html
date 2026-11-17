@@ -3,66 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AQUARIO ONLINE - Monta tu acuario en 3D</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<title>AQUARIO ONLINE</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#050d1a;color:white;padding-bottom:20px}
+header{display:flex;justify-content:space-between;padding:14px;background:#071223;align-items:center;gap:10px}
+.logo{font-size:22px;font-weight:900;line-height:1}.logo span{color:#29a7ff}
+header button{background:#1e90ff;color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:bold}
+main{display:flex;gap:12px;padding:12px}
+#visor{flex:1;background:#0a1a2f;border-radius:15px;overflow:hidden;position:relative;min-height:420px}
+canvas#acuarioCanvas{width:100%;height:420px;display:block;background:linear-gradient(#0a3a5a,#062a44)}
+.vista-btns{position:absolute;bottom:10px;left:10px;display:flex;gap:6px}
+aside{width:340px;display:flex;flex-direction:column;gap:12px}
+.panel{background:#0d1c31;padding:14px;border-radius:15px}
+.panel h2{margin:0 0 10px;color:#29a7ff;font-size:16px}
+.panel label{display:block;margin-top:10px;font-size:14px}
+.panel input{width:100%;accent-color:#29a7ff}
+.grosores{display:flex;gap:6px;margin-top:6px}
+.grosores button{flex:1;background:#132a44;color:white;border:1px solid #2a4a6b;padding:8px;border-radius:8px}
+.grosores button.active{background:#1e90ff}
+.litros{background:#12365c;margin-top:12px;padding:10px;border-radius:10px;font-size:20px;font-weight:900}
+.litros small{display:block;font-size:12px;font-weight:400}
+#avisos div{padding:10px;border-radius:8px;margin-bottom:8px;font-size:13px}
+.ok{background:#123b24}.warn{background:#4a3800}.bad{background:#5a1111}
+footer{margin:0 12px;background:#0d1c31;padding:12px;border-radius:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button{cursor:pointer;background:#132a44;color:white;border:1px solid #2a4a6b;padding:8px 10px;border-radius:8px}
+@media(max-width:850px){main{flex-direction:column}aside{width:100%}canvas#acuarioCanvas{height:340px}}
+</style>
 </head>
 <body>
-<header>
-  <div class="logo">🐠 AQUARIO <span>ONLINE</span></div>
-  <button onclick="descargarFicha()">⬇ Descargar Ficha PDF</button>
-</header>
-
+<header><div class="logo">🐠 AQUARIO<br><span>ONLINE</span></div><button onclick="window.print()">⬇ Descargar Ficha PDF</button></header>
 <main>
-  <!-- CENTRO 3D -->
-  <section id="visor">
-    <div id="canvas-3d"></div>
-    <div class="vista-btns">
-      <button onclick="cambiarVista('montaje')">Montaje</button>
-      <button onclick="cambiarVista('real')">Llenar agua</button>
-      <button onclick="limpiar()">Limpiar</button>
-    </div>
-  </section>
-
-  <!-- PANEL DERECHO -->
-  <aside>
-    <div class="panel">
-      <h2>PARAMETROS</h2>
-      <label>Largo: <b id="v-largo">100 cm</b></label>
-      <input type="range" id="largo" min="30" max="200" value="100">
-      <label>Ancho: <b id="v-ancho">40 cm</b></label>
-      <input type="range" id="ancho" min="25" max="80" value="40">
-      <label>Alto: <b id="v-alto">40 cm</b></label>
-      <input type="range" id="alto" min="25" max="80" value="40">
-      <label>Grosor cristal:</label>
-      <div class="grosores">
-        <button onclick="setGrosor(6)">6mm</button>
-        <button onclick="setGrosor(8)" class="active">8mm</button>
-        <button onclick="setGrosor(10)">10mm</button>
-        <button onclick="setGrosor(12)">12mm</button>
-      </div>
-      <div class="litros">💧 <span id="litros">160 L</span><small id="peso">Peso total ~180 kg</small></div>
-    </div>
-
-    <div class="panel diagnostico">
-      <h2>DIAGNOSTICO</h2>
-      <div id="avisos"></div>
-      <h3>Ficha de cortes:</h3>
-      <ul id="ficha"></ul>
-    </div>
-  </aside>
+<section id="visor"><canvas id="acuarioCanvas" width="800" height="420"></canvas><div class="vista-btns"><button onclick="cambiarVista('montaje')">Montaje</button><button onclick="cambiarVista('real')">Llenar agua</button><button onclick="limpiar()">Limpiar</button></div></section>
+<aside>
+<div class="panel"><h2>PARAMETROS</h2>
+<label>Largo: <b id="v-largo">100 cm</b></label><input type="range" id="largo" min="30" max="200" value="100">
+<label>Ancho: <b id="v-ancho">40 cm</b></label><input type="range" id="ancho" min="25" max="80" value="40">
+<label>Alto: <b id="v-alto">40 cm</b></label><input type="range" id="alto" min="25" max="80" value="40">
+<label>Grosor cristal:</label><div class="grosores"><button onclick="setGrosor(6,this)">6mm</button><button onclick="setGrosor(8,this)" class="active">8mm</button><button onclick="setGrosor(10,this)">10mm</button><button onclick="setGrosor(12,this)">12mm</button></div>
+<div class="litros">💧 <span id="litros">160 L</span><small id="peso"></small></div></div>
+<div class="panel"><h2>DIAGNOSTICO</h2><div id="avisos"></div><h3>Ficha de cortes:</h3><ul id="ficha"></ul></div>
+</aside>
 </main>
-
-<!-- BARRA CONSTRUCCION -->
-<footer>
-  <span>CONSTRUCCIÓN</span>
-  <button onclick="addItem('pez')">🐟 Peces</button>
-  <button onclick="addItem('planta')">🌿 Plantas</button>
-  <button onclick="addItem('roca')">🪨 Rocas</button>
-  <button onclick="addItem('tronco')">🪵 Troncos</button>
-  <button onclick="addItem('equipo')">⚙️ Equipo</button>
-</footer>
-
-<script src="app.js"></script>
+<footer><span>CONSTRUCCIÓN</span><button onclick="addItem('pez')">🐟 Peces</button><button onclick="addItem('planta')">🌿 Plantas</button><button onclick="addItem('roca')">🪨 Rocas</button><button onclick="addItem('tronco')">🪵 Troncos</button><button onclick="addItem('equipo')">⚙️ Equipo</button></footer>
+<script>
+let largo=100,ancho=40,alto=40,grosor=8,conAgua=true,items=[],peces=[];
+let cv=document.getElementById('acuarioCanvas'),ctx=cv.getContext('2d');
+function dibujar(){
+  ctx.clearRect(0,0,800,420);
+  // fondo agua
+  ctx.fillStyle=conAgua?'#0e5a8a':'#1a2a3a'; ctx.fillRect(0,0,800,420);
+  // sustrato
+  ctx.fillStyle='#d9b98a'; ctx.fillRect(30,350,740,40);
+  ctx.fillStyle='#b89a6a'; for(let i=0;i<60;i++){ctx.beginPath();ctx.arc(40+Math.random()*720,355+Math.random()*25,2,0,7);ctx.fill();}
+  // rocas y plantas guardadas
+  items.forEach(it=>{
+    if(it.tipo==='roca'){ctx.fillStyle='#777';ctx.beginPath();ctx.moveTo(it.x-30,it.y+20);ctx.lineTo(it.x,it.y-20);ctx.lineTo(it.x+30,it.y+20);ctx.fill();}
+    if(it.tipo==='planta'){ctx.strokeStyle='#2ecc71';ctx.lineWidth=5;for(let k=-2;k<=2;k++){ctx.beginPath();ctx.moveTo(it.x,350);ctx.quadraticCurveTo(it.x+k*10,300,it.x+k*14,240+Math.random()*10);ctx.stroke();}}
+    if(it.tipo==='tronco'){ctx.strokeStyle='#8b5a2b';ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(it.x-60,330);ctx.quadraticCurveTo(it.x,280,it.x+60,320);ctx.stroke();}
+    if(it.tipo==='equipo'){ctx.fillStyle='#111';ctx.fillRect(it.x,40,50,50);ctx.fillStyle='white';ctx.font='12px Arial';ctx.fillText('FILTRO',it.x+2,68);}
+  });
+  // peces nadando
+  peces.forEach(p=>{
+    p.x+=p.v; if(p.x>740||p.x<50)p.v*=-1;
+    ctx.fillStyle=p.c; ctx.beginPath();ctx.ellipse(p.x,p.y,18,9,0,0,7);ctx.fill();
+    ctx.beginPath();ctx.moveTo(p.x+(p.v>0?-18:18),p.y);ctx.lineTo(p.x+(p.v>0?-30:30),p.y-10);ctx.lineTo(p.x+(p.v>0?-30:30),p.y+10);ctx.fill();
+    ctx.fillStyle='white';ctx.beginPath();ctx.arc(p.x+(p.v>0?8:-8),p.y-2,3,0,7);ctx.fill();
+    ctx.fillStyle='black';ctx.beginPath();ctx.arc(p.x+(p.v>0?8:-8),p.y-2,1.5,0,7);ctx.fill();
+  });
+  // cristal
+  ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=4;ctx.strokeRect(20,20,760,370);
+  // tirante rojo si hace falta
+  if(largo>90||alto>45){ctx.fillStyle='#ff4444';ctx.fillRect(20,18,760,8);ctx.fillStyle='white';ctx.font='bold 13px Arial';ctx.fillText('⚠ TIRANTE OBLIGATORIO',300,16);}
+  // texto medidas
+  ctx.fillStyle='white';ctx.font='bold 16px Arial';ctx.fillText(largo+'cm x '+ancho+'cm x '+alto+'cm  -  '+Math.round(largo*ancho*alto/1000)+'L',30,405);
+  requestAnimationFrame(dibujar);
+}
+function addItem(t){
+  if(t==='pez'){peces.push({x:100+Math.random()*500,y:100+Math.random()*180,v:1+Math.random(),c:['#ff7b00','#ffcc00','#ff4444','#00ccff'][Math.floor(Math.random()*4)]});}
+  else{items.push({tipo:t,x:100+Math.random()*550,y:320});}
+  actualizar();
+}
+function limpiar(){items=[];peces=[];actualizar();}
+function cambiarVista(v){conAgua=(v==='real');}
+function setGrosor(g,btn){grosor=g;document.querySelectorAll('.grosores button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');actualizar();}
+function actualizar(){
+  document.getElementById('v-largo').textContent=largo+' cm';document.getElementById('v-ancho').textContent=ancho+' cm';document.getElementById('v-alto').textContent=alto+' cm';
+  let litros=Math.round(largo*ancho*alto/1000);document.getElementById('litros').textContent=litros+' L';
+  document.getElementById('peso').textContent='Peso total ~'+Math.round(litros*1.15+15)+' kg - Cristal '+grosor+'mm';
+  let rec=alto<=30?6:alto<=40?8:alto<=50?10:12;let a='';
+  if(grosor>=rec)a+=`<div class="ok">✅ CORRECTO: ${grosor}mm es seguro para ${alto}cm de alto.</div>`;
+  else a+=`<div class="bad">🚨 PELIGRO: Con ${alto}cm necesitas ${rec}mm mínimo.</div>`;
+  if(largo>90)a+=`<div class="warn">⚠️ TIRANTE OBLIGATORIO: Largo ${largo}cm > 90cm.</div>`;
+  if(largo>130)a+=`<div class="warn">⚠️ PON 2 TIRANTES: Largo ${largo}cm > 130cm.</div>`;
+  if(alto>45)a+=`<div class="warn">⚠️ REFUERZO INFERIOR: Alto ${alto}cm > 45cm.</div>`;
+  document.getElementById('avisos').innerHTML=a||`<div class="ok">✅ Montaje seguro</div>`;
+  document.getElementById('ficha').innerHTML=`<li>Frontal/Trasero: 2x ${largo} x ${alto} cm</li><li>Laterales: 2x ${(ancho-grosor*2/10).toFixed(1)} x ${alto} cm</li><li>Base: 1x ${largo} x ${ancho} cm</li><li>Silicona: ${litros<=100?1:litros<=250?2:3} tubo(s)</li><li>Tirantes: ${largo>90?(largo>130?2:1)+'x '+(ancho-2)+' x 8cm':'No necesita'}</li>`;
+}
+document.getElementById('largo').addEventListener('input',e=>{largo=+e.target.value;actualizar();});
+document.getElementById('ancho').addEventListener('input',e=>{ancho=+e.target.value;actualizar();});
+document.getElementById('alto').addEventListener('input',e=>{alto=+e.target.value;actualizar();});
+dibujar();actualizar();
+</script>
 </body>
 </html>
