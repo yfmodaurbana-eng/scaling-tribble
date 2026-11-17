@@ -6,17 +6,29 @@
 <title>AQUARIO ONLINE</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#050d1a;color:white;padding-bottom:20px}
-header{display:flex;justify-content:space-between;padding:14px;background:#071223;align-items:center;gap:10px}
+body{margin:0;background:#050d1a;color:white}
+header{display:flex;justify-content:space-between;padding:14px;background:#071223;align-items:center}
 .logo{font-size:22px;font-weight:900;line-height:1}.logo span{color:#29a7ff}
 header button{background:#1e90ff;color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:bold}
 main{display:flex;gap:12px;padding:12px}
-#visor{flex:1;background:#0a1a2f;border-radius:15px;overflow:hidden;position:relative;min-height:420px}
-canvas#acuarioCanvas{width:100%;height:420px;display:block;background:linear-gradient(#0a3a5a,#062a44)}
-.vista-btns{position:absolute;bottom:10px;left:10px;display:flex;gap:6px}
+#visor{flex:1;border-radius:15px;overflow:hidden;position:relative;height:440px;
+background-image:url('https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=1200&q=80');
+background-size:cover;background-position:center;}
+#visor::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.22) 0%,transparent 25%,transparent 75%,rgba(255,255,255,.12) 100%);pointer-events:none}
+#cristal{position:absolute;inset:8px;border:3px solid rgba(255,255,255,.45);border-radius:12px;z-index:5;pointer-events:none;box-shadow:inset 0 0 40px rgba(255,255,255,.15)}
+#agua{position:absolute;inset:0;background:linear-gradient(rgba(0,120,200,.15),rgba(0,40,90,.35))}
+.pez{position:absolute;font-size:34px;z-index:3;animation:nadar 8s ease-in-out infinite alternate}
+.pez:nth-child(2){animation-duration:11s;animation-delay:1s}
+.pez:nth-child(3){animation-duration:7s;animation-delay:.5s}
+@keyframes nadar{0%{transform:translate(0,0) scaleX(1)}50%{transform:translate(120px,-30px) scaleX(1)}100%{transform:translate(220px,20px) scaleX(-1)}}
+.burbuja{position:absolute;background:rgba(255,255,255,.7);border-radius:50%;animation:subir 4s linear infinite}
+@keyframes subir{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-320px);opacity:0}}
+#medidas{position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.65);padding:8px 12px;border-radius:10px;z-index:6;font-weight:bold;font-size:13px}
+#tirante{position:absolute;top:8px;left:8px;right:8px;height:14px;background:#ff4444;display:none;z-index:6;text-align:center;font-size:11px;font-weight:900;padding-top:1px}
+.vista-btns{position:absolute;bottom:10px;right:10px;display:flex;gap:6px;z-index:7}
 aside{width:340px;display:flex;flex-direction:column;gap:12px}
 .panel{background:#0d1c31;padding:14px;border-radius:15px}
-.panel h2{margin:0 0 10px;color:#29a7ff;font-size:16px}
+.panel h2{margin:0 0 10px;color:#29a7ff}
 .panel label{display:block;margin-top:10px;font-size:14px}
 .panel input{width:100%;accent-color:#29a7ff}
 .grosores{display:flex;gap:6px;margin-top:6px}
@@ -26,15 +38,27 @@ aside{width:340px;display:flex;flex-direction:column;gap:12px}
 .litros small{display:block;font-size:12px;font-weight:400}
 #avisos div{padding:10px;border-radius:8px;margin-bottom:8px;font-size:13px}
 .ok{background:#123b24}.warn{background:#4a3800}.bad{background:#5a1111}
-footer{margin:0 12px;background:#0d1c31;padding:12px;border-radius:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+footer{margin:0 12px 15px;background:#0d1c31;padding:12px;border-radius:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 button{cursor:pointer;background:#132a44;color:white;border:1px solid #2a4a6b;padding:8px 10px;border-radius:8px}
-@media(max-width:850px){main{flex-direction:column}aside{width:100%}canvas#acuarioCanvas{height:340px}}
+#decor{position:absolute;bottom:12px;left:12px;right:12px;display:flex;gap:8px;flex-wrap:wrap;z-index:4;font-size:30px}
+@media(max-width:850px){main{flex-direction:column}aside{width:100%}#visor{height:340px}}
 </style>
 </head>
 <body>
 <header><div class="logo">🐠 AQUARIO<br><span>ONLINE</span></div><button onclick="window.print()">⬇ Descargar Ficha PDF</button></header>
 <main>
-<section id="visor"><canvas id="acuarioCanvas" width="800" height="420"></canvas><div class="vista-btns"><button onclick="cambiarVista('montaje')">Montaje</button><button onclick="cambiarVista('real')">Llenar agua</button><button onclick="limpiar()">Limpiar</button></div></section>
+<section id="visor">
+<div id="agua"></div>
+<div id="peces"></div>
+<div id="decor"></div>
+<div id="tirante">⚠ TIRANTE OBLIGATORIO</div>
+<div id="cristal"></div>
+<div id="medidas">100cm x 40cm x 40cm - 160L</div>
+<div class="vista-btns"><button onclick="cambiarVista('montaje')">Montaje</button><button onclick="cambiarVista('real')">Llenar agua</button><button onclick="limpiar()">Limpiar</button></div>
+<div class="burbuja" style="left:20%;bottom:20px;width:8px;height:8px"></div>
+<div class="burbuja" style="left:45%;bottom:10px;width:12px;height:12px;animation-delay:1s"></div>
+<div class="burbuja" style="left:70%;bottom:30px;width:6px;height:6px;animation-delay:2s"></div>
+</section>
 <aside>
 <div class="panel"><h2>PARAMETROS</h2>
 <label>Largo: <b id="v-largo">100 cm</b></label><input type="range" id="largo" min="30" max="200" value="100">
@@ -47,55 +71,42 @@ button{cursor:pointer;background:#132a44;color:white;border:1px solid #2a4a6b;pa
 </main>
 <footer><span>CONSTRUCCIÓN</span><button onclick="addItem('pez')">🐟 Peces</button><button onclick="addItem('planta')">🌿 Plantas</button><button onclick="addItem('roca')">🪨 Rocas</button><button onclick="addItem('tronco')">🪵 Troncos</button><button onclick="addItem('equipo')">⚙️ Equipo</button></footer>
 <script>
-let largo=100,ancho=40,alto=40,grosor=8,conAgua=true,items=[],peces=[];
-let cv=document.getElementById('acuarioCanvas'),ctx=cv.getContext('2d');
-function dibujar(){
-  ctx.clearRect(0,0,800,420);
-  // fondo agua
-  ctx.fillStyle=conAgua?'#0e5a8a':'#1a2a3a'; ctx.fillRect(0,0,800,420);
-  // sustrato
-  ctx.fillStyle='#d9b98a'; ctx.fillRect(30,350,740,40);
-  ctx.fillStyle='#b89a6a'; for(let i=0;i<60;i++){ctx.beginPath();ctx.arc(40+Math.random()*720,355+Math.random()*25,2,0,7);ctx.fill();}
-  // rocas y plantas guardadas
-  items.forEach(it=>{
-    if(it.tipo==='roca'){ctx.fillStyle='#777';ctx.beginPath();ctx.moveTo(it.x-30,it.y+20);ctx.lineTo(it.x,it.y-20);ctx.lineTo(it.x+30,it.y+20);ctx.fill();}
-    if(it.tipo==='planta'){ctx.strokeStyle='#2ecc71';ctx.lineWidth=5;for(let k=-2;k<=2;k++){ctx.beginPath();ctx.moveTo(it.x,350);ctx.quadraticCurveTo(it.x+k*10,300,it.x+k*14,240+Math.random()*10);ctx.stroke();}}
-    if(it.tipo==='tronco'){ctx.strokeStyle='#8b5a2b';ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(it.x-60,330);ctx.quadraticCurveTo(it.x,280,it.x+60,320);ctx.stroke();}
-    if(it.tipo==='equipo'){ctx.fillStyle='#111';ctx.fillRect(it.x,40,50,50);ctx.fillStyle='white';ctx.font='12px Arial';ctx.fillText('FILTRO',it.x+2,68);}
-  });
-  // peces nadando
-  peces.forEach(p=>{
-    p.x+=p.v; if(p.x>740||p.x<50)p.v*=-1;
-    ctx.fillStyle=p.c; ctx.beginPath();ctx.ellipse(p.x,p.y,18,9,0,0,7);ctx.fill();
-    ctx.beginPath();ctx.moveTo(p.x+(p.v>0?-18:18),p.y);ctx.lineTo(p.x+(p.v>0?-30:30),p.y-10);ctx.lineTo(p.x+(p.v>0?-30:30),p.y+10);ctx.fill();
-    ctx.fillStyle='white';ctx.beginPath();ctx.arc(p.x+(p.v>0?8:-8),p.y-2,3,0,7);ctx.fill();
-    ctx.fillStyle='black';ctx.beginPath();ctx.arc(p.x+(p.v>0?8:-8),p.y-2,1.5,0,7);ctx.fill();
-  });
-  // cristal
-  ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=4;ctx.strokeRect(20,20,760,370);
-  // tirante rojo si hace falta
-  if(largo>90||alto>45){ctx.fillStyle='#ff4444';ctx.fillRect(20,18,760,8);ctx.fillStyle='white';ctx.font='bold 13px Arial';ctx.fillText('⚠ TIRANTE OBLIGATORIO',300,16);}
-  // texto medidas
-  ctx.fillStyle='white';ctx.font='bold 16px Arial';ctx.fillText(largo+'cm x '+ancho+'cm x '+alto+'cm  -  '+Math.round(largo*ancho*alto/1000)+'L',30,405);
-  requestAnimationFrame(dibujar);
+let largo=100,ancho=40,alto=40,grosor=8,conAgua=true,decor=[];
+let pecesDiv=document.getElementById('peces'),decorDiv=document.getElementById('decor');
+function renderDecor(){
+  decorDiv.innerHTML=decor.map(d=>`<span>${d}</span>`).join('');
+  pecesDiv.innerHTML=decor.filter(d=>d.includes('🐟')||d.includes('🐠')).map((d,i)=>`<div class="pez" style="left:${15+i*18}%;top:${30+ (i%3)*18}%">${d}</div>`).join('');
 }
 function addItem(t){
-  if(t==='pez'){peces.push({x:100+Math.random()*500,y:100+Math.random()*180,v:1+Math.random(),c:['#ff7b00','#ffcc00','#ff4444','#00ccff'][Math.floor(Math.random()*4)]});}
-  else{items.push({tipo:t,x:100+Math.random()*550,y:320});}
-  actualizar();
+  if(t==='pez') decor.push(['🐟','🐠','🐡'][Math.floor(Math.random()*3)]);
+  if(t==='planta') decor.push('🌿');
+  if(t==='roca') decor.push('🪨');
+  if(t==='tronco') decor.push('🪵');
+  if(t==='equipo') decor.push('⚙️');
+  renderDecor();actualizar();
 }
-function limpiar(){items=[];peces=[];actualizar();}
-function cambiarVista(v){conAgua=(v==='real');}
+function limpiar(){decor=[];renderDecor();actualizar();}
+function cambiarVista(v){
+  conAgua=(v==='real');
+  document.getElementById('agua').style.opacity=conAgua?1:0;
+  document.getElementById('visor').style.filter=conAgua?'none':'brightness(0.7) sepia(0.2)';
+}
 function setGrosor(g,btn){grosor=g;document.querySelectorAll('.grosores button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');actualizar();}
 function actualizar(){
   document.getElementById('v-largo').textContent=largo+' cm';document.getElementById('v-ancho').textContent=ancho+' cm';document.getElementById('v-alto').textContent=alto+' cm';
   let litros=Math.round(largo*ancho*alto/1000);document.getElementById('litros').textContent=litros+' L';
   document.getElementById('peso').textContent='Peso total ~'+Math.round(litros*1.15+15)+' kg - Cristal '+grosor+'mm';
+  document.getElementById('medidas').textContent=`${largo}cm x ${ancho}cm x ${alto}cm - ${litros}L`;
+  document.getElementById('tirante').style.display=(largo>90||alto>45)?'block':'none';
+  // el acuario cambia de forma con los sliders
+  let w= 55 + (largo-30)/170*35; // 55% a 90%
+  let h= 260 + (alto-25)/55*140;
+  document.getElementById('visor').style.height=h+'px';
   let rec=alto<=30?6:alto<=40?8:alto<=50?10:12;let a='';
-  if(grosor>=rec)a+=`<div class="ok">✅ CORRECTO: ${grosor}mm es seguro para ${alto}cm de alto.</div>`;
+  if(grosor>=rec)a+=`<div class="ok">✅ CORRECTO: ${grosor}mm es seguro para ${alto}cm.</div>`;
   else a+=`<div class="bad">🚨 PELIGRO: Con ${alto}cm necesitas ${rec}mm mínimo.</div>`;
   if(largo>90)a+=`<div class="warn">⚠️ TIRANTE OBLIGATORIO: Largo ${largo}cm > 90cm.</div>`;
-  if(largo>130)a+=`<div class="warn">⚠️ PON 2 TIRANTES: Largo ${largo}cm > 130cm.</div>`;
+  if(largo>130)a+=`<div class="warn">⚠️ PON 2 TIRANTES.</div>`;
   if(alto>45)a+=`<div class="warn">⚠️ REFUERZO INFERIOR: Alto ${alto}cm > 45cm.</div>`;
   document.getElementById('avisos').innerHTML=a||`<div class="ok">✅ Montaje seguro</div>`;
   document.getElementById('ficha').innerHTML=`<li>Frontal/Trasero: 2x ${largo} x ${alto} cm</li><li>Laterales: 2x ${(ancho-grosor*2/10).toFixed(1)} x ${alto} cm</li><li>Base: 1x ${largo} x ${ancho} cm</li><li>Silicona: ${litros<=100?1:litros<=250?2:3} tubo(s)</li><li>Tirantes: ${largo>90?(largo>130?2:1)+'x '+(ancho-2)+' x 8cm':'No necesita'}</li>`;
@@ -103,7 +114,8 @@ function actualizar(){
 document.getElementById('largo').addEventListener('input',e=>{largo=+e.target.value;actualizar();});
 document.getElementById('ancho').addEventListener('input',e=>{ancho=+e.target.value;actualizar();});
 document.getElementById('alto').addEventListener('input',e=>{alto=+e.target.value;actualizar();});
-dibujar();actualizar();
+// peces de inicio para que se vea bonito al abrir
+decor=['🐟','🐠','🌿','🌿','🪨'];renderDecor();actualizar();
 </script>
 </body>
 </html>
